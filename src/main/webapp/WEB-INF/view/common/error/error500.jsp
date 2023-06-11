@@ -10,7 +10,7 @@
 .mainDiv{
 	width:1900px;
 	height:800px;
-	background: url("/images/error/500error.jpg") no-repeat center;
+	background: url("images/error/500error.jpg") no-repeat center;
 }
 
 .btnHomeDiv{
