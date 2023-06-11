@@ -123,10 +123,10 @@ public class LoginServiceImpl implements LoginService {
 		paramMap.put("dirPath", dirPath);
 		
 		// 파일 저장
-		String itemFilePath = dirPath+ File.separator; // 업로드 실제 경로 조립 (무나열생성)
-		FileUtilCho fileUtil = new FileUtilCho(multipartHttpServletRequest, "D:\\FileRepository", itemFilePath);
-		Map<String, Object> fileInfo = fileUtil.uploadFiles(); // 실제 럽로드 처리
-		
+		String itemFilePath = dirPath + File.separator; // 업로드 실제 경로 조립 (무나열생성)
+		FileUtilCho fileUtil = new FileUtilCho(multipartHttpServletRequest, "D:\\FileRepository", "", itemFilePath);
+		Map<String, Object> fileInfo = fileUtil.uploadFiles(); // 실제 업로드 처리
+
 		// 데이터 저장
 		try {
 				
