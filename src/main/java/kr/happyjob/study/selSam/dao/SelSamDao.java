@@ -1,21 +1,21 @@
-package kr.happyjob.study.selSad.dao;
+package kr.happyjob.study.selSam.dao;
 
 import kr.happyjob.study.mngNot.model.NoticeModel;
-import kr.happyjob.study.selSad.model.SelSadModel;
+import kr.happyjob.study.selSam.model.SelSamModel;
 
 import java.util.List;
 import java.util.Map;
 
-public interface SelSadDao {
+public interface SelSamDao {
 
 	/**  목록 조회 */
-	public List<SelSadModel> noticelist(Map<String, Object> paramMap) throws Exception;
+	public List<SelSamModel> noticelist(Map<String, Object> paramMap) throws Exception;
 
 	/** 목록 카운트 조회 */
 	public int countnoticelist(Map<String, Object> paramMap) throws Exception;
 
 	/** 한건 조회 */
-	public SelSadModel noticeselectone(Map<String, Object> paramMap) throws Exception;
+	public SelSamModel noticeselectone(Map<String, Object> paramMap) throws Exception;
 
 	/** 등록 */
 	public int noticeinsert(Map<String, Object> paramMap) throws Exception;
