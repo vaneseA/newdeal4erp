@@ -181,4 +181,34 @@
 		)
 	</insert>
 
+	<delete id="deletefileinfo">
+		delete from tb_file
+		where file_no = (
+			select file_no
+			from tb_notice
+			where notice_no = #{notice_no}
+		)
+	</delete>
+
+	<update id="noticeupdatefile">
+		update tb_notice
+		set notice_title =  #{file_notice_title}
+		, notice_cont =  #{file_notice_cont}
+		, notice_date =  now()
+		<if test="fileexist eq 'Y'.toString()">
+			, file_no = (select ifnull(max(file_no),0)  from tb_file)
+		</if>
+		<if test="fileexist eq 'N'.toString()">
+			, file_no = 0
+		</if>
+		where  notice_no =  #{notice_no}
+	</update>
+
+	<delete id="noticedeletefile">
+		delete from tb_notice
+		where  notice_no =  #{notice_no}
+	</delete>
+
+
+
 </mapper>

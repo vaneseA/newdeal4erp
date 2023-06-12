@@ -49,9 +49,8 @@ public class FileUtilCho {
 		this.multipartHttpServletRequest = multipartHttpServletRequest;
 		this.rootFilePath = rootFilePath;
 		this.virtualrootPath = virtualrootPath;
-		this.itemFilePath = itemFilePath;
+		this.itemFilePath = File.separator + itemFilePath;
 	}
-
 
 
 	public void setMultipartHttpServletRequest(MultipartHttpServletRequest multipartHttpServletRequest) {

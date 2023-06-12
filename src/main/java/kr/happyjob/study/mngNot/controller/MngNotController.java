@@ -1,5 +1,7 @@
 package kr.happyjob.study.mngNot.controller;
 
+import java.io.File;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import kr.happyjob.study.common.comnUtils.ComnCodUtil;
 import kr.happyjob.study.mngNot.model.NoticeModel;
@@ -163,7 +167,29 @@ public class MngNotController {
       return returnmap;
    }
 
+   @RequestMapping("downloadnoticefile.do")
+   public void downloadBbsAtmtFil(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+                                  HttpServletResponse response, HttpSession session) throws Exception {
 
+      logger.info("+ Start " + className + ".downloadBbsAtmtFil");
+      logger.info("   - paramMap : " + paramMap);
+
+      // 첨부파일 조회
+      NoticeModel noticesearch = mngNotService.noticeselectone(paramMap);  // file 이름    , 물리경로
+
+      byte fileByte[] = FileUtils.readFileToByteArray(new File(noticesearch.getPhysic_path()));
+
+      response.setContentType("application/octet-stream");
+      response.setContentLength(fileByte.length);
+      response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(noticesearch.getFile_name(),"UTF-8")+"\";");
+      response.setHeader("Content-Transfer-Encoding", "binary");
+      response.getOutputStream().write(fileByte);
+
+      response.getOutputStream().flush();
+      response.getOutputStream().close();
+
+      logger.info("+ End " + className + ".downloadBbsAtmtFil");
+   }
 
 
 

@@ -93,5 +93,5 @@ public class NoticeModel {
 	private int file_size;
 	private String exten;
 	private String name;
-	
+
 }

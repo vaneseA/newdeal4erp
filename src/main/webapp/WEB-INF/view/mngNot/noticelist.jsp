@@ -48,6 +48,10 @@
 						$("#action").val("D");
 						fn_save();
 						break;
+					case 'btnDeleteFile' :
+						$("#action").val("D");
+						fn_savefile();
+						break;
 					case 'btnSaveFile' :
 						fn_savefile();
 						break;
@@ -242,7 +246,7 @@
 				$("#notice_no").val(object.notice_no);
 				$("#upfile").val("");
 
-				var inserthtml = "<a href='javascript:filedownload()'>";
+				var inserthtml = "<a href='javascript:fn_filedownload()'>";
 
 				if(object.file_name == "" || object.file_name == null || object.file_name == undefined) {
 					inserthtml += "";
@@ -344,7 +348,15 @@
 
 		}
 
+		function fn_filedownload() {
+			alert("다운로드");
 
+			var params = "";
+			params += "<input type='hidden' name='notice_no' id='notice_no' value='"+ $("#notice_no").val() +"' />";
+
+			jQuery("<form action='/mngNot/downloadnoticefile.do' method='post'>"+params+"</form>").appendTo('body').submit().remove();
+
+		}
 
 
 

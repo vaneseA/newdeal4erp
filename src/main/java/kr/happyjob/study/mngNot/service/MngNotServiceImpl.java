@@ -112,13 +112,55 @@ public class MngNotServiceImpl implements MngNotService {
 	/** 수정 파일 */
 	public int noticeupdatefile(Map<String, Object> paramMap, HttpServletRequest request) throws Exception {
 
+		NoticeModel selectone = mngNotDao.noticeselectone(paramMap);
 
-		return 1;
+		if(selectone.getFile_name() != "" && selectone.getFile_name() != null) {
+			File attfile = new File(selectone.getPhysic_path());
+			attfile.delete();
+
+			//notice_no
+			// tb_file delete
+			mngNotDao.deletefileinfo(paramMap);
+		}
+
+
+
+		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+
+		String noticedir = File.separator + noticePath + File.separator;
+		FileUtilCho fileup = new FileUtilCho(multipartHttpServletRequest,rootPath, virtualrootPath, noticedir);
+		Map filereturn = fileup.uploadFiles();
+
+		String upfile = (String) filereturn.get("file_nm");
+		paramMap.put("fileprc", "Y");
+
+		if(upfile == "" || upfile == null) {
+			paramMap.put("fileexist", "N");
+		} else {
+			paramMap.put("filereturn", filereturn);
+			paramMap.put("fileexist", "Y");
+
+			mngNotDao.fileinsert(paramMap);
+		}
+
+		return mngNotDao.noticeupdatefile(paramMap);
+
 	}
 
 	/** 삭제  파일*/
 	public int noticedeletefile(Map<String, Object> paramMap) throws Exception {
 
-		return 1;
+		NoticeModel selectone = mngNotDao.noticeselectone(paramMap);
+
+		if(selectone.getFile_name() != "" && selectone.getFile_name() != null) {
+			File attfile = new File(selectone.getPhysic_path());
+			attfile.delete();
+
+			//notice_no
+			// tb_file delete
+			mngNotDao.deletefileinfo(paramMap);
+		}
+
+		return mngNotDao.noticedeletefile(paramMap);
 	}
 }

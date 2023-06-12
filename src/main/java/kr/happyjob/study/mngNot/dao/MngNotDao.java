@@ -39,4 +39,8 @@ public interface MngNotDao {
 	/** 파일 등록 */
 	public int fileinsert(Map<String, Object> paramMap) throws Exception;
 
+	/** 파일 정보 삭제 */
+	public int deletefileinfo(Map<String, Object> paramMap) throws Exception;
+
+
 }
