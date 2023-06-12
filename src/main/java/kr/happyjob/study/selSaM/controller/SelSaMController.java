@@ -1,7 +1,8 @@
-package kr.happyjob.study.selSad.controller;
+package kr.happyjob.study.selSaM.controller;
 
-import kr.happyjob.study.selSad.model.SelSadModel;
-import kr.happyjob.study.selSad.service.SelSadService;
+import kr.happyjob.study.selSaD.model.SelSaDModel;
+import kr.happyjob.study.selSaM.model.SelSaMModel;
+import kr.happyjob.study.selSaM.service.SelSaMService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +15,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/selSad/")
-public class SelSadController {
+@RequestMapping("/selSaM/")
+public class SelSaMController {
 
     @Autowired
-    SelSadService selSadService;
+    SelSaMService selSaMService;
 
     // Set logger
     private final Logger logger = LogManager.getLogger(this.getClass());
@@ -35,7 +35,7 @@ public class SelSadController {
     /**
      * 초기화면
      */
-    @RequestMapping("saleDay.do")
+    @RequestMapping("saleMonth.do")
     public String notice(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                          HttpServletResponse response, HttpSession session) throws Exception {
 
@@ -44,14 +44,14 @@ public class SelSadController {
 
         logger.info("+ End " + className + ".sel");
 
-        return "/selSad/saleDayList";
+        return "/selSaM/saleMonthList";
     }
 
-    @RequestMapping("/selSad/saleDay.do")
+    @RequestMapping("/selSaM/saleMonth.do")
     public String selSadList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                              HttpServletResponse response, HttpSession session) throws Exception {
 
-        logger.info("+ Start " + className + ".selSadList");
+        logger.info("+ Start " + className + ".selSamList");
         logger.info("   - paramMap : " + paramMap);
 
         int pagenum = Integer.parseInt((String) paramMap.get("pagenum"));
@@ -62,15 +62,15 @@ public class SelSadController {
         paramMap.put("pageindex", pageindex);
 
         // Controller  Service  Dao  SQL
-        List<SelSadModel> noticesearchlist = selSadService.noticelist(paramMap);
-        int totalcnt = selSadService.countnoticelist(paramMap);
+        List<SelSaMModel> noticesearchlist = selSaMService.selSaMList(paramMap);
+        int totalcnt = selSaMService.countSelSaMList(paramMap);
 
         model.addAttribute("noticesearchlist", noticesearchlist);
         model.addAttribute("totalcnt", totalcnt);
 
-        logger.info("+ End " + className + ".selSadList");
+        logger.info("+ End " + className + ".selSamList");
 
-        return "selSad/saleDayListGrd";
+        return "selSaM/saleMonthListGrd";
     }
 
 

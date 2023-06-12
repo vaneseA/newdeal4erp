@@ -1,6 +1,6 @@
-package kr.happyjob.study.selSam.model;
+package kr.happyjob.study.selSaM.model;
 
-public class SelSamModel {
+public class SelSaMModel {
 
 	public String getNotice_del_yn() {
 		return notice_del_yn;

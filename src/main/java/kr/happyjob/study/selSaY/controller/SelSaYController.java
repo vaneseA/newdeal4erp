@@ -1,7 +1,7 @@
-package kr.happyjob.study.selSay.controller;
+package kr.happyjob.study.selSaY.controller;
 
-import kr.happyjob.study.selSad.model.SelSadModel;
-import kr.happyjob.study.selSad.service.SelSadService;
+import kr.happyjob.study.selSaD.model.SelSaDModel;
+import kr.happyjob.study.selSaD.service.SelSaDService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +18,11 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/selSay/")
-public class SelSayController {
+@RequestMapping("/selSaY/")
+public class SelSaYController {
 
     @Autowired
-    SelSadService selSayService;
+    SelSaDService selSayService;
 
     // Set logger
     private final Logger logger = LogManager.getLogger(this.getClass());
@@ -46,7 +46,7 @@ public class SelSayController {
         return "/selSay/saleYearList";
     }
 
-    @RequestMapping("/selSay/saleYear.do")
+    @RequestMapping("/selSaY/saleYear.do")
     public String selSayList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                              HttpServletResponse response, HttpSession session) throws Exception {
 
@@ -61,15 +61,15 @@ public class SelSayController {
         paramMap.put("pageindex", pageindex);
 
         // Controller  Service  Dao  SQL
-        List<SelSadModel> noticesearchlist = selSayService.noticelist(paramMap);
-        int totalcnt = selSayService.countnoticelist(paramMap);
+        List<SelSaDModel> noticesearchlist = selSayService.selSaDList(paramMap);
+        int totalcnt = selSayService.countSelSaDList(paramMap);
 
         model.addAttribute("noticesearchlist", noticesearchlist);
         model.addAttribute("totalcnt", totalcnt);
 
         logger.info("+ End " + className + ".selSayList");
 
-        return "selSay/SelSayServiceImpl";
+        return "selSaY/SelSayServiceImpl";
     }
 
 
