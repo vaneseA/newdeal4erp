@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -50,7 +49,7 @@ public class SelSaDController {
     public String selSadList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                              HttpServletResponse response, HttpSession session) throws Exception {
 
-        logger.info("+ Start " + className + ".selSaDList");
+        logger.info("+ Start " + className + ".selSadList");
         logger.info("   - paramMap : " + paramMap);
 
         int pagenum = Integer.parseInt((String) paramMap.get("pagenum"));
@@ -67,7 +66,7 @@ public class SelSaDController {
         model.addAttribute("noticesearchlist", noticesearchlist);
         model.addAttribute("totalcnt", totalcnt);
 
-        logger.info("+ End " + className + ".selSaDList");
+        logger.info("+ End " + className + ".selSadList");
 
         return "selSaD/saleDayListGrd";
     }

@@ -10,7 +10,7 @@ import java.util.Map;
 public interface SelSaYService {
 
 	/**  목록 조회 */
-	public List<SelSaYModel> selSaMList(Map<String, Object> paramMap) throws Exception;
+	public List<SelSaYModel> selSaYList(Map<String, Object> paramMap) throws Exception;
 
 	/** 목록 카운트 조회 */
 	public int countSelSaYList(Map<String, Object> paramMap) throws Exception;

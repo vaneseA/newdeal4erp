@@ -36,7 +36,7 @@ public class SelSaYServiceImpl implements SelSaYService {
 
 
 	/** 목록 조회 */
-	public List<SelSaYModel> selSaMList(Map<String, Object> paramMap) throws Exception {
+	public List<SelSaYModel> selSaYList(Map<String, Object> paramMap) throws Exception {
 
 		return selSaYDao.selSaYList(paramMap);
 	}

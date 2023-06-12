@@ -1,7 +1,7 @@
 package kr.happyjob.study.selSaY.controller;
 
-import kr.happyjob.study.selSaD.model.SelSaDModel;
-import kr.happyjob.study.selSaD.service.SelSaDService;
+import kr.happyjob.study.selSaY.model.SelSaYModel;
+import kr.happyjob.study.selSaY.service.SelSaYService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import java.util.Map;
 public class SelSaYController {
 
     @Autowired
-    SelSaDService selSayService;
+    SelSaYService selSaYService;
 
     // Set logger
     private final Logger logger = LogManager.getLogger(this.getClass());
@@ -43,7 +43,7 @@ public class SelSaYController {
 
         logger.info("+ End " + className + ".sel");
 
-        return "/selSay/saleYearList";
+        return "/selSaY/saleYearList";
     }
 
     @RequestMapping("/selSaY/saleYear.do")
@@ -61,8 +61,8 @@ public class SelSaYController {
         paramMap.put("pageindex", pageindex);
 
         // Controller  Service  Dao  SQL
-        List<SelSaDModel> noticesearchlist = selSayService.selSaDList(paramMap);
-        int totalcnt = selSayService.countSelSaDList(paramMap);
+        List<SelSaYModel> noticesearchlist = selSaYService.selSaYList(paramMap);
+        int totalcnt = selSaYService.countSelSaYList(paramMap);
 
         model.addAttribute("noticesearchlist", noticesearchlist);
         model.addAttribute("totalcnt", totalcnt);
