@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,11 +47,11 @@ public class SelSadController {
         return "/selSad/saleDayList";
     }
 
-    @RequestMapping("saleDay.do")
-    public String noticelist(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+    @RequestMapping("/selSad/saleDay.do")
+    public String selSadList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                              HttpServletResponse response, HttpSession session) throws Exception {
 
-        logger.info("+ Start " + className + ".noticelist");
+        logger.info("+ Start " + className + ".selSadList");
         logger.info("   - paramMap : " + paramMap);
 
         int pagenum = Integer.parseInt((String) paramMap.get("pagenum"));
@@ -68,100 +68,100 @@ public class SelSadController {
         model.addAttribute("noticesearchlist", noticesearchlist);
         model.addAttribute("totalcnt", totalcnt);
 
-
-        logger.info("+ End " + className + ".noticelist");
+        logger.info("+ End " + className + ".selSadList");
 
         return "selSad/saleDayListGrd";
     }
 
+
     //데이터를 조회하는 곳??
     //일단 놔두자.
-    @RequestMapping("noticeselectone.do")
-    @ResponseBody
-    public Map<String, Object> noticeselectone(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
-                                               HttpServletResponse response, HttpSession session) throws Exception {
-
-        logger.info("+ Start " + className + ".noticeselectone");
-        logger.info("   - paramMap : " + paramMap);
-
-        // Controller  Service  Dao  SQL
-        SelSadModel noticesearch = selSadService.noticeselectone(paramMap);
-
-        Map<String, Object> returnmap = new HashMap<String, Object>();
-
-        returnmap.put("noticesearch", noticesearch);
-
-        logger.info("+ End " + className + ".noticeselectone");
-
-        return returnmap;
-    }
-
-    //공지사항 입력 수정 삭제 하는 곳
-    //일단 놔두자.
-    @RequestMapping("noticesave.do")
-    @ResponseBody
-    public Map<String, Object> noticesave(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
-                                          HttpServletResponse response, HttpSession session) throws Exception {
-
-        logger.info("+ Start " + className + ".noticesave");
-        logger.info("   - paramMap : " + paramMap);
-
-        String action = (String) paramMap.get("action");
-
-        paramMap.put("loginid", (String) session.getAttribute("loginId"));
-
-
-        int returncval = 0;
-
-        if ("I".equals(action)) {
-            returncval = selSadService.noticeinsert(paramMap);
-        } else if ("U".equals(action)) {
-            returncval = selSadService.noticeupdate(paramMap);
-        } else if ("D".equals(action)) {
-            returncval = selSadService.noticedelete(paramMap);
-        }
-
-        Map<String, Object> returnmap = new HashMap<String, Object>();
-
-        returnmap.put("returncval", returncval);
-
-        logger.info("+ End " + className + ".noticesave");
-
-        return returnmap;
-    }
-
-    //공지사항 파일 입력 수정 삭제 하는 곳
-    //일단 놔두자.
-    @RequestMapping("noticesavefile.do")
-    @ResponseBody
-    public Map<String, Object> noticesavefile(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
-                                              HttpServletResponse response, HttpSession session) throws Exception {
-
-        logger.info("+ Start " + className + ".noticesavefile");
-        logger.info("   - paramMap : " + paramMap);
-
-        String action = (String) paramMap.get("action");
-
-        paramMap.put("loginid", (String) session.getAttribute("loginId"));
-
-        int returncval = 0;
-
-        if ("I".equals(action)) {
-            returncval = selSadService.noticeinsertfile(paramMap, request);
-        } else if ("U".equals(action)) {
-            returncval = selSadService.noticeupdatefile(paramMap, request);
-        } else if ("D".equals(action)) {
-            returncval = selSadService.noticedeletefile(paramMap);
-        }
-
-        Map<String, Object> returnmap = new HashMap<String, Object>();
-
-        returnmap.put("returncval", returncval);
-
-        logger.info("+ End " + className + ".noticesavefile");
-
-        return returnmap;
-    }
+//    @RequestMapping("noticeselectone.do")
+//    @ResponseBody
+//    public Map<String, Object> noticeselectone(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+//                                               HttpServletResponse response, HttpSession session) throws Exception {
+//
+//        logger.info("+ Start " + className + ".noticeselectone");
+//        logger.info("   - paramMap : " + paramMap);
+//
+//        // Controller  Service  Dao  SQL
+//        SelSadModel noticesearch = selSadService.noticeselectone(paramMap);
+//
+//        Map<String, Object> returnmap = new HashMap<String, Object>();
+//
+//        returnmap.put("noticesearch", noticesearch);
+//
+//        logger.info("+ End " + className + ".noticeselectone");
+//
+//        return returnmap;
+//    }
+//
+//    //공지사항 입력 수정 삭제 하는 곳
+//    //일단 놔두자.
+//    @RequestMapping("noticesave.do")
+//    @ResponseBody
+//    public Map<String, Object> noticesave(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+//                                          HttpServletResponse response, HttpSession session) throws Exception {
+//
+//        logger.info("+ Start " + className + ".noticesave");
+//        logger.info("   - paramMap : " + paramMap);
+//
+//        String action = (String) paramMap.get("action");
+//
+//        paramMap.put("loginid", (String) session.getAttribute("loginId"));
+//
+//
+//        int returncval = 0;
+//
+//        if ("I".equals(action)) {
+//            returncval = selSadService.noticeinsert(paramMap);
+//        } else if ("U".equals(action)) {
+//            returncval = selSadService.noticeupdate(paramMap);
+//        } else if ("D".equals(action)) {
+//            returncval = selSadService.noticedelete(paramMap);
+//        }
+//
+//        Map<String, Object> returnmap = new HashMap<String, Object>();
+//
+//        returnmap.put("returncval", returncval);
+//
+//        logger.info("+ End " + className + ".noticesave");
+//
+//        return returnmap;
+//    }
+//
+//    //공지사항 파일 입력 수정 삭제 하는 곳
+//    //일단 놔두자.
+//    @RequestMapping("noticesavefile.do")
+//    @ResponseBody
+//    public Map<String, Object> noticesavefile(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+//                                              HttpServletResponse response, HttpSession session) throws Exception {
+//
+//        logger.info("+ Start " + className + ".noticesavefile");
+//        logger.info("   - paramMap : " + paramMap);
+//
+//        String action = (String) paramMap.get("action");
+//
+//        paramMap.put("loginid", (String) session.getAttribute("loginId"));
+//
+//        int returncval = 0;
+//
+//        if ("I".equals(action)) {
+//            returncval = selSadService.noticeinsertfile(paramMap, request);
+//        } else if ("U".equals(action)) {
+//            returncval = selSadService.noticeupdatefile(paramMap, request);
+//        } else if ("D".equals(action)) {
+//            returncval = selSadService.noticedeletefile(paramMap);
+//        }
+//
+//        Map<String, Object> returnmap = new HashMap<String, Object>();
+//
+//        returnmap.put("returncval", returncval);
+//
+//        logger.info("+ End " + className + ".noticesavefile");
+//
+//        return returnmap;
+//    }
 
 
 }
