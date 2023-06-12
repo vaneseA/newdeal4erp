@@ -89,7 +89,7 @@
                 $("#pageno").val(pagenum);
             }
 
-            callAjax("/selSad/saleDay.do", "post", "text", false, param, listcollabck);
+            callAjax("/selSaM/saleMonth.do", "post", "text", false, param, listcollabck);
 
         }
 
@@ -177,7 +177,7 @@
             }
 
             //callAjax("/mngNot/noticesave.do", "post", "json", false, param, savecollback) ;
-            callAjax("/selSad/saleDay.do", "post", "json", false, $("#myForm").serialize(), savecollback);
+            callAjax("/selSaM/saleMonth.do", "post", "json", false, $("#myForm").serialize(), savecollback);
 
         }
 

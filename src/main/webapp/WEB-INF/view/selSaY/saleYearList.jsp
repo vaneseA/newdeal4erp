@@ -89,7 +89,7 @@
                 $("#pageno").val(pagenum);
             }
 
-            callAjax("/selSay/saleYear.do", "post", "text", false, param, listcollabck);
+            callAjax("/selSaY/saleYear.do", "post", "text", false, param, listcollabck);
 
         }
 
@@ -177,7 +177,7 @@
             }
 
             //callAjax("/mngNot/noticesave.do", "post", "json", false, param, savecollback) ;
-            callAjax("/selSay/saleYear.do", "post", "json", false, $("#myForm").serialize(), savecollback);
+            callAjax("/selSaY/saleYear.do", "post", "json", false, $("#myForm").serialize(), savecollback);
 
         }
 
