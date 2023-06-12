@@ -21,7 +21,7 @@ import java.util.Map;
 public class SelSaDController {
 
     @Autowired
-    SelSaDService selSadService;
+    SelSaDService selSaDService;
 
     // Set logger
     private final Logger logger = LogManager.getLogger(this.getClass());
@@ -46,10 +46,10 @@ public class SelSaDController {
     }
 
     @RequestMapping("/selSaD/saleDay.do")
-    public String selSadList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+    public String selSaDList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                              HttpServletResponse response, HttpSession session) throws Exception {
 
-        logger.info("+ Start " + className + ".selSadList");
+        logger.info("+ Start " + className + ".selSaDList");
         logger.info("   - paramMap : " + paramMap);
 
         int pagenum = Integer.parseInt((String) paramMap.get("pagenum"));
@@ -60,13 +60,13 @@ public class SelSaDController {
         paramMap.put("pageindex", pageindex);
 
         // Controller  Service  Dao  SQL
-        List<SelSaDModel> noticesearchlist = selSadService.selSaDList(paramMap);
-        int totalcnt = selSadService.countSelSaDList(paramMap);
+        List<SelSaDModel> noticesearchlist = selSaDService.selSaDList(paramMap);
+        int totalcnt = selSaDService.countSelSaDList(paramMap);
 
         model.addAttribute("noticesearchlist", noticesearchlist);
         model.addAttribute("totalcnt", totalcnt);
 
-        logger.info("+ End " + className + ".selSadList");
+        logger.info("+ End " + className + ".selSaDList");
 
         return "selSaD/saleDayListGrd";
     }

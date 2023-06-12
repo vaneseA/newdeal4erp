@@ -1,6 +1,5 @@
 package kr.happyjob.study.selSaM.controller;
 
-import kr.happyjob.study.selSaD.model.SelSaDModel;
 import kr.happyjob.study.selSaM.model.SelSaMModel;
 import kr.happyjob.study.selSaM.service.SelSaMService;
 import org.apache.log4j.LogManager;
@@ -48,10 +47,10 @@ public class SelSaMController {
     }
 
     @RequestMapping("/selSaM/saleMonth.do")
-    public String selSadList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+    public String selSaMList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                              HttpServletResponse response, HttpSession session) throws Exception {
 
-        logger.info("+ Start " + className + ".selSamList");
+        logger.info("+ Start " + className + ".selSaMList");
         logger.info("   - paramMap : " + paramMap);
 
         int pagenum = Integer.parseInt((String) paramMap.get("pagenum"));
@@ -68,7 +67,7 @@ public class SelSaMController {
         model.addAttribute("noticesearchlist", noticesearchlist);
         model.addAttribute("totalcnt", totalcnt);
 
-        logger.info("+ End " + className + ".selSamList");
+        logger.info("+ End " + className + ".selSaMList");
 
         return "selSaM/saleMonthListGrd";
     }
