@@ -7,7 +7,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>공지사항</title>
+	<title>일별 매출 현황</title>
 	<jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
 
 	<script type="text/javascript">
@@ -327,12 +327,12 @@
 
 						<p class="Location">
 							<a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
-								class="btn_nav bold">운영</span> <span class="btn_nav bold">공지사항
+								class="btn_nav bold">매출</span> <span class="btn_nav bold">일별 매출 현황
 								관리</span> <a href="../system/comnCodMgr.do" class="btn_set refresh">새로고침</a>
 						</p>
 
-						<p class="conTitle">
-							<span>공지사항</span> <span class="fr">
+						<p class="conT지itle">
+							<span>일별 매출 현황</span> <span class="fr">
 							<select id="delyn" name="delyn" style="width: 150px;">
 							        <option value="" >전체</option>
 									<option value="Y" >삭제</option>

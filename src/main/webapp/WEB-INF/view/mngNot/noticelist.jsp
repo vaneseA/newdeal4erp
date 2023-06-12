@@ -222,9 +222,45 @@
 
 				$("#action").val("I");
 			} else {
+				/*
+                "notice_del_yn":"N"
+                "loginID":"admin"
+                 "notice_no":71
+                 "notice_title":"oofile"
+                  "notice_date":"2023-06-12 09:16:58.0"
+                  "notice_cont":"ddddd"
+                  "file_no":30
+                  "file_name":"0524.sql"
+                 "logic_path":"/serverfile\\\\notice\\0524.sql"
+                  "physic_path":"W:\\FileRepository\\\\notice\\0524.sql"
+                  "file_size":34498
+                  "exten":"sql"
+                  "name":"관리자"
+                 */
 				$("#file_notice_title").val(object.notice_title);
 				$("#file_notice_cont").val(object.notice_cont);
-				$("#file_notice_no").val(object.notice_no);
+				$("#notice_no").val(object.notice_no);
+				$("#upfile").val("");
+
+				var inserthtml = "<a href='javascript:filedownload()'>";
+
+				if(object.file_name == "" || object.file_name == null || object.file_name == undefined) {
+					inserthtml += "";
+				} else {
+					var selfile = object.file_name;
+					var selfilearr = selfile.split(".");
+					var lastindex = selfilearr.length - 1;
+					if(selfilearr[lastindex].toLowerCase() == "jpg" || selfilearr[lastindex].toLowerCase() == "gif" || selfilearr[lastindex].toLowerCase() == "jpge" || selfilearr[lastindex].toLowerCase() == "png") {
+						inserthtml += "<img src='" + object.logic_path + "' style='width:100px; height:80px' />";
+					} else {
+						inserthtml += object.file_name;
+					}
+				}
+
+
+				inserthtml += "</a>"
+
+				$("#previewdiv").empty().append(inserthtml);
 
 				$("#btnDeleteFile").show();
 
@@ -286,7 +322,27 @@
 
 		}
 
+		function fn_selectonefile(no) {
 
+			//alert(no);
+
+			var param = {
+				notice_no : no
+			}
+
+			var selectoncallback = function(returndata) {
+				console.log( JSON.stringify(returndata) );
+
+				popupinitfile(returndata.noticesearch);
+
+				// 모달 팝업
+				gfModalPop("#layer2");
+
+			}
+
+			callAjax("/mngNot/noticeselectone.do", "post", "json", false, param, selectoncallback) ;
+
+		}
 
 
 

@@ -39,10 +39,10 @@ public class SelSadController {
     public String notice(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                          HttpServletResponse response, HttpSession session) throws Exception {
 
-        logger.info("+ Start " + className + ".notice");
+        logger.info("+ Start " + className + ".sel");
         logger.info("   - paramMap : " + paramMap);
 
-        logger.info("+ End " + className + ".notice");
+        logger.info("+ End " + className + ".sel");
 
         return "/selSad/saleDayList";
     }
