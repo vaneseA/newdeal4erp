@@ -1,4 +1,4 @@
-package kr.happyjob.study.selSaD.model;
+package kr.happyjob.study.selSad.model;
 
 public class SelSaDModel {
 

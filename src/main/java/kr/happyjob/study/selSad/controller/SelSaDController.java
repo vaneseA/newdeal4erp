@@ -1,7 +1,7 @@
-package kr.happyjob.study.selSaD.controller;
+package kr.happyjob.study.selSad.controller;
 
-import kr.happyjob.study.selSaD.model.SelSaDModel;
-import kr.happyjob.study.selSaD.service.SelSaDService;
+import kr.happyjob.study.selSad.model.SelSaDModel;
+import kr.happyjob.study.selSad.service.SelSaDService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

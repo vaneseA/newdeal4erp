@@ -1,11 +1,12 @@
-package kr.happyjob.study.selSaD.service;
+package kr.happyjob.study.selSad.dao;
 
-import kr.happyjob.study.selSaD.model.SelSaDModel;
+import kr.happyjob.study.selSad.model.SelSaDModel;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
-
-public interface SelSaDService {
+@Component
+public interface SelSaDDao {
 
 	/**  목록 조회 */
 	public List<SelSaDModel> selSaDList(Map<String, Object> paramMap) throws Exception;
@@ -24,6 +25,5 @@ public interface SelSaDService {
 
 	/** 삭제 */
 	public int selSaDDelete(Map<String, Object> paramMap) throws Exception;
-
 
 }

@@ -1,11 +1,11 @@
-package kr.happyjob.study.selSaD.dao;
+package kr.happyjob.study.selSad.service;
 
-import kr.happyjob.study.selSaD.model.SelSaDModel;
+import kr.happyjob.study.selSad.model.SelSaDModel;
 
 import java.util.List;
 import java.util.Map;
 
-public interface SelSaDDao {
+public interface SelSaDService {
 
 	/**  목록 조회 */
 	public List<SelSaDModel> selSaDList(Map<String, Object> paramMap) throws Exception;
@@ -24,5 +24,6 @@ public interface SelSaDDao {
 
 	/** 삭제 */
 	public int selSaDDelete(Map<String, Object> paramMap) throws Exception;
+
 
 }
