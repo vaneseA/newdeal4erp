@@ -42,7 +42,7 @@ public class SelSaMController {
 
         logger.info("+ End " + className + ".sel");
 
-        return "/selSaM/saleMonthList";
+        return "selSaM/saleMonth";
     }
 
     @RequestMapping("selSaMList.do")
@@ -60,15 +60,15 @@ public class SelSaMController {
         paramMap.put("pageindex", pageindex);
 
         // Controller  Service  Dao  SQL
-        List<SelSaMModel> noticesearchlist = selSaMService.selSaMList(paramMap);
+        List<SelSaMModel> selSaMSearchList = selSaMService.selSaMList(paramMap);
         int totalcnt = selSaMService.countSelSaMList(paramMap);
 
-        model.addAttribute("noticesearchlist", noticesearchlist);
+        model.addAttribute("noticesearchlist", selSaMSearchList);
         model.addAttribute("totalcnt", totalcnt);
 
         logger.info("+ End " + className + ".selSaMList");
 
-        return "selSaM/saleMonthListGrd";
+        return "saleMonthGrd";
     }
 
 }

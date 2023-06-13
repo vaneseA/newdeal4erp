@@ -322,7 +322,7 @@
 								관리</span> <a href="../system/comnCodMgr.do" class="btn_set refresh">새로고침</a>
                         </p>
 
-                        <p class="conTitle">출
+                        <p class="conTitle">
                             <span>일별 매출 현황</span> <span class="fr">
 							<select id="delyn" name="delyn" style="width: 150px;">
 							        <option value="">전체</option>

@@ -1,6 +1,5 @@
 package kr.happyjob.study.selSaM.dao;
 
-import kr.happyjob.study.empSam.model.SalmanagementModel;
 import kr.happyjob.study.selSaM.model.SelSaMModel;
 import org.springframework.stereotype.Component;
 

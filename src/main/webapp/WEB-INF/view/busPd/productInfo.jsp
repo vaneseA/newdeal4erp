@@ -395,12 +395,12 @@
 
 						<p class="Location">
 							<a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
-								class="btn_nav bold">운영</span> <span class="btn_nav bold">공지사항
-								관리</span> <a href="../system/comnCodMgr.do" class="btn_set refresh">새로고침</a>
+								class="btn_nav bold">영업</span> <span class="btn_nav bold">제품정보
+								</span> <a href="../system/comnCodMgr.do" class="btn_set refresh">새로고침</a>
 						</p>
 
 						<p class="conTitle">
-							<span>공지사항</span> <span class="fr">
+							<span>제품정보</span> <span class="fr">
 							<select id="delyn" name="delyn" style="width: 150px;">
 							        <option value="" >전체</option>
 									<option value="Y" >삭제</option>
@@ -413,8 +413,7 @@
 							</select>
 							<input type="text" style="width: 300px; height: 25px;" id="sname" name="sname">
 							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
-							 <a class="btnType blue" href="javascript:fn_openpopup();" name="modal"><span>신규등록</span></a>
-							 <a class="btnType blue" href="javascript:fn_openpopupfile();" name="modal"><span>신규등록 파일</span></a>
+							 <a class="btnType blue" href="javascript:fn_openpopup();" name="modal"><span>제품등록</span></a>
 							</span>
 						</p>
 
@@ -422,20 +421,27 @@
 							<table class="col">
 								<caption>caption</caption>
 								<colgroup>
-									<col width="15%">
-									<col width="40%">
-									<col width="15%">
-									<col width="15%">
-									<col width="15%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
 								</colgroup>
 
 								<thead>
 								<tr>
-									<th scope="col">글번호</th>
-									<th scope="col">제목</th>
-									<th scope="col">작성일자</th>
-									<th scope="col">작성자</th>
-									<th scope="col">삭제여부</th>
+									<th scope="col">제품번호</th>
+									<th scope="col">납품기업번호</th>
+									<th scope="col">납품기업명</th>
+									<th scope="col">품명</th>
+									<th scope="col">모델명</th>
+									<th scope="col">판매가</th>
+									<th scope="col">납품단가</th>
+									<th scope="col">수량</th>
+
 								</tr>
 								</thead>
 								<tbody id="listnotice"></tbody>
