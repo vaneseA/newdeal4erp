@@ -23,7 +23,7 @@
 			// 버튼 이벤트 등록
 			fRegisterButtonClickEvent();
 
-			fn_noticelist();
+			fn_busPdList();
 
 
 		});
@@ -31,40 +31,40 @@
 
 		/** 버튼 이벤트 등록 */
 
-		function fRegisterButtonClickEvent() {
-			$('a[name=btn]').click(function(e) {
-				e.preventDefault();
+		// function fRegisterButtonClickEvent() {
+		// 	$('a[name=btn]').click(function(e) {
+		// 		e.preventDefault();
+		//
+		// 		var btnId = $(this).attr('id');
+		//
+		// 		switch (btnId) {
+		// 			case 'btnSearch' :
+		// 				fn_noticelist();
+		// 				break;
+		// 			case 'btnSave' :
+		// 				fn_save();
+		// 				break;
+		// 			case 'btnDelete' :
+		// 				$("#action").val("D");
+		// 				fn_save();
+		// 				break;
+		// 			case 'btnDeleteFile' :
+		// 				$("#action").val("D");
+		// 				fn_savefile();
+		// 				break;
+		// 			case 'btnSaveFile' :
+		// 				fn_savefile();
+		// 				break;
+		// 			case 'btnClose' :
+		// 			case 'btnCloseFile' :
+		// 				gfCloseModal();
+		// 				break;
+		// 		}
+		// 	});
+		// }
 
-				var btnId = $(this).attr('id');
 
-				switch (btnId) {
-					case 'btnSearch' :
-						fn_noticelist();
-						break;
-					case 'btnSave' :
-						fn_save();
-						break;
-					case 'btnDelete' :
-						$("#action").val("D");
-						fn_save();
-						break;
-					case 'btnDeleteFile' :
-						$("#action").val("D");
-						fn_savefile();
-						break;
-					case 'btnSaveFile' :
-						fn_savefile();
-						break;
-					case 'btnClose' :
-					case 'btnCloseFile' :
-						gfCloseModal();
-						break;
-				}
-			});
-		}
-
-
-		function fn_noticelist(pagenum) {
+		function fn_busPdList(pagenum) {
 
 			pagenum = pagenum || 1;
 
@@ -172,9 +172,9 @@
 					gfCloseModal();
 
 					if($("#action").val() == "U") {
-						fn_noticelist($("#pageno").val());
+						fn_busPdList($("#pageno").val());
 					} else {
-						fn_noticelist();
+						fn_busPdList();
 					}
 				}  else {
 					alert("오류가 발생 되었습니다.");
@@ -313,9 +313,9 @@
 					gfCloseModal();
 
 					if($("#action").val() == "U") {
-						fn_noticelist($("#pageno").val());
+						fn_busPdList($("#pageno").val());
 					} else {
-						fn_noticelist();
+						fn_busPdList();
 					}
 				}  else {
 					alert("오류가 발생 되었습니다.");

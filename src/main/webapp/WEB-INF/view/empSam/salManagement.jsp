@@ -22,7 +22,7 @@
             // 버튼 이벤트 등록
             fRegisterButtonClickEvent();
 
-            fn_noticelist();
+            fn_busPdList();
 
 
         });
@@ -174,9 +174,9 @@
                     gfCloseModal();
 
                     if ($("#action").val() == "U") {
-                        fn_noticelist($("#pageno").val());
+                        fn_busPdList($("#pageno").val());
                     } else {
-                        fn_noticelist();
+                        fn_busPdList();
                     }
                 } else {
                     alert("오류가 발생 되었습니다.");
@@ -315,9 +315,9 @@
                     gfCloseModal();
 
                     if ($("#action").val() == "U") {
-                        fn_noticelist($("#pageno").val());
+                        fn_busPdList($("#pageno").val());
                     } else {
-                        fn_noticelist();
+                        fn_busPdList();
                     }
                 } else {
                     alert("오류가 발생 되었습니다.");
