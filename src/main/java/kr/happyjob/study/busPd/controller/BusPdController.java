@@ -2,7 +2,6 @@
 package kr.happyjob.study.busPd.controller;
 import kr.happyjob.study.busPd.model.BusPdModel;
 import kr.happyjob.study.busPd.service.BusPdService;
-import kr.happyjob.study.mngNot.model.NoticeModel;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +36,18 @@ public class BusPdController {
      * 초기화면
      */
     @RequestMapping("productInfo.do")
-    public String notice(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
-                         HttpServletResponse response, HttpSession session) throws Exception {
+    public String productInfo(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+                              HttpServletResponse response, HttpSession session) throws Exception {
 
         logger.info("+ Start " + className + ".productInfo");
         logger.info("   - paramMap : " + paramMap); //println으로 값이 들어왔는지 확인하는거ㄴ
 
         logger.info("+ End " + className + ".salManagement");
+
+        // Controller  Service  Dao  SQL
+        //이거하면 500뜸
+//        List<BusPdModel> productInfoList = busPdService.productInfoList(paramMap);
+//        model.addAttribute("productInfoList", productInfoList);
 
         return "busPd/productInfo";
     }

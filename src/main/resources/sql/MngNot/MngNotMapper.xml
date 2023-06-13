@@ -14,7 +14,7 @@
 		,nt.notice_cont
 		,nt.file_no
 		,fi.file_name
-		,fi.logic_path
+		,fi.logic_pathnoticelist
 		,fi.physic_path
 		,fi.file_size
 		,fi.exten

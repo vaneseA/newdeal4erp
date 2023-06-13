@@ -1,7 +1,6 @@
 package kr.happyjob.study.busPd.service;
 
 import kr.happyjob.study.busPd.model.BusPdModel;
-import kr.happyjob.study.mngNot.model.NoticeModel;
 
 import java.util.List;
 import java.util.Map;
