@@ -31,38 +31,6 @@
 
 		/** 버튼 이벤트 등록 */
 
-		// function fRegisterButtonClickEvent() {
-		// 	$('a[name=btn]').click(function(e) {
-		// 		e.preventDefault();
-		//
-		// 		var btnId = $(this).attr('id');
-		//
-		// 		switch (btnId) {
-		// 			case 'btnSearch' :
-		// 				fn_noticelist();
-		// 				break;
-		// 			case 'btnSave' :
-		// 				fn_save();
-		// 				break;
-		// 			case 'btnDelete' :
-		// 				$("#action").val("D");
-		// 				fn_save();
-		// 				break;
-		// 			case 'btnDeleteFile' :
-		// 				$("#action").val("D");
-		// 				fn_savefile();
-		// 				break;
-		// 			case 'btnSaveFile' :
-		// 				fn_savefile();
-		// 				break;
-		// 			case 'btnClose' :
-		// 			case 'btnCloseFile' :
-		// 				gfCloseModal();
-		// 				break;
-		// 		}
-		// 	});
-		// }
-
 
 		function fn_productInfoList(pagenum) {
 
@@ -206,65 +174,7 @@
 		//////////////////////////   위는 파일 업이 처리
 		/////////////////////////    file upload
 
-		function fn_openpopupfile() {
-			popupinitfile();
 
-			// 모달 팝업
-			gfModalPop("#layer2");
-		}
-
-
-
-		function preview(event) {
-			var image = event.target;
-
-			//alert(image.files[0].file_name + " : " + image.files[0].file_nm + " : " + image.files[0].name);
-
-			if(image.files[0]){
-				//alert(window.URL.createObjectURL(image.files[0]));
-
-				var selfile = image.files[0].name;
-				var selfilearr = selfile.split(".");
-				var inserthtml = "";
-				var lastindex = selfilearr.length - 1;
-
-
-				if(selfilearr[lastindex].toLowerCase() == "jpg" || selfilearr[lastindex].toLowerCase() == "gif" || selfilearr[lastindex].toLowerCase() == "jpge" || selfilearr[lastindex].toLowerCase() == "png") {
-					inserthtml = "<img src='" + window.URL.createObjectURL(image.files[0]) + "' style='width:100px; height:80px' />";
-				} else {
-					inserthtml = selfile;
-				}
-
-
-				$("#previewdiv").empty().append(inserthtml);
-			}
-
-
-		}
-
-
-
-		function fn_selectonefile(no) {
-
-			//alert(no);
-
-			var param = {
-				notice_no : no
-			}
-
-			var selectoncallback = function(returndata) {
-				console.log( JSON.stringify(returndata) );
-
-				popupinitfile(returndata.noticesearch);
-
-				// 모달 팝업
-				gfModalPop("#layer2");
-
-			}
-
-			callAjax("/mngNot/noticeselectone.do", "post", "json", false, param, selectoncallback) ;
-
-		}
 
 
 

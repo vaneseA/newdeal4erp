@@ -40,14 +40,9 @@ public class BusPdController {
                               HttpServletResponse response, HttpSession session) throws Exception {
 
         logger.info("+ Start " + className + ".productInfo");
-        logger.info("   - paramMap : " + paramMap); //println으로 값이 들어왔는지 확인하는거ㄴ
+        logger.info("   - paramMap : " + paramMap);
 
-        logger.info("+ End " + className + ".salManagement");
-
-        // Controller  Service  Dao  SQL
-        //이거하면 500뜸
-//        List<BusPdModel> productInfoList = busPdService.productInfoList(paramMap);
-//        model.addAttribute("productInfoList", productInfoList);
+        logger.info("+ End " + className + ".productInfo");
 
         return "busPd/productInfo";
     }
@@ -56,7 +51,7 @@ public class BusPdController {
     public String productList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                               HttpServletResponse response, HttpSession session) throws Exception {
 
-        logger.info("+ Start " + className + "productInfoList");
+        logger.info("+ Start " + className + ".productInfoList");
         logger.info("   - paramMap : " + paramMap);
 
         int pagenum = Integer.parseInt((String) paramMap.get("pagenum"));
@@ -66,38 +61,16 @@ public class BusPdController {
         paramMap.put("pageSize", pageSize);
         paramMap.put("pageindex", pageindex);
 
-        // Controller  Service  Dao  SQL
+        // Controller -> Service -> Dao -> SQL
         List<BusPdModel> busPdSearchList = busPdService.productInfoList(paramMap);
-//        int totalcnt = busPdService.countBusPdList(paramMap);
 
         model.addAttribute("busPdSearchList", busPdSearchList);
-//        model.addAttribute("totalcnt", totalcnt);
 
+        logger.info("+ End " + className + ".productInfoList");
 
-        logger.info("+ End " + className + ".busPdList");
-
-        return "busPd/productInfoGrd";
+        return "busPd/productInfo";
     }
 
-
-    @RequestMapping("productSelectOne.do")
-    @ResponseBody
-    public Map<String, Object> productSelectOne(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
-                                               HttpServletResponse response, HttpSession session) throws Exception {
-
-        logger.info("+ Start " + className + ".productSelectOne");
-        logger.info("   - paramMap : " + paramMap);
-
-        // Controller  Service  Dao  SQL
-        BusPdModel productSearch = busPdService.productSelectOne(paramMap);
-
-        Map<String, Object> returnmap = new HashMap<String, Object>();
-
-        returnmap.put("productSearch", productSearch);
-
-        logger.info("+ End " + className + ".productSelectOne");
-
-        return returnmap;
-    }
+    // Rest of the controller methods...
 
 }
