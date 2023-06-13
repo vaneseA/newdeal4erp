@@ -40,12 +40,16 @@ public class BusPdController {
                               HttpServletResponse response, HttpSession session) throws Exception {
 
         logger.info("+ Start " + className + ".productInfo");
-        logger.info("   - paramMap : " + paramMap);
+        logger.info("   - paramMap: " + paramMap);
+
+        // 모델에 추가할 데이터 설정
+        model.addAttribute("productInfoData", "This is product information");
 
         logger.info("+ End " + className + ".productInfo");
 
         return "busPd/productInfo";
     }
+
 
     @RequestMapping("productInfoList.do")
     public String productList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,

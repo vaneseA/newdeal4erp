@@ -33,38 +33,37 @@
 
 
 		function fn_productInfoList(pagenum) {
-
 			pagenum = pagenum || 1;
 
 			var param = {
-				delyn : $("#delyn").val()
-				,	searchKey : $("#searchKey").val()
-				, 	sname : $("#sname").val()
-				, pageSize : pageSize
-				, pageBlockSize : pageBlockSize
-				, pagenum : pagenum
-			}
+				delyn: $("#delyn").val(),
+				searchKey: $("#searchKey").val(),
+				sname: $("#sname").val(),
+				pageSize: pageSize,
+				pageBlockSize: pageBlockSize,
+				pagenum: pagenum
+			};
 
-			var listcollabck = function(returnvalue) {
+			var listcallback = function(returnvalue) {
 				console.log(returnvalue);
 
 				$("#listnotice").empty().append(returnvalue);
 
-				var  totalcnt = $("#totalcnt").val();
+				var totalcnt = $("#totalcnt").val();
 
-				console.log("totalcnt : " + totalcnt);
+				console.log("totalcnt: " + totalcnt);
 
-				var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_productInfo');
-				console.log("paginationHtml : " + paginationHtml);
+				var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_productInfoList');
+				console.log("paginationHtml: " + paginationHtml);
 
-				$("#noticePagination").empty().append( paginationHtml );
+				$("#noticePagination").empty().append(paginationHtml);
 
 				$("#pageno").val(pagenum);
-			}
+			};
 
-			callAjax("/busPd/productInfo.do", "post", "text", false, param, listcollabck) ;
-
+			callAjax("/busPd/productInfo.do", "post", "text", false, param, listcallback);
 		}
+
 
 		function fn_openpopup() {
 
