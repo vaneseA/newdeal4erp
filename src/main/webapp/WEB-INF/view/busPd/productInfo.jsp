@@ -7,7 +7,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>공지사항</title>
+	<title>제품정보</title>
 	<jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
 
 	<script type="text/javascript">
