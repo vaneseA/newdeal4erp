@@ -17,24 +17,8 @@ import java.util.Map;
 @Service
 public class SelSaMServiceImpl implements SelSaMService {
 
-	// Set logger
-	private final Logger logger = LogManager.getLogger(this.getClass());
-
-	// Get class name for logger
-	private final String className = this.getClass().toString();
-
 	@Autowired
 	SelSaMDao selSaMDao;
-
-	@Value("${fileUpload.rootPath}")
-	private String rootPath;    // W:\\FileRepository
-
-	@Value("${fileUpload.virtualRootPath}")
-	private String virtualrootPath;  // /serverfile
-
-	@Value("${fileUpload.noticePath}")
-	private String noticePath;   // notice
-
 
 	/**
 	 * 목록 조회
@@ -49,28 +33,4 @@ public class SelSaMServiceImpl implements SelSaMService {
 
 		return selSaMDao.countSelSaMList(paramMap);
 	}
-
-	/** 한건 조회 */
-	public SelSaMModel selSaMSelectOne(Map<String, Object> paramMap) throws Exception {
-
-		return selSaMDao.selSaMSelectOne(paramMap);
-	}
-
-	/** 등록 */
-	public int selSaMInsert(Map<String, Object> paramMap) throws Exception {
-		paramMap.put("fileprc", "N");
-		return selSaMDao.selSaMInsert(paramMap);
-	}
-
-	/** 수정 */
-	public int selSaMUpdate(Map<String, Object> paramMap) throws Exception {
-		paramMap.put("fileprc", "N");
-		return selSaMDao.selSaMUpdate(paramMap);
-	}
-
-	/** 삭제 */
-	public int selSaMDelete(Map<String, Object> paramMap) throws Exception {
-		return selSaMDao.selSaMDelete(paramMap);
-	}
-
 }

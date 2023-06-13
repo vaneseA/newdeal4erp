@@ -30,36 +30,36 @@
 
         /** 버튼 이벤트 등록 */
 
-        function fRegisterButtonClickEvent() {
-            $('a[name=btn]').click(function (e) {
-                e.preventDefault();
+        // function fRegisterButtonClickEvent() {
+        //     $('a[name=btn]').click(function (e) {
+        //         e.preventDefault();
+        //
+        //         var btnId = $(this).attr('id');
+        //
+        //         switch (btnId) {
+        //             case 'btnSearch' :
+        //                 fn_noticelist();
+        //                 break;
+        //             case 'btnSave' :
+        //                 fn_save();
+        //                 break;
+        //             case 'btnDelete' :
+        //                 $("#action").val("D");
+        //                 fn_save();
+        //                 break;
+        //             case 'btnSaveFile' :
+        //                 fn_savefile();
+        //                 break;
+        //             case 'btnClose' :
+        //             case 'btnCloseFile' :
+        //                 gfCloseModal();
+        //                 break;
+        //         }
+        //     });
+        // }
 
-                var btnId = $(this).attr('id');
-
-                switch (btnId) {
-                    case 'btnSearch' :
-                        fn_noticelist();
-                        break;
-                    case 'btnSave' :
-                        fn_save();
-                        break;
-                    case 'btnDelete' :
-                        $("#action").val("D");
-                        fn_save();
-                        break;
-                    case 'btnSaveFile' :
-                        fn_savefile();
-                        break;
-                    case 'btnClose' :
-                    case 'btnCloseFile' :
-                        gfCloseModal();
-                        break;
-                }
-            });
-        }
-
-
-        function fn_noticelist(pagenum) {
+        //리스트 뿌려주기
+        function fn_selSaMList(pagenum) {
 
             pagenum = pagenum || 1;
 
@@ -89,7 +89,7 @@
                 $("#pageno").val(pagenum);
             }
 
-            callAjax("/selSaM/saleMonth.do", "post", "text", false, param, listcollabck);
+            callAjax("/selSaM/selSaMList.do", "post", "text", false, param, listcollabck);
 
         }
 
@@ -177,7 +177,7 @@
             }
 
             //callAjax("/mngNot/noticesave.do", "post", "json", false, param, savecollback) ;
-            callAjax("/selSaM/saleMonth.do", "post", "json", false, $("#myForm").serialize(), savecollback);
+            callAjax("/mngNot/noticesave.do", "post", "json", false, $("#myForm").serialize(), savecollback);
 
         }
 
@@ -224,9 +224,6 @@
                 $("#file_notice_title").val(object.notice_title);
                 $("#file_notice_cont").val(object.notice_cont);
                 $("#file_notice_no").val(object.notice_no);
-
-                $("#btnDeleteFile").show();
-
                 $("#action").val("U");
             }
         }

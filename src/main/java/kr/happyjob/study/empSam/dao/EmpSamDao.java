@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import kr.happyjob.study.empSam.model.SalmanagementModel;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public interface EmpSamDao {
 
 	//급여목록 리스트 조회
