@@ -48,11 +48,11 @@ public class BusPdController {
         return "busPd/productInfo";
     }
 
-    @RequestMapping("busPdList.do")
+    @RequestMapping("productInfoList.do")
     public String productList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                               HttpServletResponse response, HttpSession session) throws Exception {
 
-        logger.info("+ Start " + className + "busPdList");
+        logger.info("+ Start " + className + "productInfoList");
         logger.info("   - paramMap : " + paramMap);
 
         int pagenum = Integer.parseInt((String) paramMap.get("pagenum"));

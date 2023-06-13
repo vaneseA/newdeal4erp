@@ -147,7 +147,7 @@
 
 			}
 
-			callAjax("/mngNot/noticeselectone.do", "post", "json", false, param, selectoncallback) ;
+			callAjax("/busPd/productSelectOne.do", "post", "json", false, param, selectoncallback) ;
 
 		}
 
@@ -159,10 +159,12 @@
 
 			var param = {
 				action : $("#action").val(),
-				notice_no : $("#notice_no").val(),
-				notice_title : $("#notice_title").val(),
-				notice_cont : $("#notice_cont").val()
+				notice_no : $("#product_no").val(),
+				notice_title : $("#product_name").val(),
+				notice_cont : $("#splr_name").val()
 			}
+
+			//
 
 			var savecollback = function(reval) {
 				console.log( JSON.stringify(reval) );
@@ -181,8 +183,7 @@
 				}
 			}
 
-			//callAjax("/mngNot/noticesave.do", "post", "json", false, param, savecollback) ;
-			callAjax("/mngNot/noticesave.do", "post", "json", false, $("#myForm").serialize() , savecollback) ;
+			callAjax("/busPd/productSave.do", "post", "json", false, $("#myForm").serialize() , savecollback) ;
 
 		}
 
@@ -212,65 +213,7 @@
 			gfModalPop("#layer2");
 		}
 
-		function popupinitfile(object) {
 
-			if(object == "" || object == null || object == undefined) {
-				$("#file_notice_title").val("");
-				$("#file_notice_cont").val("");
-				$("#notice_no").val("");
-				$("#upfile").val("");
-
-				$("#previewdiv").empty();
-
-				$("#btnDeleteFile").hide();
-
-				$("#action").val("I");
-			} else {
-				/*
-                "notice_del_yn":"N"
-                "loginID":"admin"
-                 "notice_no":71
-                 "notice_title":"oofile"
-                  "notice_date":"2023-06-12 09:16:58.0"
-                  "notice_cont":"ddddd"
-                  "file_no":30
-                  "file_name":"0524.sql"
-                 "logic_path":"/serverfile\\\\notice\\0524.sql"
-                  "physic_path":"W:\\FileRepository\\\\notice\\0524.sql"
-                  "file_size":34498
-                  "exten":"sql"
-                  "name":"관리자"
-                 */
-				$("#file_notice_title").val(object.notice_title);
-				$("#file_notice_cont").val(object.notice_cont);
-				$("#notice_no").val(object.notice_no);
-				$("#upfile").val("");
-
-				var inserthtml = "<a href='javascript:fn_filedownload()'>";
-
-				if(object.file_name == "" || object.file_name == null || object.file_name == undefined) {
-					inserthtml += "";
-				} else {
-					var selfile = object.file_name;
-					var selfilearr = selfile.split(".");
-					var lastindex = selfilearr.length - 1;
-					if(selfilearr[lastindex].toLowerCase() == "jpg" || selfilearr[lastindex].toLowerCase() == "gif" || selfilearr[lastindex].toLowerCase() == "jpge" || selfilearr[lastindex].toLowerCase() == "png") {
-						inserthtml += "<img src='" + object.logic_path + "' style='width:100px; height:80px' />";
-					} else {
-						inserthtml += object.file_name;
-					}
-				}
-
-
-				inserthtml += "</a>"
-
-				$("#previewdiv").empty().append(inserthtml);
-
-				$("#btnDeleteFile").show();
-
-				$("#action").val("U");
-			}
-		}
 
 		function preview(event) {
 			var image = event.target;
@@ -299,32 +242,7 @@
 
 		}
 
-		function fn_savefile() {
 
-			var frm = document.getElementById("myForm");
-			frm.enctype = 'multipart/form-data';
-			var fileData = new FormData(frm);
-
-			var filesavecallback = function(returnval) {
-				console.log( JSON.stringify(returnval) );
-
-				if(returnval.returncval > 0) {
-					alert("저장 되었습니다.");
-					gfCloseModal();
-
-					if($("#action").val() == "U") {
-						fn_productInfoList($("#pageno").val());
-					} else {
-						fn_productInfoList();
-					}
-				}  else {
-					alert("오류가 발생 되었습니다.");
-				}
-			}
-
-			callAjaxFileUploadSetFormData("/mngNot/noticesavefile.do", "post", "json", true, fileData, filesavecallback);
-
-		}
 
 		function fn_selectonefile(no) {
 
@@ -347,18 +265,6 @@
 			callAjax("/mngNot/noticeselectone.do", "post", "json", false, param, selectoncallback) ;
 
 		}
-
-		function fn_filedownload() {
-			alert("다운로드");
-
-			var params = "";
-			params += "<input type='hidden' name='notice_no' id='notice_no' value='"+ $("#notice_no").val() +"' />";
-
-			jQuery("<form action='/mngNot/downloadnoticefile.do' method='post'>"+params+"</form>").appendTo('body').submit().remove();
-
-		}
-
-
 
 
 
@@ -464,7 +370,7 @@
 	<div id="layer1" class="layerPop layerType2" style="width: 600px;">
 		<dl>
 			<dt>
-				<strong>그룹코드 관리</strong>
+				<strong>제품 등록</strong>
 			</dt>
 			<dd class="content">
 				<!-- s : 여기에 내용입력 -->
@@ -479,7 +385,7 @@
 
 					<tbody>
 					<tr>
-						<th scope="row">제목 <span class="font_red">*</span></th>
+						<th scope="row">제품명 <span class="font_red">*</span></th>
 						<td colspan="3"><input type="text" class="inputTxt p100" name="notice_title" id="notice_title" /></td>
 					</tr>
 					<tr>
