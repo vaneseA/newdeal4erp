@@ -80,9 +80,16 @@ public class MngNotController {
 
       // Controller  Service  Dao  SQL
       List<NoticeModel> noticesearchlist = mngNotService.noticelist(paramMap);
+
+      //총 개수는 totalcnt 변수에 저장됩니다.
       int totalcnt = mngNotService.countnoticelist(paramMap);
 
+      //model 객체에 noticesearchlist 변수를 "noticesearchlist"라는 이름으로 추가합니다.
+      //이렇게 함으로써 noticesearchlist 변수의 값을 뷰(템플릿)에서 사용할 수 있게 됩니다.
       model.addAttribute("noticesearchlist", noticesearchlist);
+
+      //model 객체에 totalcnt 변수를 "totalcnt"라는 이름으로 추가합니다.
+      //이렇게 함으로써 totalcnt 변수의 값을 뷰(템플릿)에서 사용할 수 있게 됩니다.
       model.addAttribute("totalcnt", totalcnt);
 
 

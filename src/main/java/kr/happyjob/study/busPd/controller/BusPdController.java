@@ -68,10 +68,10 @@ public class BusPdController {
 
         // Controller  Service  Dao  SQL
         List<BusPdModel> busPdSearchList = busPdService.productInfoList(paramMap);
-        int totalcnt = busPdService.countBusPdList(paramMap);
+//        int totalcnt = busPdService.countBusPdList(paramMap);
 
         model.addAttribute("busPdSearchList", busPdSearchList);
-        model.addAttribute("totalcnt", totalcnt);
+//        model.addAttribute("totalcnt", totalcnt);
 
 
         logger.info("+ End " + className + ".busPdList");
