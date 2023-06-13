@@ -44,14 +44,22 @@ public class MngNotController {
    /**
     * 초기화면
     */
+//   @RequestMapping("notice.do")는 "/notice.do"라는 URL에 대한 요청을 처리하는 메서드임을 나타냅니다. 즉, 클라이언트가 "/notice.do"에 대한 요청을 보내면 이 메서드가 실행됩니다.
    @RequestMapping("notice.do")
+//   Model model: Spring의 Model 객체로, 뷰에 데이터를 전달하는 데 사용됩니다.
+//   @RequestParam Map<String, Object> paramMap: HTTP 요청에서 전달된 파라미터들을 담는 맵 객체입니다.
+//   HttpServletRequest request: 현재 요청에 대한 정보를 가지고 있는 HttpServletRequest 객체입니다.
+//   HttpServletResponse response: 클라이언트로의 응답을 다루기 위한 HttpServletResponse 객체입니다.
+//   HttpSession session: 현재 세션을 나타내는 HttpSession 객체입니다.
    public String notice(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                         HttpServletResponse response, HttpSession session) throws Exception {
-
+//      logger.info 메서드를 사용하여 로깅 정보를 출력합니다. 이는 디버깅이나 추적 목적으로 사용됩니다.
       logger.info("+ Start " + className + ".notice");
       logger.info("   - paramMap : " + paramMap);
 
       logger.info("+ End " + className + ".notice");
+//      "mngNot/noticelist"라는 문자열을 반환합니다.
+//      이는 뷰의 이름을 나타내며, Spring은 이를 찾아 해당하는 뷰를 렌더링하여 클라이언트에게 응답으로 보냅니다.
 
       return "mngNot/noticelist";
    }

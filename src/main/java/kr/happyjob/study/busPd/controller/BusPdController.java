@@ -45,8 +45,8 @@ public class BusPdController {
     }
 
     @RequestMapping("busPdList.do")
-    public String noticelist(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
-                             HttpServletResponse response, HttpSession session) throws Exception {
+    public String productList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+                              HttpServletResponse response, HttpSession session) throws Exception {
 
         logger.info("+ Start " + className + "busPdList");
         logger.info("   - paramMap : " + paramMap);
@@ -68,7 +68,7 @@ public class BusPdController {
 
         logger.info("+ End " + className + ".busPdList");
 
-        return "productInfo";
+        return "busPd/productInfoGrd";
     }
 
 

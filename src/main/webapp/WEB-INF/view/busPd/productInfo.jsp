@@ -86,7 +86,7 @@
 
 				console.log("totalcnt : " + totalcnt);
 
-				var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_noticelist');
+				var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_productInfo');
 				console.log("paginationHtml : " + paginationHtml);
 
 				$("#noticePagination").empty().append( paginationHtml );
@@ -94,7 +94,7 @@
 				$("#pageno").val(pagenum);
 			}
 
-			callAjax("/busPd/productList", "post", "text", false, param, listcollabck) ;
+			callAjax("/busPd/productInfo.do", "post", "text", false, param, listcollabck) ;
 
 		}
 
@@ -129,7 +129,7 @@
 			}
 		}
 
-		function fn_selectone(no) {
+		function fn_selectOne(no) {
 
 			//alert(no);
 
@@ -140,7 +140,7 @@
 			var selectoncallback = function(returndata) {
 				console.log( JSON.stringify(returndata) );
 
-				popupinit(returndata.noticesearch);
+				popupinit(returndata.productSearch);
 
 				// 모달 팝업
 				gfModalPop("#layer1");

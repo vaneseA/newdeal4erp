@@ -12,7 +12,7 @@
 <c:if test="${totalcnt > 0 }">
 	<c:forEach items="${noticesearchlist}" var="list">
 		<tr>
-			<td><a href="javascript:fn_selectone('${list.notice_no}')">${list.notice_no}</a></td>
+			<td><a href="javascript:fn_selectOne('${list.notice_no}')">${list.notice_no}</a></td>
 			<td>${list.notice_date}</td>
 			<td>${list.name}</td>
 			<td>${list.notice_del_yn}</td>
