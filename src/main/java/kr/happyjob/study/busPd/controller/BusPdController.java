@@ -2,6 +2,7 @@
 package kr.happyjob.study.busPd.controller;
 import kr.happyjob.study.busPd.model.BusPdModel;
 import kr.happyjob.study.busPd.service.BusPdService;
+import kr.happyjob.study.mngNot.model.NoticeModel;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,7 +63,7 @@ public class BusPdController {
         paramMap.put("pageindex", pageindex);
 
         // Controller  Service  Dao  SQL
-        List<BusPdModel> busPdSearchList = busPdService.busPdList(paramMap);
+        List<BusPdModel> busPdSearchList = busPdService.productInfoList(paramMap);
         int totalcnt = busPdService.countBusPdList(paramMap);
 
         model.addAttribute("busPdSearchList", busPdSearchList);
@@ -71,5 +75,25 @@ public class BusPdController {
         return "busPd/productInfoGrd";
     }
 
+
+    @RequestMapping("productSelectOne.do")
+    @ResponseBody
+    public Map<String, Object> productSelectOne(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+                                               HttpServletResponse response, HttpSession session) throws Exception {
+
+        logger.info("+ Start " + className + ".productSelectOne");
+        logger.info("   - paramMap : " + paramMap);
+
+        // Controller  Service  Dao  SQL
+        BusPdModel productSearch = busPdService.productSelectOne(paramMap);
+
+        Map<String, Object> returnmap = new HashMap<String, Object>();
+
+        returnmap.put("productSearch", productSearch);
+
+        logger.info("+ End " + className + ".productSelectOne");
+
+        return returnmap;
+    }
 
 }

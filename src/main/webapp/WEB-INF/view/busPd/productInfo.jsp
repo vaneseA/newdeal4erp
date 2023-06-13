@@ -23,7 +23,7 @@
 			// 버튼 이벤트 등록
 			fRegisterButtonClickEvent();
 
-			fn_busPdList();
+			fn_productInfoList();
 
 
 		});
@@ -64,7 +64,7 @@
 		// }
 
 
-		function fn_busPdList(pagenum) {
+		function fn_productInfoList(pagenum) {
 
 			pagenum = pagenum || 1;
 
@@ -172,9 +172,9 @@
 					gfCloseModal();
 
 					if($("#action").val() == "U") {
-						fn_busPdList($("#pageno").val());
+						fn_productInfoList($("#pageno").val());
 					} else {
-						fn_busPdList();
+						fn_productInfoList();
 					}
 				}  else {
 					alert("오류가 발생 되었습니다.");
@@ -313,9 +313,9 @@
 					gfCloseModal();
 
 					if($("#action").val() == "U") {
-						fn_busPdList($("#pageno").val());
+						fn_productInfoList($("#pageno").val());
 					} else {
-						fn_busPdList();
+						fn_productInfoList();
 					}
 				}  else {
 					alert("오류가 발생 되었습니다.");
