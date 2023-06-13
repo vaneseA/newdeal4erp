@@ -6,7 +6,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import kr.happyjob.study.mngNot.model.NoticeModel;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface MngNotDao {
 
 	/**  목록 조회 */

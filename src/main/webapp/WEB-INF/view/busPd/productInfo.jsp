@@ -438,8 +438,8 @@
 									<th scope="col">납품기업명</th>
 									<th scope="col">품명</th>
 									<th scope="col">모델명</th>
-									<th scope="col">판매가</th>
 									<th scope="col">납품단가</th>
+									<th scope="col">판매가</th>
 									<th scope="col">수량</th>
 
 								</tr>

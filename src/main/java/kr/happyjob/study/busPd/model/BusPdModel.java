@@ -10,105 +10,88 @@ public class BusPdModel {
     public void setLoginID(String loginID) {
         this.loginID = loginID;
     }
-    public String getSal_date() {
-        return sal_date;
+
+    //제품번호
+    public int getProduct_no() { return product_no; }
+
+    public void setProduct_no(int product_no) {
+        this.product_no = product_no;
     }
-    public void setSal_date(String sal_date) {
-        this.sal_date = sal_date;
+
+    //납품기업번호
+    public int getSplr_no() { return splr_no; }
+
+    public void setSplr_no(int splr_no) {
+        this.splr_no = splr_no;
     }
-    public String getEmp_name() {
-        return emp_name;
+
+
+    //납품기업명
+    public String getSplr_name() {
+        return splr_name;
     }
-    public void setEmp_name(String emp_name) {
-        this.emp_name = emp_name;
+    public void setSplr_name(String splr_name) {
+        this.splr_name = splr_name;
     }
-    public String getDept_cd() {
-        return dept_cd;
+
+
+    //품명
+    public String getProduct_name() {
+        return product_name;
     }
-    public void setDept_cd(String dept_cd) {
-        this.dept_cd = dept_cd;
+    public void setProduct_name(String product_name) {
+        this.product_name = product_name;
     }
-    public String getLevel_cd() {
-        return level_cd;
+
+    //모델명
+    public String getProduct_serial() {
+        return product_serial;
     }
-    public void setLevel_cd(String level_cd) {
-        this.level_cd = level_cd;
+    public void setProduct_serial(String product_serial) {
+        this.product_serial = product_serial;
     }
-    public int getEmp_yr_sal() {
-        return emp_yr_sal;
+
+    //판매가
+    public int getProduct_price() { return product_price; }
+
+    public void setProduct_price(int product_price) {
+        this.product_price = product_price;
     }
-    public void setEmp_yr_sal(int emp_yr_sal) {
-        this.emp_yr_sal = emp_yr_sal;
+
+    //납품단가
+    public int getProduct_unit_price() { return product_unit_price; }
+
+    public void setProduct_unit_price(int product_unit_price) {
+        this.product_unit_price = product_unit_price;
     }
-    public int getSal_pre() {
-        return sal_pre;
-    }
-    public void setSal_pre(int sal_pre) {
-        this.sal_pre = sal_pre;
-    }
-    public int getSal_san() {
-        return sal_san;
-    }
-    public void setSal_san(int sal_san) {
-        this.sal_san = sal_san;
-    }
-    public int getSal_ko() {
-        return sal_ko;
-    }
-    public void setSal_ko(int sal_ko) {
-        this.sal_ko = sal_ko;
-    }
-    public int getSal_kun() {
-        return sal_kun;
-    }
-    public void setSal_kun(int sal_kun) {
-        this.sal_kun = sal_kun;
-    }
-    public int getSal_kuk() {
-        return sal_kuk;
-    }
-    public void setSal_kuk(int sal_kuk) {
-        this.sal_kuk = sal_kuk;
-    }
-    public int getSal_after() {
-        return sal_after;
-    }
-    public void setSal_after(int sal_after) {
-        this.sal_after = sal_after;
-    }
-    public int getEmp_final_money() {
-        return emp_final_money;
-    }
-    public void setEmp_final_money(int emp_final_money) {
-        this.emp_final_money = emp_final_money;
-    }
-    public String getEmp_meno() {
-        return emp_meno;
-    }
-    public void setEmp_meno(String emp_meno) {
-        this.emp_meno = emp_meno;
-    }
-    public String getSal_pay_yn() {
-        return sal_pay_yn;
-    }
-    public void setSal_pay_yn(String sal_pay_yn) {
-        this.sal_pay_yn = sal_pay_yn;
-    }
-    private String loginID; //사번
-    private String sal_date;  //해당년월
-    private String emp_name;  //사원명
-    private String dept_cd;  //부서코드
-    private String level_cd;  //직급코드
-    private int emp_yr_sal;  //연봉
-    private int sal_pre; //세전급여(기본급)
-    private int sal_san;  //산재보험
-    private int sal_ko;  //고용보험
-    private int sal_kun;  //건강보험
-    private int sal_kuk;  //국민연금
-    private int sal_after;  //실급여
-    private int emp_final_money;  //퇴직금
-    private String emp_meno;  //비고
-    private String sal_pay_yn;  //당월 급여 지급여부
+
+//    //수량
+//    public int getSplr_no() { return splr_no; }
+//
+//    public void setSplr_no(int splr_no) {
+//        this.splr_no = splr_no;
+//    }
+
+
+
+
+    private String loginID; //
+
+    /////
+    private int product_no;//제품번호
+
+    private int splr_no;//납품기업번호
+
+    private String splr_name;//납품기업명
+
+
+    private String product_name;//품명
+
+    private String product_serial;//모델명
+
+    private int product_unit_price;//납품단가
+    private int product_price;//판매가
+
 
 
 }
