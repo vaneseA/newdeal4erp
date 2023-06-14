@@ -329,28 +329,24 @@
 
                     <tbody>
                     <tr>
-                        <th scope="row">납품기업번호 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="splr_no" id="splr_no"/></td>
-                    </tr>
-                    <tr>
                         <th scope="row">납품기업명 <span class="font_red">*</span></th>
                         <td><input type="text" class="inputTxt p100" name="splr_name" id="splr_name"/></td>
-                    <tr>
-                        <th scope="row">품명 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="product_name" id="product_name"/></td>
-
+                        <th scope="row">제품종류 <span class="font_red">*</span></th>
+                        <td><input type="text" class="inputTxt p100" name="product_type" id="product_type"/></td>
+                    </tr>
                     <tr>
                         <th scope="row">모델명 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="product_serial" id="product_serial"/></td>
+                        <td><input type="text" class="inputTxt p100" name="product_serial"
+                                               id="product_serial"/></td>
+                        <th scope="row">품명 <span class="font_red">*</span></th>
+                        <td><input type="text" class="inputTxt p100" name="product_name" id="product_name"/></td>
                     <tr>
                         <th scope="row">납품단가 <span class="font_red">*</span></th>
                         <td><input type="text" class="inputTxt p100" name="product_unit_price" id="product_unit_price"/>
                         </td>
-                    <tr>
                         <th scope="row">판매가 <span class="font_red">*</span></th>
                         <td><input type="text" class="inputTxt p100" name="product_price" id="product_price"/></td>
                     </tr>
-
                     </tbody>
                 </table>
 
