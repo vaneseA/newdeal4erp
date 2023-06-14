@@ -14,168 +14,75 @@
              , sl.splr_name
         FROM tb_product pd
         inner join tb_splr sl on sl.splr_no = pd.splr_no
-        ORDER BY product_no DESC
---             LIMIT #{pageindex}, #{pageSize}
+        ORDER BY pd.product_no
+        LIMIT #{pageindex}, #{pageSize}
+
     </select>
+
+<select id="countProductList" resultType="int">
+SELECT COUNT(*)
+FROM tb_product pd
+INNER JOIN tb_detail_code dc ON dc.group_code = 'bk_cd' AND dc.detail_code = sp.bk_cd
+
+</select>
+
+
+        <!-- 납품기업 한건 조회 -->
+<select id="productSelectOne" resultType="kr.happyjob.study.busPd.model.BusPdModel">
+    SELECT pd.product_no
+         , pd.product_serial
+         , pd.product_name
+         , pd.product_unit_price
+         , pd.product_price
+         , sl.splr_no
+         , sl.splr_name
+    FROM tb_product pd
+             inner join tb_splr sl on sl.splr_no = pd.splr_no
+    WHERE pd.product_no = #{product_no}
+</select>
+
+    <!-- 등록 -->
+    <insert id="productInsert">
+        <selectKey resultType="int" keyProperty="no" order="BEFORE">
+            SELECT ifnull(max(product_no),0) + 1 FROM tb_product
+        </selectKey>
+        INSERT INTO tb_product
+        (
+        product_no
+        , product_serial
+        , product_name
+        , product_unit_price
+        , product_price
+        , splr_no
+        , splr_name
+        )
+        VALUES (
+        #{no}
+        ,#{product_serial}
+        ,#{product_name}
+        ,#{product_unit_price}
+        ,#{product_price}
+        ,#{splr_no}
+        ,#{splr_name}
+        )
+    </insert>
+
+    <!-- 수정 -->
+    <update id="productUpdate">
+        UPDATE tb_product
+        SET product_serial = #{product_serial}
+          ,product_name = #{product_name}
+          ,product_unit_price = #{product_unit_price}
+          ,product_price = #{product_price}
+          ,splr_no = #{splr_no}
+          ,splr_name = #{splr_name}
+        WHERE product_no = #{product_no}
+    </update>
+
+    <!-- 납품기업 삭제 -->
+    <delete id="productDelete">
+        DELETE FROM tb_product
+        WHERE product_no = #{product_no}
+    </delete>
+
 </mapper>
-<!--	&lt;!&ndash; 목록 총 갯수 조회 &ndash;&gt;-->
-<!--	<select id="countnoticelist" resultType="int">-->
-<!--		/*kr.happyjob.study.mngNot.dao.MngNotDao.countnoticelist*/-->
-<!--		select count(*)-->
-<!--		from tb_notice nt-->
-<!--		inner join tb_userinfo ui on ui.loginID = nt.loginID-->
-<!--		left outer join tb_file fi on fi.file_no = nt.file_no-->
-<!--		<where>-->
-<!--			<if test="(delyn != null) and (!delyn.equals(''))">-->
-<!--				and nt.notice_del_yn = #{delyn}-->
-<!--			</if>-->
-<!--			<if test="(sname != null) and (!sname.equals(''))">-->
-<!--				<choose>-->
-<!--					<when-->
-<!--							test="searchKey eq 'writer'.toString()">-->
-<!--						and ui.name Like CONCAT('%', #{sname}, '%')-->
-<!--					</when>-->
-<!--					<when-->
-<!--							test="searchKey eq 'title'.toString()">-->
-<!--						and nt.notice_title LIKE CONCAT('%', #{sname}, '%')-->
-<!--					</when>-->
-<!--					<otherwise>-->
-<!--						and (   ui.name Like CONCAT('%', #{sname}, '%')-->
-<!--						or nt.notice_title LIKE CONCAT('%', #{sname}, '%')-->
-<!--						)-->
-<!--					</otherwise>-->
-<!--				</choose>-->
-<!--			</if>-->
-<!--		</where>-->
-<!--	</select>-->
-
-<!--	<select id="noticeselectone" resultType="kr.happyjob.study.mngNot.model.NoticeModel">-->
-<!--		select nt.notice_del_yn-->
-<!--			 ,nt.loginID-->
-<!--			 ,nt.notice_no-->
-<!--			 ,nt.notice_title-->
-<!--			 ,nt.notice_date-->
-<!--			 ,nt.notice_cont-->
-<!--			 ,nt.file_no-->
-<!--			 ,fi.file_name-->
-<!--			 ,fi.logic_path-->
-<!--			 ,fi.physic_path-->
-<!--			 ,fi.file_size-->
-<!--			 ,fi.exten-->
-<!--			 ,ui.name-->
-<!--		from tb_notice nt-->
-<!--				 inner join tb_userinfo ui on ui.loginID = nt.loginID-->
-<!--				 left outer join tb_file fi on fi.file_no = nt.file_no-->
-<!--		where nt.notice_no =  #{notice_no}-->
-<!--	</select>-->
-
-<!--	<insert id="noticeinsert">-->
-<!--		<selectKey resultType="int" keyProperty="no" order="BEFORE">-->
-<!--			select ifnull(max(notice_no),0) + 1 from tb_notice-->
-<!--		</selectKey>-->
-<!--		insert into tb_notice-->
-<!--		(-->
-<!--		notice_no-->
-<!--		, notice_del_yn-->
-<!--		, loginID-->
-<!--		, notice_title-->
-<!--		, notice_cont-->
-<!--		, notice_date-->
-<!--		, file_no-->
-<!--		)-->
-<!--		values (-->
-<!--		#{no}-->
-<!--		,'N'-->
-<!--		,#{loginid}-->
-<!--		<if test="fileprc eq 'N'.toString()">-->
-<!--			,#{notice_title}-->
-<!--		</if>-->
-<!--		<if test="fileprc eq 'Y'.toString()">-->
-<!--			,#{file_notice_title}-->
-<!--		</if>-->
-<!--		<if test="fileprc eq 'N'.toString()">-->
-<!--			,#{notice_cont}-->
-<!--		</if>-->
-<!--		<if test="fileprc eq 'Y'.toString()">-->
-<!--			,#{file_notice_cont}-->
-<!--		</if>-->
-<!--		,now()-->
-<!--		<if test="(fileprc eq 'N'.toString()) or (fileexist eq 'N'.toString()) ">-->
-<!--			,0-->
-<!--		</if>-->
-<!--		<if test="(fileprc eq 'Y'.toString()) and (fileexist eq 'Y'.toString())">-->
-<!--			,(select ifnull(max(file_no),0)  from tb_file)-->
-<!--		</if>-->
-<!--		)-->
-<!--	</insert>-->
-
-<!--	<update id="noticeupdate">-->
-<!--		update tb_notice-->
-<!--		set notice_title =  #{notice_title}-->
-<!--		  , notice_cont =  #{notice_cont}-->
-<!--		  , notice_date =  now()-->
-<!--		where  notice_no =  #{notice_no}-->
-<!--	</update>-->
-
-<!--	<update id="noticedelete">-->
-<!--		update tb_notice-->
-<!--		set notice_del_yn =  'Y'-->
-<!--		where  notice_no =  #{notice_no}-->
-<!--	</update>-->
-
-<!--	<delete id="noticedeleteold">-->
-<!--		delete from tb_notice-->
-<!--		where  notice_no =  #{notice_no}-->
-<!--	</delete>-->
-
-<!--	<insert id="fileinsert">-->
-<!--		<selectKey resultType="int" keyProperty="no" order="BEFORE">-->
-<!--			select ifnull(max(file_no),0) + 1 from tb_file-->
-<!--		</selectKey>-->
-<!--		insert into tb_file-->
-<!--		(-->
-<!--		file_no-->
-<!--		, file_name-->
-<!--		, logic_path-->
-<!--		, physic_path-->
-<!--		, file_size-->
-<!--		, exten-->
-<!--		) values (-->
-<!--		#{no}-->
-<!--		,#{filereturn.file_nm}-->
-<!--		,#{filereturn.vrfile_loc}-->
-<!--		,#{filereturn.file_loc}-->
-<!--		,#{filereturn.file_size}-->
-<!--		,#{filereturn.fileExtension}-->
-<!--		)-->
-<!--	</insert>-->
-
-<!--	<delete id="deletefileinfo">-->
-<!--		delete from tb_file-->
-<!--		where file_no = (-->
-<!--			select file_no-->
-<!--			from tb_notice-->
-<!--			where notice_no = #{notice_no}-->
-<!--		)-->
-<!--	</delete>-->
-
-<!--	<update id="noticeupdatefile">-->
-<!--		update tb_notice-->
-<!--		set notice_title =  #{file_notice_title}-->
-<!--		, notice_cont =  #{file_notice_cont}-->
-<!--		, notice_date =  now()-->
-<!--		<if test="fileexist eq 'Y'.toString()">-->
-<!--			, file_no = (select ifnull(max(file_no),0)  from tb_file)-->
-<!--		</if>-->
-<!--		<if test="fileexist eq 'N'.toString()">-->
-<!--			, file_no = 0-->
-<!--		</if>-->
-<!--		where  notice_no =  #{notice_no}-->
-<!--	</update>-->
-
-<!--	<delete id="noticedeletefile">-->
-<!--		delete from tb_notice-->
-<!--		where  notice_no =  #{notice_no}-->
-<!--	</delete>-->
-
-

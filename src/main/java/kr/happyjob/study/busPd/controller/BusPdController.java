@@ -2,7 +2,7 @@
 package kr.happyjob.study.busPd.controller;
 import kr.happyjob.study.busPd.model.BusPdModel;
 import kr.happyjob.study.busPd.service.BusPdService;
-import kr.happyjob.study.mngNot.model.NoticeModel;
+import kr.happyjob.study.busSpm.model.SplrModel;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,22 +44,19 @@ public class BusPdController {
         logger.info("   - paramMap: " + paramMap);
 
 
-//        List<BusPdModel> productSearchList = busPdService.productInfoList(paramMap);
-
-        // Controller  Service  Dao  SQL
-//        model.addAttribute("productInfoData", productSearchList);
-
         logger.info("+ End " + className + ".productInfo");
 
-        return "busPd/productInfo";
+        return "busPd/productList";
     }
 
-
-    @RequestMapping("productInfoList.do")
+    /**
+     * 목록 조회
+     */
+    @RequestMapping("productList.do")
     public String productList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                               HttpServletResponse response, HttpSession session) throws Exception {
 
-        logger.info("+ Start " + className + ".productInfoList");
+        logger.info("+ Start " + className + ".productList");
         logger.info("   - paramMap : " + paramMap);
 
         int pagenum = Integer.parseInt((String) paramMap.get("pagenum"));
@@ -70,15 +67,72 @@ public class BusPdController {
         paramMap.put("pageindex", pageindex);
 
         // Controller -> Service -> Dao -> SQL
-        List<BusPdModel> busPdSearchList = busPdService.productInfoList(paramMap);
+        List<BusPdModel> busPdSearchList = busPdService.productList(paramMap);
+        int totalcnt = busPdService.countProductList(paramMap);
 
         model.addAttribute("busPdSearchList", busPdSearchList);
+        model.addAttribute("totalcnt", totalcnt);
 
-        logger.info("+ End " + className + ".productInfoList");
+        logger.info("+ End " + className + ".productList");
 
-        return "busPd/productInfo";
+        return "busPd/productListGrd";
     }
 
-    // Rest of the controller methods...
+    /**
+     * 한건 조회
+     */
+    @RequestMapping("productSelectOne.do")
+    @ResponseBody
+    public Map<String, Object> productSelectOne(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+                                             HttpServletResponse response, HttpSession session) throws Exception {
 
+        logger.info("+ Start " + className + ".productSelectOne");
+        logger.info("   - paramMap : " + paramMap);
+
+        // Controller  Service  Dao  SQL
+        BusPdModel productSearch = busPdService.productSelectOne(paramMap);
+
+        Map<String, Object> returnmap = new HashMap<String, Object>();
+
+        returnmap.put("productSearch", productSearch);
+
+        logger.info("+ End " + className + ".productSelectOne");
+
+        return returnmap;
+    }
+
+    /**
+     * 생성, 수정, 삭제
+     */
+    @RequestMapping("productSave.do")
+    @ResponseBody
+    public Map<String, Object> productSave(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+                                        HttpServletResponse response, HttpSession session) throws Exception {
+
+        logger.info("+ Start " + className + ".productSave");
+        logger.info("   - paramMap : " + paramMap);
+
+        String action = (String) paramMap.get("action");
+
+        paramMap.put("loginid", (String) session.getAttribute("loginId"));
+
+
+        int returncval = 0;
+
+        if("I".equals(action)) {
+            returncval = busPdService.productInsert(paramMap);
+        } else if("U".equals(action)) {
+            returncval = busPdService.productUpdate(paramMap);
+        } else if("D".equals(action)) {
+            returncval = busPdService.productDelete(paramMap);
+        }
+
+        Map<String, Object> returnmap = new HashMap<String, Object>();
+
+        returnmap.put("returncval", returncval);
+
+        logger.info("+ End " + className + ".productSave");
+
+        return returnmap;
+    }
 }

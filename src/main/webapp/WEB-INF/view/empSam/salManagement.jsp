@@ -22,7 +22,7 @@
             // 버튼 이벤트 등록
             fRegisterButtonClickEvent();
 
-            fn_productInfoList();
+            fn_productList();
 
 
         });
@@ -174,9 +174,9 @@
                     gfCloseModal();
 
                     if ($("#action").val() == "U") {
-                        fn_productInfoList($("#pageno").val());
+                        fn_productList($("#pageno").val());
                     } else {
-                        fn_productInfoList();
+                        fn_productList();
                     }
                 } else {
                     alert("오류가 발생 되었습니다.");
@@ -315,9 +315,9 @@
                     gfCloseModal();
 
                     if ($("#action").val() == "U") {
-                        fn_productInfoList($("#pageno").val());
+                        fn_productList($("#pageno").val());
                     } else {
-                        fn_productInfoList();
+                        fn_productList();
                     }
                 } else {
                     alert("오류가 발생 되었습니다.");

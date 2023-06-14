@@ -10,10 +10,10 @@ import java.util.Map;
 public interface BusPdDao {
 
 	//제품 리스트 조회
-	public List<BusPdModel> busPdList(Map<String, Object> paramMap) throws Exception;
+	public List<BusPdModel> productList(Map<String, Object> paramMap) throws Exception;
 
 	//제품 카운트 조회
-	public int countBusPdList(Map<String, Object> paramMap) throws Exception;
+	public int countProductList(Map<String, Object> paramMap) throws Exception;
 
 	//한건 조회
 	public BusPdModel productSelectOne(Map<String, Object> paramMap) throws Exception;
