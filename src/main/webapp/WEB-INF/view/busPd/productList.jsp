@@ -127,8 +127,6 @@
 
         function fn_selectOne(no) {
 
-            //alert(no);
-
             var param = {
                 product_no: no
             }

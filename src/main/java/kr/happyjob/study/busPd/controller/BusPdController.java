@@ -2,7 +2,6 @@
 package kr.happyjob.study.busPd.controller;
 import kr.happyjob.study.busPd.model.BusPdModel;
 import kr.happyjob.study.busPd.service.BusPdService;
-import kr.happyjob.study.busSpm.model.SplrModel;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,10 +66,10 @@ public class BusPdController {
         paramMap.put("pageindex", pageindex);
 
         // Controller -> Service -> Dao -> SQL
-        List<BusPdModel> busPdSearchList = busPdService.productList(paramMap);
+        List<BusPdModel> productSearchList = busPdService.productList(paramMap);
         int totalcnt = busPdService.countProductList(paramMap);
 
-        model.addAttribute("busPdSearchList", busPdSearchList);
+        model.addAttribute("productSearchList", productSearchList);
         model.addAttribute("totalcnt", totalcnt);
 
         logger.info("+ End " + className + ".productList");
