@@ -245,15 +245,21 @@
 
                         <p class="conTitle">
                             <span>제품정보</span> <span class="fr">
-							<select id="delyn" name="delyn" style="width: 150px;">
-							        <option value="">전체</option>
-									<option value="Y">삭제</option>
-									<option value="N">미삭제</option>
+							<select id="delyn" name="delyn" style="width: 170px;">
+							        <option value="">(대분류명 : 제품종류) 전체</option>
+									<option value="A">그래픽카드</option>
+									<option value="B">메인보드</option>
+                                <option value="C">메모리</option>
+                                <option value="D">저장장치</option>
+
 							</select>
-							 <select id="searchKey" name="searchKey" style="width: 150px;">
-							        <option value="">전체</option>
-									<option value="writer">작성자</option>
-									<option value="title">제목</option>
+							 <select id="searchKey" name="searchKey" style="width: 170px;">
+							        <option value="">(중분류명 : 납품기업명) 전체</option>
+									<option value="writer">삼성</option>
+									<option value="title">LG</option>
+                                 <option value="title2">애플</option>
+                                 <option value="title3">인텔</option>
+                                 <option value="title4">레노버</option>
 							</select>
 							<input type="text" style="width: 300px; height: 25px;" id="sname" name="sname">
 							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
@@ -273,19 +279,17 @@
                                     <col width="10%">
                                     <col width="10%">
                                     <col width="10%">
-                                    <col width="10%">
                                 </colgroup>
 
                                 <thead>
                                 <tr>
                                     <th scope="col">제품번호</th>
-                                    <th scope="col">납품기업번호</th>
-                                    <th scope="col">납품기업명</th>
-                                    <th scope="col">품명</th>
+                                    <th scope="col">대분류명(종류)</th>
+                                    <th scope="col">중분류명(납품기업명)</th>
+                                    <th scope="col">소분류명(품명)</th>
                                     <th scope="col">모델명</th>
                                     <th scope="col">납품단가</th>
                                     <th scope="col">판매가</th>
-                                    <th scope="col">수량</th>
 
                                 </tr>
                                 </thead>

@@ -5,13 +5,8 @@
 
 	<!--  목록 조회 -->
 	<select id="productInfo" resultType="kr.happyjob.study.busPd.model.BusPdModel">
-        SELECT pd.product_no
-             , pd.product_serial
-             , pd.product_name
-             , pd.product_unit_price
-             , pd.product_price
-             , sl.splr_no
-             , sl.splr_name
+        SELECT
+
         FROM tb_product pd
         inner join tb_splr sl on sl.splr_no = pd.splr_no
         ORDER BY pd.product_no
