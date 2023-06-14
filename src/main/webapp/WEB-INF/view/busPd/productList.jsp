@@ -245,8 +245,10 @@
 								</span> <a href="../busPd/productInfo.do" class="btn_set refresh">새로고침</a>
                         </p>
 
+
                         <p class="conTitle">
                             <span>제품정보</span> <span class="fr">
+						 <!-- 검색창 영역 시작 -->
 							<select id="proLgCd" name="proLgCd" style="width: 170px;">
 							        <option value="">(제품종류) 전체</option>
 									<option value="9005">그래픽카드</option>
@@ -268,7 +270,7 @@
                                 name="modal"><span>제품등록</span></a>
 							</span>
                         </p>
-
+                        <!-- 검색창 영역 끝 -->
                         <div class="productList">
                             <table class="col">
                                 <caption>caption</caption>

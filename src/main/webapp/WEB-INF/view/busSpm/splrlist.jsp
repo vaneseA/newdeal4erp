@@ -283,7 +283,7 @@
 							<select id="searchKey" name="searchKey" style="width:150px; margin-right:5px;" >
 						        <option value="" >검색조건</option>
 								<option value="sp_name" >기업명</option>
-								<option value="sp_indst_no" >사업자등록번호</option>
+								<option value="sp_indst_no" >사업자등록번호</option>건
 							</select> 
 							<input type="text" style="width:300px; height:28px; margin-right:5px;" id="sname" name="sname">
 							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
@@ -310,7 +310,7 @@
 										<th scope="col">주소</th>
 										<th scope="col">회사전화</th>
 										<th scope="col">담당자</th>
-									</tr>
+									</tr>명
 								</thead>
 								<tbody id="listsplr"></tbody>
 							</table>
