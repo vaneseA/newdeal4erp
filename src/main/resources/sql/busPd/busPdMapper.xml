@@ -15,7 +15,7 @@
         FROM tb_product pd
         inner join tb_splr sl on sl.splr_no = pd.splr_no
         ORDER BY product_no DESC
-            LIMIT #{pageindex}, #{pageSize}
+--             LIMIT #{pageindex}, #{pageSize}
     </select>
 </mapper>
 <!--	&lt;!&ndash; 목록 총 갯수 조회 &ndash;&gt;-->

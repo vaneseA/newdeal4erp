@@ -30,10 +30,30 @@
 
 
 		/** 버튼 이벤트 등록 */
+		function fRegisterButtonClickEvent() {
+			$('a[name=btn]').click(function (e) {
+				e.preventDefault();
 
+				var btnId = $(this).attr('id');
 
-		function fn_productInfoList(pagenum) {
-			pagenum = pagenum || 1;
+				switch (btnId) {
+					case 'btnSearch' :
+						fn_productInfoList();
+						break;
+					case 'btnSave' :
+						fn_save();
+						break;
+					case 'btnDelete' :
+						$("#action").val("D");
+						fn_save();
+						break;
+					case 'btnClose' :
+				}
+			});
+		}
+
+		function fn_productInfoList(pageNum) {
+			pageNum = pageNum || 1;
 
 			var param = {
 				delyn: $("#delyn").val(),
@@ -41,33 +61,33 @@
 				sname: $("#sname").val(),
 				pageSize: pageSize,
 				pageBlockSize: pageBlockSize,
-				pagenum: pagenum
+				pageNum: pageNum
 			};
 
-			var listcallback = function(returnvalue) {
-				console.log(returnvalue);
+			var listCallBack = function(returnValue) {
+				console.log(returnValue);
 
-				$("#listnotice").empty().append(returnvalue);
+				$("#listnotice").empty().append(returnValue);
 
-				var totalcnt = $("#totalcnt").val();
+				var totalCnt = $("#totalCnt").val();
 
-				console.log("totalcnt: " + totalcnt);
+				console.log("totalCnt: " + totalCnt);
 
-				var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_productInfoList');
+				var paginationHtml = getPaginationHtml(pageNum, totalCnt, pageSize, pageBlockSize, 'fn_productInfoList');
 				console.log("paginationHtml: " + paginationHtml);
 
-				$("#noticePagination").empty().append(paginationHtml);
+				$("#productPagination").empty().append(paginationHtml);
 
-				$("#pageno").val(pagenum);
+				$("#pageNo").val(pageNum);
 			};
 
-			callAjax("/busPd/productInfo.do", "post", "text", false, param, listcallback);
+			callAjax("/busPd/productInfo.do", "post", "text", false, param, listCallBack);
 		}
 
 
-		function fn_openpopup() {
+		function fn_openPopUp() {
 
-			popupinit();
+			popUpInit();
 
 			// 모달 팝업
 			gfModalPop("#layer1");
@@ -75,20 +95,28 @@
 
 		}
 
-		function popupinit(object) {
+		function popUpInit(object) {
 
 			if(object == "" || object == null || object == undefined) {
-				$("#notice_title").val("");
-				$("#notice_cont").val("");
-				$("#notice_no").val("");
+				$("#splr_no").val("");
+				$("#splr_name").val("");
+				$("#product_name").val("");
+				$("#product_serial").val("");
+				$("#product_unit_price").val("");
+				$("#product_price").val("");
+
 
 				$("#btnDelete").hide();
 
 				$("#action").val("I");
 			} else {
-				$("#notice_title").val(object.notice_title);
-				$("#notice_cont").val(object.notice_cont);
-				$("#notice_no").val(object.notice_no);
+				$("#splr_no").val(object.splr_no);
+				$("#splr_name").val(object.splr_name);
+				$("#product_name").val(object.product_name);
+				$("#product_serial").val(object.product_serial);
+				$("#product_unit_price").val(object.product_unit_price);
+				$("#product_price").val(object.product_price);
+
 
 				$("#btnDelete").show();
 
@@ -101,20 +129,20 @@
 			//alert(no);
 
 			var param = {
-				notice_no : no
+				product_no : no
 			}
 
-			var selectoncallback = function(returndata) {
+			var selectOnCallBack = function(returndata) {
 				console.log( JSON.stringify(returndata) );
 
-				popupinit(returndata.productSearch);
+				popUpInit(returndata.productSearch);
 
 				// 모달 팝업
 				gfModalPop("#layer1");
 
 			}
 
-			callAjax("/busPd/productSelectOne.do", "post", "json", false, param, selectoncallback) ;
+			callAjax("/busPd/productSelectOne.do", "post", "json", false, param, selectOnCallBack) ;
 
 		}
 
@@ -126,14 +154,18 @@
 
 			var param = {
 				action : $("#action").val(),
-				notice_no : $("#product_no").val(),
-				notice_title : $("#product_name").val(),
-				notice_cont : $("#splr_name").val()
+				product_no : $("#product_no").val(),
+				splr_no : $("#splr_no").val(),
+				splr_name : $("#splr_name").val(),
+				product_name : $("#product_name").val(),
+				product_serial : $("#product_serial").val(),
+				product_unit_price : $("#product_unit_price").val(),
+				product_price : $("#product_price").val()
 			}
 
 			//
 
-			var savecollback = function(reval) {
+			var saveCollBack = function(reval) {
 				console.log( JSON.stringify(reval) );
 
 				if(reval.returncval > 0) {
@@ -141,7 +173,7 @@
 					gfCloseModal();
 
 					if($("#action").val() == "U") {
-						fn_productInfoList($("#pageno").val());
+						fn_productInfoList($("#pageNo").val());
 					} else {
 						fn_productInfoList();
 					}
@@ -150,7 +182,7 @@
 				}
 			}
 
-			callAjax("/busPd/productSave.do", "post", "json", false, $("#myForm").serialize() , savecollback) ;
+			callAjax("/busPd/productSave.do", "post", "json", false, $("#myForm").serialize() , saveCollBack) ;
 
 		}
 
@@ -158,8 +190,13 @@
 
 			var chk = checkNotEmpty(
 					[
-						[ "notice_title", "제목을 입력해 주세요." ]
-						,	[ "notice_cont", "내용을 입력해 주세요" ]
+						[ "splr_no", "납품기업번호를 입력해 주세요." ]
+						,	[ "splr_name", "납품기업명을 입력해 주세요" ]
+						,	[ "product_name", "품명을 입력해 주세요" ]
+						,	[ "product_serial", "모델명을 입력해 주세요" ]
+						,	[ "product_unit_price", "납품을 입력해 주세요" ]
+						,	[ "product_price", "판매가을 입력해 주세요" ],
+
 					]
 			);
 
@@ -185,8 +222,8 @@
 <body>
 <form id="myForm" action=""  method="">
 	<input type="hidden" id="action"  name="action"  />
-	<input type="hidden" id="notice_no"  name="notice_no"  />
-	<input type="hidden" id="pageno"  name="pageno"  />
+	<input type="hidden" id="product_no"  name="product_no"  />
+	<input type="hidden" id="pageNo"  name="pageNo"  />
 
 	<!-- 모달 배경 -->
 	<div id="mask"></div>
@@ -228,11 +265,11 @@
 							</select>
 							<input type="text" style="width: 300px; height: 25px;" id="sname" name="sname">
 							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
-							 <a class="btnType blue" href="javascript:fn_openpopup();" name="modal"><span>제품등록</span></a>
+							 <a class="btnType blue" href="javascript:fn_openPopUp();" name="modal"><span>제품등록</span></a>
 							</span>
 						</p>
 
-						<div class="noticeList">
+						<div class="productList">
 							<table class="col">
 								<caption>caption</caption>
 								<colgroup>
@@ -294,14 +331,24 @@
 
 					<tbody>
 					<tr>
-						<th scope="row">제품명 <span class="font_red">*</span></th>
-						<td colspan="3"><input type="text" class="inputTxt p100" name="notice_title" id="notice_title" /></td>
+						<th scope="row">납품기업번호 <span class="font_red">*</span></th>
+						<td colspan="3"><textarea id="splr_no" name="splr_no"> </textarea></td>
 					</tr>
 					<tr>
-						<th scope="row">내용 <span class="font_red">*</span></th>
-						<td colspan="3">
-							<textarea id="notice_cont" name="notice_cont"> </textarea>
-						</td>
+						<th scope="row">납품기업명 <span class="font_red">*</span></th>
+						<td colspan="3"><textarea id="splr_name" name="splr_name"> </textarea></td>
+					<tr>
+						<th scope="row">품명 <span class="font_red">*</span></th>
+						<td colspan="3"><textarea id="product_name" name="product_name"> </textarea></td>
+					<tr>
+						<th scope="row">모델명 <span class="font_red">*</span></th>
+						<td colspan="3"><textarea id="product_serial" name="product_serial"> </textarea></td>
+					<tr>
+						<th scope="row">납품단가 <span class="font_red">*</span></th>
+						<td colspan="3"><textarea id="product_unit_price" name="product_unit_price"> </textarea></td>
+					<tr>
+						<th scope="row">판매가 <span class="font_red">*</span></th>
+						<td colspan="3"><textarea id="product_price" name="product_price"> </textarea></td>
 					</tr>
 
 					</tbody>
@@ -342,30 +389,11 @@
 						<th scope="row">제목 <span class="font_red">*</span></th>
 						<td colspan="3"><input type="text" class="inputTxt p100" name="file_notice_title" id="file_notice_title" /></td>
 					</tr>
-					<tr>
-						<th scope="row">내용 <span class="font_red">*</span></th>
-						<td colspan="3">
-							<textarea id="file_notice_cont" name="file_notice_cont"> </textarea>
-						</td>
-					</tr>
-					<tr>
-						<td colspan=2>
-							<input type="file" id="upfile"  name="upfile"  onchange="javascript:preview(event)" />
-						</td>
-						<td colspan=2>
-							<div id="previewdiv" ></div>
-						</td>
-					</tr>
 					</tbody>
 				</table>
 
 				<!-- e : 여기에 내용입력 -->
 
-				<div class="btn_areaC mt30">
-					<a href="" class="btnType blue" id="btnSaveFile" name="btn"><span>저장</span></a>
-					<a href="" class="btnType blue" id="btnDeleteFile" name="btn"><span>삭제</span></a>
-					<a href="" class="btnType gray" id="btnCloseFile" name="btn"><span>취소</span></a>
-				</div>
 			</dd>
 		</dl>
 		<a href="" class="closePop"><span class="hidden">닫기</span></a>

@@ -2,6 +2,7 @@
 package kr.happyjob.study.busPd.controller;
 import kr.happyjob.study.busPd.model.BusPdModel;
 import kr.happyjob.study.busPd.service.BusPdService;
+import kr.happyjob.study.mngNot.model.NoticeModel;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,11 @@ public class BusPdController {
         logger.info("+ Start " + className + ".productInfo");
         logger.info("   - paramMap: " + paramMap);
 
-        // 모델에 추가할 데이터 설정
-        model.addAttribute("productInfoData", "This is product information");
+
+//        List<BusPdModel> productSearchList = busPdService.productInfoList(paramMap);
+
+        // Controller  Service  Dao  SQL
+//        model.addAttribute("productInfoData", productSearchList);
 
         logger.info("+ End " + className + ".productInfo");
 
