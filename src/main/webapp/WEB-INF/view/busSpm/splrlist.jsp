@@ -310,7 +310,7 @@
 										<th scope="col">주소</th>
 										<th scope="col">회사전화</th>
 										<th scope="col">담당자</th>
-									</tr>명
+									</tr>
 								</thead>
 								<tbody id="listsplr"></tbody>
 							</table>

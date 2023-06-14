@@ -59,8 +59,8 @@
 
             var param = {
                 proLgCd: $("#proLgCd").val()
-                ,proMdCd: $("#proMdCd").val()
-                ,searchKey : $("#searchKey").val()
+                , proMdCd: $("#proMdCd").val()
+                , searchKey: $("#searchKey").val()
                 , pname: $("#pname").val()
                 , pageSize: pageSize
                 , pageBlockSize: pageBlockSize
@@ -253,18 +253,16 @@
 							        <option value="">(제품종류) 전체</option>
 									<option value="9005">그래픽카드</option>
 									<option value="9001">메인보드</option>
-
-
 							</select>
                             <select id="proMdCd" name="proMgCd" style="width: 170px;">
 							        <option value="">(납품기업명) 전체</option>
 									<option value="8005">삼성</option>
 									<option value="8001">LG</option>
 							</select>
-							  <select id="searchKey" name="searchKey" style="width: 150px;" >
-									<option value="pro_sm_cd" >제품이름</option>
+							  <select id="searchKey" name="searchKey" style="width: 120px;">
+									<option value="pro_sm_cd">제품이름</option>
 							</select>
-							<input type="text" style="width: 300px; height: 25px;" id="pname" name="pname">
+							<input type="text" style="width: 200px; height: 25px;" id="pname" name="pname">
 							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
 							 <a class="btnType blue" href="javascript:fn_openPopUp();"
                                 name="modal"><span>제품등록</span></a>
@@ -332,24 +330,25 @@
                     <tbody>
                     <tr>
                         <th scope="row">납품기업번호 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="splr_no" id="splr_no" /></td>
+                        <td><input type="text" class="inputTxt p100" name="splr_no" id="splr_no"/></td>
                     </tr>
                     <tr>
                         <th scope="row">납품기업명 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="splr_name" id="splr_name" /></td>
+                        <td><input type="text" class="inputTxt p100" name="splr_name" id="splr_name"/></td>
                     <tr>
                         <th scope="row">품명 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="product_name" id="product_name" /></td>
+                        <td><input type="text" class="inputTxt p100" name="product_name" id="product_name"/></td>
 
                     <tr>
                         <th scope="row">모델명 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="product_serial" id="product_serial" /></td>
+                        <td><input type="text" class="inputTxt p100" name="product_serial" id="product_serial"/></td>
                     <tr>
                         <th scope="row">납품단가 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="product_unit_price" id="product_unit_price" /></td>
+                        <td><input type="text" class="inputTxt p100" name="product_unit_price" id="product_unit_price"/>
+                        </td>
                     <tr>
                         <th scope="row">판매가 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="product_price" id="product_price" /></td>
+                        <td><input type="text" class="inputTxt p100" name="product_price" id="product_price"/></td>
                     </tr>
 
                     </tbody>
