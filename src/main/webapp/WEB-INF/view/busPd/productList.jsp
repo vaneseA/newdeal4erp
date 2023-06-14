@@ -58,8 +58,10 @@
             pagenum = pagenum || 1;
 
             var param = {
-                searchKey: $("#searchKey").val()
-                , sname: $("#sname").val()
+                proLgCd: $("#proLgCd").val()
+                ,proMdCd: $("#proMdCd").val()
+                ,searchKey : $("#searchKey").val()
+                , pname: $("#pname").val()
                 , pageSize: pageSize
                 , pageBlockSize: pageBlockSize
                 , pagenum: pagenum
@@ -245,23 +247,22 @@
 
                         <p class="conTitle">
                             <span>제품정보</span> <span class="fr">
-							<select id="delyn" name="delyn" style="width: 170px;">
-							        <option value="">(대분류명 : 제품종류) 전체</option>
-									<option value="A">그래픽카드</option>
-									<option value="B">메인보드</option>
-                                <option value="C">메모리</option>
-                                <option value="D">저장장치</option>
+							<select id="proLgCd" name="proLgCd" style="width: 170px;">
+							        <option value="">(제품종류) 전체</option>
+									<option value="9005">그래픽카드</option>
+									<option value="9001">메인보드</option>
+
 
 							</select>
-							 <select id="searchKey" name="searchKey" style="width: 170px;">
-							        <option value="">(중분류명 : 납품기업명) 전체</option>
-									<option value="writer">삼성</option>
-									<option value="title">LG</option>
-                                 <option value="title2">애플</option>
-                                 <option value="title3">인텔</option>
-                                 <option value="title4">레노버</option>
+                            <select id="proMdCd" name="proMgCd" style="width: 170px;">
+							        <option value="">(납품기업명) 전체</option>
+									<option value="8005">삼성</option>
+									<option value="8001">LG</option>
 							</select>
-							<input type="text" style="width: 300px; height: 25px;" id="sname" name="sname">
+							  <select id="searchKey" name="searchKey" style="width: 150px;" >
+									<option value="pro_sm_cd" >제품이름</option>
+							</select>
+							<input type="text" style="width: 300px; height: 25px;" id="pname" name="pname">
 							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
 							 <a class="btnType blue" href="javascript:fn_openPopUp();"
                                 name="modal"><span>제품등록</span></a>
@@ -286,7 +287,7 @@
                                     <th scope="col">제품번호</th>
                                     <th scope="col">대분류명(종류)</th>
                                     <th scope="col">중분류명(납품기업명)</th>
-                                    <th scope="col">소분류명(품명)</th>
+                                    <th scope="col">제품이름</th>
                                     <th scope="col">모델명</th>
                                     <th scope="col">납품단가</th>
                                     <th scope="col">판매가</th>
