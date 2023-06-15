@@ -13,7 +13,7 @@
   <c:forEach items="${empSearchList}" var="list">
     <tr>
       <td>${list.loginId}</td>
-      <td><a href="javascript:fn_selectone('${list.loginId}')">${list.name}</a></td>
+      <td><a href="javascript:fn_selectOne('${list.loginId}')">${list.name}</a></td>
       <td>${list.dept_cd}</td>
       <td>${list.dept_cd}
       <select id="deptcd" name="deptcd">

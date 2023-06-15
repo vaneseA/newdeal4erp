@@ -37,14 +37,16 @@ public class SelSaMController {
     public String notice(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                          HttpServletResponse response, HttpSession session) throws Exception {
 
-        logger.info("+ Start " + className + ".sel");
+        logger.info("+ Start " + className + ".saleMonth");
         logger.info("   - paramMap : " + paramMap);
 
-        logger.info("+ End " + className + ".sel");
+        logger.info("+ End " + className + ".saleMonth");
 
-        return "selSaM/saleMonth";
+        return "selSaM/selSaMList";
     }
-
+    /**
+     * 목록 조회
+     */
     @RequestMapping("selSaMList.do")
     public String selSaMList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                              HttpServletResponse response, HttpSession session) throws Exception {
@@ -63,12 +65,12 @@ public class SelSaMController {
         List<SelSaMModel> selSaMSearchList = selSaMService.selSaMList(paramMap);
         int totalcnt = selSaMService.countSelSaMList(paramMap);
 
-        model.addAttribute("noticesearchlist", selSaMSearchList);
+        model.addAttribute("selSaMSearchList", selSaMSearchList);
         model.addAttribute("totalcnt", totalcnt);
 
         logger.info("+ End " + className + ".selSaMList");
 
-        return "saleMonthGrd";
+        return "selSaM/selSaMListGrd";
     }
 
 }
