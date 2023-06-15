@@ -17,8 +17,12 @@
             <td>${list.pro_md_name}</td>
             <td><a href="javascript:fn_selectOne('${list.product_no}')">${list.pro_sm_name}</a></td>
             <td>${list.product_serial}</td>
-            <td>${list.product_unit_price}</td>
-            <td>${list.product_price}</td>
+            <td>
+                <fmt:formatNumber value="${list.product_unit_price}" type="number" pattern="#,###" />
+            </td>
+            <td>
+                <fmt:formatNumber value="${list.product_price}" type="number" pattern="#,###" />
+            </td>
 
 
 
