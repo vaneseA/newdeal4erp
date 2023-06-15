@@ -184,7 +184,6 @@
                     alert("오류가 발생 되었습니다.");
                 }
             }
-류
             callAjax("/busPd/productSave.do", "post", "json", false, $("#myForm").serialize(), saveCollBack);
 
         }
