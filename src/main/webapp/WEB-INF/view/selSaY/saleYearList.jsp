@@ -7,13 +7,13 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>연별 매출 현황</title>
+    <title>제품정보</title>
     <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
 
     <script type="text/javascript">
 
         // 페이징 설정
-        var pageSize = 10;
+        var pageSize = 5;
         var pageBlockSize = 5;
 
 
@@ -22,14 +22,13 @@
             // 버튼 이벤트 등록
             fRegisterButtonClickEvent();
 
-            fn_noticelist();
+            fn_saleDayList();
 
 
         });
 
 
         /** 버튼 이벤트 등록 */
-
         function fRegisterButtonClickEvent() {
             $('a[name=btn]').click(function (e) {
                 e.preventDefault();
@@ -38,7 +37,7 @@
 
                 switch (btnId) {
                     case 'btnSearch' :
-                        fn_noticelist();
+                        fn_saleDayList();
                         break;
                     case 'btnSave' :
                         fn_save();
@@ -47,55 +46,50 @@
                         $("#action").val("D");
                         fn_save();
                         break;
-                    case 'btnSaveFile' :
-                        fn_savefile();
-                        break;
                     case 'btnClose' :
-                    case 'btnCloseFile' :
+                    case 'btnCloseDtlCod' :
                         gfCloseModal();
                         break;
                 }
             });
         }
-
-
-        function fn_noticelist(pagenum) {
-
+        function fn_saleDayList(pagenum) {
             pagenum = pagenum || 1;
 
             var param = {
-                delyn: $("#delyn").val()
+                proLgCd: $("#proLgCd").val()
+                , proMdCd: $("#proMdCd").val()
                 , searchKey: $("#searchKey").val()
-                , sname: $("#sname").val()
+                , pname: $("#pname").val()
                 , pageSize: pageSize
                 , pageBlockSize: pageBlockSize
                 , pagenum: pagenum
-            }
+            };
 
-            var listcollabck = function (returnvalue) {
-                console.log(returnvalue);
+            var listCallBack = function (returnValue) {
+                console.log(returnValue);
 
-                $("#listnotice").empty().append(returnvalue);
+                $("#listSaleYear").empty().append(returnValue);
 
-                var totalcnt = $("#totalcnt").val();
+                var totalCnt = $("#totalCnt").val();
 
-                console.log("totalcnt : " + totalcnt);
+                console.log("totalCnt: " + totalCnt);
 
-                var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_noticelist');
-                console.log("paginationHtml : " + paginationHtml);
+                var paginationHtml = getPaginationHtml(pagenum, totalCnt, pageSize, pageBlockSize, 'fn_saleDayList');
+                console.log("paginationHtml: " + paginationHtml);
 
-                $("#noticePagination").empty().append(paginationHtml);
+                $("#saleYearPagination").empty().append(paginationHtml);
 
                 $("#pageno").val(pagenum);
-            }
+            };
 
-            callAjax("/selSaY/saleYear.do", "post", "text", false, param, listcollabck);
-
+            callAjax("/selSaY/saleYearList.do", "post", "text", false, param, listCallBack);
         }
 
-        function fn_openpopup() {
 
-            popupinit();
+        function fn_openPopUp() {
+
+            popUpInit();
 
             // 모달 팝업
             gfModalPop("#layer1");
@@ -103,20 +97,30 @@
 
         }
 
-        function popupinit(object) {
+        function popUpInit(object) {
 
             if (object == "" || object == null || object == undefined) {
-                $("#notice_title").val("");
-                $("#notice_cont").val("");
-                $("#notice_no").val("");
+                $("#product_no").val("");
+                $("#pro_sm_cd").val("");
+                $("#pro_lg_cd").val("");
+                $("#pro_md_cd").val("");
+                $("#product_serial").val("");
+                $("#product_unit_price").val("");
+                $("#product_price").val("");
+
 
                 $("#btnDelete").hide();
-
+// object 가 없는 상태로 팝업 뜰 땐, action 을 “I” 로 설정하여  INSERT
                 $("#action").val("I");
             } else {
-                $("#notice_title").val(object.notice_title);
-                $("#notice_cont").val(object.notice_cont);
-                $("#notice_no").val(object.notice_no);
+                $("#product_no").val(object.product_no);
+                $("#pro_sm_cd").val(object.pro_sm_cd);
+                $("#pro_lg_cd").val(object.pro_lg_cd);
+                $("#pro_md_cd").val(object.pro_md_cd);
+                $("#product_serial").val(object.product_serial);
+                $("#product_unit_price").val(object.product_unit_price);
+                $("#product_price").val(object.product_price);
+
 
                 $("#btnDelete").show();
 
@@ -124,25 +128,23 @@
             }
         }
 
-        function fn_selectone(no) {
-
-            //alert(no);
+        function fn_selectOne(no) {
 
             var param = {
-                notice_no: no
+                product_no: no
             }
 
-            var selectoncallback = function (returndata) {
+            var selectOnCallBack = function (returndata) {
                 console.log(JSON.stringify(returndata));
 
-                popupinit(returndata.noticesearch);
+                popUpInit(returndata.saleYearSearch);
 
                 // 모달 팝업
                 gfModalPop("#layer1");
 
             }
 
-            callAjax("/mngNot/noticeselectone.do", "post", "json", false, param, selectoncallback);
+            callAjax("/selSaY/saleYearSelectOne.do", "post", "json", false, param, selectOnCallBack);
 
         }
 
@@ -154,12 +156,18 @@
 
             var param = {
                 action: $("#action").val(),
-                notice_no: $("#notice_no").val(),
-                notice_title: $("#notice_title").val(),
-                notice_cont: $("#notice_cont").val()
+                product_no: $("#product_no").val(),
+                pro_sm_cd: $("#pro_sm_cd").val(),
+                pro_lg_cd: $("#pro_lg_cd").val(),
+                pro_md_cd: $("#pro_md_cd").val(),
+                product_serial: $("#product_serial").val(),
+                product_unit_price: $("#product_unit_price").val(),
+                product_price: $("#product_price").val()
             }
 
-            var savecollback = function (reval) {
+            //
+
+            var saveCollBack = function (reval) {
                 console.log(JSON.stringify(reval));
 
                 if (reval.returncval > 0) {
@@ -167,17 +175,15 @@
                     gfCloseModal();
 
                     if ($("#action").val() == "U") {
-                        fn_noticelist($("#pageno").val());
+                        fn_saleDayList($("#pageno").val());
                     } else {
-                        fn_noticelist();
+                        fn_saleDayList();
                     }
                 } else {
                     alert("오류가 발생 되었습니다.");
                 }
             }
-
-            //callAjax("/mngNot/noticesave.do", "post", "json", false, param, savecollback) ;
-            callAjax("/selSaY/saleYear.do", "post", "json", false, $("#myForm").serialize(), savecollback);
+            callAjax("/busPd/productSave.do", "post", "json", false, $("#myForm").serialize(), saveCollBack);
 
         }
 
@@ -185,8 +191,13 @@
 
             var chk = checkNotEmpty(
                 [
-                    ["notice_title", "제목을 입력해 주세요."]
-                    , ["notice_cont", "내용을 입력해 주세요"]
+                    ["pro_sm_cd", "pro_sm_cd 입력해 주세요."]
+                    , ["pro_lg_cd", "pro_lg_cd 입력해 주세요"]
+                    , ["pro_md_cd", "pro_md_cd 입력해 주세요"]
+                    , ["product_serial", "모델명을 입력해 주세요"]
+                    , ["product_unit_price", "납품을 입력해 주세요"]
+                    , ["product_price", "판매가을 입력해 주세요"],
+
                 ]
             );
 
@@ -197,94 +208,6 @@
             return true;
         }
 
-        //////////////////////////   위는 파일 업이 처리
-        /////////////////////////    file upload
-
-        function fn_openpopupfile() {
-            popupinitfile();
-
-            // 모달 팝업
-            gfModalPop("#layer2");
-        }
-
-        function popupinitfile(object) {
-
-            if (object == "" || object == null || object == undefined) {
-                $("#file_notice_title").val("");
-                $("#file_notice_cont").val("");
-                $("#notice_no").val("");
-                $("#upfile").val("");
-
-                $("#previewdiv").empty();
-
-                $("#btnDeleteFile").hide();
-
-                $("#action").val("I");
-            } else {
-                $("#file_notice_title").val(object.notice_title);
-                $("#file_notice_cont").val(object.notice_cont);
-                $("#file_notice_no").val(object.notice_no);
-
-                $("#btnDeleteFile").show();
-
-                $("#action").val("U");
-            }
-        }
-
-        function preview(event) {
-            var image = event.target;
-
-            //alert(image.files[0].file_name + " : " + image.files[0].file_nm + " : " + image.files[0].name);
-
-            if (image.files[0]) {
-                //alert(window.URL.createObjectURL(image.files[0]));
-
-                var selfile = image.files[0].name;
-                var selfilearr = selfile.split(".");
-                var inserthtml = "";
-                var lastindex = selfilearr.length - 1;
-
-
-                if (selfilearr[lastindex].toLowerCase() == "jpg" || selfilearr[lastindex].toLowerCase() == "gif" || selfilearr[lastindex].toLowerCase() == "jpge" || selfilearr[lastindex].toLowerCase() == "png") {
-                    inserthtml = "<img src='" + window.URL.createObjectURL(image.files[0]) + "' style='width:100px; height:80px' />";
-                } else {
-                    inserthtml = selfile;
-                }
-
-
-                $("#previewdiv").empty().append(inserthtml);
-            }
-
-
-        }
-
-        function fn_savefile() {
-
-            var frm = document.getElementById("myForm");
-            frm.enctype = 'multipart/form-data';
-            var fileData = new FormData(frm);
-
-            var filesavecallback = function (returnval) {
-                console.log(JSON.stringify(returnval));
-
-                if (returnval.returncval > 0) {
-                    alert("저장 되었습니다.");
-                    gfCloseModal();
-
-                    if ($("#action").val() == "U") {
-                        fn_noticelist($("#pageno").val());
-                    } else {
-                        fn_noticelist();
-                    }
-                } else {
-                    alert("오류가 발생 되었습니다.");
-                }
-            }
-
-            callAjaxFileUploadSetFormData("/mngNot/noticesavefile.do", "post", "json", true, fileData, filesavecallback);
-
-        }
-
 
     </script>
 
@@ -292,7 +215,7 @@
 <body>
 <form id="myForm" action="" method="">
     <input type="hidden" id="action" name="action"/>
-    <input type="hidden" id="notice_no" name="notice_no"/>
+    <input type="hidden" id="product_no" name="product_no"/>
     <input type="hidden" id="pageno" name="pageno"/>
 
     <!-- 모달 배경 -->
@@ -318,26 +241,35 @@
 
                         <p class="Location">
                             <a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
-                                class="btn_nav bold">매출</span> <span class="btn_nav bold">연별 매출 현황
-								관리</span> <a href="../system/comnCodMgr.do" class="btn_set refresh">새로고침</a>
+                                class="btn_nav bold">영업</span> <span class="btn_nav bold">제품정보
+								</span> <a href="../busPd/productInfo.do" class="btn_set refresh">새로고침</a>
                         </p>
 
-                        <p class="conTitle">출
-                            <span>연별 매출 현황</span> <span class="fr">
-							<select id="delyn" name="delyn" style="width: 150px;">
-							        <option value="">전체</option>
+
+                        <p class="conTitle">
+                            <span>제품정보</span> <span class="fr">
+						 <!-- 검색창 영역 시작 -->
+							<select id="proLgCd" name="proLgCd" style="width: 170px;">
+							        <option value="">(제품종류) 전체</option>
+									<option value="9005">저장장치</option>
+									<option value="9001">CPU</option>
 							</select>
-							 <select id="searchKey" name="searchKey" style="width: 150px;">
-							        <option value="">날짜입력</option>
+                            <select id="proMdCd" name="proMgCd" style="width: 170px;">
+							        <option value="">(납품기업명) 전체</option>
+									<option value="8005">삼성</option>
+									<option value="8001">intel</option>
 							</select>
-							    <a href="" class="btnType blue" id="btnSearch" name="btn"><span>검색</span></a>
-                                <a href="" class="btnType blue" id="leftBtn" name="btn"><span><<</span></a>
-                                <a href="" class="btnType blue" id="todayBtn" name="btn"><span>오늘</span></a>
-                                <a href="" class="btnType blue" id="rightBtn" name="btn"><span>>></span></a>
+							  <select id="searchKey" name="searchKey" style="width: 120px;">
+									<option value="pro_sm_cd">제품이름</option>
+							</select>
+							<input type="text" style="width: 200px; height: 25px;" id="pname" name="pname">
+							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
+							 <a class="btnType blue" href="javascript:fn_openPopUp();"
+                                name="modal"><span>제품등록</span></a>
 							</span>
                         </p>
-
-                        <div class="noticeList">
+                        <!-- 검색창 영역 끝 -->
+                        <div class="productList">
                             <table class="col">
                                 <caption>caption</caption>
                                 <colgroup>
@@ -348,31 +280,25 @@
                                     <col width="10%">
                                     <col width="10%">
                                     <col width="10%">
-                                    <col width="10%">
-                                    <col width="10%">
-                                    <col width="10%">
-
                                 </colgroup>
 
                                 <thead>
                                 <tr>
-                                    <th scope="col">주문일자</th>
-                                    <th scope="col">고객기업번호</th>
-                                    <th scope="col">고객기업명</th>
-                                    <th scope="col">납품업체명</th>
-                                    <th scope="col">품명</th>
+                                    <th scope="col">제품번호</th>
+                                    <th scope="col">대분류명(종류)</th>
+                                    <th scope="col">중분류명(납품기업명)</th>
+                                    <th scope="col">제품이름</th>
                                     <th scope="col">모델명</th>
-                                    <th scope="col">판매가</th>
                                     <th scope="col">납품단가</th>
-                                    <th scope="col">수량</th>
-                                    <th scope="col">총액</th>
+                                    <th scope="col">판매가</th>
+
                                 </tr>
                                 </thead>
-                                <tbody id="listnotice"></tbody>
+                                <tbody id="listProduct"></tbody>
                             </table>
                         </div>
 
-                        <div class="paging_area" id="noticePagination"></div>
+                        <div class="paging_area" id="productPagination"></div>
 
 
                     </div> <!--// content -->
@@ -388,32 +314,39 @@
     <div id="layer1" class="layerPop layerType2" style="width: 600px;">
         <dl>
             <dt>
-                <strong>그룹코드 관리</strong>
+                <strong>제품 등록</strong>
             </dt>
             <dd class="content">
                 <!-- s : 여기에 내용입력 -->
                 <table class="row">
                     <caption>caption</caption>
                     <colgroup>
-                        <col width="120px">
-                        <col width="*">
-                        <col width="120px">
-                        <col width="*">
+                        <col width="25%">
+                        <col width="25%">
+                        <col width="25%">
+                        <col width="25%">
                     </colgroup>
 
                     <tbody>
                     <tr>
-                        <th scope="row">제목 <span class="font_red">*</span></th>
-                        <td colspan="3"><input type="text" class="inputTxt p100" name="notice_title" id="notice_title"/>
-                        </td>
+                        <th scope="row">납품기업명 <span class="font_red">*</span></th>
+                        <td><input type="text" class="inputTxt p100" name="pro_md_cd" id="pro_md_cd"/></td>
+                        <th scope="row">제품종류 <span class="font_red">*</span></th>
+                        <td><input type="text" class="inputTxt p100" name="product_type" id="product_type"/></td>
                     </tr>
                     <tr>
-                        <th scope="row">내용 <span class="font_red">*</span></th>
-                        <td colspan="3">
-                            <textarea id="notice_cont" name="notice_cont"> </textarea>
+                        <th scope="row">품명 <span class="font_red">*</span></th>
+                        <td><input type="text" class="inputTxt p100" name="pro_sm_cd" id="pro_sm_cd"/></td>
+                        <th scope="row">모델명 <span class="font_red">*</span></th>
+                        <td><input type="text" class="inputTxt p100" name="product_serial"
+                                   id="product_serial"/></td>
+                    <tr>
+                        <th scope="row">납품단가 <span class="font_red">*</span></th>
+                        <td><input type="text" class="inputTxt p100" name="product_unit_price" id="product_unit_price"/>
                         </td>
+                        <th scope="row">판매가 <span class="font_red">*</span></th>
+                        <td><input type="text" class="inputTxt p100" name="product_price" id="product_price"/></td>
                     </tr>
-
                     </tbody>
                 </table>
 
@@ -436,47 +369,7 @@
             </dt>
             <dd class="content">
 
-                <!-- s : 여기에 내용입력 -->
 
-                <table class="row">
-                    <caption>caption</caption>
-                    <colgroup>
-                        <col width="120px">
-                        <col width="*">
-                        <col width="120px">
-                        <col width="*">
-                    </colgroup>
-
-                    <tbody>
-                    <tr>
-                        <th scope="row">제목 <span class="font_red">*</span></th>
-                        <td colspan="3"><input type="text" class="inputTxt p100" name="file_notice_title"
-                                               id="file_notice_title"/></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">내용 <span class="font_red">*</span></th>
-                        <td colspan="3">
-                            <textarea id="file_notice_cont" name="file_notice_cont"> </textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan=2>
-                            <input type="file" id="upfile" name="upfile" onchange="javascript:preview(event)"/>
-                        </td>
-                        <td colspan=2>
-                            <div id="previewdiv"></div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <!-- e : 여기에 내용입력 -->
-
-                <div class="btn_areaC mt30">
-                    <a href="" class="btnType blue" id="btnSaveFile" name="btn"><span>저장</span></a>
-                    <a href="" class="btnType blue" id="btnDeleteFile" name="btn"><span>삭제</span></a>
-                    <a href="" class="btnType gray" id="btnCloseFile" name="btn"><span>취소</span></a>
-                </div>
             </dd>
         </dl>
         <a href="" class="closePop"><span class="hidden">닫기</span></a>

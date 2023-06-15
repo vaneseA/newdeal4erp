@@ -38,19 +38,21 @@ public class SelSaYController {
     public String notice(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                          HttpServletResponse response, HttpSession session) throws Exception {
 
-        logger.info("+ Start " + className + ".sel");
+        logger.info("+ Start " + className + ".saleYear");
         logger.info("   - paramMap : " + paramMap);
 
-        logger.info("+ End " + className + ".sel");
+        logger.info("+ End " + className + ".saleYear");
 
         return "/selSaY/saleYearList";
     }
+    /**
+     * 목록 조회
+     */
+    @RequestMapping("saleYearList.do")
+    public String saleYearList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+                               HttpServletResponse response, HttpSession session) throws Exception {
 
-    @RequestMapping("/selSaY/saleYear.do")
-    public String selSaYList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
-                             HttpServletResponse response, HttpSession session) throws Exception {
-
-        logger.info("+ Start " + className + ".selSaYList");
+        logger.info("+ Start " + className + ".saleYearList");
         logger.info("   - paramMap : " + paramMap);
 
         int pagenum = Integer.parseInt((String) paramMap.get("pagenum"));
@@ -61,15 +63,15 @@ public class SelSaYController {
         paramMap.put("pageindex", pageindex);
 
         // Controller  Service  Dao  SQL
-        List<SelSaYModel> noticesearchlist = selSaYService.selSaYList(paramMap);
-        int totalcnt = selSaYService.countSelSaYList(paramMap);
+        List<SelSaYModel> saleYearSearchlist = selSaYService.saleYearList(paramMap);
+        int totalcnt = selSaYService.countSaleYearList(paramMap);
 
-        model.addAttribute("noticesearchlist", noticesearchlist);
+        model.addAttribute("saleYearSearchlist", saleYearSearchlist);
         model.addAttribute("totalcnt", totalcnt);
 
-        logger.info("+ End " + className + ".selSaYList");
+        logger.info("+ End " + className + ".saleYearList");
 
-        return "selSaY/SelSaYServiceImpl";
+        return "selSaY/saleYearListGrd";
     }
 
 

@@ -47,7 +47,6 @@ public class BusPdController {
 
         return "busPd/productList";
     }
-
     /**
      * 목록 조회
      */

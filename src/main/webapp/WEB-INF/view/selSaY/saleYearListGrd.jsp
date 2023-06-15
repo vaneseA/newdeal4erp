@@ -10,15 +10,24 @@
 </c:if>
 
 <c:if test="${totalcnt > 0 }">
-	<c:forEach items="${noticesearchlist}" var="list">
+	<c:forEach items="${productSearchList}" var="list">
 		<tr>
-			<td>${list.notice_no}</td>
-			<td><a href="javascript:fn_selectOne('${list.notice_no}')">${list.notice_title}</a></td>
-			<td>${list.notice_date}</td>
-			<td>${list.name}</td>
-			<td>${list.notice_del_yn}</td>
+			<td>${list.product_no}</td>
+			<td>${list.pro_lg_name}</td>
+			<td>${list.pro_md_name}</td>
+			<td><a href="javascript:fn_selectOne('${list.product_no}')">${list.pro_sm_name}</a></td>
+			<td>${list.product_serial}</td>
+			<td>
+				<fmt:formatNumber value="${list.product_unit_price}" type="number" pattern="#,###" />
+			</td>
+			<td>
+				<fmt:formatNumber value="${list.product_price}" type="number" pattern="#,###" />
+			</td>
+
+
+
 		</tr>
 	</c:forEach>
 </c:if>
 
-<input type="hidden" id="totalcnt" name="totalcnt" value ="${totalcnt}"/>
+<input type="hidden" id="totalcnt" name="totalcnt" value="${totalcnt}"/>
