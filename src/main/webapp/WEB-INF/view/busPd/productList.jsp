@@ -101,9 +101,10 @@
         function popUpInit(object) {
 
             if (object == "" || object == null || object == undefined) {
-                $("#splr_no").val("");
-                $("#splr_name").val("");
-                $("#product_name").val("");
+                $("#product_no").val("");
+                $("#pro_sm_cd").val("");
+                $("#pro_lg_cd").val("");
+                $("#pro_md_cd").val("");
                 $("#product_serial").val("");
                 $("#product_unit_price").val("");
                 $("#product_price").val("");
@@ -113,9 +114,10 @@
 // object 가 없는 상태로 팝업 뜰 땐, action 을 “I” 로 설정하여  INSERT
                 $("#action").val("I");
             } else {
-                $("#splr_no").val(object.splr_no);
-                $("#splr_name").val(object.splr_name);
-                $("#product_name").val(object.product_name);
+                $("#product_no").val(object.product_no);
+                $("#pro_sm_cd").val(object.pro_sm_cd);
+                $("#pro_lg_cd").val(object.pro_lg_cd);
+                $("#pro_md_cd").val(object.pro_md_cd);
                 $("#product_serial").val(object.product_serial);
                 $("#product_unit_price").val(object.product_unit_price);
                 $("#product_price").val(object.product_price);
@@ -156,9 +158,9 @@
             var param = {
                 action: $("#action").val(),
                 product_no: $("#product_no").val(),
-                splr_no: $("#splr_no").val(),
-                splr_name: $("#splr_name").val(),
-                product_name: $("#product_name").val(),
+                pro_sm_cd: $("#pro_sm_cd").val(),
+                pro_lg_cd: $("#pro_lg_cd").val(),
+                pro_md_cd: $("#pro_md_cd").val(),
                 product_serial: $("#product_serial").val(),
                 product_unit_price: $("#product_unit_price").val(),
                 product_price: $("#product_price").val()
@@ -182,7 +184,7 @@
                     alert("오류가 발생 되었습니다.");
                 }
             }
-
+류
             callAjax("/busPd/productSave.do", "post", "json", false, $("#myForm").serialize(), saveCollBack);
 
         }
@@ -191,9 +193,9 @@
 
             var chk = checkNotEmpty(
                 [
-                    ["splr_no", "납품기업번호를 입력해 주세요."]
-                    , ["splr_name", "납품기업명을 입력해 주세요"]
-                    , ["product_name", "품명을 입력해 주세요"]
+                    ["pro_sm_cd", "pro_sm_cd 입력해 주세요."]
+                    , ["pro_lg_cd", "pro_lg_cd 입력해 주세요"]
+                    , ["pro_md_cd", "pro_md_cd 입력해 주세요"]
                     , ["product_serial", "모델명을 입력해 주세요"]
                     , ["product_unit_price", "납품을 입력해 주세요"]
                     , ["product_price", "판매가을 입력해 주세요"],
@@ -330,16 +332,16 @@
                     <tbody>
                     <tr>
                         <th scope="row">납품기업명 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="splr_name" id="splr_name"/></td>
+                        <td><input type="text" class="inputTxt p100" name="pro_md_cd" id="pro_md_cd"/></td>
                         <th scope="row">제품종류 <span class="font_red">*</span></th>
                         <td><input type="text" class="inputTxt p100" name="product_type" id="product_type"/></td>
                     </tr>
                     <tr>
+                        <th scope="row">품명 <span class="font_red">*</span></th>
+                        <td><input type="text" class="inputTxt p100" name="pro_sm_cd" id="pro_sm_cd"/></td>
                         <th scope="row">모델명 <span class="font_red">*</span></th>
                         <td><input type="text" class="inputTxt p100" name="product_serial"
                                                id="product_serial"/></td>
-                        <th scope="row">품명 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="product_name" id="product_name"/></td>
                     <tr>
                         <th scope="row">납품단가 <span class="font_red">*</span></th>
                         <td><input type="text" class="inputTxt p100" name="product_unit_price" id="product_unit_price"/>
@@ -369,27 +371,6 @@
             </dt>
             <dd class="content">
 
-                <!-- s : 여기에 내용입력 -->
-
-                <table class="row">
-                    <caption>caption</caption>
-                    <colgroup>
-                        <col width="120px">
-                        <col width="*">
-                        <col width="120px">
-                        <col width="*">
-                    </colgroup>
-
-                    <tbody>
-                    <tr>
-                        <th scope="row">제목 <span class="font_red">*</span></th>
-                        <td colspan="3"><input type="text" class="inputTxt p100" name="file_notice_title"
-                                               id="file_notice_title"/></td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <!-- e : 여기에 내용입력 -->
 
             </dd>
         </dl>

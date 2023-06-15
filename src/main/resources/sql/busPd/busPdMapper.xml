@@ -73,28 +73,31 @@ FROM tb_product pd
     <!--  등록 -->
     <insert id="productInsert">
         <selectKey resultType="int" keyProperty="no" order="BEFORE">
-            SELECT ifnull(max(splrproduct_no_no),0) + 1 FROM tb_splr
+            SELECT IFNULL(MAX(product_no), 0) + 1 FROM tb_product
         </selectKey>
         INSERT INTO tb_product
         (
-        product_no
-        ,pro_sm_cd
-        ,pro_lg_cd
-        ,pro_md_cd
-        ,product_serial
-        ,product_unit_price
-        ,product_price
+        product_no,
+        pro_sm_cd,
+        pro_lg_cd,
+        pro_md_cd,
+        product_serial,
+        product_unit_price,
+        product_price,
+        splr_no
         )
         VALUES (
-        #{no}
-        ,#{pro_sm_cd}
-        ,#{pro_lg_cd}
-        ,#{pro_md_cd}
-        ,#{product_serial}
-        ,#{product_unit_price}
-        ,#{product_price}
+        #{no},
+        #{pro_sm_cd},
+        #{pro_lg_cd},
+        #{pro_md_cd},
+        #{product_serial},
+        #{product_unit_price},
+        #{product_price},
+        #{splr_no},
         )
     </insert>
+
     <!-- 수정 -->
     <update id="productUpdate">
         UPDATE tb_product
