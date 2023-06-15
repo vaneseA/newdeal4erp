@@ -78,10 +78,9 @@ FROM tb_product pd
         INSERT INTO tb_product
         (
         product_no
-        ,pro_sm_cd
-        ,pro_lg_cd
-        ,pro_md_cd
-        ,pro_sm_cd
+        ,pro_sm_name
+        ,pro_lg_name
+        ,pro_md_name
         ,product_serial
         ,product_unit_price
         ,product_price
@@ -91,8 +90,6 @@ FROM tb_product pd
         ,#{pro_sm_cd}
         ,#{pro_lg_cd}
         ,#{pro_md_cd}
-        ,#{pro_md_cd}
-        ,#{pro_sm_cd}
         ,#{product_serial}
         ,#{product_unit_price}
         ,#{product_price}
