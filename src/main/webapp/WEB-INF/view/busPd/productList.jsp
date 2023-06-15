@@ -251,13 +251,13 @@
 						 <!-- 검색창 영역 시작 -->
 							<select id="proLgCd" name="proLgCd" style="width: 170px;">
 							        <option value="">(제품종류) 전체</option>
-									<option value="9005">그래픽카드</option>
-									<option value="9001">메인보드</option>
+									<option value="9005">저장장치</option>
+									<option value="9001">CPU</option>
 							</select>
                             <select id="proMdCd" name="proMgCd" style="width: 170px;">
 							        <option value="">(납품기업명) 전체</option>
 									<option value="8005">삼성</option>
-									<option value="8001">LG</option>
+									<option value="8001">intel</option>
 							</select>
 							  <select id="searchKey" name="searchKey" style="width: 120px;">
 									<option value="pro_sm_cd">제품이름</option>

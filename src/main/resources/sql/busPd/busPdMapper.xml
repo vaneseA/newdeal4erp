@@ -16,7 +16,7 @@
         FROM tb_product_lg lg
         INNER JOIN tb_product pd ON lg.pro_lg_cd = pd.pro_lg_cd
         INNER JOIN tb_product_md md ON pd.pro_md_cd = md.pro_md_cd
-        INNER JOIN tb_product_sm sm ON pd.pro_sm_cd = sm.pro_sm_cd;
+        INNER JOIN tb_product_sm sm ON pd.pro_sm_cd = sm.pro_sm_cd
 
         <where>
             <if test="(proLgCd != null) and (!proLgCd.equals(''))">
