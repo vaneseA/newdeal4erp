@@ -10,7 +10,7 @@
     <title>제품정보</title>
     <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
 
-    <script type="text/javascript">
+    <script type="text/javascript">명
 
         // 페이징 설정
         var pageSize = 5;
@@ -200,7 +200,7 @@
 
                 ]
             );
-
+명
             if (!chk) {
                 return;
             }
@@ -260,7 +260,7 @@
 									<option value="8001">intel</option>
 							</select>
 							  <select id="searchKey" name="searchKey" style="width: 120px;">
-									<option value="pro_sm_cd">제품이름</option>
+									<option value="pro_sm_cd">품명</option>
 							</select>
 							<input type="text" style="width: 200px; height: 25px;" id="pname" name="pname">
 							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
@@ -285,9 +285,9 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">제품번호</th>
-                                    <th scope="col">대분류명(종류)</th>
-                                    <th scope="col">중분류명(납품기업명)</th>
-                                    <th scope="col">제품이름</th>
+                                    <th scope="col">제품종류</th>
+                                    <th scope="col">납품기업명</th>
+                                    <th scope="col">품명</th>
                                     <th scope="col">모델명</th>
                                     <th scope="col">납품단가</th>
                                     <th scope="col">판매가</th>
@@ -335,11 +335,11 @@
                         <td><input type="text" class="inputTxt p100" name="product_type" id="product_type"/></td>
                     </tr>
                     <tr>
+                        <th scope="row">품명 <span class="font_red">*</span></th>
+                        <td><input type="text" class="inputTxt p100" name="product_name" id="product_name"/></td>
                         <th scope="row">모델명 <span class="font_red">*</span></th>
                         <td><input type="text" class="inputTxt p100" name="product_serial"
                                                id="product_serial"/></td>
-                        <th scope="row">품명 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="product_name" id="product_name"/></td>
                     <tr>
                         <th scope="row">납품단가 <span class="font_red">*</span></th>
                         <td><input type="text" class="inputTxt p100" name="product_unit_price" id="product_unit_price"/>
