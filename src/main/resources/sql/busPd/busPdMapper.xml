@@ -81,7 +81,6 @@ FROM tb_product pd
         ,pro_sm_cd
         ,pro_lg_cd
         ,pro_md_cd
-        ,pro_sm_cd
         ,product_serial
         ,product_unit_price
         ,product_price
@@ -91,8 +90,6 @@ FROM tb_product pd
         ,#{pro_sm_cd}
         ,#{pro_lg_cd}
         ,#{pro_md_cd}
-        ,#{pro_md_cd}
-        ,#{pro_sm_cd}
         ,#{product_serial}
         ,#{product_unit_price}
         ,#{product_price}
@@ -104,7 +101,6 @@ FROM tb_product pd
         SET pro_sm_cd = #{pro_sm_cd}
           ,pro_lg_cd = #{pro_lg_cd}
           ,pro_md_cd = #{pro_md_cd}
-          ,pro_sm_cd = #{pro_sm_cd}
           ,product_serial = #{product_serial}
           ,product_unit_price = #{product_unit_price}
           ,product_price = #{product_price}
