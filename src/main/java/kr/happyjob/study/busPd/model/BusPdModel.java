@@ -15,7 +15,33 @@ public class BusPdModel {
     private int pro_md_cd;
     private int pro_lg_cd;
 
+    private String pro_lg_name;
+    private String pro_md_name;
+    private String pro_sm_name;
 
+    public String getPro_lg_name() {
+        return pro_lg_name;
+    }
+
+    public void setPro_lg_name(String pro_lg_name) {
+        this.pro_lg_name = pro_lg_name;
+    }
+
+    public String getPro_md_name() {
+        return pro_md_name;
+    }
+
+    public void setPro_md_name(String pro_md_name) {
+        this.pro_md_name = pro_md_name;
+    }
+
+    public String getPro_sm_name() {
+        return pro_sm_name;
+    }
+
+    public void setPro_sm_name(String pro_sm_name) {
+        this.pro_sm_name = pro_sm_name;
+    }
 
     //제품번호
     public int getProduct_no() { return product_no; }
@@ -91,12 +117,6 @@ public class BusPdModel {
         this.pro_lg_cd = pro_lg_cd;
     }
 
-    //    //수량
-//    public int getSplr_no() { return splr_no; }
-//
-//    public void setSplr_no(int splr_no) {
-//        this.splr_no = splr_no;
-//    }
 
 
 
