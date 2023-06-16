@@ -18,10 +18,10 @@
         INNER JOIN tb_splr sl ON pd.splr_no = sl.splr_no
         <where>
             <if test="(proName != null) and (!proName.equals(''))">
-                and pd.pro_name = #{proName}
+                and pc.pro_name = #{proName}
             </if>
             <if test="(splrName != null) and (!splrName.equals(''))">
-                and pd.splr_name = #{splrName}
+                and sl.splr_name = #{splrName}
             </if>
             <if test="(pname != null) and (!pname.equals(''))">
                 <choose>
@@ -44,13 +44,15 @@
     <select id="countProductList" resultType="int">
         SELECT COUNT(*)
         FROM tb_product pd
+        INNER JOIN tb_pro pc ON pd.pro_cd = pc.pro_cd
+        INNER JOIN tb_splr sl ON pd.splr_no = sl.splr_no
 
         <where>
             <if test="(proName != null) and (!proName.equals(''))">
-                and pd.pro_name = #{proName}
+                and pc.pro_name = #{proName}
             </if>
             <if test="(splrName != null) and (!splrName.equals(''))">
-                and pd.splr_name = #{splrName}
+                and sl.splr_name = #{splrName}
             </if>
             <if test="(pname != null) and (!pname.equals(''))">
                 <choose>
