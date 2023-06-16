@@ -255,7 +255,7 @@
 									<option value="9005">저장장치</option>
 									<option value="9001">CPU</option>
 							</select>
-                            <select id="splrName" name="proMgCd" style="width: 170px;">
+                            <select id="splrName" name="splrName" style="width: 170px;">
 							        <option value="">(납품기업명) 전체</option>
 									<option value="8005">삼성</option>
 									<option value="8001">intel</option>
