@@ -13,9 +13,9 @@
     <c:forEach items="${productSearchList}" var="list">
         <tr>
             <td>${list.product_no}</td>
-            <td>${list.pro_lg_name}</td>
-            <td>${list.pro_md_name}</td>
-            <td><a href="javascript:fn_selectOne('${list.product_no}')">${list.pro_sm_name}</a></td>
+            <td>${list.pro_name}</td>
+            <td>${list.splr_name}</td>
+            <td>${list.product_name}</td>
             <td>${list.product_serial}</td>
             <td>
                 <fmt:formatNumber value="${list.product_unit_price}" type="number" pattern="#,###" />
