@@ -194,7 +194,7 @@
                 [
                     ["pro_name", "제품분류를 선택해 주세요."]
                     , ["splr_name", "납품회사명을 선택해 주세요"]
-                    , ["splr_name", "품명 입력해 주세요"]
+                    , ["product_name", "품명 입력해 주세요"]
                     , ["product_serial", "모델명을 입력해 주세요"]
                     , ["product_unit_price", "납품을 입력해 주세요"]
                     , ["product_price", "판매가을 입력해 주세요"],
