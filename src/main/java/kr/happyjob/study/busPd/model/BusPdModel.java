@@ -11,37 +11,9 @@ public class BusPdModel {
     private String product_serial;//모델명
     private int product_unit_price;//납품단가
     private int product_price;//판매가
-    private int pro_sm_cd;
-    private int pro_md_cd;
-    private int pro_lg_cd;
+    private String pro_name;
 
-    private String pro_lg_name;
-    private String pro_md_name;
-    private String pro_sm_name;
 
-    public String getPro_lg_name() {
-        return pro_lg_name;
-    }
-
-    public void setPro_lg_name(String pro_lg_name) {
-        this.pro_lg_name = pro_lg_name;
-    }
-
-    public String getPro_md_name() {
-        return pro_md_name;
-    }
-
-    public void setPro_md_name(String pro_md_name) {
-        this.pro_md_name = pro_md_name;
-    }
-
-    public String getPro_sm_name() {
-        return pro_sm_name;
-    }
-
-    public void setPro_sm_name(String pro_sm_name) {
-        this.pro_sm_name = pro_sm_name;
-    }
 
     //제품번호
     public int getProduct_no() { return product_no; }
@@ -93,31 +65,14 @@ public class BusPdModel {
         this.product_unit_price = product_unit_price;
     }
 
-    public int getPro_sm_cd() {
-        return pro_sm_cd;
+
+    //제품분류명
+    public String getPro_name() {
+        return pro_name;
     }
-
-    public void setPro_sm_cd(int pro_sm_cd) {
-        this.pro_sm_cd = pro_sm_cd;
+    public void setPro_name(String pro_name) {
+        this.pro_name = pro_name;
     }
-
-    public int getPro_md_cd() {
-        return pro_md_cd;
-    }
-
-    public void setPro_md_cd(int pro_md_cd) {
-        this.pro_md_cd = pro_md_cd;
-    }
-
-    public int getPro_lg_cd() {
-        return pro_lg_cd;
-    }
-
-    public void setPro_lg_cd(int pro_lg_cd) {
-        this.pro_lg_cd = pro_lg_cd;
-    }
-
-
 
 
 

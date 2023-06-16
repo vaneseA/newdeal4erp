@@ -58,8 +58,8 @@
             pagenum = pagenum || 1;
 
             var param = {
-                proLgCd: $("#proLgCd").val()
-                , proMdCd: $("#proMdCd").val()
+                proName: $("#proName").val()
+                , splrName: $("#splrName").val()
                 , searchKey: $("#searchKey").val()
                 , pname: $("#pname").val()
                 , pageSize: pageSize
@@ -102,9 +102,9 @@
 
             if (object == "" || object == null || object == undefined) {
                 $("#product_no").val("");
-                $("#pro_sm_cd").val("");
-                $("#pro_lg_cd").val("");
-                $("#pro_md_cd").val("");
+                $("#product_name").val("");
+                $("#pro_name").val("");
+                $("#splr_name").val("");
                 $("#product_serial").val("");
                 $("#product_unit_price").val("");
                 $("#product_price").val("");
@@ -115,9 +115,9 @@
                 $("#action").val("I");
             } else {
                 $("#product_no").val(object.product_no);
-                $("#pro_sm_cd").val(object.pro_sm_cd);
-                $("#pro_lg_cd").val(object.pro_lg_cd);
-                $("#pro_md_cd").val(object.pro_md_cd);
+                $("#product_name").val(object.product_name);
+                $("#pro_name").val(object.pro_name);
+                $("#splr_name").val(object.splr_name);
                 $("#product_serial").val(object.product_serial);
                 $("#product_unit_price").val(object.product_unit_price);
                 $("#product_price").val(object.product_price);
@@ -158,9 +158,9 @@
             var param = {
                 action: $("#action").val(),
                 product_no: $("#product_no").val(),
-                pro_sm_cd: $("#pro_sm_cd").val(),
-                pro_lg_cd: $("#pro_lg_cd").val(),
-                pro_md_cd: $("#pro_md_cd").val(),
+                product_name: $("#product_name").val(),
+                pro_name: $("#pro_name").val(),
+                splr_name: $("#splr_name").val(),
                 product_serial: $("#product_serial").val(),
                 product_unit_price: $("#product_unit_price").val(),
                 product_price: $("#product_price").val()
@@ -192,9 +192,9 @@
 
             var chk = checkNotEmpty(
                 [
-                    ["pro_sm_cd", "pro_sm_cd 입력해 주세요."]
-                    , ["pro_lg_cd", "pro_lg_cd 입력해 주세요"]
-                    , ["pro_md_cd", "pro_md_cd 입력해 주세요"]
+                    ["pro_name", "제품분류를 선택해 주세요."]
+                    , ["splr_name", "납품회사명을 선택해 주세요"]
+                    , ["splr_name", "품명 입력해 주세요"]
                     , ["product_serial", "모델명을 입력해 주세요"]
                     , ["product_unit_price", "납품을 입력해 주세요"]
                     , ["product_price", "판매가을 입력해 주세요"],
@@ -250,18 +250,18 @@
                         <p class="conTitle">
                             <span>제품정보</span> <span class="fr">
 						 <!-- 검색창 영역 시작 -->
-							<select id="proLgCd" name="proLgCd" style="width: 170px;">
+							<select id="proName" name="proName" style="width: 170px;">
 							        <option value="">(제품종류) 전체</option>
 									<option value="9005">저장장치</option>
 									<option value="9001">CPU</option>
 							</select>
-                            <select id="proMdCd" name="proMgCd" style="width: 170px;">
+                            <select id="splrName" name="proMgCd" style="width: 170px;">
 							        <option value="">(납품기업명) 전체</option>
 									<option value="8005">삼성</option>
 									<option value="8001">intel</option>
 							</select>
 							  <select id="searchKey" name="searchKey" style="width: 120px;">
-									<option value="pro_sm_cd">제품이름</option>
+									<option value="product_name">제품이름</option>
 							</select>
 							<input type="text" style="width: 200px; height: 25px;" id="pname" name="pname">
 							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
@@ -331,13 +331,13 @@
                     <tbody>
                     <tr>
                         <th scope="row">납품기업명 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="pro_md_cd" id="pro_md_cd"/></td>
+                        <td><input type="text" class="inputTxt p100" name="splr_name" id="splr_name"/></td>
                         <th scope="row">제품종류 <span class="font_red">*</span></th>
                         <td><input type="text" class="inputTxt p100" name="product_type" id="product_type"/></td>
                     </tr>
                     <tr>
                         <th scope="row">품명 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="pro_sm_cd" id="pro_sm_cd"/></td>
+                        <td><input type="text" class="inputTxt p100" name="product_name" id="product_name"/></td>
                         <th scope="row">모델명 <span class="font_red">*</span></th>
                         <td><input type="text" class="inputTxt p100" name="product_serial"
                                                id="product_serial"/></td>
