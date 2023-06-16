@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>제품정보</title>
+    <title>월별 매출 현황</title>
     <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
 
     <script type="text/javascript">
@@ -22,7 +22,7 @@
             // 버튼 이벤트 등록
             fRegisterButtonClickEvent();
 
-            fn_saleYearList();
+            fn_selSaMList();
 
 
         });
@@ -37,7 +37,7 @@
 
                 switch (btnId) {
                     case 'btnSearch' :
-                        fn_saleYearList();
+                        fn_productList();
                         break;
                     case 'btnSave' :
                         fn_save();
@@ -53,39 +53,40 @@
                 }
             });
         }
-        function fn_saleYearList(pagenum) {
+
+        //리스트 뿌려주기
+        function fn_selSaMList(pagenum) {
             pagenum = pagenum || 1;
 
             var param = {
-                proLgCd: $("#proLgCd").val()
-                , proMdCd: $("#proMdCd").val()
+                delyn: $("#delyn").val()
                 , searchKey: $("#searchKey").val()
-                , pname: $("#pname").val()
+                , sname: $("#sname").val()
                 , pageSize: pageSize
                 , pageBlockSize: pageBlockSize
                 , pagenum: pagenum
-            };
+            }
 
             var listCallBack = function (returnValue) {
                 console.log(returnValue);
 
-                $("#listSaleYear").empty().append(returnValue);
+                $("#listSelSaM").empty().append(returnValue);
 
                 var totalCnt = $("#totalCnt").val();
 
                 console.log("totalCnt: " + totalCnt);
 
-                var paginationHtml = getPaginationHtml(pagenum, totalCnt, pageSize, pageBlockSize, 'fn_saleYearList');
-                console.log("paginationHtml: " + paginationHtml);
+                var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_noticelist');
+                console.log("paginationHtml : " + paginationHtml);
 
-                $("#saleYearPagination").empty().append(paginationHtml);
+                $("#selSaMPagination").empty().append(paginationHtml);
 
                 $("#pageno").val(pagenum);
-            };
+            }
 
-            callAjax("/selSaY/saleYearList.do", "post", "text", false, param, listCallBack);
+            callAjax("/selSaM/selSaMList.do", "post", "text", false, param, listCallBack);
+
         }
-
 
         function fn_openPopUp() {
 
@@ -100,34 +101,23 @@
         function popUpInit(object) {
 
             if (object == "" || object == null || object == undefined) {
-                $("#product_no").val("");
-                $("#pro_sm_cd").val("");
-                $("#pro_lg_cd").val("");
-                $("#pro_md_cd").val("");
-                $("#product_serial").val("");
-                $("#product_unit_price").val("");
-                $("#product_price").val("");
-
+                $("#notice_title").val("");
+                $("#notice_cont").val("");
+                $("#notice_no").val("");
 
                 $("#btnDelete").hide();
-// object 가 없는 상태로 팝업 뜰 땐, action 을 “I” 로 설정하여  INSERT
+
                 $("#action").val("I");
             } else {
-                $("#product_no").val(object.product_no);
-                $("#pro_sm_cd").val(object.pro_sm_cd);
-                $("#pro_lg_cd").val(object.pro_lg_cd);
-                $("#pro_md_cd").val(object.pro_md_cd);
-                $("#product_serial").val(object.product_serial);
-                $("#product_unit_price").val(object.product_unit_price);
-                $("#product_price").val(object.product_price);
-
+                $("#notice_title").val(object.notice_title);
+                $("#notice_cont").val(object.notice_cont);
+                $("#notice_no").val(object.notice_no);
 
                 $("#btnDelete").show();
 
                 $("#action").val("U");
             }
         }
-
         function fn_selectOne(no) {
 
             var param = {
@@ -137,14 +127,14 @@
             var selectOnCallBack = function (returndata) {
                 console.log(JSON.stringify(returndata));
 
-                popUpInit(returndata.saleYearSearch);
+                popUpInit(returndata.productSearch);
 
                 // 모달 팝업
                 gfModalPop("#layer1");
 
             }
 
-            callAjax("/selSaY/saleYearSelectOne.do", "post", "json", false, param, selectOnCallBack);
+            callAjax("/busPd/productSelectOne.do", "post", "json", false, param, selectOnCallBack);
 
         }
 
@@ -175,9 +165,9 @@
                     gfCloseModal();
 
                     if ($("#action").val() == "U") {
-                        fn_saleYearList($("#pageno").val());
+                        fn_productList($("#pageno").val());
                     } else {
-                        fn_saleYearList();
+                        fn_productList();
                     }
                 } else {
                     alert("오류가 발생 되었습니다.");
@@ -269,7 +259,7 @@
 							</span>
                         </p>
                         <!-- 검색창 영역 끝 -->
-                        <div class="saleYearList">
+                        <div class="productList">
                             <table class="col">
                                 <caption>caption</caption>
                                 <colgroup>

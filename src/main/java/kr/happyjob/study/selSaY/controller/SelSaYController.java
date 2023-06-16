@@ -35,7 +35,7 @@ public class SelSaYController {
      * 초기화면
      */
     @RequestMapping("saleYear.do")
-    public String notice(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+    public String saleYear(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                          HttpServletResponse response, HttpSession session) throws Exception {
 
         logger.info("+ Start " + className + ".saleYear");

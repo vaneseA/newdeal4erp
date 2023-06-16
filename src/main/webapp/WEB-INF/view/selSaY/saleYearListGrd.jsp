@@ -10,7 +10,7 @@
 </c:if>
 
 <c:if test="${totalcnt > 0 }">
-	<c:forEach items="${productSearchList}" var="list">
+	<c:forEach items="${saleYearSearchList}" var="list">
 		<tr>
 			<td>${list.product_no}</td>
 			<td>${list.pro_lg_name}</td>
