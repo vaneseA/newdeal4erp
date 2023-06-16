@@ -252,13 +252,13 @@
 						 <!-- 검색창 영역 시작 -->
 							<select id="proName" name="proName" style="width: 170px;">
 							        <option value="">(제품종류) 전체</option>
-									<option value="9005">저장장치</option>
-									<option value="9001">CPU</option>
+									<option value="저장장치">저장장치</option>
+									<option value="CPU">CPU</option>
 							</select>
                             <select id="splrName" name="splrName" style="width: 170px;">
 							        <option value="">(납품기업명) 전체</option>
-									<option value="8005">삼성</option>
-									<option value="8001">intel</option>
+									<option value="삼성">삼성</option>
+									<option value="intel">intel</option>
 							</select>
 							  <select id="searchKey" name="searchKey" style="width: 120px;">
 									<option value="product_name">제품이름</option>
