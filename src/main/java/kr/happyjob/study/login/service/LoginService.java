@@ -14,7 +14,6 @@ import kr.happyjob.study.login.model.UsrMnuChildAtrtModel;
 public interface LoginService {
 	
 	/** 사용자 로그인 체크*/
-	//해당 메서드는 주어진 paramMap을 사용하여 로그인 검증을 수행하고, 그 결과에 따라 적절한 String 값을 반환합니다.
 	public String checkLogin(Map<String, Object> paramMap) throws Exception;
 	
 	/** 사용자 로그인 */

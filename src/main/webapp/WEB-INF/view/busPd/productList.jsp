@@ -331,9 +331,20 @@
                     <tbody>
                     <tr>
                         <th scope="row">납품기업명 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="splr_name" id="splr_name"/></td>
+                        <td colspan="3">
+                            <div style="display:flex; flex-direction:row;">
+                                <select id="splr_name" name="splr_name" style="margin-right:5px;"></select>
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr>
                         <th scope="row">제품종류 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="pro_name" id="pro_name"/></td>
+                        <td colspan="3">
+                            <div style="display:flex; flex-direction:row;">
+                                <select id="pro_name" name="pro_name" style="margin-right:5px;"></select>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <th scope="row">품명 <span class="font_red">*</span></th>

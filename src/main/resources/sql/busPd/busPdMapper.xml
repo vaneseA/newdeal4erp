@@ -75,14 +75,6 @@
         <selectKey resultType="int" keyProperty="no" order="BEFORE">
             SELECT IFNULL(MAX(product_no), 0) + 1 FROM tb_product
         </selectKey>
-        INSERT INTO tb_pro (pro_cd, pro_name)
-        SELECT 1001, '저장장치' FROM tb_pro
-        WHERE NOT EXISTS (SELECT pro_cd FROM tb_pro WHERE pro_cd = 1001) LIMIT 1;
-
-        INSERT INTO tb_splr (splr_no, splr_name)
-        SELECT 1, 'Samsung' FROM tb_splr
-        WHERE NOT EXISTS (SELECT splr_no FROM tb_splr WHERE splr_no = 1) LIMIT 1;
-
         INSERT INTO tb_product
         (
         product_no,

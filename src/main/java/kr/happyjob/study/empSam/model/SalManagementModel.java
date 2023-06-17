@@ -1,6 +1,6 @@
 package kr.happyjob.study.empSam.model;
 
-public class SalmanagementModel {
+public class SalManagementModel {
 	
 	public String getLoginID() {
 		return loginID;
@@ -14,23 +14,23 @@ public class SalmanagementModel {
 	public void setSal_date(String sal_date) {
 		this.sal_date = sal_date;
 	}
-	public String getEmp_name() {
-		return emp_name;
+	public String getName() {
+		return name;
 	}
-	public void setEmp_name(String emp_name) {
-		this.emp_name = emp_name;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getDept_cd() {
-		return dept_cd;
+	public String getDept_name() {
+		return dept_name;
 	}
-	public void setDept_cd(String dept_cd) {
-		this.dept_cd = dept_cd;
+	public void setDept_name(String dept_cd) {
+		this.dept_name = dept_cd;
 	}
-	public String getLevel_cd() {
-		return level_cd;
+	public String getLevel_name() {
+		return level_name;
 	}
-	public void setLevel_cd(String level_cd) {
-		this.level_cd = level_cd;
+	public void setLevel_name(String level_cd) {
+		this.level_name = level_cd;
 	}
 	public int getEmp_yr_sal() {
 		return emp_yr_sal;
@@ -94,9 +94,9 @@ public class SalmanagementModel {
 	}
 	private String loginID; //사번
 	private String sal_date;  //해당년월
-	private String emp_name;  //사원명
-	private String dept_cd;  //부서코드
-	private String level_cd;  //직급코드
+	private String name;  //사원명
+	private String dept_name;  //부서
+	private String level_name;  //직급
 	private int emp_yr_sal;  //연봉
 	private int sal_pre; //세전급여(기본급)
 	private int sal_san;  //산재보험

@@ -13,16 +13,16 @@
   <c:forEach items="${empSearchList}" var="list">
     <tr>
       <td>${list.loginId}</td>
-      <td><a href="javascript:fn_selectOne('${list.loginId}')">${list.name}</a></td>
+      <td><a href="javascript:fn_selectone('${list.loginId}')">${list.name}</a></td>
       <td>${list.dept_cd}</td>
       <td>${list.dept_cd}
       <select id="deptcd" name="deptcd">
         <option value="" >전체</option>
-        <option value="100" >관리자</option>
-        <option value="200" >임원직</option>
-        <option value="300" >회계팀</option>
-        <option value="400" >영업팀</option>
-        <option value="500" >인사팀</option>
+        <option value="100" <c:if test ="${list.dept_cd eq '100'}">selected="selected"</c:if>>관리자</option>
+        <option value="200" <c:if test ="${list.dept_cd eq '200'}">selected="selected"</c:if>>임원직</option>
+        <option value="300" <c:if test ="${list.dept_cd eq '300'}">selected="selected"</c:if>>회계팀</option>
+        <option value="400" <c:if test ="${list.dept_cd eq '400'}">selected="selected"</c:if>>영업팀</option>
+        <option value="500" <c:if test ="${list.dept_cd eq '500'}">selected="selected"</c:if>>인사팀</option>
       </select>
       </td>
       <td>${list.level_cd}
@@ -40,7 +40,7 @@
         </select>
       </td>
       <td>${list.emp_sdate}</td>
-      <td>${list.notice_del_yn}</td>
+      <td>${list.emp_work_yn}</td>
     </tr>
   </c:forEach>
 </c:if>

@@ -5,20 +5,37 @@
 
 							<c:if test="${totalcnt eq 0 }">
 								<tr>
-									<td colspan="5">데이터가 존재하지 않습니다.</td>
+									<td colspan="15">데이터가 존재하지 않습니다.</td>
 								</tr>
 							</c:if>
 							
 							<c:if test="${totalcnt > 0 }">
-								<c:forEach items="${noticesearchlist}" var="list">
+								<c:forEach items="${empSamSearchList}" var="list">
 									<tr>
-										<td>${list.notice_no}</td>
-										<td>${list.notice_title}</td>
-										<td>${list.notice_date}</td>
+										<td>${list.sal_date}</td>
+										<td>${list.loginID}</td>
 										<td>${list.name}</td>
-										<td>${list.notice_del_yn}</td>
+										<td>${list.dept_name}</td>
+										<td>${list.level_name}</td>
+										<td>${list.emp_yr_sal}</td>
+										<td>${list.sal_pre}</td>
+										<td>${list.sal_san}</td>
+										<td>${list.sal_ko}</td>
+										<td>${list.sal_kun}</td>
+										<td>${list.sal_kuk}</td>
+										<td>${list.sal_after}</td>
+										<td>${list.emp_final_money}</td>
+										<td>${list.emp_meno}</td>
+									<c:if test="${list.sal_pay_yn eq 'N'}">
+										<td><a class="btnType blue" href="javascript:fn_openpopup(${list.loginID}, ${list.sal_date.substring(0,4).concat(list.sal_date.substring(5))});" id="btnChoice" name="modal" style=" color:black; border:1px;font-size:1px; padding:0px; margin:0; width:50px">미지급</a></td>
+									</c:if>
+									<c:if test="${list.sal_pay_yn eq 'Y'}">
+										<td><a class="btnType blue" id="btnChoice" name="modal" style=" color:white; border:1px;font-size:1px; padding:0px; margin:0; width:50px">지급</a></td>
+									</c:if>
+										
 									</tr>
 								</c:forEach>
 							</c:if>
 							
 							<input type="hidden" id="totalcnt" name="totalcnt" value ="${totalcnt}"/>
+							

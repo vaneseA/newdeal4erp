@@ -1,4 +1,4 @@
-package kr.happyjob.study.accAcm.controller;
+package kr.happyjob.study.busClm.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,16 +19,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.happyjob.study.common.comnUtils.ComnCodUtil;
-import kr.happyjob.study.accAcm.model.AccManagementModel;
-import kr.happyjob.study.accAcm.service.AccAcmService;
+import kr.happyjob.study.busClm.model.ClntModel;
+import kr.happyjob.study.busClm.service.BusClmService;
 
 
 @Controller
-@RequestMapping("/accAcm/")
-public class AccAcmController {
+@RequestMapping("/busClm/")
+public class BusClmController {
    
    @Autowired
-   AccAcmService accAcmService;
+   BusClmService busClmService;
    
    // Set logger
    private final Logger logger = LogManager.getLogger(this.getClass());
@@ -39,28 +39,28 @@ public class AccAcmController {
    
    
    /**
-    * 납품기업 관리 초기화면
+    * 고객기업 관리 초기화면
     */
-   @RequestMapping("accManagement.do")
-   public String accManagement(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+   @RequestMapping("clntManagement.do")
+   public String clntManagement(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
          HttpServletResponse response, HttpSession session) throws Exception {
       
-      logger.info("+ Start " + className + ".accManagement");
+      logger.info("+ Start " + className + ".clntManagement");
       logger.info("   - paramMap : " + paramMap);
       
-      logger.info("+ End " + className + ".accManagement");
+      logger.info("+ End " + className + ".clntManagement");
 
-      return "accAcm/accmanagementlist";
+      return "busClm/clntlist";
    }
    
    /**
-    * 납품기업 관리 목록 조회
+    * 고객기업 관리 목록 조회
     */
-   @RequestMapping("accmanagementlist.do")
-   public String accmanagementlist(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+   @RequestMapping("clntlist.do")
+   public String clntlist(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
          HttpServletResponse response, HttpSession session) throws Exception {
       
-      logger.info("+ Start " + className + ".accmanagementlist");
+      logger.info("+ Start " + className + ".clntlist");
       logger.info("   - paramMap : " + paramMap);
       
       int pagenum = Integer.parseInt((String) paramMap.get("pagenum"));
@@ -71,50 +71,50 @@ public class AccAcmController {
       paramMap.put("pageindex", pageindex);
       
       // Controller  Service  Dao  SQL
-      List<AccManagementModel> accmanagementsearchlist = accAcmService.accmanagementlist(paramMap);
-      int totalcnt = accAcmService.countaccmanagementlist(paramMap);
+      List<ClntModel> clntsearchlist = busClmService.clntlist(paramMap);
+      int totalcnt = busClmService.countclntlist(paramMap);
       
-      model.addAttribute("splrsearchlist", accmanagementsearchlist);
+      model.addAttribute("clntsearchlist", clntsearchlist);
       model.addAttribute("totalcnt", totalcnt);
       
       
-      logger.info("+ End " + className + ".splrlist");
+      logger.info("+ End " + className + ".clntlist");
 
-      return "busSpm/splrlistgrd";
+      return "busClm/clntlistgrd";
    }
    
    /**
-    * 납품기업 관리 한건 조회
+    * 고객기업 관리 한건 조회
     */
-   @RequestMapping("splrselectone.do")
+   @RequestMapping("clntselectone.do")
    @ResponseBody
-   public Map<String, Object> accmanagementselectone(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+   public Map<String, Object> clntselectone(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                                               HttpServletResponse response, HttpSession session) throws Exception {
 
-       logger.info("+ Start " + className + ".accmanagementselectone");
+       logger.info("+ Start " + className + ".clntselectone");
        logger.info("   - paramMap : " + paramMap);
 
        // Controller  Service  Dao  SQL
-       AccManagementModel accmanagementsearch = accAcmService.accmanagementselectone(paramMap);
+       ClntModel clntsearch = busClmService.clntselectone(paramMap);
 
        Map<String, Object> returnmap = new HashMap<String, Object>();
 
-       returnmap.put("accmanagementsearch", accmanagementsearch);
+       returnmap.put("clntsearch", clntsearch);
 
-       logger.info("+ End " + className + ".accmanagementselectone");
+       logger.info("+ End " + className + ".clntselectone");
 
        return returnmap;
    }
    
    /**
-    * 납품기업 관리 생성, 수정, 삭제
+    * 고객기업 관리 생성, 수정, 삭제
     */
-   @RequestMapping("splrsave.do")
+   @RequestMapping("clntsave.do")
    @ResponseBody
-   public Map<String, Object> accmanagementsave(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+   public Map<String, Object> clntsave(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                                          HttpServletResponse response, HttpSession session) throws Exception {
 
-       logger.info("+ Start " + className + ".accmanagementsave");
+       logger.info("+ Start " + className + ".clntsave");
        logger.info("   - paramMap : " + paramMap);
 
        String action = (String) paramMap.get("action");
@@ -125,21 +125,21 @@ public class AccAcmController {
        int returncval = 0;
 
        if("I".equals(action)) {
-           returncval = accAcmService.accmanagementinsert(paramMap);
+           returncval = busClmService.clntinsert(paramMap);
        } else if("U".equals(action)) {
-           returncval = accAcmService.accmanagementupdate(paramMap);
+           returncval = busClmService.clntupdate(paramMap);
        } else if("D".equals(action)) {
-           returncval = accAcmService.accmanagementdelete(paramMap);
+           returncval = busClmService.clntdelete(paramMap);
        }      
 
        Map<String, Object> returnmap = new HashMap<String, Object>();
 
        returnmap.put("returncval", returncval);
 
-       logger.info("+ End " + className + ".accmanagementsave");
+       logger.info("+ End " + className + ".clntsave");
 
        return returnmap;
-   }  
+   }    
      
       
       

@@ -12,7 +12,7 @@
 	      ,sp.splr_hp
 	      ,sp.splr_zip
 	      ,sp.bk_cd
-	      ,dc.detail_name as bk_name
+	      ,dc.detail_name AS bk_name
 	      ,sp.splr_acc
 	      ,sp.splr_add
 	      ,sp.splr_add_dt
@@ -72,7 +72,7 @@
 	      ,sp.splr_hp
 	      ,sp.splr_zip
 	      ,sp.bk_cd
-	      ,dc.detail_name as bk_name
+	      ,dc.detail_name AS bk_name
 	      ,sp.splr_acc
 	      ,sp.splr_add
 	      ,sp.splr_add_dt
@@ -114,7 +114,7 @@
 		    ,#{splr_mng} 
 		    ,#{splr_hp} 
 		    ,#{splr_zip}
-		    ,#{bk_cd}
+		    ,#{bkcombo}
 		    ,#{splr_acc}
 		    ,#{splr_add}
 		    ,#{splr_add_dt}
@@ -133,7 +133,7 @@
 		    ,splr_mng = #{splr_mng}
 		    ,splr_hp = #{splr_hp}
 		    ,splr_zip = #{splr_zip}
-		    ,bk_cd = #{bk_cd}
+		    ,bk_cd = #{bkcombo}
 		    ,splr_acc = #{splr_acc}
 		    ,splr_add = #{splr_add}
 		    ,splr_add_dt = #{splr_add_dt}

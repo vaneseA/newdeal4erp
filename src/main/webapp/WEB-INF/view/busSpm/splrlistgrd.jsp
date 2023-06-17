@@ -13,7 +13,7 @@
 								<c:forEach items="${splrsearchlist}" var="list">
 									<tr>
 										<td>${list.splr_no}</td>
-										<td><a href="javascript:fn_selectOne('${list.splr_no}')">${list.splr_name}</a></td>
+										<td><a href="javascript:fn_selectone('${list.splr_no}')">${list.splr_name}</a></td>
 										<td>${list.splr_indst_no}</td>
 										<td>${list.splr_add} ${list.splr_add_dt}</td>
 										<td>${list.splr_tel}</td>

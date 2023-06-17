@@ -9,6 +9,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title>납품기업 관리</title>
 <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
+
+<!-- 우편번호 조회 -->
+<script
+	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="${CTX_PATH}/js/popFindZipCode.js"></script>
                               
 <script type="text/javascript">
 
@@ -25,6 +31,8 @@
 		
 		fn_splrlist();
 		
+		// 은행코드 콤보    상세코드테이블의 은행코드, 은행코드명 으로 만듬   
+		comcombo("bk_cd","bkcombo","all","");   // group_code, combo_name, type(기본값  all : 전체   sel : 선택)    , selvalue(선택 되어 나올 값)         
 		
 	});
 	
@@ -97,7 +105,7 @@
 		
 		// 모달 팝업
 		gfModalPop("#layer1");
-			
+					
 	}
 	
 	
@@ -114,6 +122,7 @@
 	        $("#splr_email").val("");
 	        $("#splr_indst").val("");
 	        $("#splr_indst_no").val("");
+	        $("#bkcombo").val("");
 	        $("#splr_acc").val("");
 	        $("#splr_memo").val("");
 	        $("#splr_no").val("");
@@ -134,6 +143,7 @@
 	        $("#splr_indst").val(object.splr_indst);
 	        $("#splr_indst_no").val(object.splr_indst_no);
 	        $("#splr_acc").val(object.splr_acc);
+	        $("#bkcombo").val(object.bk_cd);
 	        $("#splr_memo").val(object.splr_memo);
 	        $("#splr_no").val(object.splr_no);
 
@@ -174,6 +184,8 @@
 	        return;
 	    }
 
+		// serialize() 사용으로, var param 선언부 주석처리
+		/*
 	    var param = {
 	        action : $("#action").val(),
 	        splr_no : $("#splr_no").val(),
@@ -190,6 +202,7 @@
 	        splr_acc : $("#splr_acc").val(),
 	        splr_memo : $("#splr_memo").val()
 	    }
+		*/
 
 	    var savecallback = function(reval) {
 	        console.log( JSON.stringify(reval) );
@@ -199,7 +212,7 @@
 	            gfCloseModal();
 
 	            if($("#action").val() == "U") {
-	                fn_noticelist($("#pageno").val());
+	                fn_splrlist($("#pageno").val());
 	            } else {
 	                fn_splrlist();
 	            }
@@ -221,7 +234,7 @@
 					,	[ "splr_mng", "담당자를 입력해 주세요." ]
 					,	[ "splr_hp", "담당자 전화를 입력해 주세요." ]
 					,	[ "splr_zip", "우편번호를 입력해 주세요." ]
-					,	[ "bk_cd", "은행코드를 입력해 주세요." ]
+					,	[ "bk_cd", "은행이름을 선택해 주세요." ]
 					,	[ "splr_acc", "계좌번호를 입력해 주세요." ]
 					,	[ "splr_add", "주소를 입력해 주세요." ]
 					,	[ "splr_add_dt", "상세주소를 입력해 주세요." ]
@@ -235,6 +248,50 @@
 		}
 		return true;
 	}
+	
+	// 우편번호 API
+	function execDaumPostcode(q) {
+		new daum.Postcode({
+			oncomplete : function(data) {
+				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+				// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+				var addr = ''; // 주소 변수
+				var extraAddr = ''; // 참고항목 변수
+
+				//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+				if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+					addr = data.roadAddress;
+				} else { // 사용자가 지번 주소를 선택했을 경우(J)
+					addr = data.jibunAddress;
+				}
+
+				// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+				if (data.userSelectedType === 'R') {
+					// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+					// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+					if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+						extraAddr += data.bname;
+					}
+					// 건물명이 있고, 공동주택일 경우 추가한다.
+					if (data.buildingName !== '' && data.apartment === 'Y') {
+						extraAddr += (extraAddr !== '' ? ', '
+								+ data.buildingName : data.buildingName);
+					}
+				}
+
+				// 우편번호와 주소 정보를 해당 필드에 넣는다.
+				document.getElementById("splr_zip").value = data.zonecode;
+				document.getElementById("splr_add").value = addr;
+				// 커서를 상세주소 필드로 이동한다.
+				document.getElementById("splr_add_dt").focus();
+			}
+		}).open({
+			q : q
+		});
+	}
+
 	
 
 </script>
@@ -283,7 +340,7 @@
 							<select id="searchKey" name="searchKey" style="width:150px; margin-right:5px;" >
 						        <option value="" >검색조건</option>
 								<option value="sp_name" >기업명</option>
-								<option value="sp_indst_no" >사업자등록번호</option>건
+								<option value="sp_indst_no" >사업자등록번호</option>
 							</select> 
 							<input type="text" style="width:300px; height:28px; margin-right:5px;" id="sname" name="sname">
 							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
@@ -329,7 +386,7 @@
 	</div>
 
 	<!-- 모달팝업 -->
-	<div id="layer1" class="layerPop layerType2" style="width: 600px;">
+	<div id="layer1" class="layerPop layerType2" style="width: 650px;">
 		<dl>
 			<dt>
 				<strong>납품기업 관리</strong>
@@ -360,7 +417,13 @@
 						</tr>
 						<tr>
 							<th scope="row">우편번호 <span class="font_red">*</span></th>
-							<td colspan="3"><input type="text" class="inputTxt p100" name="splr_zip" id="splr_zip" /></td>
+							<td colspan="3">
+								<div style="display:flex; flex-direction:row;">
+									<input type="text" class="inputTxt p100" name="splr_zip" id="splr_zip" />
+									<input type="button" value="우편번호 찾기"
+									       onclick="execDaumPostcode()" style="margin-left:5px; width:130px; height:30px;" />
+								</div>
+							</td>
 						</tr>
 						<tr>
 							<th scope="row">주소 <span class="font_red">*</span></th>
@@ -384,7 +447,12 @@
 						</tr>
 						<tr>
 							<th scope="row">계좌번호 <span class="font_red">*</span></th>
-							<td colspan="3"><input type="text" class="inputTxt p100" name="splr_acc" id="splr_acc" /></td>
+							<td colspan="3">
+								<div style="display:flex; flex-direction:row;">
+									<select id="bkcombo" name="bkcombo" style="margin-right:5px;"></select>
+									<input type="text" class="inputTxt p100" name="splr_acc" id="splr_acc" />
+								</div>
+							</td>
 						</tr>
 						<tr>
 							<th scope="row">메모 </th>
