@@ -24,6 +24,14 @@
 
             fn_productList();
 
+            // 제품 대분류
+            productCombo("l", "ltypecombo", "all", "", "", "", "");  // combo type( l : 대분류   m : 중분류   s : 소분류) combo_name, type(기본값  all : 전체   sel : 선택) ,  대분류 코드, 중분류코드, 소분류 코드, ""
+
+            // 제품 중분류
+            $('#ltypecombo').change(function () {
+                productCombo("m", "mtypecombo", "all", $("#ltypecombo").val(), "", "", "");   // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , 선택된 상위 계정코드, ""
+                $("#ptypecombo option").remove();
+            });
 
         });
 
@@ -270,7 +278,8 @@
                                 <option value="">검색조건</option>
                                 <option value="product_name">제품 이름</option>
                             </select>
-                            <input type="text" style="width: 200px; height: 25px; margin-right:5px; " id="pname" name="pname">
+                            <input type="text" style="width: 200px; height: 25px; margin-right:5px; " id="pname"
+                                   name="pname">
                             <a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
                             </p>
                         </div>
@@ -319,7 +328,7 @@
     </div>
 
     <!-- 모달팝업 -->
-    <div id="layer1" class="layerPop layerType2" style="width: 600px;">
+    <div id="layer1" class="layerPop layerType2" style="width: 650px;">
         <dl>
             <dt>
                 <strong>제품 등록</strong>
@@ -337,20 +346,17 @@
 
                     <tbody>
                     <tr>
-                        <th scope="row">납품기업명 <span class="font_red">*</span></th>
-                        <td colspan="3">
-                            <div style="display:flex; flex-direction:row;">
-                                <select id="splr_name" name="splr_name" style="margin-right:5px;"></select>
-                            </div>
+                        <th scope="row">제품종류 <span class="font_red">*</span></th>
+                        <td>
+                            <select id="ltypecombo" name="ltypecombo">
+                            </select>
                         </td>
-
                     </tr>
                     <tr>
-                        <th scope="row">제품종류 <span class="font_red">*</span></th>
-                        <td colspan="3">
-                            <div style="display:flex; flex-direction:row;">
-                                <select id="pro_name" name="pro_name" style="margin-right:5px;"></select>
-                            </div>
+                        <th scope="row">제조사 <span class="font_red">*</span></th>
+                        <td>
+                            <select id="mtypecombo" name="mtypecombo">
+                            </select>
                         </td>
                     </tr>
                     <tr>
@@ -359,6 +365,7 @@
                         <th scope="row">모델명 <span class="font_red">*</span></th>
                         <td><input type="text" class="inputTxt p100" name="product_serial"
                                    id="product_serial"/></td>
+                    </tr>
                     <tr>
                         <th scope="row">납품단가 <span class="font_red">*</span></th>
                         <td><input type="text" class="inputTxt p100" name="product_unit_price" id="product_unit_price"/>

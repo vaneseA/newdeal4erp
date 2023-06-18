@@ -407,7 +407,7 @@
 							<th scope="row">기업명 <span class="font_red">*</span></th>
 							<td><input type="text" class="inputTxt p100" name="splr_name" id="splr_name" /></td>
 							<th scope="row">회사 전화 <span class="font_red">*</span></th>
-							<td><input type="text" class="inputTxt p100" name="splr_tel" id="splr_tel" /></td>
+							<td><input type="text" class="inputTxt p100" name="splr_tel" id="splr_tel" /></td>명
 						</tr>
 						<tr>
 							<th scope="row">담당자 <span class="font_red">*</span></th>

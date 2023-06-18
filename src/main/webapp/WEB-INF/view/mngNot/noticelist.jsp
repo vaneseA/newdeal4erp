@@ -37,7 +37,7 @@
 		
 		// combo box 종류  pro : 제품 전체   조회 대상 테이블  tb_product   
 		selectComCombo("pro","proallcombo","all","","");  // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , "", "" 
-		
+		품
 		
 		// 제품 대분류
 		productCombo("l","ltypecombo","all","","","","");  // combo type( l : 대분류   m : 중분류   s : 소분류) combo_name, type(기본값  all : 전체   sel : 선택) ,  대분류 코드, 중분류코드, 소분류 코드, ""

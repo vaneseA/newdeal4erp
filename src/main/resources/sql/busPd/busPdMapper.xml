@@ -78,18 +78,22 @@
         INSERT INTO tb_product
         (
         product_no,
-        splr_name,
-        pro_name,
+        pro_cd,
+        splr_no,
         product_name,
+        product_dt,
+        file_no,
         product_serial,
         product_unit_price,
         product_price
         )
         VALUES (
         #{no},
-        (SELECT splr_no FROM tb_splr WHERE splr_name = 'Samsung'),
-        (SELECT pro_cd FROM tb_pro WHERE pro_name = '저장장치'),
+        #{ltypecombo},
+        #{mtypecombo},
         #{product_name},
+        1,
+        1,
         #{product_serial},
         #{product_unit_price},
         #{product_price}
