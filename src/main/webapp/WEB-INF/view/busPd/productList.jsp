@@ -249,27 +249,34 @@
 
                         <p class="conTitle">
                             <span>제품정보</span> <span class="fr">
-						 <!-- 검색창 영역 시작 -->
-							<select id="proName" name="proName" style="width: 170px;">
-							        <option value="">(제품종류) 전체</option>
-									<option value="저장장치">저장장치</option>
-									<option value="CPU">CPU</option>
-							</select>
-                            <select id="splrName" name="splrName" style="width: 170px;">
-							        <option value="">(납품기업명) 전체</option>
-									<option value="삼성">삼성</option>
-									<option value="intel">intel</option>
-							</select>
-							  <select id="searchKey" name="searchKey" style="width: 120px;">
-									<option value="product_name">제품이름</option>
-							</select>
-							<input type="text" style="width: 200px; height: 25px;" id="pname" name="pname">
-							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
-							 <a class="btnType blue" href="javascript:fn_openPopUp();"
+                             <a class="btnType blue" href="javascript:fn_openpopup();"
                                 name="modal"><span>제품등록</span></a>
-							</span>
+					</span>
                         </p>
+
+                        <!-- 검색창 영역 시작 -->
+                        <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">
+                            <select id="proName" name="proName" style="width: 170px; margin-right:5px;">
+                                <option value="">(제품종류) 전체</option>
+                                <option value="저장장치">저장장치</option>
+                                <option value="CPU">CPU</option>
+                            </select>
+                            <select id="splrName" name="splrName" style="width: 170px; margin-right:5px;">
+                                <option value="">(납품기업명) 전체</option>
+                                <option value="삼성">삼성</option>
+                                <option value="intel">intel</option>
+                            </select>
+                            <select id="searchKey" name="searchKey" style="width: 120px; margin-right:5px;">
+                                <option value="">검색조건</option>
+                                <option value="product_name">제품이름</option>
+                            </select>
+                            <input type="text" style="width: 200px; height: 25px; margin-right:5px; " id="pname" name="pname">
+                            <a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
+                            </p>
+                        </div>
                         <!-- 검색창 영역 끝 -->
+
+
                         <div class="productList">
                             <table class="col">
                                 <caption>caption</caption>
