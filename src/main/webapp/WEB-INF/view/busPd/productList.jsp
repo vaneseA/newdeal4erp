@@ -262,13 +262,13 @@
                                 <option value="CPU">CPU</option>
                             </select>
                             <select id="splrName" name="splrName" style="width: 170px; margin-right:5px;">
-                                <option value="">(납품기업명) 전체</option>
+                                <option value="">(제조사) 전체</option>
                                 <option value="삼성">삼성</option>
                                 <option value="intel">intel</option>
                             </select>
                             <select id="searchKey" name="searchKey" style="width: 120px; margin-right:5px;">
                                 <option value="">검색조건</option>
-                                <option value="product_name">제품이름</option>
+                                <option value="product_name">제품 이름</option>
                             </select>
                             <input type="text" style="width: 200px; height: 25px; margin-right:5px; " id="pname" name="pname">
                             <a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
@@ -292,10 +292,10 @@
 
                                 <thead>
                                 <tr>
-                                    <th scope="col">제품번호</th>
-                                    <th scope="col">대분류명(종류)</th>
-                                    <th scope="col">중분류명(납품기업명)</th>
-                                    <th scope="col">제품이름</th>
+                                    <th scope="col">제품 번호</th>
+                                    <th scope="col">제폼 종류</th>
+                                    <th scope="col">제조사</th>
+                                    <th scope="col">제품 이름</th>
                                     <th scope="col">모델명</th>
                                     <th scope="col">납품단가</th>
                                     <th scope="col">판매가</th>
