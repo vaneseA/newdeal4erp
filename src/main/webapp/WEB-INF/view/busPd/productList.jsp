@@ -249,7 +249,7 @@
 
                         <p class="conTitle">
                             <span>제품정보</span> <span class="fr">
-                             <a class="btnType blue" href="javascript:fn_openpopup();"
+                             <a class="btnType blue" href="javascript:fn_openPopUp();"
                                 name="modal"><span>제품등록</span></a>
 					</span>
                         </p>
