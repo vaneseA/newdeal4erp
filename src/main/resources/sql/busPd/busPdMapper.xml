@@ -103,9 +103,11 @@
     <!-- 수정 -->
     <update id="productUpdate">
         UPDATE tb_product
-        SET product_name = #{product_name}
-          ,pro_name = #{pro_name}
-          ,splr_name = #{splr_name}
+        SET   pro_cd = #{ltypecombo}
+          ,splr_no = #{mtypecombo}
+          ,product_name = #{product_name}
+          ,product_dt = #{product_dt}
+          ,file_no = #{file_no}
           ,product_serial = #{product_serial}
           ,product_unit_price = #{product_unit_price}
           ,product_price = #{product_price}
