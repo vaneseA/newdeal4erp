@@ -1,5 +1,6 @@
 package kr.happyjob.study.selSaD.dao;
 
+<<<<<<< HEAD
 import kr.happyjob.study.selSaD.model.SelSaDModel;
 
 import java.util.List;
@@ -25,4 +26,7 @@ public interface SelSaDDao {
 	/** 삭제 */
 	public int selSaDDelete(Map<String, Object> paramMap) throws Exception;
 
+=======
+public class SelSaDDao {
+>>>>>>> 678375e (일매출1)
 }

@@ -1,6 +1,7 @@
 package kr.happyjob.study.selSaD.model;
 
 public class SelSaDModel {
+<<<<<<< HEAD
 
 	public String getNotice_del_yn() {
 		return notice_del_yn;
@@ -94,4 +95,6 @@ public class SelSaDModel {
 	private String exten;
 	private String name;
 	
+=======
+>>>>>>> 678375e (일매출1)
 }

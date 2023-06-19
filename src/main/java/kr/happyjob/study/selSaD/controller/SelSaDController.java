@@ -1,5 +1,6 @@
 package kr.happyjob.study.selSaD.controller;
 
+<<<<<<< HEAD
 import kr.happyjob.study.selSaD.model.SelSaDModel;
 import kr.happyjob.study.selSaD.service.SelSaDService;
 import org.apache.log4j.LogManager;
@@ -72,3 +73,7 @@ public class SelSaDController {
     }
 
 }
+=======
+public class SelSaDController {
+}
+>>>>>>> 678375e (일매출1)
