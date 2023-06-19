@@ -268,6 +268,9 @@
                                 <option value="">(제품종류) 전체</option>
                                 <option value="저장장치">저장장치</option>
                                 <option value="CPU">CPU</option>
+                                <option value="메모리">메모리</option>
+                                <option value="그래픽카드">그래픽카드</option>
+                                <option value="메인보드">메인보드</option>
                             </select>
                             <select id="splrName" name="splrName" style="width: 170px; margin-right:5px;">
                                 <option value="">(제조사) 전체</option>
