@@ -1,7 +1,6 @@
 package kr.happyjob.study.busPd.service;
 
 import kr.happyjob.study.busPd.dao.BusPdDao;
-
 import kr.happyjob.study.busPd.model.BusPdModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
