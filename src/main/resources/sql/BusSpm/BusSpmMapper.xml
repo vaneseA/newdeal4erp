@@ -22,21 +22,21 @@
 	      ,sp.splr_email
 		  FROM tb_splr sp
 		       INNER JOIN tb_detail_code dc ON dc.group_code = 'bk_cd' AND dc.detail_code = sp.bk_cd
-	    <where>
-	      <if test="(sname != null) and (!sname.equals(''))">
-	        <choose>
-	          <when test="searchKey eq 'sp_name'.toString()">
-	            and sp.splr_name Like CONCAT('%', #{sname}, '%')
-	          </when>
-	          <when test="searchKey eq 'sp_indst_no'.toString()">
-	            and sp.splr_indst_no LIKE CONCAT('%', #{sname}, '%')
-	          </when>
-	          <otherwise>
-	            and ( sp.splr_name Like CONCAT('%', #{sname}, '%') or sp.splr_indst_no LIKE CONCAT('%', #{sname}, '%') )
-	          </otherwise>
-	        </choose>
-	      </if>
-	    </where>
+<!--	    <where>-->
+<!--	      <if test="(sname != null) and (!sname.equals(''))">-->
+<!--	        <choose>-->
+<!--	          <when test="searchKey eq 'sp_name'.toString()">-->
+<!--	            and sp.splr_name Like CONCAT('%', #{sname}, '%')-->
+<!--	          </when>-->
+<!--	          <when test="searchKey eq 'sp_indst_no'.toString()">-->
+<!--	            and sp.splr_indst_no LIKE CONCAT('%', #{sname}, '%')-->
+<!--	          </when>-->
+<!--	          <otherwise>-->
+<!--	            and ( sp.splr_name Like CONCAT('%', #{sname}, '%') or sp.splr_indst_no LIKE CONCAT('%', #{sname}, '%') )-->
+<!--	          </otherwise>-->
+<!--	        </choose>-->
+<!--	      </if>-->
+<!--	    </where>-->
 	    ORDER BY sp.splr_no
 	    LIMIT #{pageindex}, #{pageSize}
 	</select>
