@@ -38,17 +38,6 @@
                     case 'btnSearch' :
                         fn_saleDayList();
                         break;
-                    case 'btnSave' :
-                        fn_save();
-                        break;
-                    case 'btnDelete' :
-                        $("#action").val("D");
-                        fn_save();
-                        break;
-                    case 'btnClose' :
-                    case 'btnCloseDtlCod' :
-                        gfCloseModal();
-                        break;
                 }
             });
         }
@@ -57,13 +46,13 @@
             pagenum = pagenum || 1;
 
             var param = {
-                // proName: $("#proName").val()
-                // , splrName: $("#splrName").val()
-                // , searchKey: $("#searchKey").val()
-                // , pname: $("#pname").val()
-                // , pageSize: pageSize
-                // , pageBlockSize: pageBlockSize
-                // , pagenum: pagenum
+                proName: $("#proName").val(),
+                splrName: $("#splrName").val(),
+                searchKey: $("#searchKey").val(),
+                pname: $("#pname").val(),
+                pageSize: pageSize,
+                pageBlockSize: pageBlockSize,
+                pagenum: pagenum
             };
 
             var listCallBack = function (returnValue) {
@@ -75,7 +64,7 @@
 
                 console.log("totalCnt: " + totalCnt);
 
-                var paginationHtml = getPaginationHtml(pagenum, totalCnt, pageSize, pageBlockSize, 'fn_productList');
+                var paginationHtml = getPaginationHtml(pagenum, totalCnt, pageSize, pageBlockSize, 'fn_saleDayList');
                 console.log("paginationHtml: " + paginationHtml);
 
                 $("#saleDayPagination").empty().append(paginationHtml);
@@ -86,127 +75,6 @@
             callAjax("/selSaD/saleDayList.do", "post", "text", false, param, listCallBack);
         }
 
-
-        function fn_openPopUp() {
-
-            popUpInit();
-
-            // 모달 팝업
-            gfModalPop("#layer1");
-
-
-        }
-
-        function popUpInit(object) {
-
-            if (object == "" || object == null || object == undefined) {
-                $("#product_no").val("");
-                $("#product_name").val("");
-                $("#pro_name").val("");
-                $("#splr_name").val("");
-                $("#product_serial").val("");
-                $("#product_unit_price").val("");
-                $("#product_price").val("");
-
-
-                $("#btnDelete").hide();
-// object 가 없는 상태로 팝업 뜰 땐, action 을 “I” 로 설정하여  INSERT
-                $("#action").val("I");
-            } else {
-                $("#product_no").val(object.product_no);
-                $("#product_name").val(object.product_name);
-                $("#pro_name").val(object.pro_name);
-                $("#splr_name").val(object.splr_name);
-                $("#product_serial").val(object.product_serial);
-                $("#product_unit_price").val(object.product_unit_price);
-                $("#product_price").val(object.product_price);
-
-
-                $("#btnDelete").show();
-
-                $("#action").val("U");
-            }
-        }
-
-        function fn_selectOne(no) {
-
-            var param = {
-                product_no: no
-            }
-
-            var selectOnCallBack = function (returndata) {
-                console.log(JSON.stringify(returndata));
-
-                popUpInit(returndata.productSearch);
-
-                // 모달 팝업
-                gfModalPop("#layer1");
-
-            }
-
-            callAjax("/busPd/productSelectOne.do", "post", "json", false, param, selectOnCallBack);
-
-        }
-
-        function fn_save() {
-
-            if (!fn_Validate()) {
-                return;
-            }
-
-            var param = {
-                action: $("#action").val(),
-                product_no: $("#product_no").val(),
-                product_name: $("#product_name").val(),
-                pro_name: $("#pro_name").val(),
-                splr_name: $("#splr_name").val(),
-                product_serial: $("#product_serial").val(),
-                product_unit_price: $("#product_unit_price").val(),
-                product_price: $("#product_price").val()
-            }
-
-            //
-
-            var saveCollBack = function (reval) {
-                console.log(JSON.stringify(reval));
-
-                if (reval.returncval > 0) {
-                    alert("저장 되었습니다.");
-                    gfCloseModal();
-
-                    if ($("#action").val() == "U") {
-                        fn_saleDayList($("#pageno").val());
-                    } else {
-                        fn_saleDayList();
-                    }
-                } else {
-                    alert("오류가 발생 되었습니다.");
-                }
-            }
-            callAjax("/busPd/productSave.do", "post", "json", false, $("#myForm").serialize(), saveCollBack);
-
-        }
-
-        function fn_Validate() {
-
-            var chk = checkNotEmpty(
-                [
-                    ["pro_name", "제품분류를 선택해 주세요."]
-                    , ["splr_name", "납품회사명을 선택해 주세요"]
-                    , ["product_name", "품명 입력해 주세요"]
-                    , ["product_serial", "모델명을 입력해 주세요"]
-                    , ["product_unit_price", "납품을 입력해 주세요"]
-                    , ["product_price", "판매가을 입력해 주세요"],
-
-                ]
-            );
-
-            if (!chk) {
-                return;
-            }
-
-            return true;
-        }
 
 
     </script>
