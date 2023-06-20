@@ -141,16 +141,16 @@
                             <table class="col">
                                 <caption>caption</caption>
                                 <colgroup>
+                                    <col width="12%">
+                                    <col width="5%">
                                     <col width="9%">
                                     <col width="9%">
                                     <col width="9%">
+                                    <col width="12%">
                                     <col width="9%">
                                     <col width="9%">
                                     <col width="9%">
-                                    <col width="9%">
-                                    <col width="9%">
-                                    <col width="9%">
-                                    <col width="9%">
+                                    <col width="5%">
                                     <col width="9%">
                                 </colgroup>
 

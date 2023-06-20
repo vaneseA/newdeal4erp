@@ -12,12 +12,12 @@
 <c:if test="${totalcnt > 0 }">
     <c:forEach items="${saleDaySearchList}" var="list">
         <tr>
-            <td>${list.order_date}</td>
+            <td>${list.order_date_str}</td>
             <td>${list.order_no}</td>
             <td>${list.clnt_name}</td>
+            <td>${list.pro_name}</td>
             <td>${list.splr_name}</td>
             <td>${list.product_name}</td>
-            <td>${list.pro_name}</td>
             <td>${list.product_serial}</td>
             <td>
                 <fmt:formatNumber value="${list.product_unit_price}" type="number" pattern="#,###" />
