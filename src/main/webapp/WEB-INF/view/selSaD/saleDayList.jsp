@@ -46,14 +46,15 @@
             pagenum = pagenum || 1;
 
             var param = {
-                proName: $("#proName").val(),
-                splrName: $("#splrName").val(),
+                selectedValue: $("#proName").val(),
+                selectedValue: $("#splrName").val(),
                 searchKey: $("#searchKey").val(),
-                pname: $("#pname").val(),
+                selectedValue: $("#pname").val(),
                 pageSize: pageSize,
                 pageBlockSize: pageBlockSize,
                 pagenum: pagenum
             };
+
 
             var listCallBack = function (returnValue) {
                 console.log(returnValue);
@@ -74,7 +75,6 @@
 
             callAjax("/selSaD/saleDayList.do", "post", "text", false, param, listCallBack);
         }
-
 
 
     </script>
@@ -151,6 +151,7 @@
                                     <col width="10%">
                                     <col width="10%">
                                     <col width="10%">
+                                    <col width="10%">
                                 </colgroup>
 
                                 <thead>
@@ -158,6 +159,7 @@
                                     <th scope="col">주문 일자</th>
                                     <th scope="col">주문 번호</th>
                                     <th scope="col">고객기업명</th>
+                                    <th scope="col">제품 분류</th>
                                     <th scope="col">제조사</th>
                                     <th scope="col">품명</th>
                                     <th scope="col">모델명</th>
