@@ -83,7 +83,7 @@
 <body>
 <form id="myForm" action="" method="">
     <input type="hidden" id="action" name="action"/>
-    <input type="hidden" id="product_no" name="product_no"/>
+    <input type="hidden" id="order_no" name="order_no"/>
     <input type="hidden" id="pageno" name="pageno"/>
 
     <!-- 모달 배경 -->
@@ -110,7 +110,7 @@
                         <p class="Location">
                             <a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
                                 class="btn_nav bold">매출</span> <span class="btn_nav bold">일별 매출 현황
-								</span> <a href="../busPd/productInfo.do" class="btn_set refresh">새로고침</a>
+								</span> <a href="../selSaD/saleDay.do" class="btn_set refresh">새로고침</a>
                         </p>
 
 
@@ -121,7 +121,7 @@
 
                         <!-- 검색창 영역 시작 -->
                         <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">
-                            <select id="proName" name="proName" style="width: 170px; margin-right:5px;">
+                            <select id="selectedValue" name="selectedValue" style="width: 170px; margin-right:5px;">
                                 <option value="">검색 조건</option>
                                 <option value="저장장치">주문 일자</option>
                                 <option value="CPU">고객기업명</option>
@@ -141,17 +141,17 @@
                             <table class="col">
                                 <caption>caption</caption>
                                 <colgroup>
-                                    <col width="10%">
-                                    <col width="10%">
-                                    <col width="10%">
-                                    <col width="10%">
-                                    <col width="10%">
-                                    <col width="10%">
-                                    <col width="10%">
-                                    <col width="10%">
-                                    <col width="10%">
-                                    <col width="10%">
-                                    <col width="10%">
+                                    <col width="9%">
+                                    <col width="9%">
+                                    <col width="9%">
+                                    <col width="9%">
+                                    <col width="9%">
+                                    <col width="9%">
+                                    <col width="9%">
+                                    <col width="9%">
+                                    <col width="9%">
+                                    <col width="9%">
+                                    <col width="9%">
                                 </colgroup>
 
                                 <thead>
