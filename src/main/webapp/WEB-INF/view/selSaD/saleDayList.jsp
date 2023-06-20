@@ -69,7 +69,7 @@
             var listCallBack = function (returnValue) {
                 console.log(returnValue);
 
-                $("#listProduct").empty().append(returnValue);
+                $("#listSaleDay").empty().append(returnValue);
 
                 var totalCnt = $("#totalCnt").val();
 
@@ -78,7 +78,7 @@
                 var paginationHtml = getPaginationHtml(pagenum, totalCnt, pageSize, pageBlockSize, 'fn_productList');
                 console.log("paginationHtml: " + paginationHtml);
 
-                $("#productPagination").empty().append(paginationHtml);
+                $("#saleDayPagination").empty().append(paginationHtml);
 
                 $("#pageno").val(pagenum);
             };
@@ -241,36 +241,25 @@
 
                         <p class="Location">
                             <a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
-                                class="btn_nav bold">영업</span> <span class="btn_nav bold">제품정보
+                                class="btn_nav bold">매출</span> <span class="btn_nav bold">일별 매출 현황
 								</span> <a href="../busPd/productInfo.do" class="btn_set refresh">새로고침</a>
                         </p>
 
 
                         <p class="conTitle">
-                            <span>제품정보</span> <span class="fr">
-                             <a class="btnType blue" href="javascript:fn_openPopUp();"
-                                name="modal"><span>제품등록</span></a>
+                            <span>일별 매출 현황</span> <span class="fr">
 					</span>
                         </p>
 
                         <!-- 검색창 영역 시작 -->
                         <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">
                             <select id="proName" name="proName" style="width: 170px; margin-right:5px;">
-                                <option value="">(제품종류) 전체</option>
-                                <option value="저장장치">저장장치</option>
-                                <option value="CPU">CPU</option>
-                                <option value="메모리">메모리</option>
-                                <option value="그래픽카드">그래픽카드</option>
-                                <option value="메인보드">메인보드</option>
-                            </select>
-                            <select id="splrName" name="splrName" style="width: 170px; margin-right:5px;">
-                                <option value="">(제조사) 전체</option>
-                                <option value="삼성">삼성</option>
-                                <option value="intel">intel</option>
-                            </select>
-                            <select id="searchKey" name="searchKey" style="width: 120px; margin-right:5px;">
-                                <option value="">검색조건</option>
-                                <option value="product_name">제품 이름</option>
+                                <option value="">검색 조건</option>
+                                <option value="저장장치">주문 일자</option>
+                                <option value="CPU">고객기업명</option>
+                                <option value="메모리">제조사</option>
+                                <option value="그래픽카드">품명</option>
+                                <option value="메인보드">모델명</option>
                             </select>
                             <input type="text" style="width: 200px; height: 25px; margin-right:5px; " id="pname"
                                    name="pname">
@@ -280,10 +269,13 @@
                         <!-- 검색창 영역 끝 -->
 
 
-                        <div class="productList">
+                        <div class="saleDayList">
                             <table class="col">
                                 <caption>caption</caption>
                                 <colgroup>
+                                    <col width="10%">
+                                    <col width="10%">
+                                    <col width="10%">
                                     <col width="10%">
                                     <col width="10%">
                                     <col width="10%">
@@ -295,21 +287,24 @@
 
                                 <thead>
                                 <tr>
-                                    <th scope="col">제품 번호</th>
-                                    <th scope="col">제폼 종류</th>
+                                    <th scope="col">주문 일자</th>
+                                    <th scope="col">주문 번호</th>
+                                    <th scope="col">고객기업명</th>
                                     <th scope="col">제조사</th>
-                                    <th scope="col">제품 이름</th>
+                                    <th scope="col">품명</th>
                                     <th scope="col">모델명</th>
                                     <th scope="col">납품단가</th>
                                     <th scope="col">판매가</th>
+                                    <th scope="col">수량</th>
+                                    <th scope="col">총액</th>
 
                                 </tr>
                                 </thead>
-                                <tbody id="listProduct"></tbody>
+                                <tbody id="listSaleDay"></tbody>
                             </table>
                         </div>
 
-                        <div class="paging_area" id="productPagination"></div>
+                        <div class="paging_area" id="saleDayPagination"></div>
 
 
                     </div> <!--// content -->
@@ -321,80 +316,7 @@
         </div>
     </div>
 
-    <!-- 모달팝업 -->
-    <div id="layer1" class="layerPop layerType2" style="width: 650px;">
-        <dl>
-            <dt>
-                <strong>제품 등록</strong>
-            </dt>
-            <dd class="content">
-                <!-- s : 여기에 내용입력 -->
-                <table class="row">
-                    <caption>caption</caption>
-                    <colgroup>
-                        <col width="25%">
-                        <col width="25%">
-                        <col width="25%">
-                        <col width="25%">
-                    </colgroup>
 
-                    <tbody>
-                    <tr>
-                        <th scope="row">제품종류 <span class="font_red">*</span></th>
-                        <td>
-                            <select id="ltypecombo" name="ltypecombo">
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">제조사 <span class="font_red">*</span></th>
-                        <td>
-                            <select id="mtypecombo" name="mtypecombo">
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">품명 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="product_name" id="product_name"/></td>
-                        <th scope="row">모델명 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="product_serial"
-                                   id="product_serial"/></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">납품단가 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="product_unit_price" id="product_unit_price"/>
-                        </td>
-                        <th scope="row">판매가 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="product_price" id="product_price"/></td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <!-- e : 여기에 내용입력 -->
-
-                <div class="btn_areaC mt30">
-                    <a href="" class="btnType blue" id="btnSave" name="btn"><span>저장</span></a>
-                    <a href="" class="btnType blue" id="btnDelete" name="btn"><span>삭제</span></a>
-                    <a href="" class="btnType gray" id="btnClose" name="btn"><span>취소</span></a>
-                </div>
-            </dd>
-        </dl>
-        <a href="" class="closePop"><span class="hidden">닫기</span></a>
-    </div>
-
-    <div id="layer2" class="layerPop layerType2" style="width: 600px;">
-        <dl>
-            <dt>
-                <strong>상세코드 관리</strong>
-            </dt>
-            <dd class="content">
-
-
-            </dd>
-        </dl>
-        <a href="" class="closePop"><span class="hidden">닫기</span></a>
-    </div>
-    <!--// 모달팝업 -->
 </form>
 </body>
 </html>
