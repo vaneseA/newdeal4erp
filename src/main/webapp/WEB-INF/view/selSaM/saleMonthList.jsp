@@ -57,13 +57,13 @@
             pagenum = pagenum || 1;
 
             var param = {
-                proName: $("#proName").val()
-                , splrName: $("#splrName").val()
-                , searchKey: $("#searchKey").val()
-                , pname: $("#pname").val()
-                , pageSize: pageSize
-                , pageBlockSize: pageBlockSize
-                , pagenum: pagenum
+                // proName: $("#proName").val()
+                // , splrName: $("#splrName").val()
+                // , searchKey: $("#searchKey").val()
+                // , pname: $("#pname").val()
+                // , pageSize: pageSize
+                // , pageBlockSize: pageBlockSize
+                // , pagenum: pagenum
             };
 
             var listCallBack = function (returnValue) {

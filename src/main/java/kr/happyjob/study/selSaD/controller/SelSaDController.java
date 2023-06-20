@@ -1,6 +1,12 @@
 package kr.happyjob.study.selSaD.controller;
 
-<<<<<<< HEAD
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import kr.happyjob.study.selSaD.model.SelSaDModel;
 import kr.happyjob.study.selSaD.service.SelSaDService;
 import org.apache.log4j.LogManager;
@@ -10,12 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/selSaD/")
@@ -31,26 +31,30 @@ public class SelSaDController {
     private final String className = this.getClass().toString();
 
 
+
     /**
      * 초기화면
      */
     @RequestMapping("saleDay.do")
-    public String notice(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
-                         HttpServletResponse response, HttpSession session) throws Exception {
+    public String saleDay(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+                            HttpServletResponse response, HttpSession session) throws Exception {
 
-        logger.info("+ Start " + className + ".sel");
+        logger.info("+ Start " + className + ".saleDay");
         logger.info("   - paramMap : " + paramMap);
 
-        logger.info("+ End " + className + ".sel");
+        logger.info("+ End " + className + ".saleDay");
 
-        return "/selSaD/saleDayList";
+        return "selSaD/saleDayList";
+
     }
+    /**
+     * 목록 조회
+     */
+    @RequestMapping("saleDayList.do")
+    public String productList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+                              HttpServletResponse response, HttpSession session) throws Exception {
 
-    @RequestMapping("/selSaD/saleDay.do")
-    public String selSaDList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
-                             HttpServletResponse response, HttpSession session) throws Exception {
-
-        logger.info("+ Start " + className + ".selSaDList");
+        logger.info("+ Start " + className + ".saleDayList");
         logger.info("   - paramMap : " + paramMap);
 
         int pagenum = Integer.parseInt((String) paramMap.get("pagenum"));
@@ -60,20 +64,28 @@ public class SelSaDController {
         paramMap.put("pageSize", pageSize);
         paramMap.put("pageindex", pageindex);
 
-        // Controller  Service  Dao  SQL
-        List<SelSaDModel> noticesearchlist = selSaDService.selSaDList(paramMap);
-        int totalcnt = selSaDService.countSelSaDList(paramMap);
+        // Controller -> Service -> Dao -> SQL
+        List<SelSaDModel> saleDaySearchList = selSaDService.saleDayList(paramMap);
+        int totalcnt = selSaDService.countSaleDayList(paramMap);
 
-        model.addAttribute("noticesearchlist", noticesearchlist);
+        model.addAttribute("productSearchList", saleDaySearchList);
         model.addAttribute("totalcnt", totalcnt);
 
-        logger.info("+ End " + className + ".selSaDList");
+        logger.info("+ End " + className + ".productList");
 
         return "selSaD/saleDayListGrd";
     }
 
+
+
+
+
+
 }
-=======
-public class SelSaDController {
-}
->>>>>>> 678375e (일매출1)
+
+
+
+
+
+
+

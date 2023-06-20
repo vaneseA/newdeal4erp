@@ -1,100 +1,128 @@
 package kr.happyjob.study.selSaD.model;
 
-public class SelSaDModel {
-<<<<<<< HEAD
+import java.util.Date;
 
-	public String getNotice_del_yn() {
-		return notice_del_yn;
-	}
-	public void setNotice_del_yn(String notice_del_yn) {
-		this.notice_del_yn = notice_del_yn;
-	}
-	public String getLoginID() {
-		return loginID;
-	}
-	public void setLoginID(String loginID) {
-		this.loginID = loginID;
-	}
-	public int getNotice_no() {
-		return notice_no;
-	}
-	public void setNotice_no(int notice_no) {
-		this.notice_no = notice_no;
-	}
-	public String getNotice_title() {
-		return notice_title;
-	}
-	public void setNotice_title(String notice_title) {
-		this.notice_title = notice_title;
-	}
-	public String getNotice_date() {
-		return notice_date;
-	}
-	public void setNotice_date(String notice_date) {
-		this.notice_date = notice_date;
-	}
-	public String getNotice_cont() {
-		return notice_cont;
-	}
-	public void setNotice_cont(String notice_cont) {
-		this.notice_cont = notice_cont;
-	}
-	public int getFile_no() {
-		return file_no;
-	}
-	public void setFile_no(int file_no) {
-		this.file_no = file_no;
-	}
-	public String getFile_name() {
-		return file_name;
-	}
-	public void setFile_name(String file_name) {
-		this.file_name = file_name;
-	}
-	public String getLogic_path() {
-		return logic_path;
-	}
-	public void setLogic_path(String logic_path) {
-		this.logic_path = logic_path;
-	}
-	public String getPhysic_path() {
-		return physic_path;
-	}
-	public void setPhysic_path(String physic_path) {
-		this.physic_path = physic_path;
-	}
-	public int getFile_size() {
-		return file_size;
-	}
-	public void setFile_size(int file_size) {
-		this.file_size = file_size;
-	}
-	public String getExten() {
-		return exten;
-	}
-	public void setExten(String exten) {
-		this.exten = exten;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	private String notice_del_yn;
-	private String loginID;
-	private int notice_no;
-	private String notice_title;
-	private String notice_date;
-	private String notice_cont;
-	private int file_no;
-	private String file_name;
-	private String logic_path;
-	private String physic_path;
-	private int file_size;
-	private String exten;
-	private String name;
-	
-=======
->>>>>>> 678375e (일매출1)
+public class SelSaDModel {
+    private int order_no;//주문번호
+    private Date order_date;//주문일자
+    private int product_no;//제품번호
+    private int splr_no;//납품기업번호
+    private String splr_name;//납품기업명
+    private String product_name;//품명
+
+    private String pro_cd;//제품 분류코드
+
+    private String pro_name;//제품 분류
+
+    private String product_serial;//모델명
+    private int product_unit_price;//납품단가
+    private int product_price;//판매가
+
+    private int oder_dt_amt;//수량
+
+    private int oder_tot_price;//총액
+
+    public int getOrder_no() {
+        return order_no;
+    }
+
+    public void setOrder_no(int order_no) {
+        this.order_no = order_no;
+    }
+
+    public Date getOrder_date() {
+        return order_date;
+    }
+
+    public void setOrder_date(Date order_date) {
+        this.order_date = order_date;
+    }
+
+    public int getProduct_no() {
+        return product_no;
+    }
+
+    public void setProduct_no(int product_no) {
+        this.product_no = product_no;
+    }
+
+    public int getSplr_no() {
+        return splr_no;
+    }
+
+    public void setSplr_no(int splr_no) {
+        this.splr_no = splr_no;
+    }
+
+    public String getSplr_name() {
+        return splr_name;
+    }
+
+    public void setSplr_name(String splr_name) {
+        this.splr_name = splr_name;
+    }
+
+    public String getProduct_name() {
+        return product_name;
+    }
+
+    public void setProduct_name(String product_name) {
+        this.product_name = product_name;
+    }
+
+    public String getPro_cd() {
+        return pro_cd;
+    }
+
+    public void setPro_cd(String pro_cd) {
+        this.pro_cd = pro_cd;
+    }
+
+    public String getPro_name() {
+        return pro_name;
+    }
+
+    public void setPro_name(String pro_name) {
+        this.pro_name = pro_name;
+    }
+
+    public String getProduct_serial() {
+        return product_serial;
+    }
+
+    public void setProduct_serial(String product_serial) {
+        this.product_serial = product_serial;
+    }
+
+    public int getProduct_unit_price() {
+        return product_unit_price;
+    }
+
+    public void setProduct_unit_price(int product_unit_price) {
+        this.product_unit_price = product_unit_price;
+    }
+
+    public int getProduct_price() {
+        return product_price;
+    }
+
+    public void setProduct_price(int product_price) {
+        this.product_price = product_price;
+    }
+
+    public int getOder_dt_amt() {
+        return oder_dt_amt;
+    }
+
+    public void setOder_dt_amt(int oder_dt_amt) {
+        this.oder_dt_amt = oder_dt_amt;
+    }
+
+    public int getOder_tot_price() {
+        return oder_tot_price;
+    }
+
+    public void setOder_tot_price(int oder_tot_price) {
+        this.oder_tot_price = oder_tot_price;
+    }
 }
