@@ -19,10 +19,18 @@
             <td>${list.product_name}</td>
             <td>${list.pro_name}</td>
             <td>${list.product_serial}</td>
-            <td>${list.product_price}</td>
-            <td>${list.product_unit_price}</td>
-            <td>${list.order_dt_amt}</td>
-            <td>${list.order_tot_price}</td>
+            <td>
+                <fmt:formatNumber value="${list.product_unit_price}" type="number" pattern="#,###" />
+            </td>
+            <td>
+                <fmt:formatNumber value="${list.product_price}" type="number" pattern="#,###" />
+            </td>
+            <td>
+                <fmt:formatNumber value="${list.order_dt_amt}" type="number" pattern="#,###" />
+            </td>
+            <td>
+                <fmt:formatNumber value="${list.order_tot_price}" type="number" pattern="#,###" />
+            </td>
         </tr>
     </c:forEach>
 </c:if>
