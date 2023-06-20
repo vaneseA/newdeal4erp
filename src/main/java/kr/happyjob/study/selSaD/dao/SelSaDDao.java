@@ -15,7 +15,7 @@ public interface SelSaDDao {
     //리스트 조회
     public List<SelSaDModel> saleDayList(Map<String, Object> paramMap) throws Exception;
 
-    //제품 카운트 조회
+    //카운트 조회
     public int countSaleDayList(Map<String, Object> paramMap) throws Exception;
 
 

@@ -35,8 +35,9 @@
 
 	<!-- Component Scan을 하기 위한 ROOT Package 설정 -->
 	<!-- context:component-scan base-package="kr.happyjob.study" /  -->
-	<context:component-scan base-package="kr.happyjob" />
-	
+	<context:component-scan base-package="kr.happyjob, kr.happyjob.study.selSaD.dao" />
+
+
 	<!-- dao 스캔 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="kr.happyjob.study.**.dao" />
