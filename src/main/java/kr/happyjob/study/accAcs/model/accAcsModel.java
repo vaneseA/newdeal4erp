@@ -13,11 +13,12 @@ public class accAcsModel {
 	private String pdate; //날짜
 	private String loginID; //담당자
 	private String name; //담당자
-	private String acnt_dt_sbjct_inout; //수입 or 지출
+	private String acnt_sbjct_inout; //수입 or 지출
 	private String acnt_dt_sbjct_name; // 계정과목 이름
 	private String client; //거래처
 	private int outamt; // 비용
 	private int inamt; //수입
+	private String acnt_sbjct_name; //계정대과목 이름
 	public int getBudget_no() {
 		return budget_no;
 	}
@@ -78,11 +79,11 @@ public class accAcsModel {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAcnt_dt_sbjct_inout() {
-		return acnt_dt_sbjct_inout;
+	public String getAcnt_sbjct_inout() {
+		return acnt_sbjct_inout;
 	}
-	public void setAcnt_dt_sbjct_inout(String acnt_dt_sbjct_inout) {
-		this.acnt_dt_sbjct_inout = acnt_dt_sbjct_inout;
+	public void setAcnt_sbjct_inout(String acnt_sbjct_inout) {
+		this.acnt_sbjct_inout = acnt_sbjct_inout;
 	}
 	public String getAcnt_dt_sbjct_name() {
 		return acnt_dt_sbjct_name;
@@ -108,6 +109,16 @@ public class accAcsModel {
 	public void setInamt(int inamt) {
 		this.inamt = inamt;
 	}
+	public String getAcnt_sbjct_name() {
+		return acnt_sbjct_name;
+	}
+	public void setAcnt_sbjct_name(String acnt_sbjct_name) {
+		this.acnt_sbjct_name = acnt_sbjct_name;
+	}
+	
+	
+	
+	
 	
 
 
