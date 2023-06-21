@@ -15,18 +15,18 @@
 		      ,ll.pdate
 		      ,ll.loginID
 		      ,ui.name
-		      ,case when ds.acnt_dt_sbjct_inout = '1' then '수입'
-		            when ds.acnt_dt_sbjct_inout = '2' then '지출'
+		      ,case when asb.acnt_sbjct_inout = '1' then '수입'
+		            when asb.acnt_sbjct_inout = '2' then '지출'
 		            else ''
-		       end as acnt_dt_sbjct_inout 
-		      ,ds.acnt_dt_sbjct_name
+		       end as acnt_sbjct_inout 
+		      ,ds.acnt_dt_sbjct_name as acnt_dt_sbjct_name
 		      ,ll.client
-		      ,case when ds.acnt_dt_sbjct_inout = '1' then 0
-		            when ds.acnt_dt_sbjct_inout = '2' then ll.amt
+		      ,case when asb.acnt_sbjct_inout = '1' then 0
+		            when asb.acnt_sbjct_inout = '2' then ll.amt
 		            else 0
 		       end as outamt 
-		      ,case when ds.acnt_dt_sbjct_inout = '1' then ll.amt
-		            when ds.acnt_dt_sbjct_inout = '2' then 0
+		      ,case when asb.acnt_sbjct_inout = '1' then ll.amt
+		            when asb.acnt_sbjct_inout = '2' then 0
 		            else 0
 		       end as inamt 
 		  from (
@@ -79,6 +79,7 @@
 		        ) ll
 		        inner join tb_dt_sbject ds on ds.acnt_sbject_cd = ll.acnt_sbject_cd and ds.acnt_dt_sbject_cd = ll.acnt_dt_sbject_cd
 		        inner join tb_userinfo ui on ui.loginID = ll.loginID
+            inner join tb_acnt_sbject asb on asb.acnt_sbject_cd = ll.acnt_sbject_cd
 		        <where>
 					<if test ="(start != null) and (!start.equals(''))" >
        				   and ll.pdate <![CDATA[>=]]> STR_TO_DATE(#{start}, '%Y-%m-%d')    
@@ -87,17 +88,16 @@
        				   and ll.pdate <![CDATA[<=]]> DATE_ADD(STR_TO_DATE(#{end} , '%Y-%m-%d'), INTERVAL 1 DAY)
 			        </if>
 		        	<if test="(clicombo != null) and (!clicombo.equals(''))">
-			        	<choose> 
-			        		<when test="clicombo eq 1">
-			        			and ll.client = '태평물산'
-			        		</when>
+<!-- 			        	<choose>  -->
 <!-- 			        		<when test="clicombo eq 1"> -->
 <!-- 			        			and ll.client = '태평물산' -->
 <!-- 			        		</when> -->
-			        	</choose>
-			        	
-			        	
+<!-- 			        	</choose> -->
+			        	and ll.client = (select clnt_name from tb_clnt where clnt_no = #{clicombo})
 			        </if>
+			        
+			        
+			        
 			        <if test="(acccombo != null) and (!acccombo.equals(''))">
 			        	and ll.acnt_sbject_cd = #{acccombo}
 			        </if>
@@ -111,7 +111,7 @@
 	
 	<select id="countactlist" resultType="int">
 			select count(*)
-		  from (
+		      from (
 		                     select bd.budget_no
 		                           ,bd.acnt_sbject_cd
 		                           ,bd.acnt_dt_sbject_cd
@@ -161,6 +161,7 @@
 		        ) ll
 		        inner join tb_dt_sbject ds on ds.acnt_sbject_cd = ll.acnt_sbject_cd and ds.acnt_dt_sbject_cd = ll.acnt_dt_sbject_cd
 		        inner join tb_userinfo ui on ui.loginID = ll.loginID
+            	inner join tb_acnt_sbject asb on asb.acnt_sbject_cd = ll.acnt_sbject_cd
 		        <where>
 					<if test ="(start != null) and (!start.equals(''))" >
        				   and ll.pdate <![CDATA[>=]]> STR_TO_DATE(#{start}, '%Y-%m-%d')    
@@ -169,12 +170,12 @@
        				   and ll.pdate <![CDATA[<=]]> DATE_ADD(STR_TO_DATE(#{end} , '%Y-%m-%d'), INTERVAL 1 DAY)
 			        </if>
 		        	<if test="(clicombo != null) and (!clicombo.equals(''))">
-			        	<choose> 
-			        		<when test="clicombo eq 1">
-			        			and ll.client = '태평물산'
-			        		</when>
-			        	</choose>
-			        	
+<!-- 			        	<choose>  -->
+<!-- 			        		<when test="clicombo eq 1"> -->
+<!-- 			        			and ll.client = '태평물산' -->
+<!-- 			        		</when> -->
+<!-- 			        	</choose> -->
+			        	and ll.client = (select clnt_name from tb_clnt where clnt_no = #{clicombo})	
 			        	
 			        </if>
 			        <if test="(acccombo != null) and (!acccombo.equals(''))">
@@ -183,11 +184,11 @@
 			        <if test="(accdcombo != null) and (!accdcombo.equals(''))">
 			        	and ll.acnt_dt_sbject_cd = #{accdcombo}
 			        </if>
-		        </where>			
+		        </where>
 	</select>
 	
 	<select id="accountSearchSelectone" resultType="kr.happyjob.study.accAcs.model.accAcsModel">
-				select ll.budget_no
+		select ll.budget_no
 		      ,ll.acnt_sbject_cd
 		      ,ll.acnt_dt_sbject_cd
 		      ,ll.expen_report_no
@@ -197,18 +198,18 @@
 		      ,ll.pdate
 		      ,ll.loginID
 		      ,ui.name
-		      ,case when ds.acnt_dt_sbjct_inout = '1' then '수입'
-		            when ds.acnt_dt_sbjct_inout = '2' then '지출'
+		      ,case when asb.acnt_sbjct_inout = '1' then '수입'
+		            when asb.acnt_sbjct_inout = '2' then '지출'
 		            else ''
-		       end as acnt_dt_sbjct_inout 
-		      ,ds.acnt_dt_sbjct_name
+		       end as acnt_sbjct_inout 
+		      ,ds.acnt_dt_sbjct_name as acnt_dt_sbjct_name
 		      ,ll.client
-		      ,case when ds.acnt_dt_sbjct_inout = '1' then 0
-		            when ds.acnt_dt_sbjct_inout = '2' then ll.amt
+		      ,case when asb.acnt_sbjct_inout = '1' then 0
+		            when asb.acnt_sbjct_inout = '2' then ll.amt
 		            else 0
 		       end as outamt 
-		      ,case when ds.acnt_dt_sbjct_inout = '1' then ll.amt
-		            when ds.acnt_dt_sbjct_inout = '2' then 0
+		      ,case when asb.acnt_sbjct_inout = '1' then ll.amt
+		            when asb.acnt_sbjct_inout = '2' then 0
 		            else 0
 		       end as inamt 
 		  from (
@@ -261,6 +262,7 @@
 		        ) ll
 		        inner join tb_dt_sbject ds on ds.acnt_sbject_cd = ll.acnt_sbject_cd and ds.acnt_dt_sbject_cd = ll.acnt_dt_sbject_cd
 		        inner join tb_userinfo ui on ui.loginID = ll.loginID
+            inner join tb_acnt_sbject asb on asb.acnt_sbject_cd = ll.acnt_sbject_cd
 		        <where>
 		        budget_no = #{budget_no}
 		        </where>
