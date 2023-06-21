@@ -138,6 +138,45 @@
 
 
                         <div class="saleDayList">
+
+
+                            <style>
+                                table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                }
+
+                                th, td {
+                                    text-align: center;
+                                    padding: 5px;
+                                    border: 1px solid black;
+                                }
+                            </style>
+                            <table class="col">
+                                <caption>caption</caption>
+                                <tr>
+                                    <th>매출</th>
+
+                                    <td>${tem_in1}</td>
+                                </tr>
+                                <tr>
+                                    <th>매출 원가</th>
+
+                                    <td>${tem_in2}</td>
+                                </tr>
+                                <tr>
+
+                                    <th>매출 순이익</th>
+                                    <td>${tem_in3}</td>
+                                </tr>
+                                <tr>
+
+                                    <th>매출 이익률</th>
+                                    <td>${tem_in4}</td>
+                                </tr>
+                            </table>
+
+
                             <table class="col">
                                 <caption>caption</caption>
                                 <colgroup>
