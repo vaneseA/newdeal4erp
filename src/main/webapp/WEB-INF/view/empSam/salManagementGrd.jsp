@@ -27,10 +27,10 @@
 										<td>${list.emp_final_money}</td>
 										<td>${list.emp_meno}</td>
 									<c:if test="${list.sal_pay_yn eq 'N'}">
-										<td><a class="btnType blue" href="javascript:fn_openpopup(${list.loginID}, ${list.sal_date.substring(0,4).concat(list.sal_date.substring(5))});" id="btnChoice" name="modal" style=" color:black; border:1px;font-size:1px; padding:0px; margin:0; width:50px">미지급</a></td>
+										<td><a class="btnType2 color2" href="javascript:fn_openpopup(${list.loginID}, ${list.sal_date.substring(0,4).concat(list.sal_date.substring(5))});" id="btnChoice" name="modal"  >미지급</a></td>
 									</c:if>
 									<c:if test="${list.sal_pay_yn eq 'Y'}">
-										<td><a class="btnType blue" id="btnChoice" name="modal" style=" color:white; border:1px;font-size:1px; padding:0px; margin:0; width:50px">지급</a></td>
+										<td><a class="btnType2 color2" id="btnChoice" name="modal" >지급</a></td>
 									</c:if>
 										
 									</tr>

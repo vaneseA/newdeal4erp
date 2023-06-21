@@ -15,6 +15,17 @@ public interface accAcmDao {
 
 	int countactlist(Map<String, Object> paramMap);
 
+	int bigInsert(Map<String, Object> paramMap);
+
+	List<accAcmModel> accAcmSListSearch(Map<String, Object> paramMap);
+
+	int countSList(Map<String, Object> paramMap);
+
+	int smallInsert(Map<String, Object> paramMap);
+	
+	
+	
+
 	
 
 

@@ -12,13 +12,15 @@
 							<c:if test="${totalcnt > 0 }">
 								<c:forEach items="${accAcmSearchList}" var="list">
 									<tr>
-										<td>${list.acnt_dt_sbjct_inout}</td>
+										<td>
+											<c:if test="${list.acnt_sbjct_inout == 1 }">수입</c:if>
+											<c:if test="${list.acnt_sbjct_inout == 2 }">비용</c:if>
 										<td>${list.acnt_sbject_cd}</td>
-										<td>${list.acnt_sbject_name}</td>
-										<td>${list.acnt_dt_sbject_cd}</td>
-										<td>${list.acnt_dt_sbjct_name}</td>
+										<td><a href="javascript:fn_accAcmSListSearch(1, '${list.acnt_sbject_cd}', '${list.acnt_sbject_name}')">${list.acnt_sbject_name}</a></td>
 									</tr>
 								</c:forEach>
 							</c:if>
 							
 							<input type="hidden" id="totalcnt" name="totalcnt" value ="${totalcnt}"/>
+							<input type="hidden" id="acnt_sbject_cd" name="acnt_sbject_cd" value ="${acnt_sbject_cd}"/>
+							<input type="hidden" id="acnt_sbject_name" name="acnt_sbject_name" value ="${acnt_sbject_name}"/>
