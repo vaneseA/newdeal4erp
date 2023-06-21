@@ -344,14 +344,14 @@
                     <tr>
                         <th scope="row">제품종류 <span class="font_red">*</span></th>
                         <td>
-                            <select id="ltypecombo" name="ltypecombo">
+                            <select id="ltypecombo1" name="ltypecombo">
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">제조사 <span class="font_red">*</span></th>
                         <td>
-                            <select id="mtypecombo" name="mtypecombo">
+                            <select id="mtypecombo1" name="mtypecombo">
                             </select>
                         </td>
 
