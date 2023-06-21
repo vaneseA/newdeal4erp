@@ -179,56 +179,63 @@
 						
 						
 						<!-- 개인급여내역서 조회 리스트 뿌리기 -->
-						<div id="empSasTax" style="margin:10px">
-							<table class="col">
-								<caption>caption</caption>
-								<colgroup>
-									<col width="20%">
-									<col width="20%">
-									<col width="20%">
-								</colgroup>
-		
-								<thead>
-									<tr>
-										<th scope="col">공제항목</th>
-										<th scope="col">회사부담금</th>
-										<th scope="col">개인부담금</th>
-									</tr>
-								</thead>
-								<tbody id="listEmpSas1"></tbody>
-							</table>
+						<div style="display:flex; flex-grow: 1; justify-content: space-evenly;">
+							<div class="item" id="empSasTax" style="width:100%;margin-right: 10px">
+								<table class="col">
+									<caption>caption</caption>
+									<colgroup>
+										<col width="30%">
+										<col width="30%">
+										<col width="30%">
+									</colgroup>
+			
+									<thead>
+										<tr>
+											<th scope="col">공제항목</th>
+											<th scope="col">회사부담금</th>
+											<th scope="col">개인부담금</th>
+										</tr>
+									</thead>
+									<tbody id="listEmpSas1"></tbody>
+								</table>
+								
+							</div>
 							
-						</div>
-						
-						<!-- 개인급여내역서 조회 리스트 뿌리기 -->
-						<div id="empSasResult" style="margin:10px">
-							<table class="col" border="1" width="100" height="100">
-								<caption>caption</caption>
-								<colgroup>
-									<col width="20%">
-									<col width="50%">
-								</colgroup>
-		
-								<thead>
-									<tr>
-										<th scope="col">지급항목</th>
-										<th scope="col">금액</th>
-									</tr>
-								</thead>
-								<tbody id="listEmpSas2"></tbody>
-							</table>
-							<!-- 보험료 몇퍼 떼는지 알려준다 (마우스 올리면 실행) -->
-							<div style="margin-top:20px"><a id="taxPer" name="taxPer" style="border:20px; border-radius: 30px; background-color: gray; color:white; padding:10px; ">?</a></div>
-							<!-- 보험료율 모달팝업 (taxPer에 마우스 올리면 실행) -->
-							<span id="taxPopup"  style="width: 100px;visibility:hidden; border:2px; padding:10px; borderColor: black; margin:10px;">
-								<p>보험료율(근로자부담)</p>
-								<ul>
-									<li>국민연금: 4.5%</li>
-									<li>건강보험: 3.43%</li>
-									<li>고용보험: 0.8%%</li>
-									<li>산재보험: 1.56%</li>
-								</ul>	
-							</span>
+							<!-- 개인급여내역서 조회 리스트 뿌리기 -->
+							<div class="item" id="empSasResult" style="width:100%;">
+								<table class="col">
+									<caption>caption</caption>
+									<colgroup>
+										<col width="50%">
+										<col width="50%">
+									</colgroup>
+			
+									<thead>
+										<tr>
+											<th scope="col">지급항목</th>
+											<th scope="col">금액</th>
+										</tr>
+									</thead>
+									<tbody id="listEmpSas2"></tbody>
+								</table>
+								<!-- 보험료 몇퍼 떼는지 알려준다 (마우스 올리면 실행) -->
+								<div style="margin-top:20px">
+									<span style="border:1px; width:30px; height:10px;border-radius: 50%; background-color: gray; padding:3px;"><a id="taxPer" name="taxPer" style="color:white; ">?</a></span>
+									<span id="taxPopup"  style="width: 100px;visibility:hidden; border:2px; padding:10px; borderColor: black; margin:10px;">
+										<p>보험료율(근로자부담)</p>
+										<ul>
+											<li>국민연금: 4.5%</li>
+											<li>건강보험: 3.43%</li>
+											<li>고용보험: 0.8%%</li>
+											<li>산재보험: 1.56%</li>
+										</ul>	
+									</span>
+								
+								</div>	
+								<!-- 보험료율 모달팝업 (taxPer에 마우스 올리면 실행) -->
+								
+							</div>
+							
 						</div>
 						
                     

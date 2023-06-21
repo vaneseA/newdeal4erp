@@ -52,4 +52,28 @@ public class accAcmServiceImpl implements accAcmService {
 		return AccAcmDao.countactlist(paramMap);
 	}
 	
+	
+	@Override
+	public int bigInsert(Map<String, Object> paramMap) {
+		
+		System.out.println("제발" +paramMap );
+		return AccAcmDao.bigInsert(paramMap);
+	}
+	
+
+	@Override
+	public List<accAcmModel> accAcmSListSearch(Map<String, Object> paramMap) {
+		return AccAcmDao.accAcmSListSearch(paramMap);
+	}
+	
+	@Override
+	public int countSList(Map<String, Object> paramMap) {
+		return AccAcmDao.countSList(paramMap);
+	}
+	
+	@Override
+	public int smallInsert(Map<String, Object> paramMap) {
+		return AccAcmDao.smallInsert(paramMap);
+	}
+	
 }	

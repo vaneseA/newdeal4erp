@@ -9,24 +9,24 @@
         select  
      		 substr(sal.sal_date, 1, 7) as sal_date<!-- 년 월만 출력 -->
       		,sal.loginID
-			,emp.name
+			,user.name
 			,deptn.detail_name as dept_name
 			,leveln.detail_name as level_name
-			,emp.emp_yr_sal
+			,user.emp_yr_sal
 			,sal.sal_pre 
-			,emp.sal_kuk
-			,emp.sal_kun
-			,emp.sal_san
-			,emp.sal_ko
+			,user.sal_kuk
+			,user.sal_kun
+			,user.sal_san
+			,user.sal_ko
 			,sal.sal_after 
-			,emp.emp_final_money
-			,emp.emp_memo
+			,user.emp_final_money
+			,user.emp_memo
 			,sal.sal_pay_yn
 		from tb_sal sal
-  			inner join tb_emp emp
-  						on emp.loginID = sal.loginID
-  			inner join (select detail_code, detail_name from tb_detail_code ) deptn on deptn.detail_code = emp.dept_cd
-  			inner join (select detail_code, detail_name from tb_detail_code ) leveln on leveln.detail_code = emp.level_cd
+  			inner join tb_userinfo user
+  						on user.loginID = sal.loginID
+  			inner join (select detail_code, detail_name from tb_detail_code ) deptn on deptn.detail_code = user.dept_cd
+  			inner join (select detail_code, detail_name from tb_detail_code ) leveln on leveln.detail_code = user.level_cd
         
 		<where>
 		<if test="(dept_cd != null) and (!dept_cd.equals(''))">
@@ -42,11 +42,11 @@
 				<choose>
 					<when
 						test="emp_info eq 'loginID'.toString()">
-						and emp.loginID Like CONCAT('%', #{sname}, '%')
+						and user.loginID Like CONCAT('%', #{sname}, '%')
 					</when>
 					<when
 						test="emp_info eq 'name'.toString()">
-						and emp.name LIKE CONCAT('%', #{sname}, '%')
+						and user.name LIKE CONCAT('%', #{sname}, '%')
 					</when>
 				</choose>
 			</if>		
@@ -61,10 +61,10 @@
 		/*kr.happyjob.study.empSam.dao.EmpSamDao.countEmpSamlist*/
 		select count(*)
           from tb_sal sal
-               inner join tb_emp emp
-  						on emp.loginID = sal.loginID
-  				inner join (select detail_code, detail_name from tb_detail_code ) deptn on deptn.detail_code = emp.dept_cd
-  			inner join (select detail_code, detail_name from tb_detail_code ) leveln on leveln.detail_code = emp.level_cd
+               inner join tb_userinfo user
+  						on user.loginID = sal.loginID
+  				inner join (select detail_code, detail_name from tb_detail_code ) deptn on deptn.detail_code = user.dept_cd
+  			inner join (select detail_code, detail_name from tb_detail_code ) leveln on leveln.detail_code = user.level_cd
 		<where>
 		<if test="(dept_cd != null) and (!dept_cd.equals(''))">
 		    and deptn.detail_code = #{dept_cd}
@@ -79,11 +79,11 @@
 				<choose>
 					<when
 						test="emp_info eq 'loginID'.toString()">
-						and emp.loginID Like CONCAT('%', #{sname}, '%')
+						and user.loginID Like CONCAT('%', #{sname}, '%')
 					</when>
 					<when
 						test="emp_info eq 'name'.toString()">
-						and emp.name LIKE CONCAT('%', #{sname}, '%')
+						and user.name LIKE CONCAT('%', #{sname}, '%')
 					</when>
 				</choose>
 			</if>		
@@ -102,15 +102,15 @@
 	<!-- 일괄지급 쿼리 -->
 	<update id="salPayAll">
 	/*kr.happyjob.study.empSam.dao.EmpSamDao.salPayAll*/
-		update tb_emp emp
-			inner join tb_sal sal on emp.loginID = sal.loginID
+		update tb_userinfo user
+			inner join tb_sal sal on user.loginID = sal.loginID
 			set sal.sal_pay_yn = 'Y'
 				  	<where>
 						<if test="(dept_cd != null) and (!dept_cd.equals(''))">
-						    and emp.dept_cd = #{dept_cd}
+						    and user.dept_cd = #{dept_cd}
 						</if>
 						<if test="(level_cd != null) and (!level_cd.equals(''))">
-						    and emp.level_cd = #{level_cd}
+						    and user.level_cd = #{level_cd}
 						</if>
 						<if test="(sal_pay_yn != null) and (!sal_pay_yn.equals(''))">
 						    and sal.sal_pay_yn = #{sal_pay_yn}
@@ -119,16 +119,16 @@
 							<choose>
 								<when
 									test="emp_info eq 'loginID'.toString()">
-									and emp.loginID LIKE CONCAT('%', #{sname}, '%')
+									and user.loginID LIKE CONCAT('%', #{sname}, '%')
 								</when>
 								<when
 									test="emp_info eq 'emp_name'.toString()">
-									and emp.name LIKE CONCAT('%', #{sname}, '%')
+									and user.name LIKE CONCAT('%', #{sname}, '%')
 								</when>
 							</choose>
 						</if>	
 						and sal.sal_date LIKE CONCAT('%', DATE_FORMAT(now(), '%Y-%m'), '%')
-						
+						and sal.sal_pay_yn = 'N'
 					</where>
 	
 	</update>
@@ -169,7 +169,7 @@
       			 ,ROUND((sal_kuk/2),2) as sal_kuk_emp
       			 ,sal_pre
       			 ,sal_after
-  				from tb_emp 
+  				from tb_userinfo 
   					where emp_work_yn = 'Y'
 
 	</insert>

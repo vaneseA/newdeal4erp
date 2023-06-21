@@ -6,7 +6,7 @@ public class accAcmModel {
 	private int acnt_sbject_cd;
 	private String acnt_sbject_name;
 	private int acnt_dt_sbject_cd;
-	private String acnt_dt_sbjct_inout;
+	private String acnt_sbjct_inout;
 	private String acnt_dt_sbjct_name;
 	
 	
@@ -28,11 +28,11 @@ public class accAcmModel {
 	public void setAcnt_dt_sbject_cd(int acnt_dt_sbject_cd) {
 		this.acnt_dt_sbject_cd = acnt_dt_sbject_cd;
 	}
-	public String getAcnt_dt_sbjct_inout() {
-		return acnt_dt_sbjct_inout;
+	public String getAcnt_sbjct_inout() {
+		return acnt_sbjct_inout;
 	}
-	public void setAcnt_dt_sbjct_inout(String acnt_dt_sbjct_inout) {
-		this.acnt_dt_sbjct_inout = acnt_dt_sbjct_inout;
+	public void setAcnt_sbjct_inout(String acnt_sbjct_inout) {
+		this.acnt_sbjct_inout = acnt_sbjct_inout;
 	}
 	public String getAcnt_dt_sbjct_name() {
 		return acnt_dt_sbjct_name;
@@ -41,6 +41,8 @@ public class accAcmModel {
 		this.acnt_dt_sbjct_name = acnt_dt_sbjct_name;
 	}
 	
+	
+
 	
 	
 	

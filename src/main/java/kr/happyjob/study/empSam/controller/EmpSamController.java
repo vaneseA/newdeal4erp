@@ -111,10 +111,7 @@ public class EmpSamController {
 	      
 	      logger.info("+ Start " + className + "salPayAll");
 	      logger.info("   - paramMap : " + paramMap);
-	      
-	      
-	      
-	      
+
 	      
 	      // Controller  Service  Dao  SQL
 	      int salPaysf = empSamService.salPayAll(paramMap);
@@ -150,7 +147,7 @@ public class EmpSamController {
 	}
    	@RequestMapping("calSalChk.do")
    	@ResponseBody
-    public Map<String, Object> calSalChk(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+    public List<Integer> calSalChk(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
  	         HttpServletResponse response, HttpSession session) throws Exception {
  	      
  	      logger.info("+ Start " + className + "calSalChk");
@@ -159,13 +156,11 @@ public class EmpSamController {
  	      //가장 최근 급여일을 숫자로 return
  	      
  	      
- 	      Map<String, Object> returnmap = new HashMap<String, Object>();
-	      returnmap.put("reval", empSamService.calSalChk());
-	      System.out.println("안녕"+empSamService.calSalChk());
+ 	      List<Integer> reval = empSamService.calSalChk();
  	      
  	      logger.info("+ End " + className + ".calSalChk");
 
- 	      return returnmap;
+ 	      return reval;
  	}
 	   
 	   

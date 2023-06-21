@@ -16,7 +16,7 @@
 			  ,sal.sal_kuk_emp
 			  
 			from tb_sal sal
-		where sal.loginID LIKE CONCAT('%', #{searchLoginID} , '%')  and  sal.sal_date LIKE CONCAT('%', #{searchDate} , '%')  
+		where sal.loginID = replace(#{searchLoginID}, ' ','')  and  sal.sal_date LIKE CONCAT('%', #{searchDate} , '%')  
 		
 	</select>
 	
@@ -26,10 +26,10 @@
         select 
 			  sal.sal_pre
 			  ,sal.sal_after
-			  ,emp.emp_yr_sal
+			  ,user.emp_yr_sal
 			from tb_sal sal
-				inner join tb_emp emp on emp.loginID = sal.loginID
-		where sal.loginID LIKE CONCAT('%', #{searchLoginID} , '%')  and  sal.sal_date LIKE CONCAT('%', #{searchDate} , '%')  
+				inner join tb_userinfo user on user.loginID = sal.loginID
+		where sal.loginID = replace(#{searchLoginID}, ' ','')  and  sal.sal_date LIKE CONCAT('%', #{searchDate} , '%')  
 		
 	</select>
 	
@@ -37,7 +37,7 @@
 		/*kr.happyjob.study.empSas.dao.EmpSasDao*/
         select count(*)
 			from tb_sal 
-		where loginID LIKE CONCAT('%', #{searchLoginID} , '%')  and  sal_date LIKE CONCAT('%', #{searchDate} , '%')
+		where loginID = replace( #{searchLoginID}, ' ','')  and  sal_date LIKE CONCAT('%', #{searchDate} , '%')
 	</select>
 	
 	

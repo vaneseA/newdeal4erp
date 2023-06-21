@@ -183,15 +183,14 @@
 	//급여계산전 확인
 	function fn_calSalChk() {
 		if($("#calDate").val() != null && $("#calDate").val() != '') {
-			var param = {} 
+			var param = {};
 			var calSalChkCallback = function (reval) {
 				
 				//입력한 달 숫자로 변경
 				var calDate = $("#calDate").val();
 				calDate = Number(calDate.substring(0,4) + calDate.substring(5,7));
 				
-				//배열추출
-				reval= reval.reval;
+				console.log(reval);
 				
 				//db에 저장되어있는 이미 급여계산이 끝난달과 입력한 달 비교
 				var check = true;
@@ -279,53 +278,54 @@
 								class="btn_nav bold">인사</span> <span class="btn_nav bold">급여관리</span> 
 							<a href="../system/comnCodMgr.do" class="btn_set refresh">새로고침</a>
 						</p>
-						<p class="conTitle">
-							<span>급여지급 리스트 조회</span> <span class="fr"> 
+						
 						<div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">
-							
-							<select id="dept_cd" name="dept_cd" style="width: 150px; margin-right:5px;">
-							        <option value="" >부서</option>
-									<option value="300" >회계팀</option>
-									<option value="400" >영업팀</option>
-									<option value="500" >인사팀</option>
-									
-							</select> 
-							 <select id="level_cd" name="level_cd" style="width: 150px; margin-right:5px;" >
-							        <option value="" >직급</option>
-									<option value="10" >사원</option>
-									<option value="20" >주임</option>
-									<option value="30" >대리</option>
-									<option value="40" >과장</option>
-									<option value="50" >부장</option>
-									<option value="60" >상무</option>
-									<option value="70" >전무</option>
-									<option value="80" >이사</option>
-							</select> 
-							<select id="sal_pay_yn" name="sal_pay_yn" style="width: 150px; margin-right:5px;" >
-									<option value="" >전체</option>
-							        <option value="Y" >지급</option>
-									<option value="N" >미지급</option>
-							</select> 
-							 <select id="emp_info" name="emp_info" style="width: 150px; margin-right:5px;" >
-							        <option value="" >전체</option>
-									<option value="loginID" >사번</option>
-									<option value="name" >사원명</option>
-							</select> 
-							<input type="text" style="width: 300px; height: 25px; margin-right:5px;" id="sname" name="sname">
-							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
-							 
+							<p class="conTitle">
+							<span>급여지급 리스트 조회</span> 
+							<span class="fr"> 
+								<select id="dept_cd" name="dept_cd" style="width: 130px; margin-right:5px;">
+								        <option value="" >부서</option>
+										<option value="300" >회계팀</option>
+										<option value="400" >영업팀</option>
+										<option value="500" >인사팀</option>
+										
+								</select> 
+								 <select id="level_cd" name="level_cd" style="width: 130px; margin-right:5px;" >
+								        <option value="" >직급</option>
+										<option value="10" >사원</option>
+										<option value="20" >주임</option>
+										<option value="30" >대리</option>
+										<option value="40" >과장</option>
+										<option value="50" >부장</option>
+										<option value="60" >상무</option>
+										<option value="70" >전무</option>
+										<option value="80" >이사</option>
+								</select> 
+								<select id="sal_pay_yn" name="sal_pay_yn" style="width: 130px; margin-right:5px;" >
+										<option value="" >전체</option>
+								        <option value="Y" >지급</option>
+										<option value="N" >미지급</option>
+								</select> 
+								 <select id="emp_info" name="emp_info" style="width: 130px; margin-right:5px;" >
+								        <option value="" >전체</option>
+										<option value="loginID" >사번</option>
+										<option value="name" >사원명</option>
+								</select> 
+								<input type="text" style="width: 200px; height: 25px; margin-right:5px;" id="sname" name="sname">
+								<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
+								 
 							</span>
 						</p>
-						</div>
+					</div>
 						
 						
 						<!-- 급여 상세 조회 리스트 목록 뿌리기(thead부분 tbody는 salManagementGrd에서 삽입) -->
 						<div class="empSamList">
 							<!-- 이번달 급여계산 버튼 -->
-							<a href="#" class="btnType blue" id="calSal" name="btn" style="padding:7px 10px; margin:10px; color:black; font-weight:800;">이번달 급여계산</a>
+							<a href="#" class="btnType3 color1" id="calSal" name="btn" >이번달 급여계산</a>
 							<input type="month" id="calDate" name="calDate" style="padding:6px"/>
 							<span id="calSalSpan" style="color:red;"></span>
-							<table class="col">
+							<table class="col" style="margin:10px 0;">
 							<caption>caption</caption>
 							<colgroup>
 								<col width="7%">
@@ -361,7 +361,7 @@
 									<th scope="col">실급여</th>
 									<th scope="col">퇴직금</th>
 									<th scope="col">비고</th>
-									<th scope="col"><a class="btnType blue" href="javascript:fn_openpopup2();" id="btnChoice" name="btnChoice" style=" color:black; border:1px;font-size:1px; padding:0px; margin:0; width:50px">일괄지급</a></th>
+									<th scope="col"><a class="btnType2 color1" href="javascript:fn_openpopup2();" id="btnChoice" name="btnChoice" >일괄지급</a></th>
 									
 								</tr>
 							</thead>
