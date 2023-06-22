@@ -202,10 +202,10 @@
 						
 						<!-- 검색창 영역 시작 -->
 						<div style="display:flex; justify-content:center; align-content:center; line-height:2; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">
-							<label for="searchKey" style="font-size:15px; font-weight:bold; margin-right:10px;">주문기업명</label>
+							<label for="searchclicombo" style="font-size:15px; font-weight:bold; margin-right:10px;">주문기업명</label>
 							<select id="searchclicombo" name="searchclicombo" style="width:150px; margin-right:50px;"></select>
 							 							
-							<label for="start" style="font-size:15px; font-weight:bold; margin-right:10px;">주문날짜</label>
+							<label for="searchstart" style="font-size:15px; font-weight:bold; margin-right:10px;">주문날짜</label>
 							<input type="date" id="searchstart" name="searchstart" style="height:30px; width:100px; margin-right:5px;">
 							<span style="margin-right:5px; line-height:3;"> ~ </span>
 							<input type="date" id="searchend" name="searchend" style="height:30px; width:100px; margin-right:50px;">

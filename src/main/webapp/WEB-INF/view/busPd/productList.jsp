@@ -24,10 +24,16 @@
 
             fn_productList();
 
-            // 제품 대분류
+            // 검색창 콤보 박스  (조회 대상 테이블  tb_clnt)
+            selectComCombo("cli", "ltypecombo", "all", "", "");  // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , "", ""
+
+            /*  모달 내부 콤보박스 모음   */
+            selectComCombo("l", "lTypeComboForModal", "all", "", "");  // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , "", ""
+
+            // 제품분류
             productCombo("l", "ltypecombo", "all", "", "", "", "");  // combo type( l : 대분류   m : 중분류   s : 소분류) combo_name, type(기본값  all : 전체   sel : 선택) ,  대분류 코드, 중분류코드, 소분류 코드, ""
 
-            // 제품 중분류
+            // 제조사
             $('#ltypecombo').change(function () {
                 productCombo("m", "mtypecombo", "all", $("#ltypecombo").val(), "", "", "");   // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , 선택된 상위 계정코드, ""
                 $("#ptypecombo option").remove();
@@ -263,25 +269,27 @@
                         </p>
 
                         <!-- 검색창 영역 시작 -->
-                        <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">
-                            <select id="proName" name="proName" style="width: 170px; margin-right:5px;">
-                                <option value="">(제품종류) 전체</option>
-                                <option value="저장장치">저장장치</option>
-                                <option value="CPU">CPU</option>
-                                <option value="메모리">메모리</option>
-                                <option value="그래픽카드">그래픽카드</option>
-                                <option value="메인보드">메인보드</option>
+                        <div style="display:flex; justify-content:center; align-content:center; line-height:2; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">
+                            <label for="ltypecombo" style="font-size:15px; font-weight:bold; margin-right:10px;">제품
+                                분류</label>
+                            <select id="ltypecombo" name="ltypecombo" style="width: 150px; margin-right:5px;">
+
                             </select>
-                            <select id="splrName" name="splrName" style="width: 170px; margin-right:5px;">
-                                <option value="">(제조사) 전체</option>
-                                <option value="삼성">삼성</option>
-                                <option value="intel">intel</option>
+
+
+                            <label for="mtypecombo" style="font-size:15px; font-weight:bold; margin-left:10px; margin-right:10px;">제조사</label>
+                            <select id="mtypecombo" name="mtypecombo" style="width: 170px; margin-right:5px;">
+
                             </select>
+
+                            <label for="searchKey" style="font-size:15px; font-weight:bold; margin-right:10px;">검색 조건</label>
                             <select id="searchKey" name="searchKey" style="width: 120px; margin-right:5px;">
-                                <option value="">검색조건</option>
+
+                                <option value="">전체</option>
                                 <option value="product_name">제품 이름</option>
+                                <option value="product_serial">모델명</option>
                             </select>
-                            <input type="text" style="width: 200px; height: 25px; margin-right:5px; " id="pname"
+                            <input type="text" style="width: 160px; height: 25px; margin-right:5px; " id="pname"
                                    name="pname">
                             <a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
                             </p>
@@ -349,16 +357,16 @@
 
                     <tbody>
                     <tr>
-                        <th scope="row">제품종류 <span class="font_red">*</span></th>
+                        <th scope="row">제품 분류 <span class="font_red">*</span></th>
                         <td>
-                            <select id="ltypecombo" name="ltypecombo">
+                            <select id="lTypeComboForModal" name="ltypecombo">
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">제조사 <span class="font_red">*</span></th>
                         <td>
-                            <select id="mtypecombo" name="mtypecombo">
+                            <select id="mtypecombo1" name="mtypecombo">
                             </select>
                         </td>
                     </tr>
