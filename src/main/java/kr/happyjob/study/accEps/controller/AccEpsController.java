@@ -119,14 +119,9 @@ public class AccEpsController {
       
       int returncval = 0;
       
-      if("I".equals(action)) {
-    	  returncval = accEpsService.listInsertEps(paramMap);
-      } else if("U".equals(action)) {
+      if("U".equals(action)) {
     	  returncval = accEpsService.listUpdateEps(paramMap);
-      } else if("D".equals(action)) {
-    	  returncval = accEpsService.listDeleteEps(paramMap);
-      }      
-      
+      } 
       Map<String, Object> returnmap = new HashMap<String, Object>();
       
       returnmap.put("returncval", returncval);
@@ -151,13 +146,9 @@ public class AccEpsController {
       
       int returncval = 0;
       
-      if("I".equals(action)) {
-    	  returncval = accEpsService.listInsertFileEps(paramMap,request);
-      } else if("U".equals(action)) {
+      if("U".equals(action)) {
     	  returncval = accEpsService.listUpdateFileEps(paramMap,request);
-      } else if("D".equals(action)) {
-    	  returncval = accEpsService.listDeleteFileEps(paramMap);
-      }      
+      }    
       
       Map<String, Object> returnmap = new HashMap<String, Object>();
       

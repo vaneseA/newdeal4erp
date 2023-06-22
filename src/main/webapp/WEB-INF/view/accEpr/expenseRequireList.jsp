@@ -434,7 +434,7 @@ width:10px;
 						<p class="Location">
 							<a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
 								class="btn_nav bold">회계</span> <span class="btn_nav bold">지출결의서 신청
-								</span> <a href="../system/comnCodMgr.do" class="btn_set refresh">새로고침</a>
+								</span> <a href="../accEpr/expenseRequire.do" class="btn_set refresh">새로고침</a>
 						</p>
 
 						<p class="conTitle">

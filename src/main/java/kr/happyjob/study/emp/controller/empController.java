@@ -2,19 +2,18 @@ package kr.happyjob.study.emp.controller;
 
 import kr.happyjob.study.emp.model.EmpModel;
 import kr.happyjob.study.emp.service.EmpService;
+import kr.happyjob.study.mngNot.model.NoticeModel;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -64,5 +63,58 @@ public class empController {
         logger.info("+ End " + className + ".emplist");
 
         return "emp/emplistgrd";
+    }
+    @RequestMapping("/empSelectOne.do")
+    @ResponseBody
+    public Map<String, Object> empSelectOne(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+                                            HttpServletResponse response, HttpSession session) throws Exception{
+        logger.info("+ Start " + className + ".empselectone");
+        logger.info("   - paramMap : " + paramMap);
+
+        EmpModel empSearch = empService.empSelectOne(paramMap);
+
+        Map<String, Object> returnmap = new HashMap<String, Object>();
+
+        returnmap.put("empSearch", empSearch);
+
+        logger.info("+ End " + className + ".empselectone");
+
+        return returnmap;
+
+    }
+
+    @RequestMapping("empSave.do")
+    @ResponseBody
+    public Map<String, Object> empSave(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+                                          HttpServletResponse response, HttpSession session) throws Exception {
+
+        logger.info("+ Start " + className + ".empSave");
+        logger.info("   - paramMap : " + paramMap);
+
+        String action = (String) paramMap.get("action");
+
+        paramMap.put("loginid", (String) session.getAttribute("loginId"));
+
+
+        int returncval = 0;
+
+        if("I".equals(action)) {
+            logger.info("   - insert : " + paramMap);
+            returncval = empService.empInsert(paramMap);
+        } else if("U".equals(action)) {
+            logger.info("   - update : " + paramMap);
+            returncval = empService.empUpdate(paramMap);
+        } else if("D".equals(action)) {
+            logger.info("   - delete : " + paramMap);
+            returncval = empService.empDelete(paramMap);
+        }
+
+        Map<String, Object> returnmap = new HashMap<String, Object>();
+
+        returnmap.put("returncval", returncval);
+
+        logger.info("+ End " + className + ".empSave");
+
+        return returnmap;
     }
 }

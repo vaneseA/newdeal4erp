@@ -264,9 +264,18 @@
 
                         <!-- 검색창 영역 시작 -->
                         <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">
-                            <select id="ltypecombo" name="ltypecombo" style="width: 170px; margin-right:5px;">
+                            <select id="proName" name="proName" style="width: 170px; margin-right:5px;">
+                                <option value="">(제품종류) 전체</option>
+                                <option value="저장장치">저장장치</option>
+                                <option value="CPU">CPU</option>
+                                <option value="메모리">메모리</option>
+                                <option value="그래픽카드">그래픽카드</option>
+                                <option value="메인보드">메인보드</option>
                             </select>
-                            <select id="mtypecombo" name="mtypecombo" style="width: 170px; margin-right:5px;">
+                            <select id="splrName" name="splrName" style="width: 170px; margin-right:5px;">
+                                <option value="">(제조사) 전체</option>
+                                <option value="삼성">삼성</option>
+                                <option value="intel">intel</option>
                             </select>
                             <select id="searchKey" name="searchKey" style="width: 120px; margin-right:5px;">
                                 <option value="">검색조건</option>
@@ -281,8 +290,6 @@
 
 
                         <div class="productList">
-
-
                             <table class="col">
                                 <caption>caption</caption>
                                 <colgroup>
@@ -344,17 +351,16 @@
                     <tr>
                         <th scope="row">제품종류 <span class="font_red">*</span></th>
                         <td>
-                            <select id="ltypecombo1" name="ltypecombo">
+                            <select id="ltypecombo" name="ltypecombo">
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">제조사 <span class="font_red">*</span></th>
                         <td>
-                            <select id="mtypecombo1" name="mtypecombo">
+                            <select id="mtypecombo" name="mtypecombo">
                             </select>
                         </td>
-
                     </tr>
                     <tr>
                         <th scope="row">품명 <span class="font_red">*</span></th>

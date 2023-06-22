@@ -55,6 +55,11 @@
 							<td colspan="3"><input type="text" class="inputTxt p100"
 								id="clnt_add_dt" name="clnt_add_dt" value="${ordersearch.clnt_add_dt}"/></td>
 						</tr>
+						<tr>
+							<th scope="row">요청사항</th>
+							<td colspan="3">
+								<textarea id="order_req" name="order_req" value="${ordersearch.order_req}"> </textarea></td>
+						</tr>
 					</tbody>
 				</table>
 
@@ -71,10 +76,10 @@
 	
 						<thead>
 							<tr>
-								<th scope="col">번호</th>
+								<th scope="col">제품번호</th>
 								<th scope="col">제품명</th>
 								<th scope="col">판매가</th>
-								<th scope="col">수량</th>
+								<th scope="col">주문수량</th>
 								<th scope="col">주문금액</th>
 							</tr>
 						</thead>
@@ -92,7 +97,7 @@
 										<td>${list.product_name}</td>
 										<td>${list.product_price}</td>
 										<td>${list.order_dt_amt}</td>
-										<td>${list.order_dt_amt}</td>
+										<td>${list.order_dt_price}</td>
 									</tr>
 								</c:forEach>
 							</c:if>	

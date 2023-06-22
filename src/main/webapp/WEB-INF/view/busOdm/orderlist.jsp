@@ -15,7 +15,9 @@
 	// 페이징 설정
 	var pageSize = 5;     
 	var pageBlockSize = 5;    
-		
+	
+	// 주문 상세목록에 추가된 아이템 저장할 변수
+	var itemstr = "";	
 	
 	/** OnLoad event */ 
 	$(function() {
@@ -24,9 +26,22 @@
 		
 		fn_orderlist();
 		
-		// combo box 종류  cli : 거래처    조회 대상 테이블  tb_clnt   
+		// 검색창 콤보 박스  (조회 대상 테이블  tb_clnt)
+		selectComCombo("cli","searchclicombo","all","","");  // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , "", "" 
+		
+		/*  모달 내부 콤보박스 모음   */
 		selectComCombo("cli","clicombo","all","","");  // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , "", "" 
-				
+		// 제품분류
+		productCombo("l","ltypecombo","all","","","","");  // combo type( l : 대분류   m : 중분류   s : 소분류) combo_name, type(기본값  all : 전체   sel : 선택) ,  대분류 코드, 중분류코드, 소분류 코드, ""
+		// 제조사
+		$('#ltypecombo').change(function() {
+			productCombo("m","mtypecombo","all",$("#ltypecombo").val(),"","","");   // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , 선택된 상위 계정코드, "" 
+			$("#ptypecombo option").remove();
+		});
+		// 제품명
+		$('#mtypecombo').change(function() {   
+			productCombo("p","ptypecombo","all",$("#ltypecombo").val(),$("#mtypecombo").val(),"");   // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , 선택된 상위 계정코드, "" 
+		});
 	});
 	
 	
@@ -42,6 +57,9 @@
 	        case 'btnSearch' :
 	            fn_orderlist();
 	            break;
+	        case 'btnAdd' : 
+	        	setSessionStorage();
+	        	break;
 	        case 'btnSave' :
 	            fn_save();
 	            break;	
@@ -58,8 +76,9 @@
 		pagenum = pagenum || 1;
 		
 		var param = {
-			searchKey : $("#searchKey").val()
-		  ,	sname : $("#sname").val()
+		    start : $("#searchstart").val()
+		  , end : $("#searchend").val()
+		  ,	clicombo : $("#searchclicombo").val()
 		  , pageSize : pageSize
 		  , pageBlockSize : pageBlockSize
 		  , pagenum : pagenum
@@ -89,30 +108,34 @@
 	
 	function fn_openpopup() {
 		
-		popupinit();
-		
-		// 주문 상세내역 조회 모달 팝업
-		gfModalPop("#layer2");
+		// 주문서 작성 모달 팝업
+	    gfModalPop("#layer1");
 						
 	}
 	
-	// 주문 상세내역 조회 모달 팝업
-	function popupinit(object) {
+	
+	function setSessionStorage() {
 		
-		// 모달(layer2) 팝업 됐을 때만, <input type="hidden" id="order_no" name="order_no" /> 에서 type 을 "hidden" 에서 "text" 로 
-		// $('input[name=order_no]').prop('type', "text");
-		
-		$("#order_no").val(object.order_no);  // 주문번호	
-        $("#order_date").val(object.order_date);  // 주문날짜
-        $("#clnt_name").val(object.clnt_name);  // 주문기업명
-        $("#clnt_tel").val(object.clnt_tel);  // 회사전화
-        $("#clnt_email").val(object.clnt_email);  // 회사이메일
-        $("#clnt_zip").val(object.clnt_zip);  // 우편번호
-        $("#clnt_add").val(object.clnt_add);  // 주소
-        $("#clnt_add_dt").val(object.clnt_add_dt);  // 상세주소
-        $("#name").val(object.name);  // 영업담당자
-
+		// SessionStorage 에 데이터 저장
+		// dd,dd,ddd,ddd / rr,rr,rrr,rrr
+		itemstr += "/" + $("#ltypecombo").val() + "," + $("#mtypecombo").val() + "," + $("#ptypecombo").val() + "," + $("#order_dt_amt").val();
+		sessionStorage.setItem("myData", itemstr);
+		console.log("데이터가 저장되었습니다.");
 	}
+	
+	
+	// 위쪽 함수 내부에 포함시켜서, 추가 누르는 즉시 화면에 데이터 뿌려지도록 수정하기
+	function getSessionStorage() { 
+		var dataString = sessionStorage.getItem("myData");
+		if (dataString) {
+		   // JSON 문자열을 파싱하여 데이터 객체로 변환
+		   var data = JSON.parse(dataString);
+		   console.log("불러온 데이터:", data);
+		} else {
+		   console.log("저장된 데이터가 없습니다.");
+		}
+	}
+	
 	
 	function fn_selectone(no) {
 		
@@ -122,9 +145,7 @@
 		
 		var selectoncallback = function(returndata) {			
 	        
-	        // JSON은 로그 찍어보면 이상한 상태로 던져지고 있으니까 stringfy 작업 필수
 	        console.log( returndata );
-	        // 한건 조회한 데이터를 Controller 통해서 받아옴(.ordersearch)
 	        
 	        $("#layer2").empty().append(returndata);
 
@@ -182,12 +203,12 @@
 						<!-- 검색창 영역 시작 -->
 						<div style="display:flex; justify-content:center; align-content:center; line-height:2; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">
 							<label for="searchKey" style="font-size:15px; font-weight:bold; margin-right:10px;">주문기업명</label>
-							<select id="clicombo" name="accdcombo" style="width:150px; margin-right:50px;"></select>
+							<select id="searchclicombo" name="searchclicombo" style="width:150px; margin-right:50px;"></select>
 							 							
 							<label for="start" style="font-size:15px; font-weight:bold; margin-right:10px;">주문날짜</label>
-							<input type="date" id="start" name="start" min="2023-01-01" style="height:30px; width:100px; margin-right:5px;">
+							<input type="date" id="searchstart" name="searchstart" style="height:30px; width:100px; margin-right:5px;">
 							<span style="margin-right:5px; line-height:3;"> ~ </span>
-							<input type="date" id="end" name="end" min="2023-01-01" style="height:30px; width:100px; margin-right:50px;">
+							<input type="date" id="searchend" name="searchend" style="height:30px; width:100px; margin-right:50px;">
 							
 							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
 						</div>
@@ -231,14 +252,14 @@
 		</div>
 	</div>
 
-	<!-- 신규등록 모달 영역 시작 -->
-	<div id="layer1" class="layerPop layerType2" style="width: 650px;">
+	<!-- 주문서 신규등록 모달 영역 시작 -->
+	<div id="layer1" class="layerPop layerType2" style="width:800px;">
 		<dl>
 			<dt>
 				<strong>주문서 작성</strong>
 			</dt>
 			<dd class="content">
-				<!-- s : 여기에 내용입력 -->
+
 				<table class="row">
 					<caption>caption</caption>
 					<colgroup>
@@ -250,82 +271,73 @@
 
 					<tbody>
 						<tr>
-							<th scope="row">기업명 <span class="font_red">*</span></th>
-							<td><input type="text" class="inputTxt p100" name="splr_name" id="splr_name" /></td>
-							<th scope="row">회사 전화 <span class="font_red">*</span></th>
-							<td><input type="text" class="inputTxt p100" name="splr_tel" id="splr_tel" /></td>
+							<th scope="row">제품분류 <span class="font_red">*</span></th>
+							<td><select id="ltypecombo" name="ltypecombo"></select></td>
+							<th scope="row">제조사 <span class="font_red">*</span></th>
+							<td><select id="mtypecombo" name="mtypecombo"></select></td>
 						</tr>
 						<tr>
-							<th scope="row">담당자 <span class="font_red">*</span></th>
-							<td><input type="text" class="inputTxt p100" name="splr_mng" id="splr_mng" /></td>
-							<th scope="row">담당자 연락처 <span class="font_red">*</span></th>
-							<td><input type="text" class="inputTxt p100" name="splr_hp" id="splr_hp" /></td>
+							<th scope="row">제품명 <span class="font_red">*</span></th>
+							<td><select id="ptypecombo" name="ptypecombo"></select></td>
+							<th scope="row">주문수량 <span class="font_red">*</span></th>
+							<td><input type="text" class="inputTxt p100" name="order_dt_amt" id="order_dt_amt" /></td>
+						</tr>
+					</tbody>
+				</table>
+
+				
+				<!-- 제품 추가 버튼 -->
+				<div class="btn_areaC mt30">
+					<a href="" class="btnType blue" id="btnAdd" name="btn"><span>추가</span></a> 
+				</div>
+				
+				<!-- 추가된 제품 목록 그리드 -->
+				<div style="margin-top:20px;">
+				</div>
+				
+				<!-- 주문기업명, 요청사항 선택 -->
+				<table class="row">
+					<caption>caption</caption>
+					<colgroup>
+						<col width="25%">
+						<col width="25%">
+						<col width="25%">
+						<col width="25%">
+					</colgroup>
+
+					<tbody>
+						<tr>
+							<th scope="row">주문기업명 <span class="font_red">*</span></th>
+							<td><select id="clicombo" name="accdcombo"></select></td>
+							<th scope="row">주문날짜 <span class="font_red">*</span></th>
+							<td><input type="date" id="order_date" name="order_date" style="font-size:13px; height:30px; width:170px;"></td>
 						</tr>
 						<tr>
-							<th scope="row">우편번호 <span class="font_red">*</span></th>
-							<td colspan="3">
-								<div style="display:flex; flex-direction:row;">
-									<input type="text" class="inputTxt p100" name="splr_zip" id="splr_zip" />
-									<input type="button" value="우편번호 찾기"
-									       onclick="execDaumPostcode()" style="margin-left:5px; width:130px; height:30px;" />
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">주소 <span class="font_red">*</span></th>
-							<td colspan="3"><input type="text" class="inputTxt p100" name="splr_add" id="splr_add" /></td>
-						</tr>
-						<tr>
-							<th scope="row">상세주소 <span class="font_red">*</span></th>
-							<td colspan="3"><input type="text" class="inputTxt p100" name="splr_add_dt" id="splr_add_dt" /></td>
-						</tr>
-						<tr>
-							<th scope="row">회사 이메일 <span class="font_red">*</span></th>
-							<td colspan="3"><input type="text" class="inputTxt p100" name="splr_email" id="splr_email" /></td>
-						</tr>
-						<tr>
-							<th scope="row">업종 <span class="font_red">*</span></th>
-							<td colspan="3"><input type="text" class="inputTxt p100" name="splr_indst" id="splr_indst" /></td>
-						</tr>
-						<tr>
-							<th scope="row">사업자등록번호 <span class="font_red">*</span></th>
-							<td colspan="3"><input type="text" class="inputTxt p100" name="splr_indst_no" id="splr_indst_no" /></td>
-						</tr>
-						<tr>
-							<th scope="row">계좌번호 <span class="font_red">*</span></th>
-							<td colspan="3">
-								<div style="display:flex; flex-direction:row;">
-									<select id="bkcombo" name="bkcombo" style="margin-right:5px;"></select>
-									<input type="text" class="inputTxt p100" name="splr_acc" id="splr_acc" />
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">메모 </th>
+							<th scope="row">요청사항 </th>
 							<td colspan="3">
 							    <textarea id="splr_memo" name="splr_memo"> </textarea>
 							</td>
 						</tr>
 					</tbody>
 				</table>
-
-				<!-- e : 여기에 내용입력 -->
+				
 
 				<div class="btn_areaC mt30">
 					<a href="" class="btnType blue" id="btnSave" name="btn"><span>저장</span></a> 
-					<a href="" class="btnType blue" id="btnDelete" name="btn"><span>삭제</span></a> 
 					<a href=""	class="btnType gray"  id="btnClose" name="btn"><span>취소</span></a>
 				</div>
 			</dd>
 		</dl>
 		<a href="" class="closePop"><span class="hidden">닫기</span></a>
 	</div>
+	<!-- 주문서 신규등록 모달 영역 끝 -->
+
 
 	<!-- 상세내역 모달 영역 시작 -->
-	<div id="layer2" class="layerPop layerType2" style="width: 600px;">
-
+	<div id="layer2" class="layerPop layerType2" style="width:800px;">
 	</div>
 	<!-- 상세내역 모달 영역 끝 -->
+	
 	
 </form>
 </body>

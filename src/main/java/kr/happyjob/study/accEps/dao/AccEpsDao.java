@@ -17,34 +17,18 @@ public interface AccEpsDao {
 	/** 한건 조회 */
 	public AccEpsModel listSelectOneEps(Map<String, Object> paramMap) throws Exception;
 	
-	/** 등록 */
-	public int listInsertEps(Map<String, Object> paramMap) throws Exception;
-	public int approInsertEps(Map<String, Object> paramMap) throws Exception;
-	
-	
 	/** 수정 */
 	public int listUpdateEps(Map<String, Object> paramMap) throws Exception;
 	public int listUpdateApproEps(Map<String, Object> paramMap) throws Exception;
 	
-	/** 삭제 */
-	public int listDeleteEps(Map<String, Object> paramMap) throws Exception;
-	public int listDeleteApproEps(Map<String, Object> paramMap) throws Exception;
-	
-	/** 등록 파일 */
-	public int listInsertFileEps(Map<String, Object> paramMap) throws Exception;
-	
 	/** 수정 파일 */
 	public int listUpdateFileEps(Map<String, Object> paramMap) throws Exception;
 	public int listUpdateFileApproEps(Map<String, Object> paramMap) throws Exception;
+	public int listUpdateFileBudEps(Map<String, Object> paramMap) throws Exception;
 	
-	/** 삭제  파일*/
-	public int listDeleteFileEps(Map<String, Object> paramMap) throws Exception;
 	
 	/** 파일 등록 */
 	public int fileinsertEps(Map<String, Object> paramMap) throws Exception;
-	
-	/** 파일 정보 삭제 */
-	public int deletefileinfoEps(Map<String, Object> paramMap) throws Exception;
 	
 	
 }

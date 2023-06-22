@@ -47,7 +47,7 @@ public class accAcsController {
     * 초기화면
     */
    @RequestMapping("accountSearch.do")
-   public String notice(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+   public String accountSearch(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
          HttpServletResponse response, HttpSession session) throws Exception {
       
       logger.info("+ Start " + className + ".accAcs");
@@ -64,7 +64,7 @@ public class accAcsController {
     * 검색
     */
    @RequestMapping("accountSearchList.do")
-   public String noticelist(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+   public String accountSearchList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
 		   HttpServletResponse response, HttpSession session) throws Exception {
 	   
 	   logger.info("+ Start " + className + ".accAcs");
@@ -114,7 +114,7 @@ public class accAcsController {
    
    @RequestMapping("accountSearchSelectone.do")
    @ResponseBody
-   public Map<String, Object> noticeselectone(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+   public Map<String, Object> accountSearchSelectone(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
          HttpServletResponse response, HttpSession session) throws Exception {
       
       logger.info("+ Start " + className + ".accountSearcheselectone");

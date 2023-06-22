@@ -22,5 +22,5 @@
 							</c:if>
 							
 							<input type="hidden" id="totalcnt" name="totalcnt" value ="${totalcnt}"/>
-							<input type="hidden" id="acnt_sbject_cd" name="acnt_sbject_cd" value ="${acnt_sbject_cd}"/>
-							<input type="hidden" id="acnt_sbject_name" name="acnt_sbject_name" value ="${acnt_sbject_name}"/>
+							<input type="hidden" id="LL_acnt_sbject_cd" name="LL_acnt_sbject_cd" value ="${acnt_sbject_cd}"/>
+							<input type="hidden" id="LL_acnt_sbject_name" name="LL_acnt_sbject_name" value ="${acnt_sbject_name}"/>

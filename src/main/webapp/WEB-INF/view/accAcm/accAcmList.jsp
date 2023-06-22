@@ -142,10 +142,10 @@
 	}
 	
 	
-	function fn_accAcmSListSearch(currentPage, acnt_sbject_cd, acnt_sbject_name) {
+	function fn_accAcmSListSearch(currentPage, LL_acnt_sbject_cd, LL_acnt_sbject_name) {
 		
-		$("#tmpAcnt_sbject_cd").val(acnt_sbject_cd);
-		$("#tmpAcnt_sbject_name").val(acnt_sbject_name);
+		$("#tmpAcnt_sbject_cd").val(LL_acnt_sbject_cd);
+		$("#tmpAcnt_sbject_name").val(LL_acnt_sbject_name);
 		
 		console.log("파람뽑기001" + $("#tmpAcnt_sbject_cd").val());
 		console.log("파람뽑기002" + $("#tmpAcnt_sbject_name").val());
@@ -153,6 +153,11 @@
 		fn_accAcmSList(currentPage);
 		
 	}
+	
+	
+	
+	
+	
 	
 	
 	/** 계정상세 목록 조회 */
@@ -219,14 +224,28 @@
 		
 	}
 	
+	
+	function popupinit(object) {
+		
+		if(object == "" || object == null || object == undefined) {
+
+			$("#acnt_sbject_cd").val("");		
+			$("#acnt_sbject_name").val("");
+
+			$("#btnDelete").hide();
+			
+			$("#action").val("I");	
+
+		} else {
+			return;
+		}
+	}
+	
+	
 	function fn_InitFormAccDtlCod(object) {
 		
 		var acnt_sbject_cd = $("#tmpAcnt_sbject_cd").val();
 		var acnt_sbject_name = $("#tmpAcnt_sbject_name").val();
-		
-// 		var hiddenInput = $("<input>").attr("type", "hidden").attr("name", "Acnt_sbject_cd").val(acnt_sbject_cd);
-// 		$("#myForm").append(hiddenInput);
-		
 		
 		if( object == "" || object == null || object == undefined) {
 			
@@ -243,18 +262,10 @@
 		return;
 		}
 		
-		
-		
 		console.log("끼랄랄" + $("#tmpAcnt_sbject_cd").val());
 		console.log("끼랄랄22" + acnt_sbject_cd);
 		console.log("끼랄랄" + $("#tmpAcnt_sbject_name").val());
 		console.log("끼랄랄34" + acnt_sbject_name);
-		
-		
-		
-		
-// 		$("#acnt_sbject_namee").val(acnt_sbject_name);
-		
 		
 			
 			$("#btnDelete").hide();
@@ -263,38 +274,19 @@
 			
 	}
 	
-	function fn_selectone(no) {
-		
-		//alert(no);
-		
-		var param = {
-				notice_no : no
-		}
-		
-		var selectoncallback = function(returndata) {			
-			console.log( JSON.stringify(returndata) );
-								
-			popupinit(returndata.noticesearch);
-			
-			// 모달 팝업
-			gfModalPop("#layer1");
-			
-		}
-		
-		callAjax("/mngNot/noticeselectone.do", "post", "json", false, param, selectoncallback) ;
-		
-	}
-	
+
 	function fn_bigInsert() {
 		
-		if ( ! fn_Validate() ) {
-			return;
-		}
+// 		if ( ! fn_Validate() ) {
+// 			return;
+// 		}
 		
 		var param = {
 				action : $("#action").val(),
 				acnt_sbject_cd : $("#acnt_sbject_cd").val(),
 				acnt_sbject_name : $("#acnt_sbject_name").val(),
+				acnt_sbjct_inout : $("#M_acnt_sbjct_inout").val()
+				
 		}
 		
 		var savecollback = function(reval) {
@@ -314,42 +306,9 @@
 			}
 		}
 		
-		//callAjax("/mngNot/noticesave.do", "post", "json", false, param, savecollback) ;
 		callAjax("/accAcm/bigInsert.do", "post", "json", false, $("#myForm").serialize() , savecollback) ;
 		
 	}
-	
-	function fn_Validate() {
-
-		var chk = checkNotEmpty(
-				[
-						[ "acnt_sbject_cd", "새로 만들 계정 대분류 코드를 입력해 주세요." ]
-					,	[ "acnt_sbject_name", "새로 만들 계정 대분류 이름을 입력해 주세요" ]
-				]
-		);
-
-		if (!chk) {
-			return;
-		}
-
-		return true;
-	}
-	function fn_SValidate() {
-
-		var chk = checkNotEmpty(
-				[
-						[ "acnt_dt_sbject_cd", "새로 만들 계정 상세 코드를 입력해 주세요." ]
-					,	[ "acnt_dt_sbjct_name", "새로 만들 계정 상세 이름을 입력해 주세요" ]
-				]
-		);
-
-		if (!chk) {
-			return;
-		}
-
-		return true;
-	}
-	
 	
 	function fn_smallInsert() {
 		
@@ -385,15 +344,43 @@
 		
 	}
 	
-	//////////////////////////   위는 파일 업이 처리
-	/////////////////////////    file upload
-	
-	function fn_openpopupfile() {
-        popupinitfile();
+	function fn_Validate() {
+
 		
-		// 모달 팝업
-		gfModalPop("#layer2");
+		
+		var chk = checkNotEmpty(
+				[
+						[ "aacnt_sbject_cd", "새로 만들 계정 대분류 코드를 입력해 주세요." ]
+					,	[ "aacnt_sbject_name", "새로 만들 계정 대분류 이름을 입력해 주세요" ]
+				]
+		);
+
+		if (!chk) {
+			return;
+		}
+
+		return true;
 	}
+	
+	
+	function fn_SValidate() {
+
+		var chk = checkNotEmpty(
+				[
+						[ "acnt_dt_sbject_cd", "새로 만들 계정 상세 코드를 입력해 주세요." ]
+					,	[ "acnt_dt_sbjct_name", "새로 만들 계정 상세 이름을 입력해 주세요" ]
+				]
+		);
+
+		if (!chk) {
+			return;
+		}
+
+		return true;
+	}
+	
+	
+	
 	
 	
 	
@@ -599,7 +586,7 @@
 						<tr>
 							<th scope="row">구분<span class="font_red">*</span></th>
 							<td colspan="3">
-								<select id="acnt_sbjct_inout" name="acnt_sbjct_inout" style="width: 150px;">
+								<select id="M_acnt_sbjct_inout" name="M_acnt_sbjct_inout" style="width: 150px;">
 										<option value="1" >수입</option>
 										<option value="2" >비용</option>
 								</select>
@@ -647,7 +634,7 @@
 							<td colspan="3"><input type="text" class="inputTxt p100" name="acnt_sbject_cdd" id="acnt_sbject_cdd" /></td>
 						</tr>
 						<tr>
-							<th scope="row">계정대분11류명 <span class="font_red">*</span></th>
+							<th scope="row">계정대분류명 <span class="font_red">*</span></th>
 							<td colspan="3"><input type="text" class="inputTxt p100" name="acnt_sbject_namee" id="acnt_sbject_namee" /></td>
 						</tr>
 						<tr>
