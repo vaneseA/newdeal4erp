@@ -108,17 +108,50 @@
     function popupinit(object) {
 
       if(object == "" || object == null || object == undefined) {
-        $("#notice_title").val("");
-        $("#notice_cont").val("");
-        $("#notice_no").val("");
+
+        $("#emp_birth").val("");
+        $("#name").val("");
+        $("#emp_sex").val("");
+        $("#emp_edu").val("");
+        $("#emp_email").val("");
+        $("#emp_hp").val("");
+        $("#emp_zip").val("");
+        $("#emp_addr").val("");
+        $("#emp_dt_addr").val("");
+        $("#bk_cd").val("");
+        $("#emp_account").val("");
+        $("#dept_cd").val("");
+        $("#level_cd").val("");
+        $("#emp_yr_sal").val("");
+        $("#emp_sdate").val("");
+        $("#emp_edate").val("");
+        $("#retire_reason").val("");
+
 
         $("#btnDelete").hide();
 
         $("#action").val("I");
       } else {
-        $("#notice_title").val(object.notice_title);
-        $("#notice_cont").val(object.notice_cont);
-        $("#notice_no").val(object.notice_no);
+
+        $("#emp_birth").val(object.emp_birth);
+        $("#name").val(object.name);
+        $("#emp_sex").val(object.emp_sex);
+        $("#emp_edu").val(object.emp_edu);
+        $("#emp_email").val(object.emp_email);
+        $("#emp_hp").val(object.emp_hp);
+        $("#emp_zip").val(object.emp_zip);
+        $("#emp_addr").val(object.emp_addr);
+        $("#emp_dt_addr").val(object.emp_dt_addr);
+        $("#bk_cd").val(object.bk_cd);
+        $("#emp_account").val(object.emp_account);
+        $("#dept_cd").val(object.dept_cd);
+        $("#level_cd").val(object.level_cd);
+        $("#emp_yr_sal").val(object.emp_yr_sal);
+        $("#emp_sdate").val(object.emp_sdate);
+        $("#emp_edate").val(object.emp_edate);
+        $("#retire_reason").val(object.retire_reason);
+
+
 
         $("#btnDelete").show();
 
@@ -126,25 +159,25 @@
       }
     }
 
-    function fn_selectone(no) {
+    function fn_empSelectOne(login) {
 
       //alert(no);
 
       var param = {
-        notice_no : no
+        loginId : login
       }
 
       var selectoncallback = function(returndata) {
         console.log( JSON.stringify(returndata) );
 
-        popupinit(returndata.noticesearch);
+        popupinit(returndata.empSearch);
 
         // 모달 팝업
         gfModalPop("#layer1");
 
       }
 
-      callAjax("/mngNot/noticeselectone.do", "post", "json", false, param, selectoncallback) ;
+      callAjax("/empEpm/empSelectOne.do", "post", "json", false, param, selectoncallback) ;
 
     }
 
@@ -154,12 +187,41 @@
         return;
       }
 
+      /*
       var param = {
-        action : $("#action").val(),
-        notice_no : $("#notice_no").val(),
-        notice_title : $("#notice_title").val(),
-        notice_cont : $("#notice_cont").val()
+        action : $("#id").val(),
+        loginId : $("#loginId").val(""),
+        emp_birth : $("#emp_birth").val(""),
+        name : $("#name").val(""),
+        emp_sex : $("#emp_sex").val(""),
+        emp_edu : $("#emp_edu").val(""),
+        emp_email : $("#emp_email").val(""),
+        emp_hp : $("#emp_hp").val(""),
+        emp_zip : $("#emp_zip").val(""),
+        emp_dt_addr : $("#emp_dt_addr").val(""),
+        bk_cd : $("#bk_cd").val(""),
+        emp_account : $("#emp_account").val(""),
+        dept_cd : $("#dept_cd").val(""),
+        level_cd : $("#level_cd").val(""),
+        emp_yr_sal : $("#emp_yr_sal").val(""),
+        emp_sdate : $("#emp_sdate").val(""),
+        emp_edate : $("#emp_edate").val(""),
+        sal_date : $("#sal_date").val(""),
+        retire_reason : $("#retire_reason").val(""),
+        emp_addr : $("#emp_addr").val(""),
+        emp_work_yn : $("#emp_work_yn").val(""),
+        sal_san : $("#sal_san").val(""),
+        retire_reason : $("#retire_reason").val(""),
+        sal_ko : $("#sal_ko").val(""),
+        sal_kun : $("#sal_kun").val(""),
+        sal_kuk : $("#sal_kuk").val(""),
+        sal_pre : $("#sal_pre").val(""),
+        sal_after : $("#sal_after").val("")
+
+
       }
+      */
+
 
       var savecollback = function(reval) {
         console.log( JSON.stringify(reval) );
@@ -169,123 +231,43 @@
           gfCloseModal();
 
           if($("#action").val() == "U") {
-            fn_noticelist($("#pageno").val());
+            fn_emplist($("#pageno").val());
           } else {
-            fn_noticelist();
+            fn_emplist();
           }
         }  else {
           alert("오류가 발생 되었습니다.");
         }
       }
 
-      //callAjax("/mngNot/noticesave.do", "post", "json", false, param, savecollback) ;
-      callAjax("/mngNot/noticesave.do", "post", "json", false, $("#myForm").serialize() , savecollback) ;
+
+      callAjax("/empEpm/empSave.do", "post", "json", false, $("#myForm").serialize() , savecollback) ;
 
     }
-
     function fn_Validate() {
-
       var chk = checkNotEmpty(
               [
-                [ "notice_title", "제목을 입력해 주세요." ]
-                ,	[ "notice_cont", "내용을 입력해 주세요" ]
+                [ "emp_birth", "생일을 입력해 주세요." ]
+                ,	[ "name", "이름을 입력해 주세요." ]
+                ,	[ "emp_sex", "성별을 입력해 주세요." ]
+                ,	[ "emp_edu", "학력을 입력해 주세요." ]
+                ,	[ "emp_email", "이메일을 입력해 주세요." ]
+                ,	[ "emp_hp", "전화번호를 선택해 주세요." ]
+
               ]
       );
-
       if (!chk) {
         return;
       }
-
       return true;
     }
+
+
 
     //////////////////////////   위는 파일 업이 처리
     /////////////////////////    file upload
 
-    function fn_openpopupfile() {
-      popupinitfile();
 
-      // 모달 팝업
-      gfModalPop("#layer2");
-    }
-
-    function popupinitfile(object) {
-
-      if(object == "" || object == null || object == undefined) {
-        $("#file_notice_title").val("");
-        $("#file_notice_cont").val("");
-        $("#notice_no").val("");
-        $("#upfile").val("");
-
-        $("#previewdiv").empty();
-
-        $("#btnDeleteFile").hide();
-
-        $("#action").val("I");
-      } else {
-        $("#file_notice_title").val(object.notice_title);
-        $("#file_notice_cont").val(object.notice_cont);
-        $("#file_notice_no").val(object.notice_no);
-
-        $("#btnDeleteFile").show();
-
-        $("#action").val("U");
-      }
-    }
-
-    function preview(event) {
-      var image = event.target;
-
-      //alert(image.files[0].file_name + " : " + image.files[0].file_nm + " : " + image.files[0].name);
-
-      if(image.files[0]){
-        //alert(window.URL.createObjectURL(image.files[0]));
-
-        var selfile = image.files[0].name;
-        var selfilearr = selfile.split(".");
-        var inserthtml = "";
-        var lastindex = selfilearr.length - 1;
-
-
-        if(selfilearr[lastindex].toLowerCase() == "jpg" || selfilearr[lastindex].toLowerCase() == "gif" || selfilearr[lastindex].toLowerCase() == "jpge" || selfilearr[lastindex].toLowerCase() == "png") {
-          inserthtml = "<img src='" + window.URL.createObjectURL(image.files[0]) + "' style='width:100px; height:80px' />";
-        } else {
-          inserthtml = selfile;
-        }
-
-
-        $("#previewdiv").empty().append(inserthtml);
-      }
-
-
-    }
-
-    function fn_savefile() {
-
-      var frm = document.getElementById("myForm");
-      frm.enctype = 'multipart/form-data';
-      var fileData = new FormData(frm);
-
-      var filesavecallback = function(returnval) {
-        console.log( JSON.stringify(returnval) );
-
-        if(returnval.returncval > 0) {
-          alert("저장 되었습니다.");
-          gfCloseModal();
-
-          if($("#action").val() == "U") {
-            fn_noticelist($("#pageno").val());
-          } else {
-            fn_noticelist();
-          }
-        }  else {
-          alert("오류가 발생 되었습니다.");
-        }
-      }
-
-      callAjaxFileUploadSetFormData("/mngNot/noticesavefile.do", "post", "json", true, fileData, filesavecallback);
-
-    }
 
 
 
@@ -303,7 +285,7 @@
 <body>
 <form id="myForm" action=""  method="">
   <input type="hidden" id="action"  name="action"  />
-  <input type="hidden" id="notice_no"  name="notice_no"  />
+  <input type="hidden" id="loginId"  name="loginId"  />
   <input type="hidden" id="pageno"  name="pageno"  />
 
   <!-- 모달 배경 -->
@@ -357,7 +339,7 @@
 							</select>
 							 <select id="searchKey" name="searchKey" style="width: 150px;" >
 							        <option value="" >전체</option>
-									<option value="loginid" >사번</option>
+									<option value="loginId" >사번</option>
 									<option value="name" >사원명</option>
 							</select>
 							<input type="text" style="width: 300px; height: 25px;" id="ename" name="ename">
@@ -367,7 +349,7 @@
 							</span>
             </p>
 
-            <div class="noticeList">
+            <div class="empList">
               <table class="col">
                 <caption>caption</caption>
                 <colgroup>
@@ -397,7 +379,7 @@
               </table>
             </div>
 
-            <div class="paging_area"  id="noticePagination"> </div>
+            <div class="paging_area"  id="empPagination"> </div>
 
 
           </div> <!--// content -->
@@ -428,16 +410,74 @@
 
           <tbody>
           <tr>
-            <th scope="row">제목 <span class="font_red">*</span></th>
-            <td colspan="3"><input type="text" class="inputTxt p100" name="notice_title" id="notice_title" /></td>
+
+            <th scope="row">생년월일 <span class="font_red">*</span></th>
+            <td><input type="text" class="inputTxt p100" name="emp_birth" id="emp_birth" /></td>
           </tr>
           <tr>
-            <th scope="row">내용 <span class="font_red">*</span></th>
+            <th scope="row">이름 <span class="font_red">*</span></th>
+            <td><input type="text" class="inputTxt p100" name="name" id="name" /></td>
+            <th scope="row">성별 <span class="font_red">*</span></th>
+            <td><input type="text" class="inputTxt p100" name="emp_sex" id="emp_sex" /></td>
+          </tr>
+          <tr>
+            <th scope="row">학력 <span class="font_red">*</span></th>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_edu" id="emp_edu" /></td>
+          </tr>
+          <tr>
+            <th scope="row">이메일 <span class="font_red">*</span></th>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_email" id="emp_email" /></td>
+          </tr>
+          <tr>
+            <th scope="row">전화번호 <span class="font_red">*</span></th>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_hp" id="emp_hp" /></td>
+          </tr>
+          <tr>
+            <th scope="row">우편번호 <span class="font_red">*</span></th>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_zip" id="emp_zip" /></td>
+          </tr>
+          <tr>
+            <th scope="row">주소 <span class="font_red">*</span></th>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_addr" id="emp_addr" /></td>
+          </tr>
+          <tr>
+            <th scope="row">상세주소 <span class="font_red">*</span></th>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_dt_addr" id="emp_dt_addr" /></td>
+          </tr>
+          <tr>
+            <th scope="row">은행 <span class="font_red">*</span></th>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="bk_cd" id="bk_cd" /></td>
+          </tr>
+          <tr>
+            <th scope="row">계좌번호 <span class="font_red">*</span></th>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_account" id="emp_account" /></td>
+          </tr>
+          <tr>
+            <th scope="row">부서 <span class="font_red">*</span></th>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="dept_cd" id="dept_cd" /></td>
+          </tr>
+          <tr>
+            <th scope="row">직급 <span class="font_red">*</span></th>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="level_cd" id="level_cd" /></td>
+          </tr>
+          <tr>
+            <th scope="row">연봉 <span class="font_red">*</span></th>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_yr_sal" id="emp_yr_sal" /></td>
+          </tr>
+          <tr>
+            <th scope="row">입사일 <span class="font_red">*</span></th>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_sdate" id="emp_sdate" /></td>
+          </tr>
+          <tr>
+            <th scope="row">퇴사일 <span class="font_red">*</span></th>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_edate" id="emp_edate" /></td>
+          </tr>
+          <tr>
+            <th scope="row">퇴사내용 </th>
             <td colspan="3">
-              <textarea id="notice_cont" name="notice_cont"> </textarea>
+              <textarea id="retire_reason" name="retire_reason"> </textarea>
             </td>
           </tr>
-
           </tbody>
         </table>
 
@@ -462,36 +502,7 @@
 
         <!-- s : 여기에 내용입력 -->
 
-        <table class="row">
-          <caption>caption</caption>
-          <colgroup>
-            <col width="120px">
-            <col width="*">
-            <col width="120px">
-            <col width="*">
-          </colgroup>
 
-          <tbody>
-          <tr>
-            <th scope="row">제목 <span class="font_red">*</span></th>
-            <td colspan="3"><input type="text" class="inputTxt p100" name="file_notice_title" id="file_notice_title" /></td>
-          </tr>
-          <tr>
-            <th scope="row">내용 <span class="font_red">*</span></th>
-            <td colspan="3">
-              <textarea id="file_notice_cont" name="file_notice_cont"> </textarea>
-            </td>
-          </tr>
-          <tr>
-            <td colspan=2>
-              <input type="file" id="upfile"  name="upfile"  onchange="javascript:preview(event)" />
-            </td>
-            <td colspan=2>
-              <div id="previewdiv" ></div>
-            </td>
-          </tr>
-          </tbody>
-        </table>
 
         <!-- e : 여기에 내용입력 -->
 

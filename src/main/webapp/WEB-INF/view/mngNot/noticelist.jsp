@@ -35,8 +35,14 @@
 		// combo box 종류  cli : 거래처    조회 대상 테이블  tb_clnt   
 		selectComCombo("cli","clicombo","all","","");  // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , "", "" 
 		
+		// 거래처  추가
+		
+		
 		// combo box 종류  pro : 제품 전체   조회 대상 테이블  tb_product   
 		selectComCombo("pro","proallcombo","all","","");  // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , "", "" 
+		
+	
+		
 		
 		
 		// 제품 대분류
@@ -53,6 +59,14 @@
 			productCombo("p","ptypecombo","all",$("#ltypecombo").val(),$("#mtypecombo").val(),"");   // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , 선택된 상위 계정코드, "" 
 		});
 		
+		
+		// 제품 중분류 별도
+		productCombo("m","emtypecombo","all","","","","");   // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , "", ""  
+		
+		// 제품  별도
+		$('#emtypecombo').change(function() {   
+			productCombo("p","eptypecombo","all","",$("#emtypecombo").val(),"");   // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , 선택된 상위 계정코드, "" 
+		});
 		
 		// 버튼 이벤트 등록
 		fRegisterButtonClickEvent();
@@ -537,6 +551,24 @@
 								     <td>
 								              <select id="ptypecombo" name="ptypecombo">
 								              </select>
+                                     </td>	
+                                   </tr>   
+                                   <tr>
+								     <th>제품 중분류-별도</th>
+								     <td>
+								              <select id="emtypecombo" name="emtypecombo">
+								              </select>
+                                     </td>
+								     <th>제품-별도</th>
+								     <td>
+								             <select id="eptypecombo" name="eptypecombo">
+								              </select>
+                                     </td>
+								     <th></th>
+								     <td>
+                                     </td>
+								     <th></th>
+								     <td>
                                      </td>	
                                    </tr>   
 								</tbody>

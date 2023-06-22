@@ -5,7 +5,7 @@
 
 							<c:if test="${totalcnt eq 0 }">
 								<tr>
-									<td colspan="5">데이터가 존재하지 않습니다.</td>
+									<td colspan="7">데이터가 존재하지 않습니다.</td>
 								</tr>
 							</c:if>
 							
@@ -17,8 +17,9 @@
 										<td>${list.acnt_sbjct_inout}</td>
 										<td>${list.acnt_dt_sbjct_name}</td>
 										<td>${list.client}</td>
-										<td>${list.outamt}</td>
-										<td>${list.inamt}</td>
+<%-- 										<td>${list.outamt}</td> --%>
+										<td><fmt:formatNumber value="${list.outamt}" pattern="#,##0" /></td>
+										<td><fmt:formatNumber value="${list.inamt}" pattern="#,##0" /></td>
 									</tr>
 								</c:forEach>
 							</c:if>

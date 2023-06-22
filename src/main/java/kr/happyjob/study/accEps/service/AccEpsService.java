@@ -19,23 +19,12 @@ public interface AccEpsService {
 	/** 한건 조회 */
 	public AccEpsModel listSelectOneEps(Map<String, Object> paramMap) throws Exception;
 	
-	/** 등록 */
-	public int listInsertEps(Map<String, Object> paramMap) throws Exception;
-	
 	/** 수정 */
 	public int listUpdateEps(Map<String, Object> paramMap) throws Exception;
-	
-	/** 삭제 */
-	public int listDeleteEps(Map<String, Object> paramMap) throws Exception;
-	
-	/** 등록 파일 */
-	public int listInsertFileEps(Map<String, Object> paramMap, HttpServletRequest request) throws Exception;
 	
 	/** 수정 파일 */
 	public int listUpdateFileEps(Map<String, Object> paramMap, HttpServletRequest request) throws Exception;
 	
-	/** 삭제  파일*/
-	public int listDeleteFileEps(Map<String, Object> paramMap) throws Exception;
 	
 	
 }

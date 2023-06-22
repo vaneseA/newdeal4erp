@@ -7,6 +7,7 @@
 	<select id="orderlist" resultType="kr.happyjob.study.busOdm.model.OrderModel">
 		SELECT od.order_no
 		      ,DATE_FORMAT(od.order_date, '%Y-%m-%d') AS order_date
+		      ,cl.clnt_no
 		      ,cl.clnt_name
 		      ,cl.clnt_tel
 		      ,cl.clnt_email
@@ -14,10 +15,23 @@
 		      ,cl.clnt_add
 		      ,cl.clnt_add_dt
 		      ,ui.name
-		      ,order_tot_price
+		      ,od.order_tot_price
+		      ,od.order_req
 		   FROM tb_order od
 		      INNER JOIN tb_clnt cl ON od.clnt_no = cl.clnt_no
 		      INNER JOIN tb_userinfo ui ON od.loginID = ui.loginID
+		   <where>
+		   		<if test="(start != null) and (!start.equals(''))  ">
+				    and od.order_date <![CDATA[>=]]>  STR_TO_DATE(#{start}, '%Y-%m-%d')  
+				</if>
+				
+				<if test="(end != null) and (!end.equals(''))">
+				     and od.order_date <![CDATA[<=]]> STR_TO_DATE(#{end}, '%Y-%m-%d')  
+				</if>
+				<if test="(clicombo != null) and (!clicombo.equals(''))">
+					    and cl.clnt_no = #{clicombo}
+				</if>
+		   </where>
 		    ORDER BY od.order_no
 		    LIMIT #{pageindex}, #{pageSize}
 	</select>
@@ -34,6 +48,7 @@
   	<select id="orderselectone" resultType="kr.happyjob.study.busOdm.model.OrderModel">
   		SELECT od.order_no
 		      ,DATE_FORMAT(od.order_date, '%Y-%m-%d') AS order_date
+		      ,cl.clnt_no
 		      ,cl.clnt_name
 		      ,cl.clnt_tel
 		      ,cl.clnt_email
@@ -41,7 +56,8 @@
 		      ,cl.clnt_add
 		      ,cl.clnt_add_dt
 		      ,ui.name
-		      ,order_tot_price
+		      ,od.order_tot_price
+		      ,od.order_req
 		   FROM tb_order od
 		      INNER JOIN tb_clnt cl ON od.clnt_no = cl.clnt_no
 		      INNER JOIN tb_userinfo ui ON od.loginID = ui.loginID
@@ -56,7 +72,7 @@
 		      ,pd.product_name
 		      ,pd.product_price
 		      ,ot.order_dt_amt
-		      ,(pd.product_price*ot.order_dt_amt) AS detail_price
+		      ,ot.order_dt_price
 		   FROM tb_order_dt ot
 		      INNER JOIN tb_clnt cl ON ot.clnt_no = cl.clnt_no
 		      INNER JOIN tb_product pd ON ot.product_no = pd.product_no

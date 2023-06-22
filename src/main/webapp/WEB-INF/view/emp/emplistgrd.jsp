@@ -13,9 +13,9 @@
   <c:forEach items="${empSearchList}" var="list">
     <tr>
       <td>${list.loginId}</td>
-      <td><a href="javascript:fn_selectone('${list.loginId}')">${list.name}</a></td>
+      <td><a href="javascript:fn_empSelectOne('${list.loginId}')">${list.name}</a></td>
       <td>${list.dept_cd}</td>
-      <td>${list.dept_cd}
+      <td>
       <select id="deptcd" name="deptcd">
         <option value="" >전체</option>
         <option value="100" <c:if test ="${list.dept_cd eq '100'}">selected="selected"</c:if>>관리자</option>
@@ -25,18 +25,18 @@
         <option value="500" <c:if test ="${list.dept_cd eq '500'}">selected="selected"</c:if>>인사팀</option>
       </select>
       </td>
-      <td>${list.level_cd}
+      <td>
         <select id="lvcd" name="lvcd">
           <option value="" >전체</option>
-          <option value="10" >사원</option>
-          <option value="20" >주임</option>
-          <option value="30" >대리</option>
-          <option value="40" >과장</option>
-          <option value="50" >부장</option>
-          <option value="60" >상무</option>
-          <option value="70" >전무</option>
-          <option value="80" >이사</option>
-          <option value="90" >대표</option>
+          <option value="10"<c:if test ="${list.level_cd eq '10'}">selected="selected"</c:if>>사원</option>
+          <option value="20"<c:if test ="${list.level_cd eq '20'}">selected="selected"</c:if>>주임</option>
+          <option value="30"<c:if test ="${list.level_cd eq '30'}">selected="selected"</c:if> >대리</option>
+          <option value="40"<c:if test ="${list.level_cd eq '40'}">selected="selected"</c:if> >과장</option>
+          <option value="50"<c:if test ="${list.level_cd eq '50'}">selected="selected"</c:if> >부장</option>
+          <option value="60"<c:if test ="${list.level_cd eq '60'}">selected="selected"</c:if> >상무</option>
+          <option value="70"<c:if test ="${list.level_cd eq '70'}">selected="selected"</c:if> >전무</option>
+          <option value="80"<c:if test ="${list.level_cd eq '80'}">selected="selected"</c:if> >이사</option>
+          <option value="90"<c:if test ="${list.level_cd eq '90'}">selected="selected"</c:if> >대표</option>
         </select>
       </td>
       <td>${list.emp_sdate}</td>

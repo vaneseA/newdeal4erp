@@ -17,12 +17,16 @@
 	<select id="countactlist" resultType="int">
 		select count(*)
   		  from tb_acnt_sbject ab
-       		   inner join tb_dt_sbject ads on ab.acnt_sbject_cd = ads.acnt_sbject_cd
+    		    <where>
+					<if test="(acnt_sbjct_inout != null) and (!acnt_sbjct_inout.equals(''))">
+				        	and acnt_sbjct_inout = #{acnt_sbjct_inout}
+				    </if>
+			    </where>
 	</select>
 	
 	<insert id="bigInsert" >
 		insert into tb_acnt_sbject(acnt_sbject_cd, acnt_sbject_name, acnt_sbjct_inout)
-		values (#{acnt_sbject_cd},#{acnt_sbject_name}, #{acnt_sbjct_inout})
+		values (#{acnt_sbject_cd},#{acnt_sbject_name}, #{M_acnt_sbjct_inout})
 	</insert>
 	
 	
@@ -46,7 +50,11 @@
 		select count(*)
   		  from tb_acnt_sbject ab
          inner join tb_dt_sbject ads on ab.acnt_sbject_cd = ads.acnt_sbject_cd
-         where ab.acnt_sbject_cd = #{acnt_sbject_cd}
+         <where>
+					<if test="(acnt_sbject_cd != null) and (!acnt_sbject_cd.equals(''))">
+				        	and ads.acnt_sbject_cd = #{acnt_sbject_cd}
+				    </if>
+		</where>
 	</select>
 	
 	<insert id="smallInsert" >

@@ -311,16 +311,23 @@
 							
 							<label for="accdcombo" style="margin-left: 15px; font-size: 15px;">계정 상세 : </label>
 							 <select id="accdcombo" name="accdcombo" style="width: 100px;" >
-							        <option value="" >전체</option>
-									<option value="1000" >상품매출</option>
-									<option value="2000" >상품매입</option>
-									<option value="3000" >직원급여</option>
-									<option value="4000" >퇴직급여</option>
-									<option value="5000" >보험료</option>
-									<option value="6000" >소모품비</option>
-									<option value="7000" >여비교통비</option>
-									<option value="8000" >법인세</option>
+<!-- 							        <option value="" >전체</option> -->
+<!-- 									<option value="1000" >상품매출</option> -->
+<!-- 									<option value="2000" >상품매입</option> -->
+<!-- 									<option value="3000" >직원급여</option> -->
+<!-- 									<option value="4000" >퇴직급여</option> -->
+<!-- 									<option value="5000" >보험료</option> -->
+<!-- 									<option value="6000" >소모품비</option> -->
+<!-- 									<option value="7000" >여비교통비</option> -->
+<!-- 									<option value="8000" >법인세</option> -->
 							</select> 
+							
+							
+							<label for="" style="margin-left: 15px; font-size: 15px;">납품처 : </label>
+							<select id="" name="" style="width: 100px;" >
+							</select> 
+							
+							
 							<a href="" class="btnType blue" id="btnSearch" name="btn" style="margin-left: 30px;"><span>검  색</span></a>
 <!-- 							 <a class="btnType blue" href="javascript:fn_openpopup();" name="modal"><span>신규등록</span></a> -->
 <!-- 							 <a class="btnType blue" href="javascript:fn_openpopupfile();" name="modal"><span>신규등록 파일</span></a> -->

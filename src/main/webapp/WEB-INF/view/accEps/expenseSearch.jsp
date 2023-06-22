@@ -106,10 +106,6 @@ width:10px;
 				case 'btnSearch' :
 					fn_expenseSearch();
 					break;
-				case 'btnDeleteFile' :
-					$("#action").val("D");	
-					fn_save();
-					break;	
 				case 'btnSaveFile' :
 					fn_savefile();
 					break;	
@@ -231,6 +227,7 @@ width:10px;
 			 $("#expen_date").val("");
 			 $("#upfile").val("");	
 			 $("#appro_yn").val("");
+			 $("#budget_no").val("");
 			
 			$("#previewdiv").empty();
 			
@@ -255,14 +252,15 @@ width:10px;
 			 $("#upfile").val(object.upfile);		
 			 $("input[name='appro_yn'][value='" + object.appro_yn + "']").prop("checked", true);
 			 $("#appro_rej_reason").val(object.appro_rej_reason);
-			 $("#appro_no").val(object.appro_no);	
+			 $("#appro_no").val(object.appro_no);
+			 $("#budget_no").val(object.appro_no);
 			 
 			 if(object.appro_yn === "Y"){
 				 $("#btnSaveFile").hide();
 			 }else{
 				 $("#btnSaveFile").show();
 				 
-			 }
+			 } 
 			 
 			 
 			 
@@ -371,13 +369,17 @@ width:10px;
 				 appro_yn : $("input[name='appro_yn']:checked").val()
 				,appro_no :  $("#appro_no").val()
 				,appro_rej_reason : $("#appro_rej_reason").val()
+				,budget_no : $("#budget_no").val()
+				,acnt_sbject_cd : $("#acnt_sbject_cd").val()
+			    ,acnt_dt_sbject_cd : $("#acnt_dt_sbject_cd").val()
+			    ,expen_report_no : $("#expen_report_no").val()
 				,action :  $("#action").val()
 		 }
 		 
 		
-		var frm = document.getElementById("myForm");
+		/* var frm = document.getElementById("myForm");
 		frm.enctype = 'multipart/form-data';
-		var fileData = new FormData(frm);
+		var fileData = new FormData(frm); */
 		
 		var filesavecallback = function(returnval) {
 			console.log( JSON.stringify(returnval) );
@@ -403,7 +405,7 @@ width:10px;
 	
 	
 	
-	function fn_filedownload() {
+	 function fn_filedownload() {
 		alert("다운로드");
 		
 		var params = "";
@@ -411,7 +413,7 @@ width:10px;
 		
 		jQuery("<form action='/accEps/downloadListFileEps.do' method='post'>"+params+"</form>").appendTo('body').submit().remove();
 		
-	}
+	} 
 	
 
 		 
@@ -429,6 +431,7 @@ width:10px;
 	<input type="hidden" id="appro_no"  name="appro_no"  />
 	<input type="hidden" id="pageno"  name="pageno"  />
 	<input type="hidden" id="expen_report_no"  name="expen_report_no"  />
+	<input type="hidden" id="budget_no"  name="budget_no"  />
 	
 	
 	<!-- 모달 배경 -->
@@ -454,7 +457,7 @@ width:10px;
 						<p class="Location">
 							<a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
 								class="btn_nav bold">회계</span> <span class="btn_nav bold">지출결의서 조회 및 승인
-								</span> <a href="../system/comnCodMgr.do" class="btn_set refresh">새로고침</a>
+								</span> <a href="../accEps/expenseSearch.do" class="btn_set refresh">새로고침</a>
 						</p>
 
 						<p class="conTitle">
