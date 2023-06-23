@@ -15,7 +15,47 @@
         // 페이징 설정
         var pageSize = 5;
         var pageBlockSize = 5;
-
+        function fn_aa() {
+            new Chart(document.getElementById("line-chart"), {
+                type: 'line',
+                data: {
+                    labels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
+                    datasets: [{
+                        data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
+                        label: "Africa",
+                        borderColor: "#3e95cd",
+                        fill: false
+                    }, {
+                        data: [282, 350, 411, 502, 635, 809, 947, 1402, 3700, 5267],
+                        label: "Asia",
+                        borderColor: "#8e5ea2",
+                        fill: false
+                    }, {
+                        data: [168, 170, 178, 190, 203, 276, 408, 547, 675, 734],
+                        label: "Europe",
+                        borderColor: "#3cba9f",
+                        fill: false
+                    }, {
+                        data: [40, 20, 10, 16, 24, 38, 74, 167, 508, 784],
+                        label: "Latin America",
+                        borderColor: "#e8c3b9",
+                        fill: false
+                    }, {
+                        data: [6, 3, 2, 2, 7, 26, 82, 172, 312, 433],
+                        label: "North America",
+                        borderColor: "#c45850",
+                        fill: false
+                    }
+                    ]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'World population per region (in millions)'
+                    }
+                }
+            });
+        }
 
         /** OnLoad event */
         $(function () {
@@ -23,7 +63,7 @@
             fRegisterButtonClickEvent();
 
             fn_saleDayList();
-
+            fn_aa();
         });
 
 
@@ -143,81 +183,81 @@
                         <!-- 검색창 영역 끝 -->
 
 
-                        <div class="saleDayList">
+                        <div class="saleDayList" >
+                        <div style="display:flex; flex-grow: 1; justify-content: space-evenly;">
+                            <div class="items" style="width: 100%"><canvas id="line-chart" width="300" height="250"></canvas></div>
+                            <div class="items"style="width: 100%; ">
+<%--                                <style>--%>
+<%--                                    table {--%>
+<%--                                        width: 100%;--%>
+<%--                                        border-collapse: collapse;--%>
+<%--                                    }--%>
 
-                            <canvas id="line-chart" width="300" height="250"></canvas>
-                            <style>
-                                table {
-                                    width: 100%;
-                                    border-collapse: collapse;
-                                }
+<%--                                    th, td {--%>
+<%--                                        text-align: center;--%>
+<%--                                        padding: 5px;--%>
+<%--                                        border: 1px solid black;--%>
+<%--                                    }--%>
+<%--                                </style>--%>
+                                <table class="col" style="height:100%;" >
+                                    <caption>caption</caption>
+                                    <tr>
+                                        <th>매출</th>
 
-                                th, td {
-                                    text-align: center;
-                                    padding: 5px;
-                                    border: 1px solid black;
-                                }
-                            </style>
-                            <table class="col">
-                                <caption>caption</caption>
-                                <tr>
-                                    <th>매출</th>
+                                        <td>${tem_in1}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>매출 원가</th>
 
-                                    <td>${tem_in1}</td>
-                                </tr>
-                                <tr>
-                                    <th>매출 원가</th>
+                                        <td>${tem_in2}</td>
+                                    </tr>
+                                    <tr>
 
-                                    <td>${tem_in2}</td>
-                                </tr>
-                                <tr>
+                                        <th>매출 순이익</th>
+                                        <td>${tem_in3}</td>
+                                    </tr>
+                                    <tr>
 
-                                    <th>매출 순이익</th>
-                                    <td>${tem_in3}</td>
-                                </tr>
-                                <tr>
-
-                                    <th>매출 이익률</th>
-                                    <td>${tem_in4}</td>
-                                </tr>
-                            </table>
-
-
-                            <table class="col">
-                                <caption>caption</caption>
-                                <colgroup>
-                                    <col width="12%">
-                                    <col width="5%">
-                                    <col width="9%">
-                                    <col width="9%">
-                                    <col width="9%">
-                                    <col width="12%">
-                                    <col width="9%">
-                                    <col width="9%">
-                                    <col width="9%">
-                                    <col width="5%">
-                                    <col width="9%">
-                                </colgroup>
-
-                                <thead>
-                                <tr>
-                                    <th scope="col">주문 일자</th>
-                                    <th scope="col">주문 번호</th>
-                                    <th scope="col">고객기업명</th>
-                                    <th scope="col">제품 분류</th>
-                                    <th scope="col">제조사</th>
-                                    <th scope="col">품명</th>
-                                    <th scope="col">모델명</th>
-                                    <th scope="col">납품단가</th>
-                                    <th scope="col">판매가</th>
-                                    <th scope="col">수량</th>
-                                    <th scope="col">총액</th>
-
-                                </tr>
-                                </thead>
-                                <tbody id="listSaleDay"></tbody>
-                            </table>
+                                        <th>매출 이익률</th>
+                                        <td>${tem_in4}</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
+                                <table class="col">
+                                    <caption>caption</caption>
+                                    <colgroup>
+                                        <col width="12%">
+                                        <col width="5%">
+                                        <col width="9%">
+                                        <col width="9%">
+                                        <col width="9%">
+                                        <col width="12%">
+                                        <col width="9%">
+                                        <col width="9%">
+                                        <col width="9%">
+                                        <col width="5%">
+                                        <col width="9%">
+                                    </colgroup>
+
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">주문 일자</th>
+                                        <th scope="col">주문 번호</th>
+                                        <th scope="col">고객기업명</th>
+                                        <th scope="col">제품 분류</th>
+                                        <th scope="col">제조사</th>
+                                        <th scope="col">품명</th>
+                                        <th scope="col">모델명</th>
+                                        <th scope="col">납품단가</th>
+                                        <th scope="col">판매가</th>
+                                        <th scope="col">수량</th>
+                                        <th scope="col">총액</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody id="listSaleDay"></tbody>
+                                </table>
 
                         <div class="paging_area" id="saleDayPagination"></div>
 
