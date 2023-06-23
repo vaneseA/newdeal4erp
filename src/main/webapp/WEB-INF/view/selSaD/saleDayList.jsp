@@ -187,18 +187,6 @@
                         <div style="display:flex; flex-grow: 1; justify-content: space-evenly;">
                             <div class="items" style="width: 100%"><canvas id="line-chart" width="300" height="250"></canvas></div>
                             <div class="items"style="width: 100%; ">
-<%--                                <style>--%>
-<%--                                    table {--%>
-<%--                                        width: 100%;--%>
-<%--                                        border-collapse: collapse;--%>
-<%--                                    }--%>
-
-<%--                                    th, td {--%>
-<%--                                        text-align: center;--%>
-<%--                                        padding: 5px;--%>
-<%--                                        border: 1px solid black;--%>
-<%--                                    }--%>
-<%--                                </style>--%>
                                 <table class="col" style="height:100%;" >
                                     <caption>caption</caption>
                                     <tr>
