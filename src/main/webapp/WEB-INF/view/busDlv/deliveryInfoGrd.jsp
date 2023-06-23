@@ -10,15 +10,16 @@
 							</c:if>
 							
 							<c:if test="${totalcnt > 0 }">
-								<c:forEach items="${empVcpSearchList}" var="list">
+								<c:forEach items="${busDlvList}" var="list">
 									<tr>
-										<td>${list.vaca_no}</td>
+										<td>${list.dlv_no}</td>
+										<td>${list.splr_name}</td>
+										<td>${list.product_name}</td>
+										<td>${list.dlv_amt}</td>
+										<td>${list.dlv_date}</td>
+										<td>${list.dlv_state}</td>
 										<td>${list.loginID}</td>
-										<td>${list.name}</td>
-										<td>${list.vaca_req_date}</td>
-										<td>${list.vaca_sdate}</td>
-										<td>${list.vaca_edate}</td>
-										<td>${list.vaca_tel}</td>
+										<td>${list.appro_no}</td>
 									<c:if test="${list.appro_bos eq null}">
 										<td>-</td>
 									</c:if>
@@ -26,12 +27,15 @@
 										<td>${list.appro_bos}</td>
 									</c:if>
 										<td>${list.appro_yn}</td>
-									<c:if test="${list.vaca_rej eq null}">
+									<c:if test="${list.dlv_rej eq null}">
 										<td>-</td>
 									</c:if>
-									<c:if test="${list.vaca_rej ne null}">
-										<td><a href="javascript:fn_openpopup2(${list.vaca_no})"class="btnType2 color2" id="btnVacaRej" name="btn" >상세</a></td>
+									<c:if test="${list.dlv_rej ne null}">
+										<td><a href="javascript:fn_openpopup2(${list.dlv_no})"class="btnType2 color2" id="btnVacaRej" name="btn" >상세</a></td>
 									</c:if>
+									
+										
+									
 									
 										
 									</tr>

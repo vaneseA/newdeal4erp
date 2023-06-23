@@ -159,6 +159,7 @@
 									<span style="margin:0 10px;">신청일</span> 
 									<input type="date" style="width: 150px; height: 25px; margin-right:5px;" id="vaca_req_sdate" name="vaca_req_sdate">
 									<!-- 휴가신청 범위 끝 -->
+									<span>-</span>
 									<input type="date" style="width: 150px; height: 25px; margin-right:5px;" id="vaca_req_edate" name="vaca_req_edate">
 									<!-- 사번 -->
 									<span style="margin:0 10px;">사번</span> 

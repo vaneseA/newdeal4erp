@@ -24,11 +24,6 @@
 
             fn_productList();
 
-            // 검색창 콤보 박스  (조회 대상 테이블  tb_clnt)
-            selectComCombo("cli", "ltypecombo", "all", "", "");  // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , "", ""
-
-            /*  모달 내부 콤보박스 모음   */
-            selectComCombo("l", "lTypeComboForModal", "all", "", "");  // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , "", ""
 
             // 제품분류
             productCombo("l", "ltypecombo", "all", "", "", "", "");  // combo type( l : 대분류   m : 중분류   s : 소분류) combo_name, type(기본값  all : 전체   sel : 선택) ,  대분류 코드, 중분류코드, 소분류 코드, ""
@@ -359,14 +354,14 @@
                     <tr>
                         <th scope="row">제품 분류 <span class="font_red">*</span></th>
                         <td>
-                            <select id="lTypeComboForModal" name="ltypecombo">
+                            <select id="ltypecombo" name="ltypecombo">
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">제조사 <span class="font_red">*</span></th>
                         <td>
-                            <select id="mtypecombo1" name="mtypecombo">
+                            <select id="mtypecombo" name="mtypecombo">
                             </select>
                         </td>
                     </tr>

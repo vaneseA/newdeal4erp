@@ -65,12 +65,14 @@
 		insert into tb_appro
 			(
 				 appro_no
+				,loginID
 				,appro_type_cd
 				,vaca_no
 				,appro_req_date
 				,dept_cd
 			) values (
 				 #{appro_no}
+				,#{form_loginID}
 				,#{appro_type_cd}
 				,(select MAX(vaca_no) from tb_vaca_req)
 				,(select vaca_req_date from tb_vaca_req where vaca_no = (select MAX(vaca_no) from tb_vaca_req))

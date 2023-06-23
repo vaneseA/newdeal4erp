@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>일별 매출 현황</title>
     <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script type="text/javascript">
 
         // 페이징 설정
@@ -145,7 +145,7 @@
 
                         <div class="saleDayList">
 
-
+                            <canvas id="line-chart" width="300" height="250"></canvas>
                             <style>
                                 table {
                                     width: 100%;
