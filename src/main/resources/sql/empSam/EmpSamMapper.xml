@@ -79,11 +79,11 @@
 				<choose>
 					<when
 						test="emp_info eq 'loginID'.toString()">
-						and user.loginID Like CONCAT('%', #{sname}, '%')
+						and user.loginID Like CONCAT('%', replace(#{sname},' ',''), '%')
 					</when>
 					<when
 						test="emp_info eq 'name'.toString()">
-						and user.name LIKE CONCAT('%', #{sname}, '%')
+						and user.name LIKE CONCAT('%', replace(#{sname},' ',''), '%')
 					</when>
 				</choose>
 			</if>		
@@ -119,16 +119,16 @@
 							<choose>
 								<when
 									test="emp_info eq 'loginID'.toString()">
-									and user.loginID LIKE CONCAT('%', #{sname}, '%')
+									and user.loginID LIKE CONCAT('%', replace(#{sname},' ',''), '%')
 								</when>
 								<when
 									test="emp_info eq 'emp_name'.toString()">
-									and user.name LIKE CONCAT('%', #{sname}, '%')
+									and user.name LIKE CONCAT('%', replace(#{sname},' ',''), '%')
 								</when>
 							</choose>
 						</if>	
 						and sal.sal_date LIKE CONCAT('%', DATE_FORMAT(now(), '%Y-%m'), '%')
-						
+						and sal.sal_pay_yn = 'N'
 					</where>
 	
 	</update>

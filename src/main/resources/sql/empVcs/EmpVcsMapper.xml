@@ -20,12 +20,15 @@
 				 inner join tb_userinfo user on user.loginID = vaca.loginID 
 			<where>
 			<if test="(vaca_req_sdate != null) and (!vaca_req_sdate.equals(''))">
-				and STR_TO_DATE(vaca.vaca_req_date,'%Y-%m-%d') BETWEEN STR_TO_DATE(#{vaca_req_sdate},'%Y-%m-%d')
-																	   AND STR_TO_DATE(#{vaca_req_edate},'%Y-%m-%d')
+				and STR_TO_DATE(vaca.vaca_req_date,'%Y-%m-%d') >= STR_TO_DATE(#{vaca_req_sdate},'%Y-%m-%d')
+			</if>
+			<if test="(vaca_req_edate != null) and (!vaca_req_edate.equals(''))">
+				and STR_TO_DATE(#{vaca_req_edate},'%Y-%m-%d') >= STR_TO_DATE(vaca.vaca_req_date,'%Y-%m-%d')
+																	   
 			</if>
 			
 			<if test="(loginID != null) and (!loginID.equals(''))">
-				and vaca.loginID Like CONCAT('%',#{loginID}, '%')
+				and vaca.loginID Like CONCAT('%',relace(#{loginID},' ','') , '%')
 			</if>
 			</where>
 			order by vaca.vaca_no desc
@@ -39,12 +42,15 @@
 				inner join tb_userinfo user on user.loginID = vaca.loginID 
 			<where>
 			<if test="(vaca_req_sdate != null) and (!vaca_req_sdate.equals(''))">
-				and STR_TO_DATE(vaca.vaca_req_date,'%Y-%m-%d') BETWEEN STR_TO_DATE(#{vaca_req_sdate},'%Y-%m-%d')
-																	   AND STR_TO_DATE(#{vaca_req_edate},'%Y-%m-%d')
+				and STR_TO_DATE(vaca.vaca_req_date,'%Y-%m-%d') >= STR_TO_DATE(#{vaca_req_sdate},'%Y-%m-%d')
+			</if>
+			<if test="(vaca_req_edate != null) and (!vaca_req_edate.equals(''))">
+				and STR_TO_DATE(#{vaca_req_edate},'%Y-%m-%d') >= STR_TO_DATE(vaca.vaca_req_date,'%Y-%m-%d')
+																	   
 			</if>
 			
 			<if test="(loginID != null) and (!loginID.equals(''))">
-				and vaca.loginID Like CONCAT('%',#{loginID}, '%')
+				and vaca.loginID Like CONCAT('%',relace(#{loginID},' ',''), '%')
 			</if>
 			</where>
 	</select>

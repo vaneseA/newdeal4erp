@@ -241,36 +241,31 @@
 
                         <p class="Location">
                             <a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
-                                class="btn_nav bold">영업</span> <span class="btn_nav bold">제품정보
+                                class="btn_nav bold">매출</span> <span class="btn_nav bold">월별 매출 현황
 								</span> <a href="../busPd/productInfo.do" class="btn_set refresh">새로고침</a>
                         </p>
 
 
                         <p class="conTitle">
-                            <span>제품정보</span> <span class="fr">
-                             <a class="btnType blue" href="javascript:fn_openPopUp();"
-                                name="modal"><span>제품등록</span></a>
+                            <span>월별 매출 현황</span> <span class="fr">
 					</span>
                         </p>
 
                         <!-- 검색창 영역 시작 -->
-                        <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">
-                            <select id="proName" name="proName" style="width: 170px; margin-right:5px;">
-                                <option value="">(제품종류) 전체</option>
-                                <option value="저장장치">저장장치</option>
-                                <option value="CPU">CPU</option>
-                                <option value="메모리">메모리</option>
-                                <option value="그래픽카드">그래픽카드</option>
-                                <option value="메인보드">메인보드</option>
+
+                        <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:10px 10px; margin-bottom: 8px;">
+                            <label for="start" style="font-size: 15px; margin-right:5px; ">기간 조회 : </label>
+                            <input type="date" id="start" name="start" min="2023-01-01"
+                                   style="height: 25px; width: 120px;">
+                            <label for="clicombo" style="margin-left: 15px; font-size: 15px;">거래처명 : </label>
+                            <select id="clicombo" name="clicombo" style="height: 25px; width: 120px;">
                             </select>
-                            <select id="splrName" name="splrName" style="width: 170px; margin-right:5px;">
-                                <option value="">(제조사) 전체</option>
-                                <option value="삼성">삼성</option>
-                                <option value="intel">intel</option>
+
+                            <label for="acccombo" style="margin-left: 15px; font-size: 15px;">계정 대분류 : </label>
+                            <select id="acccombo" name="acccombo" style="height: 25px; width: 100px;">
+                                <option value="">전체</option>
                             </select>
-                            <select id="searchKey" name="searchKey" style="width: 120px; margin-right:5px;">
-                                <option value="">검색조건</option>
-                                <option value="product_name">제품 이름</option>
+
                             </select>
                             <input type="text" style="width: 200px; height: 25px; margin-right:5px; " id="pname"
                                    name="pname">
@@ -290,18 +285,17 @@
                                     <col width="10%">
                                     <col width="10%">
                                     <col width="10%">
-                                    <col width="10%">
                                 </colgroup>
 
                                 <thead>
                                 <tr>
-                                    <th scope="col">제품 번호</th>
-                                    <th scope="col">제폼 종류</th>
-                                    <th scope="col">제조사</th>
-                                    <th scope="col">제품 이름</th>
-                                    <th scope="col">모델명</th>
-                                    <th scope="col">납품단가</th>
-                                    <th scope="col">판매가</th>
+                                    <th scope="col">연월</th>
+                                    <th scope="col">총 주문 건수</th>
+                                    <th scope="col">매출</th>
+                                    <th scope="col">매출 원가</th>
+                                    <th scope="col">매출 총이익</th>
+                                    <th scope="col">영업이익률</th>
+
 
                                 </tr>
                                 </thead>

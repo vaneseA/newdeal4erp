@@ -51,7 +51,6 @@
 					break;
 				case 'btnVacaApp' :
 					fn_vacaFormInsert();
-					break;
 				case 'btnBack' :
 					gfCloseModal();
 					break;
