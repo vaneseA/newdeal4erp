@@ -79,6 +79,7 @@
 
                 switch (btnId) {
                     case 'btnSearch' :
+                        $(".selectedDayList").css("display", "block");  // Here
                         fn_saleDayList();
                         break;
                 }
@@ -205,7 +206,7 @@
                             </p>
                         </div>
                         <!-- 검색창 영역 끝 -->
-                        <div class="selectedDayList" >
+                        <div class="selectedDayList" style="display: none;"> <!-- Here -->
                             <div style="display:flex; flex-grow: 1; justify-content: space-evenly;">
                                 <div class="items" style="width: 100%"><canvas id="doughnut-chart" width="300" height="250"></canvas></div>
                                 <div class="items"style="width: 100%; ">
@@ -217,12 +218,10 @@
                                             <col width="20%">
                                             <col width="20%">
                                             <col width="20%">
-
                                         </colgroup>
 
                                         <thead>
                                         <tr>
-
                                             <th scope="col">선택된 일자</th>
                                             <th scope="col">총 판매량</th>
                                             <th scope="col">매출</th>
@@ -236,16 +235,16 @@
                                             <tr>
                                                 <td>${list.order_date_str}</td>
                                                 <td>
-                                                    <fmt:formatNumber value="${list.product_unit_price}" type="number" pattern="#,###" />
+                                                    <fmt:formatNumber value="${list.total_order_dt_amt}" type="number" pattern="#,###" />
                                                 </td>
                                                 <td>
-                                                    <fmt:formatNumber value="${list.product_price}" type="number" pattern="#,###" />
+                                                    <fmt:formatNumber value="${list.total_order_tot_price}" type="number" pattern="#,###" />
                                                 </td>
                                                 <td>
-                                                    <fmt:formatNumber value="${list.order_dt_amt}" type="number" pattern="#,###" />
+                                                    <fmt:formatNumber value="${list.total_product_unit_price}" type="number" pattern="#,###" />
                                                 </td>
                                                 <td>
-                                                    <fmt:formatNumber value="${list.order_tot_price}" type="number" pattern="#,###" />
+                                                    <fmt:formatNumber value="${list.net_profit}" type="number" pattern="#,###" />
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -253,6 +252,8 @@
                                     </table>
                                 </div>
                             </div>
+                        </div>
+
 
                         <div class="saleDayList">
                             <div style="display:flex; flex-grow: 1; justify-content: space-evenly;">
