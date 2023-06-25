@@ -33,6 +33,10 @@
             </td>
         </tr>
     </c:forEach>
+
+
+
+
 </c:if>
 
 <input type="hidden" id="totalcnt" name="totalcnt" value ="${totalcnt}"/>

@@ -31,13 +31,12 @@ public class SelSaDController {
     private final String className = this.getClass().toString();
 
 
-
     /**
      * 초기화면
      */
     @RequestMapping("saleDay.do")
     public String saleDay(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
-                            HttpServletResponse response, HttpSession session) throws Exception {
+                          HttpServletResponse response, HttpSession session) throws Exception {
 
         logger.info("+ Start " + className + ".saleDay");
         logger.info("   - paramMap : " + paramMap);
@@ -47,11 +46,12 @@ public class SelSaDController {
         return "selSaD/saleDayList";
 
     }
+
     /**
      * 목록 조회
      */
     @RequestMapping("saleDayList.do")
-    public String productList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+    public String saleDayList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                               HttpServletResponse response, HttpSession session) throws Exception {
 
         logger.info("+ Start " + className + ".saleDayList");
@@ -66,19 +66,17 @@ public class SelSaDController {
 
         // Controller -> Service -> Dao -> SQL
         List<SelSaDModel> saleDaySearchList = selSaDService.saleDayList(paramMap);
-        int totalcnt = selSaDService.countSaleDayList(paramMap);
-
         model.addAttribute("saleDaySearchList", saleDaySearchList);
+        int totalcnt = selSaDService.countSaleDayList(paramMap);
         model.addAttribute("totalcnt", totalcnt);
+        List<SelSaDModel> selectedDaySearchList = selSaDService.saleDayList(paramMap);
+        model.addAttribute("selectedDaySearchList", selectedDaySearchList);
+
 
         logger.info("+ End " + className + ".saleDayList");
 
         return "selSaD/saleDayListGrd";
     }
-
-
-
-
 
 
 }

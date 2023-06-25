@@ -23,28 +23,32 @@
         INNER JOIN tb_product pd ON odt.product_no = pd.product_no
         INNER JOIN tb_pro pc ON pd.pro_cd = pc.pro_cd
         INNER JOIN tb_splr sl ON pd.splr_no = sl.splr_no
-
-<!--        <where>-->
-<!--            <if test="selectedValue != null and searchKey != null">-->
-<!--                <choose>-->
-<!--                    <when test="searchKey == 'order_date'">-->
-<!--                        and od.order_date = #{selectedValue}-->
-<!--                    </when>-->
-<!--                    <when test="searchKey == 'clnt_name'">-->
-<!--                        and cl.clnt_name = #{selectedValue}-->
-<!--                    </when>-->
-<!--                    <when test="searchKey == 'splr_name'">-->
-<!--                        and sl.splr_name = #{selectedValue}-->
-<!--                    </when>-->
-<!--                    <when test="searchKey == 'product_name'">-->
-<!--                        and pd.product_name = #{selectedValue}-->
-<!--                    </when>-->
-<!--                    &lt;!&ndash; 다른 조건에 따른 처리 추가 가능 &ndash;&gt;-->
-<!--                </choose>-->
-<!--            </if>-->
-<!--        </where>-->
         ORDER BY od.order_no
         LIMIT #{pageindex}, #{pageSize}
+
+    </select>
+
+    <select id="SelectedDayList" resultType="kr.happyjob.study.selSaD.model.SelSaDModel">
+        SELECT
+            DATE_FORMAT(od.order_date, '%Y-%m-%d') as order_date_str,
+            od.order_no,
+            cl.clnt_name,
+            pc.pro_name,
+            sl.splr_name,
+            pd.product_name,
+            pd.product_serial,
+            pd.product_price,
+            pd.product_unit_price,
+            odt.order_dt_amt,
+            od.order_tot_price
+        FROM tb_order od
+                 INNER JOIN tb_clnt cl ON od.clnt_no = cl.clnt_no
+                 INNER JOIN tb_order_dt odt ON od.order_no = odt.order_no
+                 INNER JOIN tb_product pd ON odt.product_no = pd.product_no
+                 INNER JOIN tb_pro pc ON pd.pro_cd = pc.pro_cd
+                 INNER JOIN tb_splr sl ON pd.splr_no = sl.splr_no
+        ORDER BY od.order_no
+
 
     </select>
 
