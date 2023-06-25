@@ -195,32 +195,23 @@
                             <table class="col">
                                 <caption>caption</caption>
                                 <colgroup>
-                                    <col width="12%">
-                                    <col width="5%">
-                                    <col width="9%">
-                                    <col width="9%">
-                                    <col width="9%">
-                                    <col width="12%">
-                                    <col width="9%">
-                                    <col width="9%">
-                                    <col width="9%">
-                                    <col width="5%">
-                                    <col width="9%">
+                                    <col width="10%">
+                                    <col width="15%">
+                                    <col width="15%">
+                                    <col width="15%">
+                                    <col width="15%">
+                                    <col width="15%">
                                 </colgroup>
 
                                 <thead>
                                 <tr>
-                                    <th scope="col">주문 일자</th>
-                                    <th scope="col">주문 번호</th>
-                                    <th scope="col">고객기업명</th>
-                                    <th scope="col">제품 분류</th>
-                                    <th scope="col">제조사</th>
-                                    <th scope="col">품명</th>
-                                    <th scope="col">모델명</th>
-                                    <th scope="col">납품단가</th>
-                                    <th scope="col">판매가</th>
-                                    <th scope="col">수량</th>
-                                    <th scope="col">총액</th>
+                                    <th scope="col">연도</th>
+                                    <th scope="col">영업이익</th>
+                                    <th scope="col">매출</th>
+                                    <th scope="col">인건비</th>
+                                    <th scope="col">전년대비 매출 성장률</th>
+                                    <th scope="col">전년대비 순이익 성장률</th>
+
 
                                 </tr>
                                 </thead>
