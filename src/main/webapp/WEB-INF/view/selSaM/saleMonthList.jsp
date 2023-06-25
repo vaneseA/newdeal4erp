@@ -16,56 +16,48 @@
         var pageSize = 5;
         var pageBlockSize = 5;
         function fn_aa() {
-            new Chart(document.getElementById("line-chart"), {
-                type: 'line',
+            // 오늘 날짜 가져오기
+            var currentDate = new Date();
+
+            // Date 객체의 날짜를 7일씩 증가시키면서 label 생성
+            var labels = [];
+            for (var i = 0; i < 7; i++) {
+                var date = new Date(currentDate);
+                date.setDate(date.getDate() + i);
+                var formattedDate = formatDate(date); // 날짜를 원하는 형식으로 포맷팅
+                labels.push(formattedDate);
+            }
+            new Chart(document.getElementById("bar-chart-horizontal"), {
+                type: 'horizontalBar',
                 data: {
-                    labels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
-                    datasets: [{
-                        data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
-                        label: "Africa",
-                        borderColor: "#3e95cd",
-                        fill: false
-                    }, {
-                        data: [282, 350, 411, 502, 635, 809, 947, 1402, 3700, 5267],
-                        label: "Asia",
-                        borderColor: "#8e5ea2",
-                        fill: false
-                    }, {
-                        data: [168, 170, 178, 190, 203, 276, 408, 547, 675, 734],
-                        label: "Europe",
-                        borderColor: "#3cba9f",
-                        fill: false
-                    }, {
-                        data: [40, 20, 10, 16, 24, 38, 74, 167, 508, 784],
-                        label: "Latin America",
-                        borderColor: "#e8c3b9",
-                        fill: false
-                    }, {
-                        data: [6, 3, 2, 2, 7, 26, 82, 172, 312, 433],
-                        label: "North America",
-                        borderColor: "#c45850",
-                        fill: false
-                    }
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: "Population (millions)",
+                            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                            data: [2478, 5267, 734, 784, 433]
+                        }
                     ]
                 },
                 options: {
+                    legend: {display: false},
                     title: {
                         display: true,
-                        text: 'World population per region (in millions)'
+                        text: '월별 매출 순이익'
                     }
                 }
             });
+
+            /** OnLoad event */
+            $(function () {
+                // 버튼 이벤트 등록
+                fRegisterButtonClickEvent();
+
+                fn_saleMonthList();
+                fn_aa();
+
+            });
         }
-
-        /** OnLoad event */
-        $(function () {
-            // 버튼 이벤트 등록
-            fRegisterButtonClickEvent();
-
-            fn_saleMonthList();
-            fn_aa();
-
-        });
 
 
         /** 버튼 이벤트 등록 */
@@ -169,86 +161,6 @@
             }
         }
 
-        function fn_selectOne(no) {
-
-            var param = {
-                product_no: no
-            }
-
-            var selectOnCallBack = function (returndata) {
-                console.log(JSON.stringify(returndata));
-
-                popUpInit(returndata.productSearch);
-
-                // 모달 팝업
-                gfModalPop("#layer1");
-
-            }
-
-            callAjax("/busPd/productSelectOne.do", "post", "json", false, param, selectOnCallBack);
-
-        }
-
-        function fn_save() {
-
-            if (!fn_Validate()) {
-                return;
-            }
-
-            var param = {
-                action: $("#action").val(),
-                product_no: $("#product_no").val(),
-                product_name: $("#product_name").val(),
-                pro_name: $("#pro_name").val(),
-                splr_name: $("#splr_name").val(),
-                product_serial: $("#product_serial").val(),
-                product_unit_price: $("#product_unit_price").val(),
-                product_price: $("#product_price").val()
-            }
-
-            //
-
-            var saveCollBack = function (reval) {
-                console.log(JSON.stringify(reval));
-
-                if (reval.returncval > 0) {
-                    alert("저장 되었습니다.");
-                    gfCloseModal();
-
-                    if ($("#action").val() == "U") {
-                        fn_saleMonthList($("#pageno").val());
-                    } else {
-                        fn_saleMonthList();
-                    }
-                } else {
-                    alert("오류가 발생 되었습니다.");
-                }
-            }
-            callAjax("/busPd/productSave.do", "post", "json", false, $("#myForm").serialize(), saveCollBack);
-
-        }
-
-        function fn_Validate() {
-
-            var chk = checkNotEmpty(
-                [
-                    ["pro_name", "제품분류를 선택해 주세요."]
-                    , ["splr_name", "납품회사명을 선택해 주세요"]
-                    , ["product_name", "품명 입력해 주세요"]
-                    , ["product_serial", "모델명을 입력해 주세요"]
-                    , ["product_unit_price", "납품을 입력해 주세요"]
-                    , ["product_price", "판매가을 입력해 주세요"],
-
-                ]
-            );
-
-            if (!chk) {
-                return;
-            }
-
-            return true;
-        }
-
 
     </script>
 
@@ -318,31 +230,7 @@
 
                         <div class="saleMonthList">
                             <div style="display:flex; flex-grow: 1; justify-content: space-evenly;">
-                                <div class="items" style="width: 100%"><canvas id="line-chart" width="300" height="250"></canvas></div>
-                                <div class="items"style="width: 100%; ">
-                                    <table class="col" style="height:100%;" >
-                                        <caption>caption</caption>
-                                        <tr>
-                                            <th>매출</th>
-
-                                            <td>${tem_in1}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>매출 원가</th>
-
-                                            <td>${tem_in2}</td>
-                                        </tr>
-                                        <tr>
-
-                                            <th>매출 순이익</th>
-                                            <td>${tem_in3}</td>
-                                        </tr>
-                                        <tr>
-
-                                            <th>매출 이익률</th>
-                                            <td>${tem_in4}</td>
-                                        </tr>
-                                    </table>
+                                <div class="items" style="width: 100%"><canvas id="bar-chart-horizontal" width="300" height="250"></canvas></div>
                                 </div>
                             </div>
                             <table class="col">
