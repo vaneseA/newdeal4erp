@@ -47,7 +47,14 @@
                     }
                 }
             });
-
+        }
+            // 날짜를 'YYYY-MM-DD' 형식으로 포맷팅하는 함수
+            function formatDate(date) {
+                var year = date.getFullYear();
+                var month = ('0' + (date.getMonth() + 1)).slice(-2);
+                var day = ('0' + date.getDate()).slice(-2);
+                return year + '-' + month + '-' + day;
+            }
             /** OnLoad event */
             $(function () {
                 // 버튼 이벤트 등록
@@ -57,7 +64,7 @@
                 fn_aa();
 
             });
-        }
+
 
 
         /** 버튼 이벤트 등록 */
@@ -230,7 +237,7 @@
 
                         <div class="saleMonthList">
                             <div style="display:flex; flex-grow: 1; justify-content: space-evenly;">
-                                <div class="items" style="width: 100%"><canvas id="bar-chart-horizontal" width="300" height="250"></canvas></div>
+                                <div class="items" style="width: 50%"><canvas id="bar-chart-horizontal" width="300" height="250"></canvas></div>
                                 </div>
                             </div>
                             <table class="col">
