@@ -15,4 +15,7 @@ public interface SelSaDService {
     public int countSaleDayList(Map<String, Object> paramMap) throws Exception;
 
 
+    // Selected day list 조회
+    public List<SelSaDModel> selectedDayList(Map<String, Object> paramMap) throws Exception;
+
 }

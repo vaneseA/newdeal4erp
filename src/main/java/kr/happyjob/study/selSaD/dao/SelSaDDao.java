@@ -18,5 +18,5 @@ public interface SelSaDDao {
     //카운트 조회
     public int countSaleDayList(Map<String, Object> paramMap) throws Exception;
 
-
+    List<SelSaDModel> selectedDayList(Map<String, Object> paramMap) throws Exception;
 }

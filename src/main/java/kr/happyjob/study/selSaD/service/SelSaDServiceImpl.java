@@ -28,5 +28,9 @@ public class SelSaDServiceImpl implements SelSaDService {
 
         return selSaDDao.countSaleDayList(paramMap);
     }
+    // Selected day list 조회
+    public List<SelSaDModel> selectedDayList(Map<String, Object> paramMap) throws Exception {
+        return selSaDDao.selectedDayList(paramMap);
+    }
 
 }
