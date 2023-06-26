@@ -21,6 +21,11 @@ display:inline-block;
 width:10px;
 }
 
+.inputTxt p1001{
+ width:100px;
+
+}
+
 
 </style>
 <meta charset="UTF-8">
@@ -90,6 +95,7 @@ width:10px;
 		}
 		
 		var listcallback = function(returnvalue) {
+			
 			console.log(returnvalue);
 			
 			$("#myPage").empty().append(returnvalue);
@@ -166,7 +172,7 @@ width:10px;
 			$("#btnDeleteFile").hide();
 			
 		} else {
-			
+			 
 			 $("#loginID").val(object.loginID);
 			 $("#name").val(object.name);		
 			 $("#password").val(object.password);
@@ -175,16 +181,56 @@ width:10px;
 			 $("#emp_zip").val(object.emp_zip);
 			 $("#emp_addr").val(object.emp_addr);
 			 $("#emp_dt_addr").val(object.emp_dt_addr);
+			  
+			 var inserthtml = "";
+				
+				if(object.file_name == "" || object.file_name == null || object.file_name == undefined) {
+					inserthtml += "";
+				} else {
+					var selfile = object.file_name;
+				    var selfilearr = selfile.split(".");
+				    var lastindex = selfilearr.length - 1;
+				    if(selfilearr[lastindex].toLowerCase() == "jpg" || selfilearr[lastindex].toLowerCase() == "gif" || selfilearr[lastindex].toLowerCase() == "jpeg" || selfilearr[lastindex].toLowerCase() == "png") {
+				    	  inserthtml += "<img src='" + object.logic_path + "' style='width:100px; height:120px' />";
+				    } else {
+				    	  inserthtml += object.file_name;
+				    }				
+				} 
 			 
+				
+				$("#previewdiv").empty().append(inserthtml);
+				
+				$("#btnSaveFile").show();
+				$("#btnDeleteFile").hide();
 			
-			 $("#btnSaveFile").show();
-			$("#btnDeleteFile").hide();
-			
-			$("#action").val("U");	
+				$("#action").val("U");	
 		}
 	}
-	
-	
+   function preview(event) {
+		var image = event.target;
+		  
+		//alert(image.files[0].file_name + " : " + image.files[0].file_nm + " : " + image.files[0].name);
+		
+		 if(image.files[0]){
+			  //alert(window.URL.createObjectURL(image.files[0]));
+			 
+			  var selfile = image.files[0].name;
+		      var selfilearr = selfile.split(".");
+		      var inserthtml = "";
+		      var lastindex = selfilearr.length - 1;
+		      
+		      
+		      if(selfilearr[lastindex].toLowerCase() == "jpg" || selfilearr[lastindex].toLowerCase() == "gif" || selfilearr[lastindex].toLowerCase() == "jpge" || selfilearr[lastindex].toLowerCase() == "png") {
+		    	  inserthtml = "<img src='" + window.URL.createObjectURL(image.files[0]) + "' style='width:100px; height:120px' />";
+		      } else {
+		    	  inserthtml = selfile;
+		      }
+			  
+			  
+			  $("#previewdiv").empty().append(inserthtml);
+		}
+		
+   }
     
 	function fn_savefile() {
 		
@@ -223,11 +269,10 @@ width:10px;
 		//callAjaxFileUploadSetFormData("/accEps/listSaveFileEps.do", "post", "json", true, fileData, filesavecallback);
 		callAjax("/empMpg/listSaveFileMpg.do", "post", "json", true, param, filesavecallback);
 		
+	
 	}
-	
-	
-	
-		   
+
+		  
 	  </script>
 	
 	
@@ -331,29 +376,41 @@ width:10px;
 				<table class="row">
 					<caption>caption</caption>
 					<colgroup>
+						<col width="90px">
 						<col width="120px">
-						<col width="*">
-						<col width="120px">
+						<col width="90px">
 						<col width="*">
 					</colgroup>
 
 					<tbody>
+					
 						<tr>
-							<th scope="row">사번 </th>
+							<th scope="row" rowspan ="3">사진 </th>
+							<td rowspan="3" >
+								<div id="previewdiv" name="previewdiv" ></div>
+								</div>
+							</td>
+							<th scope="row" >사번 </th>
 							<td><input type="text" class="inputTxt p100" name="loginID" id="loginID" /></td>
+							
+						</tr>
+						<tr>
 							<th scope="row">이름 </th>
 							<td ><input type="text" class="inputTxt p100" name="name" id="name" /></td>
-						</tr>						
-						<tr>
-							<th scope="row">비밀번호 </th>
-							<td ><input type="text" class="inputTxt p100" name="password" id="password" /></td>
+						
+						</tr>
 							<th scope="row">연락처 </th>
 							<td ><input type="text" class="inputTxt p100" name="emp_hp" id="emp_hp" /></td>
+						
 						</tr>
+												
 						<tr>
+							<th scope="row" >비밀번호 </th>
+							<td><input type="text" class="inputTxt p1001" name="password" id="password"  /></td>
 							<th scope="row">이메일 </th>
-							<td colspan = "3"><input type="text" class="inputTxt p100" name="emp_email" id="emp_email" /></td>
+							<td><input type="text" class="inputTxt p100" name="emp_email" id="emp_email" /></td>
 						</tr>
+						
 						<tr>
 							<th scope="row">우편번호 </th>
 							<td colspan = "3"><input type="text" class="inputTxt p100" name="emp_zip" id="emp_zip" /></td>

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.happyjob.study.busOdm.model.OrderModel;
+import kr.happyjob.study.busOdm.model.OrderPdModel;
 
 public interface BusOdmDao {
 
@@ -21,5 +22,13 @@ public interface BusOdmDao {
     
     /** 주문 상세 목록 카운트 조회 */
     public int countdetaillist(Map<String, Object> paramMap) throws Exception;
-   
+    
+    /** [추가] 버튼 클릭 시, 해당 제품 이름, 가격 조회 */
+    public OrderPdModel orderadd(Map<String, Object> paramMap) throws Exception;
+    
+    /** [저장] 버튼 클릭 시, 주문정보 저장 */
+	public int orderinsert(Map<String, Object> paramMap) throws Exception;
+	
+	/** [저장] 버튼 클릭 시, 주문 상세 정보 저장 */
+    public int orderdetailinsert(Map<String, Object> paramMap) throws Exception;
 }

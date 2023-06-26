@@ -16,7 +16,7 @@
 	var pageSize = 5;     
 	var pageBlockSize = 5;    
 	
-	// 주문 상세목록에 추가된 아이템 저장할 변수
+	// 주문 상세목록에 추가된 아이템 저장할 전역변수
 	var itemstr = "";	
 	
 	/** OnLoad event */ 
@@ -58,7 +58,7 @@
 	            fn_orderlist();
 	            break;
 	        case 'btnAdd' : 
-	        	setSessionStorage();
+	        	fn_add();
 	        	break;
 	        case 'btnSave' :
 	            fn_save();
@@ -86,18 +86,14 @@
 		
 		var listcallback = function(returnvalue) {
 			console.log(returnvalue);
-			
 			$("#listorder").empty().append(returnvalue);
 			
 			var  totalcnt = $("#totalcnt").val();
-			
 			console.log("totalcnt : " + totalcnt);
 			
 			var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_orderlist');
 			console.log("paginationHtml : " + paginationHtml);
-			 
 			$("#orderPagination").empty().append( paginationHtml );
-			
 			$("#pageno").val(pagenum);
 		}
 		
@@ -107,34 +103,101 @@
 	
 	
 	function fn_openpopup() {
+		// 주문서 신규작성 모달 팝업
+	    gfModalPop("#layer1");				
+	}
+	
+	
+	//fn_add()에서 활용할 전역변수
+	var totalOrderPrice = 0;
+	
+	//fn_save()에서 활용할 전역변수
+	var orderItems = "";
+	
+	function fn_add() {
+		// tb_product 테이블 조회해서 제품명(product_name),
+		// 제품가격(product_price) 받아와야 하므로, 
+		// [추가] 버튼 누르는 즉시 순간적으로 컨트롤러에 param 보내기
+		var param = {
+			ptypecombo	: $("#ptypecombo").val()
+		};
 		
-		// 주문서 작성 모달 팝업
-	    gfModalPop("#layer1");
-						
-	}
-	
-	
-	function setSessionStorage() {
+		var order_tot_price = $("#order_tot_price").val();
 		
-		// SessionStorage 에 데이터 저장
-		// dd,dd,ddd,ddd / rr,rr,rrr,rrr
-		itemstr += "/" + $("#ltypecombo").val() + "," + $("#mtypecombo").val() + "," + $("#ptypecombo").val() + "," + $("#order_dt_amt").val();
-		sessionStorage.setItem("myData", itemstr);
-		console.log("데이터가 저장되었습니다.");
+		var addcallback = function(returndata) {
+	        var parsedData = JSON.parse(returndata);
+	        var orderadd = parsedData.orderadd;
+	        var product_no = orderadd.product_no;
+	        var product_name = orderadd.product_name;
+	        var product_price = orderadd.product_price;
+	        var order_dt_amt = $("#order_dt_amt").val();
+	        var order_dt_price = product_price * order_dt_amt;
+	        totalOrderPrice += order_dt_price;
+
+	        var html = "<tr>";
+	        html += "<td>" + product_no + "</td>";
+	        html += "<td>" + product_name + "</td>";
+	        html += "<td>" + product_price + "</td>";
+	        html += "<td>" + order_dt_amt + "</td>";
+	        html += "<td>" + order_dt_price + "</td>";
+	        html += "</tr>";
+	        $("#bucket").append(html);
+	        $("#order_tot_price").text(totalOrderPrice);
+	        
+		    // 주문 상세 정보를 자식 테이블에 저장하기 위해 item 에 담아놓기
+/* 		    
+	        var item = {
+	            order_no: $("#order_no").val(),    // hidden
+	            product_no: product_no,
+	            clnt_no: $("#mtypecombo").val(),
+	            product_price: product_price,
+	            order_dt_amt: order_dt_amt,
+	            order_dt_price: order_dt_price
+	        };
+		     */
+		     
+		     var item = $("#order_no").val() + "," + product_no + "," + $("#clicombo").val() + "," + product_price + "," + order_dt_amt + "," + order_dt_price + "/";
+	         console.log("item : " + item);
+		     
+		     orderItems += item
+	    };
+	    callAjax("/busOdm/orderadd.do", "post", "text", false, param, addcallback);
+        console.log(orderItems);
 	}
 	
 	
-	// 위쪽 함수 내부에 포함시켜서, 추가 누르는 즉시 화면에 데이터 뿌려지도록 수정하기
-	function getSessionStorage() { 
-		var dataString = sessionStorage.getItem("myData");
-		if (dataString) {
-		   // JSON 문자열을 파싱하여 데이터 객체로 변환
-		   var data = JSON.parse(dataString);
-		   console.log("불러온 데이터:", data);
-		} else {
-		   console.log("저장된 데이터가 없습니다.");
-		}
+	function fn_save() {
+		
+		// tb_order(부모테이블) 에 데이터 먼저 넣고,
+		// tb_order_dt(자식테이블) 에 데이터 넣는 순서
+		
+		var order_tot_price = totalOrderPrice;
+
+		var param = {
+	        clnt_no: $("#clicombo").val(),
+	        order_tot_price: totalOrderPrice,
+	        order_date: $("#order_date").val(),
+	        order_req: $("#order_req").val(),
+	        orderItems : orderItems
+	    };
+
+		
+		var savecallback = function(reval) {
+			console.log(JSON.stringify(reval));
+			if(reval.returncval > 0) {
+				alert("저장 되었습니다.");
+				gfCloseModal();
+				fn_orderlist();
+			} else {
+			  alert("오류가 발생 되었습니다.");				
+			}
+		};
+
+		callAjax("/busOdm/ordersave.do", "post", "json", false, param, savecallback);
+	    
 	}
+	
+
 	
 	
 	function fn_selectone(no) {
@@ -144,16 +207,12 @@
 		}
 		
 		var selectoncallback = function(returndata) {			
-	        
 	        console.log( returndata );
-	        
 	        $("#layer2").empty().append(returndata);
 
-	        // 모달 팝업
+	        // 주문 한건조회 모달 팝업
 	        gfModalPop("#layer2");
-
 	    }
-
 	    callAjax("/busOdm/orderselectone.do", "post", "text", false, param, selectoncallback);		
 	}
 	
@@ -165,6 +224,7 @@
 </head>
 <body>
 <form id="myForm" action=""  method="">
+	<input type="hidden" id="order_no"  name="order_no"  />
 	<input type="hidden" id="pageno"  name="pageno"  />
 
 	<!-- 모달 배경 -->
@@ -202,10 +262,10 @@
 						
 						<!-- 검색창 영역 시작 -->
 						<div style="display:flex; justify-content:center; align-content:center; line-height:2; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">
-							<label for="searchclicombo" style="font-size:15px; font-weight:bold; margin-right:10px;">주문기업명</label>
+							<label for="searchKey" style="font-size:15px; font-weight:bold; margin-right:10px;">주문기업명</label>
 							<select id="searchclicombo" name="searchclicombo" style="width:150px; margin-right:50px;"></select>
 							 							
-							<label for="searchstart" style="font-size:15px; font-weight:bold; margin-right:10px;">주문날짜</label>
+							<label for="start" style="font-size:15px; font-weight:bold; margin-right:10px;">주문날짜</label>
 							<input type="date" id="searchstart" name="searchstart" style="height:30px; width:100px; margin-right:5px;">
 							<span style="margin-right:5px; line-height:3;"> ~ </span>
 							<input type="date" id="searchend" name="searchend" style="height:30px; width:100px; margin-right:50px;">
@@ -291,12 +351,44 @@
 					<a href="" class="btnType blue" id="btnAdd" name="btn"><span>추가</span></a> 
 				</div>
 				
-				<!-- 추가된 제품 목록 그리드 -->
-				<div style="margin-top:20px;">
-				</div>
+				<!-- 추가된 제품 목록 그리드 시작 -->
+				<div style="overflow-y:scroll; margin-top:25px;"> <!-- 무한 스크롤 -->
+                	<table class="col">
+						<caption>caption</caption>
+						<colgroup>
+							<col width="10%">
+							<col width="40%">
+							<col width="15%">
+							<col width="10%">
+							<col width="25%">
+						</colgroup>
+	
+						<thead>
+							<tr>
+								<th scope="col">제품번호</th>
+								<th scope="col">제품명</th>
+								<th scope="col">판매가</th>
+								<th scope="col">주문수량</th>
+								<th scope="col">주문금액</th>
+							</tr>
+						</thead>
+						
+						<!-- bucket 출력 시작 -->
+						<tbody id="bucket">
+						</tbody>
+						<!-- bucket 출력 끝 -->
+						
+					</table>
+					<hr style="margin-top:30px;"> 
+					<div style="display:flex; justify-content:center; align-content:center; margin-top:15px;">
+						<span style="line-height:2.5; font-weight:bold; margin-right:5px;">= 총주문금액</span>
+						<span id="order_tot_price" name="order_tot_price" style="line-height:2.5;"></span>
+					</div>
+                </div>
+                <!-- 추가된 제품 목록 그리드 끝 -->
 				
-				<!-- 주문기업명, 요청사항 선택 -->
-				<table class="row">
+				<!-- 주문기업명, 요청사항 선택 시작 -->
+				<table class="row" style="margin-top:25px;">
 					<caption>caption</caption>
 					<colgroup>
 						<col width="25%">
@@ -308,18 +400,19 @@
 					<tbody>
 						<tr>
 							<th scope="row">주문기업명 <span class="font_red">*</span></th>
-							<td><select id="clicombo" name="accdcombo"></select></td>
+							<td><select id="clicombo" name="clicombo"></select></td>
 							<th scope="row">주문날짜 <span class="font_red">*</span></th>
 							<td><input type="date" id="order_date" name="order_date" style="font-size:13px; height:30px; width:170px;"></td>
 						</tr>
 						<tr>
 							<th scope="row">요청사항 </th>
 							<td colspan="3">
-							    <textarea id="splr_memo" name="splr_memo"> </textarea>
+							    <textarea id="order_req" name="order_req"> </textarea>
 							</td>
 						</tr>
 					</tbody>
 				</table>
+				<!-- 주문기업명, 요청사항 선택 끝 -->
 				
 
 				<div class="btn_areaC mt30">

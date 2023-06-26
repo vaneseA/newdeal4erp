@@ -6,23 +6,32 @@
 	<!--  목록 조회 -->
 	<select id="empMypageList" resultType="kr.happyjob.study.empMpg.model.EmpMpgModel">
 		/*kr.happyjob.study.empMpg.dao.EmpMpgDao.expenseSearchList*/
-     select  loginID
-              , name
-              , password
-              , emp_hp
-              , emp_email
-              , emp_zip
-              , emp_addr
-              , emp_dt_addr
- from tb_userinfo
+      select 
+	 		  ui.loginID
+              , ui.name
+              , ui.password
+              , ui.emp_hp
+              , ui.emp_email
+              , ui.emp_zip
+              , ui.emp_addr
+              , ui.emp_dt_addr
+              , ui.file_no
+		      , fi.file_name
+		      , fi.logic_path
+		      , fi.physic_path
+		      , fi.file_size
+		      , fi.exten
+ 	from tb_userinfo ui
+ 	inner join tb_file fi on fi.file_no = ui.file_no
+ 	
  <where>
  	
      <if test="currentuserType != 'A'.toString()">
-          and loginID = #{currentLoginID}
+          and ui.loginID = #{currentLoginID}
     </if>
  
 	<if test="(sname != null) and (!sname.equals(''))">
-			and loginID like  concat('%',#{sname},'%')
+			and ui.loginID like  concat('%',#{sname},'%')
 	</if>	
 	
 	</where>		
@@ -35,32 +44,42 @@
 	<select id="countList" resultType="int">
 		/*kr.happyjob.study.empMpg.dao.EmpMpgDao.countList*/
 		select count(*)
- from tb_userinfo
+ 	from tb_userinfo ui
+ 	inner join tb_file fi on fi.file_no = ui.file_no
          
  <where>
  
      <if test="currentuserType != 'A'.toString()">
-          and loginID = #{currentLoginID}
+          and ui.loginID = #{currentLoginID}
     </if>
  
 	<if test="(sname != null) and (!sname.equals(''))">
-			and loginID like  concat('%',#{sname},'%')
+			and ui.loginID like  concat('%',#{sname},'%')
 	</if>	
 	
 	</where>		
 	</select>
 	
 	<select id="listSelectOneMpg" resultType="kr.happyjob.study.empMpg.model.EmpMpgModel">
-	 select  loginID
-              , name
-              , password
-              , emp_hp
-              , emp_email
-              , emp_zip
-              , emp_addr
-              , emp_dt_addr
- 	from tb_userinfo
+	 select 
+	 		  ui.loginID
+              , ui.name
+              , ui.password
+              , ui.emp_hp
+              , ui.emp_email
+              , ui.emp_zip
+              , ui.emp_addr
+              , ui.emp_dt_addr
+              , ui.file_no
+		      , fi.file_name
+		      , fi.logic_path
+		      , fi.physic_path
+		      , fi.file_size
+		      , fi.exten
+ 	from tb_userinfo ui
+ 	inner join tb_file fi on fi.file_no = ui.file_no
  	where loginID = #{loginID}
+ 	
 	</select>
 	
 	<update id="listUpdateFileMpg">

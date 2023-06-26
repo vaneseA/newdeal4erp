@@ -22,7 +22,7 @@
 <script type="text/javascript">
 	var calendarEl;
 	var calendar;
-	var empTaList;
+	var dayCheckList;
 	
 	document.addEventListener('DOMContentLoaded', function() {
 	    	calendarEl = document.getElementById('calendar');
@@ -37,7 +37,7 @@
     	    },
     	   	events : function (info, callback){
     	   		$.ajax({
-    	   			url : '/employee/empTaList.do',
+    	   			url : '/calDay/dateCheckList.do',
     	   			type : 'POST',
     	   			data : {
     	   				  startDate: moment(info.start).format('YYYY-MM-DD')
@@ -45,88 +45,94 @@
     	   			},
     	   			dataType : 'json',
     	   			success : function(data){
-    	   				var list = data.empTaList;
-    	   				empTaList = [];
+    	   				var list = data.dateCheckList;
+    	   				dateCheckList = [];
     	   				for(var i = 0; i < list.length; i++){
     	   					
-	    	   					var ta_ynColor = "";
-	    	   					if(list[i].ta_yn == '1'){
-	    	   						ta_ynColor = "#ff0000";
-	    	   					}else if (list[i].ta_yn == '2'){
-	    	   						ta_ynColor = "#006600";
-	    	   					}else if (list[i].ta_yn == '3'){
-	    	   						ta_ynColor = "#800080";
-	    	   					} 
-	    	   					
-	    	   					var ta_yn = "";
-	    	   					if(list[i].ta_yn == '1'){
-	    	   						ta_yn = "승인대기";
-	    	   					}else if (list[i].ta_yn == '2'){
-	    	   						ta_yn = "승인";
-	    	   					}else if (list[i].ta_yn == '3'){
-	    	   						ta_yn = "반려";
+    	   					//승인여부에 따른 색상표시
+	    	   					var appro_ynColor = "";
+	    	   					if(list[i].appro_yn == 'N'){
+	    	   						appro_ynColor = "#ff9175";
+	    	   					}else if (list[i].appro_yn == 'Y'){
+	    	   						appro_ynColor = "#5470d6";
 	    	   					}
 	    	   					
-	    	   				var taList = {	
+	    	   					var appro_yn = "";
+	    	   					if(list[i].appro_yn == 'N'){
+	    	   						appro_yn = "승인대기";
+	    	   					}else if (list[i].appro_yn == 'Y'){
+	    	   						appro_yn = "승인완료";
+	    	   					}
+	    	   					
+	    	   				var CheckList = {	
 	    	   					// 이벤트 추가
-    	   				        title : ta_yn +' '+list[i].ta_yn_cnt+ '건 ',
-    	   				        start : list[i].ta_reg_date,
-    	   				        color : ta_ynColor,
+    	   				        title : appro_yn +' '+list[i].vaca_yn_cnt+ '건 ',
+    	   				        start : list[i].vaca_req_date,
+    	   				        color : appro_ynColor,
     	   				        textColor : 'white',
     	   				        allDay : true,
     	   					};
-	    	   				empTaList.push(taList);
+	    	   				dateCheckList.push(CheckList);
     	   				}//for문
-	    	   			callback(empTaList);
+	    	   			callback(dateCheckList);
     	   			}//success
     	   		});//ajax 
     	   	}, //events
-    	   	eventClick : function(info){
+    	   	
+    	   	
+    	   	
+    	   	//버튼 클릭 후 동작
+    	 	eventClick : function(info){
     	   		var taDate = moment(info.event.start).format('YYYY-MM-DD');
     	   		var ta_info = info.event.title.split(' ');
     	   		var ta_info2 = ta_info[0];
     	   		var ta_yn_kind;
-    	   		if (ta_info2 == '승인대기'){
-    	   			ta_yn_kind = 1;
-    	   		}else if (ta_info2 == '승인'){
-    	   			ta_yn_kind = 2;
-    	   		}if (ta_info2 == '반려'){
-    	   			ta_yn_kind = 3;
-    	   		}
+    	   			if (ta_info2 == '승인대기'){
+    	   				appro_yn = 1;
+    	   			}else if (ta_info2 == '승인완료'){
+    	   				appro_yn = 2;
+    	   			} 
+        	   		var ta_datail_title = '';
+    				$('#ta_detail_title').empty();
+    				ta_datail_title += '<strong>' + taDate + ' ' + ta_info2 + ' 건 현황</strong>';
+    				$('#ta_detail_title').append(ta_datail_title);
     	   		
-    	   		var ta_datail_title = '';
-				$('#ta_detail_title').empty();
-				ta_datail_title += '<strong>' + taDate + ' ' + ta_info2 + ' 건 현황</strong>';
-				$('#ta_detail_title').append(ta_datail_title);
-    	   		
-    	   		$.ajax({
-    	   			url : '/employee/empTaDetailList.do',
-    	   			type : 'POST',
-    	   			data : {
-    	   				  taDate : taDate
-    	   				, ta_yn : ta_yn_kind  				
-    	   			},
-    	   			dataType : 'json',
-    	   			success : function(data){
-						var detailList = data.empTaDetailList;
-						var ta_detailList = '';
-						for(var i = 0; i < detailList.length; i++){
-							$('#ta_detail').empty();
-							ta_detailList += '<tr>';
-							ta_detailList += '<td>'+ detailList[i].dept_name + '</td>';
-							ta_detailList += '<td>'+ detailList[i].name + '</td>';
-							ta_detailList += '<td>'+ detailList[i].kind_hol + '</td>';
-							ta_detailList += '</tr>';
-							
-							$('#ta_detail').append(ta_detailList);
-						} //for
-						
-						gfModalPop('#layer1');
-    	   			}//success
-    	   		});//ajax 
-    	   	}//eventClick
-	    });
+        	   		
+        	   		$.ajax({
+        	   			url : '/calDay/dateCheckDList.do',
+        	   			type : 'POST',
+        	   			data : {
+        	   				  vacaDate : taDate
+        	   				, appro_yn : ta_yn_kind  				
+        	   			},
+        	   			dataType : 'json',
+        	   			success : function(data){
+        	   				
+        	   				console.log(JSON.stringify(data));
+        	   				
+    						var detailList = data.dateCheckDList;
+    						var ta_detailList = '';
+    						$('#ta_detail').empty();
+    						for(var i = 0; i < detailList.length; i++){    
+    							
+    							ta_detailList += '<tr>';
+    							ta_detailList += '<td>'+ detailList[i].dept_name + '</td>';
+    							ta_detailList += '<td>'+ detailList[i].name + '</td>';
+    							ta_detailList += '<td>'+ detailList[i].appro_yn + '</td>';
+    							ta_detailList += '</tr>';
+    						} //for
+    						
+    						console.log(ta_detailList);
+    					
+    						$('#ta_detail').append(ta_detailList); //아이디
+    						
+    						gfModalPop('#layer1');
+        	   			}//success
+        	   		});//ajax 
+        	   	}//eventClick
+    	    });
 	    calendar.render();
+	    
 	    
    	});
 	
@@ -157,12 +163,13 @@
 
 					<p class="Location">
 						<a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
-							class="btn_nav bold">인사•급여</span> <span class="btn_nav bold">근태현황조회</span> <a href="/employee/empMgt.do" class="btn_set refresh">새로고침</a>
+							class="btn_nav bold">달력</span> <span class="btn_nav bold">월별결재내역</span> <a href="/calDay/datecheck.do" class="btn_set refresh">새로고침</a>
 					</p>
 
 					<p class="conTitle">
-						<span>근태 현황 조회</span> 
+						<span>월별결재내역</span> 
 					</p>
+					
 					<div id='calendar'></div>
 					</div> <!--// content -->
 				<h3 class="hidden">풋터 영역</h3>
@@ -175,7 +182,7 @@
 <!-- 모달팝업 -->
 <div id="layer1" class="layerPop layerType2" style="width: 500px;">
 	<dl>
-		<dt id = "ta_detail_title">
+		<dt id = "dateCheckDList">
 		</dt>
 		<dd class="content">
 			<!-- s : 여기에 내용입력 -->
@@ -191,10 +198,12 @@
 						<tr>
 							<th scope = "col">부서</th>
 							<th scope = "col">사원명</th>
-							<th scope = "col">신청구분</th>
+							<th scope = "col">승인여부</th>
+							<%-- <th scope = "col">신청구분</th> --%>
 						</tr>
 					</thead>
 					<tbody id = "ta_detail">
+					<!-- 팝업아이디 -->
 					</tbody>
 				</table>
 			</div>

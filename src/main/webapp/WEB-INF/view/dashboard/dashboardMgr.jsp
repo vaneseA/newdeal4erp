@@ -643,14 +643,18 @@ click-able rows
 						</p>
                          <div >
 						        <p class="conTitle" style="margin-bottom: 1%;">
-									<span>VueJS 개요</span> 
+									<span>대광유통</span> 
 									<span class="fr"> 
-										 관련 자료 
+										 DeaKwang corporation 
 									</span>
 								</p>	
 								<div>
-                                        <table>
+                                    <table>
+                                      <!-- 메인화면 이미지 -->
+                                     <img src="${CTX_PATH}/images/admin/login/dk_main_img_7.jpg"  width="900px" height="220px">
+								</div>  
 										    <tbody>
+										    		 
 										          <tr>
 										               <td><b><h6>시작</h6></b></td>
 										               <td>
@@ -1127,6 +1131,7 @@ click-able rows
                                 <br>					
                                 <p class="conTitle" style="margin-bottom: 1%;">
 									<span>10. NPM Vuejs 개요     </span> 
+							
 									<span class="fr"> 
 										  NPM
 									</span>
