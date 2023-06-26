@@ -13,7 +13,7 @@ public class OrderModel {
 	private String clnt_add_dt;  // 고객기업상세주소
 	private String loginID;  // 사번
 	private String name;  // 영업담당자(이름)
-	private int order_tot_price;  // 총주문금액
+	private long order_tot_price;  // 총주문금액
 	private String order_cancel;  // 취소여부
 	private String order_date;  // 주문날짜
 	private String order_req;  // 요청사항
@@ -22,7 +22,7 @@ public class OrderModel {
 	private int product_no;  // 제품번호
 	private int product_price;  // 판매가
 	private int order_dt_amt;  // 주문수량
-	private int order_dt_price;  // 주문금액
+	private long order_dt_price;  // 주문금액
 	
 	// 제품정보 테이블 (tb_product)
 	private String product_name;  // 제품명
@@ -58,10 +58,10 @@ public class OrderModel {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getOrder_tot_price() {
+	public long getOrder_tot_price() {
 		return order_tot_price;
 	}
-	public void setOrder_tot_price(int order_tot_price) {
+	public void setOrder_tot_price(long order_tot_price) {
 		this.order_tot_price = order_tot_price;
 	}
 	public String getOrder_cancel() {
@@ -142,10 +142,10 @@ public class OrderModel {
 	public void setDetail_price(int detail_price) {
 		this.detail_price = detail_price;
 	}
-	public int getOrder_dt_price() {
+	public long getOrder_dt_price() {
 		return order_dt_price;
 	}
-	public void setOrder_dt_price(int order_dt_price) {
+	public void setOrder_dt_price(long order_dt_price) {
 		this.order_dt_price = order_dt_price;
 	}
 	
