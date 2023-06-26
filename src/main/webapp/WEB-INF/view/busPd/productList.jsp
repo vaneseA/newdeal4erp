@@ -34,6 +34,15 @@
                 $("#ptypecombo option").remove();
             });
 
+            // 제품분류
+            productCombo("l", "ltypecomboForCreate", "all", "", "", "", "");  // combo type( l : 대분류   m : 중분류   s : 소분류) combo_name, type(기본값  all : 전체   sel : 선택) ,  대분류 코드, 중분류코드, 소분류 코드, ""
+
+            // 제조사
+            $('#ltypecomboForCreate').change(function () {
+                productCombo("m", "mtypecomboForCreate", "all", $("#ltypecomboForCreate").val(), "", "", "");   // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , 선택된 상위 계정코드, ""
+                // $("#ptypecombo option").remove();
+            });
+
         });
 
 
@@ -81,11 +90,11 @@
 
                 $("#listProduct").empty().append(returnValue);
 
-                var totalCnt = $("#totalCnt").val();
+                var totalcnt = $("#totalcnt").val();
 
-                console.log("totalCnt: " + totalCnt);
+                console.log("totalcnt: " + totalcnt);
 
-                var paginationHtml = getPaginationHtml(pagenum, totalCnt, pageSize, pageBlockSize, 'fn_productList');
+                var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_productList');
                 console.log("paginationHtml: " + paginationHtml);
 
                 $("#productPagination").empty().append(paginationHtml);
@@ -354,14 +363,14 @@
                     <tr>
                         <th scope="row">제품 분류 <span class="font_red">*</span></th>
                         <td>
-                            <select id="ltypecombo" name="ltypecombo">
+                            <select id="ltypecomboForCreate" name="ltypecomboForCreate">
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">제조사 <span class="font_red">*</span></th>
                         <td>
-                            <select id="mtypecombo" name="mtypecombo">
+                            <select id="mtypecomboForCreate" name="mtypecomboForCreate">
                             </select>
                         </td>
                     </tr>
