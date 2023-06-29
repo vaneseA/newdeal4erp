@@ -1,10 +1,11 @@
 package kr.happyjob.study.selSaD.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class SelSaDModel {
     private int order_no;//주문번호
-    private Date order_date;//주문일자
+    private String order_date;//주문일자
     private int product_no;//제품번호
     private int splr_no;//납품기업번호
     private String splr_name;//납품기업명
@@ -23,6 +24,11 @@ public class SelSaDModel {
 
     private int order_tot_price;//총액
 
+
+
+
+
+
     public String getClnt_name() {
         return this.clnt_name;
     }
@@ -31,15 +37,6 @@ public class SelSaDModel {
         this.clnt_name = clnt_name;
     }
 
-    private String order_date_str;
-
-    public String getOrder_date_str() {
-        return order_date_str;
-    }
-
-    public void setOrder_date_str(String order_date_str) {
-        this.order_date_str = order_date_str;
-    }
 
     public int getOrder_no() {
         return order_no;
@@ -49,11 +46,11 @@ public class SelSaDModel {
         this.order_no = order_no;
     }
 
-    public Date getOrder_date() {
+    public String getOrder_date() {
         return order_date;
     }
 
-    public void setOrder_date(Date order_date) {
+    public void setOrder_date(String order_date) {
         this.order_date = order_date;
     }
 

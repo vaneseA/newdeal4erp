@@ -16,9 +16,6 @@
 	var pageSize = 5;     
 	var pageBlockSize = 5;    
 	
-	// 주문 상세목록에 추가된 아이템 저장할 전역변수
-	var itemstr = "";	
-	
 	/** OnLoad event */ 
 	$(function() {
 		// 버튼 이벤트 등록
@@ -107,11 +104,10 @@
 	    gfModalPop("#layer1");				
 	}
 	
-	
 	//fn_add()에서 활용할 전역변수
 	var totalOrderPrice = 0;
 	
-	//fn_save()에서 활용할 전역변수
+	//fn_add(), fn_save()에서 활용할 전역변수
 	var orderItems = "";
 	
 	function fn_add() {
@@ -145,17 +141,6 @@
 	        $("#order_tot_price").text(totalOrderPrice);
 	        
 		    // 주문 상세 정보를 자식 테이블에 저장하기 위해 item 에 담아놓기
-/* 		    
-	        var item = {
-	            order_no: $("#order_no").val(),    // hidden
-	            product_no: product_no,
-	            clnt_no: $("#mtypecombo").val(),
-	            product_price: product_price,
-	            order_dt_amt: order_dt_amt,
-	            order_dt_price: order_dt_price
-	        };
-		     */
-		     
 		     var item = $("#order_no").val() + "," + product_no + "," + $("#clicombo").val() + "," + product_price + "," + order_dt_amt + "," + order_dt_price + "/";
 	         console.log("item : " + item);
 		     
@@ -174,10 +159,10 @@
 		var order_tot_price = totalOrderPrice;
 
 		var param = {
-	        clnt_no: $("#clicombo").val(),
-	        order_tot_price: totalOrderPrice,
-	        order_date: $("#order_date").val(),
-	        order_req: $("#order_req").val(),
+	        clnt_no : $("#clicombo").val(),
+	        order_tot_price : totalOrderPrice,
+	        order_date : $("#order_date").val(),
+	        order_req : $("#order_req").val(),
 	        orderItems : orderItems
 	    };
 

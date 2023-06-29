@@ -23,42 +23,42 @@
 					<tbody>
 						<tr>
 							<th scope="row">주문번호</th>
-							<td><input type="text" class="inputTxt p100" id="order_no" name="order_no" value="${ordersearch.order_no}"/></td>
+							<td><input type="text" class="inputTxt p100" id="order_no" name="order_no" value="${ordersearch.order_no}" readonly/></td>
 							<th scope="row">주문날짜</th>
-							<td><input type="text" class="inputTxt p100" id="order_date" name="order_date" value="${ordersearch.order_date}"/></td>
+							<td><input type="text" class="inputTxt p100" id="order_date" name="order_date" value="${ordersearch.order_date}" readonly/></td>
 						</tr>
 						<tr>
 							<th scope="row">주문기업명</th>
-							<td><input type="text" class="inputTxt p100" id="clnt_name" name="clnt_name" value="${ordersearch.clnt_name}"/></td>
+							<td><input type="text" class="inputTxt p100" id="clnt_name" name="clnt_name" value="${ordersearch.clnt_name}" readonly/></td>
 							<th scope="row">회사전화</th>
-							<td><input type="text" class="inputTxt p100" id="clnt_tel" name="clnt_tel" value="${ordersearch.clnt_tel}"/></td>
+							<td><input type="text" class="inputTxt p100" id="clnt_tel" name="clnt_tel" value="${ordersearch.clnt_tel}" readonly/></td>
 						</tr>
 						<tr>
 							<th scope="row">회사이메일</th>
-							<td><input type="text" class="inputTxt p100" id="clnt_email" name="clnt_email" value="${ordersearch.clnt_email}"/></td>
+							<td><input type="text" class="inputTxt p100" id="clnt_email" name="clnt_email" value="${ordersearch.clnt_email}" readonly/></td>
 							<th scope="row">영업담당자</th>
-							<td><input type="text" class="inputTxt p100" id="name" name="name" value="${ordersearch.name}"/></td>
+							<td><input type="text" class="inputTxt p100" id="name" name="name" value="${ordersearch.name}" readonly/></td>
 						</tr>
 						
 						<tr>
 							<th scope="row">우편번호</th>
 							<td colspan="3"><input type="text" class="inputTxt p100"
-								id="clnt_zip" name="clnt_zip" value="${ordersearch.clnt_zip}"/></td>
+								id="clnt_zip" name="clnt_zip" value="${ordersearch.clnt_zip}" readonly/></td>
 						</tr>
 						<tr>
 							<th scope="row">주소</th>
 							<td colspan="3"><input type="text" class="inputTxt p100"
-								id="clnt_add" name="clnt_add" value="${ordersearch.clnt_add}"/></td>
+								id="clnt_add" name="clnt_add" value="${ordersearch.clnt_add}" readonly/></td>
 						</tr>
 						<tr>
 							<th scope="row">상세주소</th>
 							<td colspan="3"><input type="text" class="inputTxt p100"
-								id="clnt_add_dt" name="clnt_add_dt" value="${ordersearch.clnt_add_dt}"/></td>
+								id="clnt_add_dt" name="clnt_add_dt" value="${ordersearch.clnt_add_dt}" readonly/></td>
 						</tr>
 						<tr>
 							<th scope="row">요청사항</th>
 							<td colspan="3">
-								<textarea id="order_req" name="order_req" value="${ordersearch.order_req}"> </textarea></td>
+								<textarea id="order_req" name="order_req" readonly>${ordersearch.order_req}</textarea></td>
 						</tr>
 					</tbody>
 				</table>
@@ -95,17 +95,17 @@
 									<tr>
 										<td>${list.product_no}</td>
 										<td>${list.product_name}</td>
-										<td>${list.product_price}</td>
+										<td><fmt:formatNumber value="${list.product_price}" pattern="#,##0"/></td>
 										<td>${list.order_dt_amt}</td>
-										<td>${list.order_dt_price}</td>
+										<td><fmt:formatNumber value="${list.order_dt_price}" pattern="#,##0"/></td>
 									</tr>
 								</c:forEach>
 							</c:if>	
 						</tbody>
 					</table>
 					<div style="display:flex; justify-content:center; align-content:center; margin-top:15px;">
-						<label for="total_price_input" style="line-height:2.5; font-weight:bold; margin-right:10px;">총주문금액</label>
-						<input id="total_price_input" value="${ordersearch.order_tot_price}" class="inputTxt p45">
+						<span style="font-weight:bold; margin-right:10px;">총주문금액</span>
+						<fmt:formatNumber value="${ordersearch.order_tot_price}" pattern="#,##0"/>
 					</div>
                 </div>
 

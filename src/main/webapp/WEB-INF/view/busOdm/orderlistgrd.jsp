@@ -15,7 +15,7 @@
 										<td>${list.order_no}</td>
 										<td>${list.order_date}</td>
 										<td>${list.clnt_name}</td>
-										<td>${list.order_tot_price}</td>
+										<td><fmt:formatNumber value="${list.order_tot_price}" pattern="#,##0" /></td>
 										<td>${list.name}</td>
 										<td><a class="btnType3 color1" href="javascript:fn_selectone('${list.order_no}')">보기</a></td>
 									</tr>

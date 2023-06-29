@@ -42,6 +42,18 @@
 		  FROM tb_order od
 		      INNER JOIN tb_clnt cl ON od.clnt_no = cl.clnt_no
 		      INNER JOIN tb_userinfo ui ON od.loginID = ui.loginID
+		  <where>
+		   		<if test="(start != null) and (!start.equals(''))  ">
+				    and od.order_date <![CDATA[>=]]>  STR_TO_DATE(#{start}, '%Y-%m-%d')  
+				</if>
+				
+				<if test="(end != null) and (!end.equals(''))">
+				     and od.order_date <![CDATA[<=]]> STR_TO_DATE(#{end}, '%Y-%m-%d')  
+				</if>
+				<if test="(clicombo != null) and (!clicombo.equals(''))">
+					    and cl.clnt_no = #{clicombo}
+				</if>
+		   </where>
   	</select>
   	
   	<!-- 주문 한건 조회 -->
@@ -144,6 +156,26 @@
 	       		   , #{order_dt_amt}
 	       		   , #{order_dt_price}
 	       		   );
+	</insert>
+	
+	<!-- [저장] 버튼 클릭 시, 회계전표 저장 -->
+	<insert id="accountinsert">
+		<selectKey resultType="int" keyProperty="no" order="BEFORE">
+	        SELECT ifnull(max(budget_no),0) + 1 FROM tb_budget
+	    </selectKey>
+	  	INSERT INTO tb_budget 
+		          (
+		           budget_no
+		          ,acnt_sbject_cd
+		          ,acnt_dt_sbject_cd
+		          ,order_no
+		          )
+		  VALUES (
+		           #{no}
+		          ,'1111'
+		          ,'1000'
+		          ,(SELECT ifnull(max(order_no),0) + 1 FROM tb_order)
+		          );
 	</insert>
   	
 </mapper>

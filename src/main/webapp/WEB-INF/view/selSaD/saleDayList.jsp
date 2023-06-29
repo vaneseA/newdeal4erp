@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -64,14 +65,13 @@
         $(function () {
             // 버튼 이벤트 등록
             fRegisterButtonClickEvent();
-            fn_selectedDayList();
             fn_saleDayList();
             fn_aa();
         });
 
 
         /** 버튼 이벤트 등록 */
-        function fRegisterButtonClickEvent() {
+        function fRegisterButtonClickEvent() {1
             $('a[name=btn]').click(function (e) {
                 e.preventDefault();
 
@@ -80,6 +80,7 @@
                 switch (btnId) {
                     case 'btnSearch' :
                         $(".selectedDayList").css("display", "block");  // Here
+                        fn_selectedDayList();
                         fn_saleDayList();
                         break;
                 }
@@ -120,38 +121,18 @@
             callAjax("/selSaD/saleDayList.do", "post", "text", false, param, listCallBack);
         }
 
-        function fn_selectedDayList(pagenum) {
-            pagenum = pagenum || 1;
+        function fn_selectedDayList() {
 
             var param = {
-                selectedValue: $("#proName").val(),
-                selectedValue: $("#splrName").val(),
-                searchKey: $("#searchKey").val(),
-                selectedValue: $("#pname").val(),
-                pageSize: pageSize,
-                pageBlockSize: pageBlockSize,
-                pagenum: pagenum
+                order_date : $("#order_date").val()
             };
 
 
             var listCallBack = function (returnValue) {
-                console.log(returnValue);
-
-                $("#listSaleDay").empty().append(returnValue);
-
-                var totalCnt = $("#totalCnt").val();
-
-                console.log("totalCnt: " + totalCnt);
-
-                var paginationHtml = getPaginationHtml(pagenum, totalCnt, pageSize, pageBlockSize, 'fn_saleDayList');
-                console.log("paginationHtml: " + paginationHtml);
-
-                $("#saleDayPagination").empty().append(paginationHtml);
-
-                $("#pageno").val(pagenum);
+                $("#selectedDayList").empty().append(returnValue);
             };
 
-            callAjax("/selSaD/saleDayList.do", "post", "text", false, param, listCallBack);
+            callAjax("/selSaD/selectedDayList.do", "post", "text", false, param, listCallBack);
         }
 
     </script>
@@ -199,8 +180,8 @@
                         <!-- 검색창 영역 시작 -->
 
                         <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:10px 10px; margin-bottom: 8px;">
-                            <label for="start" style="font-size: 15px; margin-right:5px; ">날짜 조회 : </label>
-                            <input type="date" id="start" name="start" min="2023-01-01"
+                            <label for="order_date" style="font-size: 15px; margin-right:5px; ">날짜 조회 : </label>
+                            <input type="date" id="order_date" name="order_date" min="2023-01-01"
                                    style="height: 25px; width: 120px; margin-right: 15px;">
                             <a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
                             </p>
@@ -230,25 +211,10 @@
                                         </tr>
                                         </thead>
 
-                                        <tbody>
-                                        <c:forEach items="${selectedDaySearchList}" var="list">
-                                            <tr>
-                                                <td>${list.order_date_str}</td>
-                                                <td>
-                                                    <fmt:formatNumber value="${list.total_order_dt_amt}" type="number" pattern="#,###" />
-                                                </td>
-                                                <td>
-                                                    <fmt:formatNumber value="${list.total_order_tot_price}" type="number" pattern="#,###" />
-                                                </td>
-                                                <td>
-                                                    <fmt:formatNumber value="${list.total_product_unit_price}" type="number" pattern="#,###" />
-                                                </td>
-                                                <td>
-                                                    <fmt:formatNumber value="${list.net_profit}" type="number" pattern="#,###" />
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
+                                        <tbody id="selectedDayList">
+
                                         </tbody>
+
                                     </table>
                                 </div>
                             </div>
