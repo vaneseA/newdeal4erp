@@ -1,5 +1,6 @@
 package kr.happyjob.study.selSaD.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.happyjob.study.selSaD.model.SelSaDModel;
+import kr.happyjob.study.selSaD.model.SelcectedDayModel;
 import kr.happyjob.study.selSaD.service.SelSaDService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -77,6 +79,25 @@ public class SelSaDController {
 
         return "selSaD/saleDayListGrd";
     }
+    /**
+     * 선택된 날짜 목록 조회
+     */
+    @RequestMapping("selectedDayList.do")
+    public String selectedDayList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+                                                   HttpServletResponse response, HttpSession session) throws Exception {
+        logger.info("+ Start " + className + ".selectedDayList");
+        logger.info("   - paramMap : " + paramMap);
+
+        // Controller -> Service -> Dao -> SQL
+        List<SelcectedDayModel> selectedDaySearchList = selSaDService.selectedDayList(paramMap);
+        System.out.println(selectedDaySearchList);
+        model.addAttribute("selectedDaySearchList",selectedDaySearchList);
+
+        logger.info("+ End " + className + ".selectedDayList");
+
+        return "selSaD/selectedDayListGrd";
+    }
+
 
 
 }

@@ -1,5 +1,6 @@
 package kr.happyjob.study.busOdm.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -65,6 +66,10 @@ public class BusOdmServiceImpl implements BusOdmService {
     public int orderdetailinsert(Map<String, Object> paramMap) throws Exception {
         return busOdmDao.orderdetailinsert(paramMap);
     }
-	
-	
+    
+    /** [저장] 버튼 클릭 시, 회계전표 저장 */
+    public int accountinsert(Map<String, Object> paramMap) throws Exception {
+    	return busOdmDao.accountinsert(paramMap);
+    }
+    
 }

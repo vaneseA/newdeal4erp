@@ -28,6 +28,12 @@ public class OrderModel {
 	private String product_name;  // 제품명
 	private int detail_price;  // 주문금액(원래 없는 칼럼, INSERT 수식 구현)
 	
+	// 회계전표 테이블 (tb_budget)
+	private int budget_no; // 회계전표 번호
+	private int acnt_sbject_cd; // 계정과목 코드
+	private int acnt_dt_sbject_cd; // 계정 상세분류 코드
+	
+	
 	public int getOrder_no() {
 		return order_no;
 	}
@@ -147,6 +153,24 @@ public class OrderModel {
 	}
 	public void setOrder_dt_price(long order_dt_price) {
 		this.order_dt_price = order_dt_price;
+	}
+	public int getBudget_no() {
+		return budget_no;
+	}
+	public void setBudget_no(int budget_no) {
+		this.budget_no = budget_no;
+	}
+	public int getAcnt_sbject_cd() {
+		return acnt_sbject_cd;
+	}
+	public void setAcnt_sbject_cd(int acnt_sbject_cd) {
+		this.acnt_sbject_cd = acnt_sbject_cd;
+	}
+	public int getAcnt_dt_sbject_cd() {
+		return acnt_dt_sbject_cd;
+	}
+	public void setAcnt_dt_sbject_cd(int acnt_dt_sbject_cd) {
+		this.acnt_dt_sbject_cd = acnt_dt_sbject_cd;
 	}
 	
 }

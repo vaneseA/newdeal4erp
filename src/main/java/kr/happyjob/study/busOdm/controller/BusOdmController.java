@@ -152,8 +152,8 @@ public class BusOdmController {
        long order_tot_price = Long.parseLong((String)paramMap.get("order_tot_price"));	
        paramMap.put("order_tot_price", order_tot_price);
        
-
        int returncval = busOdmService.orderinsert(paramMap);
+       int acntreval = busOdmService.accountinsert(paramMap);
 
        for(String item :orderitemarr) {
     	   String itemorderinfo[] = item.split(",");
@@ -161,7 +161,6 @@ public class BusOdmController {
     	   Map<String, Object> itemmap = new HashMap<String, Object>();
     	   
     	   int product_no = Integer.parseInt(itemorderinfo[1]);	
-    	   //int clnt_no = Integer.parseInt(itemorderinfo[2]);
     	   int product_price = Integer.parseInt(itemorderinfo[3]);
     	   int order_dt_amt = Integer.parseInt(itemorderinfo[4]);
     	   long order_dt_price = Long.parseLong(itemorderinfo[5]);
@@ -172,14 +171,12 @@ public class BusOdmController {
     	   itemmap.put("order_dt_amt", order_dt_amt );
     	   itemmap.put("order_dt_price", order_dt_price );
     	   
-    	   //SELECT ifnull(max(order_no),0) FROM tb_order
     	   busOdmService.orderdetailinsert(itemmap);    	   
        }
        
-       
-       
        Map<String, Object> returnmap = new HashMap<String, Object>();
        returnmap.put("returncval", returncval);
+       returnmap.put("acntreval", acntreval);
 
        logger.info("+ End " + className + ".ordersave");
 

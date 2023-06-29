@@ -1,6 +1,7 @@
 package kr.happyjob.study.selSaD.service;
 
 import kr.happyjob.study.selSaD.model.SelSaDModel;
+import kr.happyjob.study.selSaD.model.SelcectedDayModel;
 
 
 import java.util.List;
@@ -16,6 +17,6 @@ public interface SelSaDService {
 
 
     // Selected day list 조회
-    public List<SelSaDModel> selectedDayList(Map<String, Object> paramMap) throws Exception;
+    public List<SelcectedDayModel> selectedDayList(Map<String, Object> paramMap) throws Exception;
 
 }

@@ -12,7 +12,7 @@
 <c:if test="${totalcnt > 0 }">
     <c:forEach items="${saleDaySearchList}" var="list">
         <tr>
-            <td>${list.order_date_str}</td>
+            <td>${list.order_date}</td>
             <td>${list.order_no}</td>
             <td>${list.clnt_name}</td>
             <td>${list.pro_name}</td>

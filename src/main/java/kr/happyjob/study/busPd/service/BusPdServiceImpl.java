@@ -18,7 +18,6 @@ public class BusPdServiceImpl implements BusPdService {
 
     //제품 목록 리스트 조회
     public List<BusPdModel> productList(Map<String, Object> paramMap) throws Exception {
-
         return busPdDao.productList(paramMap);
     }
 
