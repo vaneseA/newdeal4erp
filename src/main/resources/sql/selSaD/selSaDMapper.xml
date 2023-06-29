@@ -44,13 +44,19 @@
         FROM tb_order od
                  INNER JOIN tb_order_dt odt ON od.order_no = odt.order_no
                  INNER JOIN tb_product pd ON odt.product_no = pd.product_no
+        <if test="(order_date != null) and (!order_date.equals(''))">
 
+            WHERE STR_TO_DATE(#{order_date}, '%Y-%m-%d') >= od.order_date
+            AND od.order_date >= DATE_SUB(STR_TO_DATE(#{order_date}, '%Y-%m-%d'), INTERVAL 7 DAY)
+
+
+
+        </if>
         GROUP BY od.order_date
         <if test="(order_date != null) and (!order_date.equals(''))">
             HAVING STR_TO_DATE(#{order_date}, '%Y-%m-%d') >= od.order_date
         </if>
-        ORDER BY od.order_date
-        LIMIT 1,7
+        ORDER BY od.order_date desc
 
 
     </select>
