@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/selSaD/")
@@ -96,6 +97,21 @@ public class SelSaDController {
         logger.info("+ End " + className + ".selectedDayList");
 
         return "selSaD/selectedDayListGrd";
+    }
+    @RequestMapping("selectedDayChart.do")
+    @ResponseBody
+    public List<SelcectedDayModel> selectedDayChart(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+                                  HttpServletResponse response, HttpSession session) throws Exception {
+        logger.info("+ Start " + className + ".selectedDayChart");
+        logger.info("   - paramMap : " + paramMap);
+
+        // Controller -> Service -> Dao -> SQL
+        List<SelcectedDayModel> selectedDayChart = selSaDService.selectedDayList(paramMap);
+
+
+        logger.info("+ End " + className + ".selectedDayChart");
+
+        return selectedDayChart;
     }
 
 

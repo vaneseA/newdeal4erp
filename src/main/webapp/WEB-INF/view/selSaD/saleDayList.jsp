@@ -18,18 +18,8 @@
         var pageSize = 5;
         var pageBlockSize = 5;
 
-        function fn_aa() {
-            // 오늘 날짜 가져오기
-            var currentDate = new Date();
+        function fn_aa(labels, dataVar) {
 
-            // Date 객체의 날짜를 7일씩 증가시키면서 label 생성
-            var labels = [];
-            for (var i = 0; i < 7; i++) {
-                var date = new Date(currentDate);
-                date.setDate(date.getDate() + i);
-                var formattedDate = formatDate(date); // 날짜를 원하는 형식으로 포맷팅
-                labels.push(formattedDate);
-            }
 
             new Chart(document.getElementById("doughnut-chart"), {
                 type: 'doughnut',
@@ -37,9 +27,9 @@
                     labels: labels,
                     datasets: [
                         {
-                            label: "Population (millions)",
+                            label: "매출",
                             backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
-                            data: [2478, 5267, 734, 784, 433]
+                            data: dataVar,
                         }
                     ]
                 },
@@ -66,7 +56,7 @@
             // 버튼 이벤트 등록
             fRegisterButtonClickEvent();
             fn_saleDayList();
-            fn_aa();
+
         });
 
 
@@ -82,6 +72,7 @@
                         $(".selectedDayList").css("display", "block");  // Here
                         fn_selectedDayList();
                         fn_saleDayList();
+                        fn_chart();
                         break;
                 }
             });
@@ -133,6 +124,29 @@
             };
 
             callAjax("/selSaD/selectedDayList.do", "post", "text", false, param, listCallBack);
+        }
+
+        function fn_chart() {
+            var param = {
+                order_date : $("#order_date").val()
+            };
+
+            var listCallBack = function (returnValue) {
+                var labels = [];
+                var dataVar = [];
+
+                for (var i = 0; i < returnValue.length; i++) {
+                    console.log(returnValue[i].order_date);
+                    labels.push(returnValue[i].order_date);
+                    dataVar.push(returnValue[i].net_profit);
+                }
+                console.log("labels" + labels);
+                console.log("dataVar" + dataVar);
+                fn_aa(labels,dataVar);
+            };
+
+
+            callAjax("/selSaD/selectedDayChart.do", "post", "json", false, param, listCallBack);
         }
 
     </script>
