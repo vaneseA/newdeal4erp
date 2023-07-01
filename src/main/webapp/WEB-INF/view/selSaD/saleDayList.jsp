@@ -72,7 +72,6 @@
                 switch (btnId) {
                     case 'btnSearch' :
                         $(".selectedDayList").css("display", "block");
-                        fn_selectedDayList();
                         fn_chart();
                         break;
                 }
@@ -134,9 +133,7 @@
         function fn_chart() {
             // 그래프 초기화
             $("#doughnut-chart").remove();
-            $(".items").append('<canvas id="doughnut-chart" width="300" height="250"></canvas>');
-
-
+            $(".doughnut_items").empty().append('<canvas id="doughnut-chart" width="300" height="250"></canvas>');
 
             // 그래프 데이터 가져오기
             var param = {
@@ -155,6 +152,7 @@
                 console.log("labels" + labels);
                 console.log("dataVar" + dataVar);
                 fn_aa(labels, dataVar);
+                fn_selectedDayList();
             };
 
             callAjax("/selSaD/selectedDayChart.do", "post", "json", false, param, listCallBack);
@@ -215,7 +213,7 @@
                         <!-- 검색창 영역 끝 -->
                         <div class="selectedDayList" style="display: none;"> <!-- Here -->
                             <div style="display:flex; flex-grow: 1; justify-content: space-evenly;">
-                                <div class="items" style="width: 100%"><canvas id="doughnut-chart" width="300" height="250"></canvas></div>
+                                <div class="doughnut_items" style="width: 100%"><canvas id="doughnut-chart" width="300" height="250"></canvas></div>
                                 <div class="items"style="width: 100%; ">
                                     <table class="col" style="height:100%;" >
                                         <caption>caption</caption>
