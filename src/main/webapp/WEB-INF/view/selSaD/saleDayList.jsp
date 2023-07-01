@@ -71,9 +71,8 @@
 
                 switch (btnId) {
                     case 'btnSearch' :
-                        $(".selectedDayList").css("display", "block");  // Here
+                        $(".selectedDayList").css("display", "block");
                         fn_selectedDayList();
-                        fn_saleDayList();
                         fn_chart();
                         break;
                 }
@@ -113,25 +112,31 @@
 
             callAjax("/selSaD/saleDayList.do", "post", "text", false, param, listCallBack);
         }
-
         function fn_selectedDayList() {
-
             var param = {
-                order_date : $("#order_date").val()
+                order_date: $("#order_date").val()
             };
 
-
             var listCallBack = function (returnValue) {
-                $("#selectedDayList").empty().append(returnValue);
+                // 테이블 행 초기화
+                $("#selectedDayList tr").not(':first').remove();
+
+                // 데이터 추가
+                $("#selectedDayList").append(returnValue);
             };
 
             callAjax("/selSaD/selectedDayList.do", "post", "text", false, param, listCallBack);
         }
 
+
+
+
         function fn_chart() {
             // 그래프 초기화
             $("#doughnut-chart").remove();
             $(".items").append('<canvas id="doughnut-chart" width="300" height="250"></canvas>');
+
+
 
             // 그래프 데이터 가져오기
             var param = {
