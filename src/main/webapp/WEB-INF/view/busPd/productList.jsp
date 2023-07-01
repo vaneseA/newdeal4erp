@@ -160,7 +160,7 @@
 
                 popUpInit(returndata.productSearch);
 
-                // 모달 팝업
+                // 모달 팝업델
                 gfModalPop("#layer1");
 
             }

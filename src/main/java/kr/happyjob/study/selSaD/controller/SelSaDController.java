@@ -72,8 +72,6 @@ public class SelSaDController {
         model.addAttribute("saleDaySearchList", saleDaySearchList);
         int totalcnt = selSaDService.countSaleDayList(paramMap);
         model.addAttribute("totalcnt", totalcnt);
-        List<SelSaDModel> selectedDaySearchList = selSaDService.saleDayList(paramMap);
-        model.addAttribute("selectedDaySearchList", selectedDaySearchList);
 
 
         logger.info("+ End " + className + ".saleDayList");
