@@ -62,12 +62,24 @@
             t = v * (1 - (1 - f) * s);
 
             switch (i % 6) {
-                case 0: r = v, g = t, b = p; break;
-                case 1: r = q, g = v, b = p; break;
-                case 2: r = p, g = v, b = t; break;
-                case 3: r = p, g = q, b = v; break;
-                case 4: r = t, g = p, b = v; break;
-                case 5: r = v, g = p, b = q; break;
+                case 0:
+                    r = v, g = t, b = p;
+                    break;
+                case 1:
+                    r = q, g = v, b = p;
+                    break;
+                case 2:
+                    r = p, g = v, b = t;
+                    break;
+                case 3:
+                    r = p, g = q, b = v;
+                    break;
+                case 4:
+                    r = t, g = p, b = v;
+                    break;
+                case 5:
+                    r = v, g = p, b = q;
+                    break;
             }
 
             // RGB로 변환
@@ -79,6 +91,7 @@
             var hex = Math.round(value).toString(16);
             return hex.length == 1 ? '0' + hex : hex;
         }
+
         //만든 랜덤칼러를 가져오는 함수
         function getColors(length) {
             var colors = [];
@@ -110,7 +123,8 @@
 
 
         /** 버튼 이벤트 등록 */
-        function fRegisterButtonClickEvent() {1
+        function fRegisterButtonClickEvent() {
+            1
             $('a[name=btn]').click(function (e) {
                 e.preventDefault();
 
@@ -120,19 +134,18 @@
                     case 'btnSearch' :
                         $(".selectedDayList").css("display", "block");
                         fn_chart();
+                        fn_saleDayList();
                         break;
                 }
             });
         }
 
         function fn_saleDayList(pagenum) {
+
             pagenum = pagenum || 1;
 
             var param = {
-                selectedValue: $("#proName").val(),
-                selectedValue: $("#splrName").val(),
-                searchKey: $("#searchKey").val(),
-                selectedValue: $("#pname").val(),
+                order_date: $("#order_date").val(),
                 pageSize: pageSize,
                 pageBlockSize: pageBlockSize,
                 pagenum: pagenum
@@ -144,11 +157,11 @@
 
                 $("#listSaleDay").empty().append(returnValue);
 
-                var totalCnt = $("#totalCnt").val();
+                var totalcnt = $("#totalcnt").val();
 
-                console.log("totalCnt: " + totalCnt);
+                console.log("totalcnt: " + totalcnt);
 
-                var paginationHtml = getPaginationHtml(pagenum, totalCnt, pageSize, pageBlockSize, 'fn_saleDayList');
+                var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_saleDayList');
                 console.log("paginationHtml: " + paginationHtml);
 
                 $("#saleDayPagination").empty().append(paginationHtml);
@@ -158,6 +171,7 @@
 
             callAjax("/selSaD/saleDayList.do", "post", "text", false, param, listCallBack);
         }
+
         function fn_selectedDayList() {
 
             // selectedDayList 초기화
@@ -177,8 +191,6 @@
         }
 
 
-
-
         function fn_chart() {
             // 그래프 초기화
             $("#doughnut-chart").remove();
@@ -186,7 +198,7 @@
 
             // 그래프 데이터 가져오기
             var param = {
-                order_date : $("#order_date").val()
+                order_date: $("#order_date").val()
             };
 
             var listCallBack = function (returnValue) {
@@ -262,9 +274,11 @@
                         <!-- 검색창 영역 끝 -->
                         <div class="selectedDayList" style="display: none;"> <!-- Here -->
                             <div style="display:flex; flex-grow: 1; justify-content: space-evenly;">
-                                <div class="doughnut_items" style="width: 100%"><canvas id="doughnut-chart" width="300" height="250"></canvas></div>
-                                <div class="items"style="width: 100%; ">
-                                    <table class="col" style="height:100%;" >
+                                <div class="doughnut_items" style="width: 100%">
+                                    <canvas id="doughnut-chart" width="300" height="250"></canvas>
+                                </div>
+                                <div class="items" style="width: 100%; ">
+                                    <table class="col" style="height:100%;">
                                         <caption>caption</caption>
                                         <colgroup>
                                             <col width="20%">
