@@ -124,21 +124,28 @@
 
         /** 버튼 이벤트 등록 */
         function fRegisterButtonClickEvent() {
-            1
             $('a[name=btn]').click(function (e) {
                 e.preventDefault();
 
                 var btnId = $(this).attr('id');
 
                 switch (btnId) {
-                    case 'btnSearch' :
-                        $(".selectedDayList").css("display", "block");
+                    case 'btnSearch':
+                        var orderDate = $("#order_date").val();
+                        if (orderDate === "") {
+                            // order_date가 입력되지 않았을 때의 처리
+                            alert("날짜를 선택해주세요.");
+                            return;
+                        }
+
+
                         fn_chart();
                         fn_saleDayList();
                         break;
                 }
             });
         }
+
 
         function fn_saleDayList(pagenum) {
 
@@ -205,6 +212,11 @@
                 var labels = [];
                 var dataVar = [];
 
+                if (returnValue.length == 0) { // 매출 데이터가 없을 때
+                    alert("해당 날짜에는 매출이 없습니다.");
+                    $(".selectedDayList").css("display", "none");
+                    return;
+                }
                 for (var i = 0; i < returnValue.length; i++) {
                     console.log(returnValue[i].order_date);
                     labels.push(returnValue[i].order_date);
@@ -214,6 +226,7 @@
                 console.log("dataVar" + dataVar);
                 fn_aa(labels, dataVar);
                 fn_selectedDayList();
+                $(".selectedDayList").css("display", "block");
             };
 
             callAjax("/selSaD/selectedDayChart.do", "post", "json", false, param, listCallBack);
@@ -282,9 +295,9 @@
                                         <caption>caption</caption>
                                         <colgroup>
                                             <col width="20%">
-                                            <col width="20%">
-                                            <col width="20%">
-                                            <col width="20%">
+                                            <col width="14%">
+                                            <col width="23%">
+                                            <col width="23%">
                                             <col width="20%">
                                         </colgroup>
 
@@ -337,7 +350,7 @@
                                 <th scope="col">제품 분류</th>
                                 <th scope="col">제조사</th>
                                 <th scope="col">품명</th>
-                                <th scope="col">모델명</th>
+                                <th scope="col">시리얼넘버</th>
                                 <th scope="col">납품단가</th>
                                 <th scope="col">판매가</th>
                                 <th scope="col">수량</th>
