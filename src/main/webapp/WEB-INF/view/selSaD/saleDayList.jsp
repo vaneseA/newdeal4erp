@@ -44,20 +44,49 @@
             });
         }
 
-        //랜덤칼러 만드는 함수
-        function getRandomColor() {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
+        // HSV를 RGB로 변환하는 함수
+        function hsvToRgb(h, s, v) {
+            var r, g, b;
+            var i;
+            var f, p, q, t;
+
+            // 표준값으로 변환
+            h = h / 360;
+            s = s / 100;
+            v = v / 100;
+
+            i = Math.floor(h * 6);
+            f = h * 6 - i;
+            p = v * (1 - s);
+            q = v * (1 - f * s);
+            t = v * (1 - (1 - f) * s);
+
+            switch (i % 6) {
+                case 0: r = v, g = t, b = p; break;
+                case 1: r = q, g = v, b = p; break;
+                case 2: r = p, g = v, b = t; break;
+                case 3: r = p, g = q, b = v; break;
+                case 4: r = t, g = p, b = v; break;
+                case 5: r = v, g = p, b = q; break;
             }
-            return color;
+
+            // RGB로 변환
+            return '#' + toHex(r * 255) + toHex(g * 255) + toHex(b * 255);
+        }
+
+        // 16진수로 변환하는 함수
+        function toHex(value) {
+            var hex = Math.round(value).toString(16);
+            return hex.length == 1 ? '0' + hex : hex;
         }
         //만든 랜덤칼러를 가져오는 함수
         function getColors(length) {
             var colors = [];
             for (var i = 0; i < length; i++) {
-                colors.push(getRandomColor());
+                // 색상을 고르게 분포
+                var hue = Math.floor(360 * i / length);
+                // 색상을 RGB 형식으로 변환
+                colors.push(hsvToRgb(hue, 100, 100));
             }
             return colors;
         }
