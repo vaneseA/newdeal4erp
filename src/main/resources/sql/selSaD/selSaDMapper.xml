@@ -25,7 +25,7 @@
         INNER JOIN tb_splr sl ON pd.splr_no = sl.splr_no
         <where>
             <if test="(order_date != null) and (!order_date.equals(''))">
-                and od.order_date >= STR_TO_DATE(#{order_date}, '%Y-%m-%d')
+                and od.order_date = STR_TO_DATE(#{order_date}, '%Y-%m-%d')
             </if>
 
         </where>

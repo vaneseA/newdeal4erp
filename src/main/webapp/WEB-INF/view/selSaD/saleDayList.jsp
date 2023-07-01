@@ -149,6 +149,7 @@
 
         function fn_saleDayList(pagenum) {
 
+
             pagenum = pagenum || 1;
 
             var param = {
@@ -160,7 +161,14 @@
 
 
             var listCallBack = function (returnValue) {
+
+
                 console.log(returnValue);
+                if (!returnValue || returnValue.length === 0) {
+                    alert("해당 날짜에는 데이터가 존재하지 않습니다.");
+                    $(".selectedDayList").css("display", "none");
+                    return;
+                }
 
                 $("#listSaleDay").empty().append(returnValue);
 
