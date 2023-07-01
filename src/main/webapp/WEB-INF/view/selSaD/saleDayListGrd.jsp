@@ -29,7 +29,7 @@
                 <fmt:formatNumber value="${list.order_dt_amt}" type="number" pattern="#,###" />
             </td>
             <td>
-                <fmt:formatNumber value="${list.order_tot_price}" type="number" pattern="#,###" />
+                <fmt:formatNumber value="${list.total_order_price}" type="number" pattern="#,###" />
             </td>
         </tr>
     </c:forEach>

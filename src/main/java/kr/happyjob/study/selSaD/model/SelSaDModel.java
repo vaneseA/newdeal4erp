@@ -11,7 +11,15 @@ public class SelSaDModel {
     private String splr_name;//납품기업명
     private String product_name;//품명
     private String clnt_name;//고객기업명
+    private BigDecimal total_order_price;
 
+    public BigDecimal getTotal_order_price() {
+        return total_order_price;
+    }
+
+    public void setTotal_order_price(BigDecimal total_order_price) {
+        this.total_order_price = total_order_price;
+    }
     private String pro_cd;//제품 분류코드
 
     private String pro_name;//제품 분류
