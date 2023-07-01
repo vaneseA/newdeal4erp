@@ -159,16 +159,18 @@
             callAjax("/selSaD/saleDayList.do", "post", "text", false, param, listCallBack);
         }
         function fn_selectedDayList() {
+
+            // selectedDayList 초기화
+            selectedDayList = [];
+
             var param = {
                 order_date: $("#order_date").val()
             };
 
             var listCallBack = function (returnValue) {
-                // 테이블 행 초기화
-                $("#selectedDayList tr").not(':first').remove();
 
                 // 데이터 추가
-                $("#selectedDayList").append(returnValue);
+                $("#selectedDayList").empty().append(returnValue);
             };
 
             callAjax("/selSaD/selectedDayList.do", "post", "text", false, param, listCallBack);
