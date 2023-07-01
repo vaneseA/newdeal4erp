@@ -39,6 +39,15 @@
                     title: {
                         display: true,
                         text: '일별 매출 순이익'
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function (tooltipItem, data) {
+                                var label = data.labels[tooltipItem.index];
+                                var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]; //천의자리마다 , 표시
+                                return label + ' : ' + value.toLocaleString() + "원"; // 라벨 (날짜)와 값을 함께 표시합니다.
+                            }
+                        }
                     }
                 }
             });
@@ -138,9 +147,9 @@
                             return;
                         }
 
-
-                        fn_chart();
                         fn_saleDayList();
+                        fn_chart();
+
                         break;
                 }
             });
