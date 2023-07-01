@@ -22,6 +22,8 @@
 
 
             new Chart(document.getElementById("doughnut-chart"), {
+
+
                 type: 'doughnut',
                 data: {
                     labels: labels,
@@ -127,6 +129,11 @@
         }
 
         function fn_chart() {
+            // 그래프 초기화
+            $("#doughnut-chart").remove();
+            $(".items").append('<canvas id="doughnut-chart" width="300" height="250"></canvas>');
+
+            // 그래프 데이터 가져오기
             var param = {
                 order_date : $("#order_date").val()
             };
@@ -142,12 +149,12 @@
                 }
                 console.log("labels" + labels);
                 console.log("dataVar" + dataVar);
-                fn_aa(labels,dataVar);
+                fn_aa(labels, dataVar);
             };
-
 
             callAjax("/selSaD/selectedDayChart.do", "post", "json", false, param, listCallBack);
         }
+
 
     </script>
 
