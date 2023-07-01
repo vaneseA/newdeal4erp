@@ -16,7 +16,7 @@
         pd.product_price,
         pd.product_unit_price,
         odt.order_dt_amt,
-        od.order_tot_price
+        odt.order_dt_amt * pd.product_price AS total_order_price
         FROM tb_order od
         INNER JOIN tb_clnt cl ON od.clnt_no = cl.clnt_no
         INNER JOIN tb_order_dt odt ON od.order_no = odt.order_no
