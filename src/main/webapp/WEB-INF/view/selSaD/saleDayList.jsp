@@ -30,7 +30,7 @@
                     datasets: [
                         {
                             label: "매출",
-                            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                            backgroundColor: getColors(labels.length),
                             data: dataVar,
                         }
                     ]
@@ -42,6 +42,24 @@
                     }
                 }
             });
+        }
+
+        //랜덤칼러 만드는 함수
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        //만든 랜덤칼러를 가져오는 함수
+        function getColors(length) {
+            var colors = [];
+            for (var i = 0; i < length; i++) {
+                colors.push(getRandomColor());
+            }
+            return colors;
         }
 
         // 날짜를 'YYYY-MM-DD' 형식으로 포맷팅하는 함수
