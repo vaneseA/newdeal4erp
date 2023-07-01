@@ -5,7 +5,7 @@
 
 <c:if test="${totalcnt eq 0 }">
     <tr>
-        <td colspan="5">데이터가 존재하지 않습니다.</td>
+        <td colspan="11">해당 날짜에 데이터가 존재하지 않습니다.</td>
     </tr>
 </c:if>
 
