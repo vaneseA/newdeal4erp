@@ -294,10 +294,10 @@
 
                         <!-- 검색창 영역 시작 -->
 
-                        <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:10px 10px; margin-bottom: 8px;">
-                            <label for="order_date" style="font-size: 15px; margin-right:5px; ">날짜 조회 : </label>
+                        <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:10px 10px;">
+                            <label for="order_date" style="font-size:15px; font-weight:bold; margin-right:10px; margin-top:6px; ">날짜 조회 : </label>
                             <input type="date" id="order_date" name="order_date" min="2023-01-01"
-                                   style="height: 25px; width: 120px; margin-right: 15px;">
+                                   style="height: 25px; width: 150px; margin-right: 15px;">
                             <a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
                             </p>
                         </div>
