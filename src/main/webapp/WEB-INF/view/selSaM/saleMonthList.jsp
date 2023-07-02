@@ -15,27 +15,18 @@
         // 페이징 설정
         var pageSize = 5;
         var pageBlockSize = 5;
-        function fn_aa() {
-            // 오늘 날짜 가져오기
-            var currentDate = new Date();
 
-            // Date 객체의 날짜를 7일씩 증가시키면서 label 생성
-            var labels = [];
-            for (var i = 0; i < 7; i++) {
-                var date = new Date(currentDate);
-                date.setDate(date.getDate() + i);
-                var formattedDate = formatDate(date); // 날짜를 원하는 형식으로 포맷팅
-                labels.push(formattedDate);
-            }
+        function fn_aa(labels, dataVar) {
+
             new Chart(document.getElementById("bar-chart-horizontal"), {
                 type: 'horizontalBar',
                 data: {
                     labels: labels,
                     datasets: [
                         {
-                            label: "Population (millions)",
-                            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
-                            data: [2478, 5267, 734, 784, 433]
+                            label: "매출",
+                            backgroundColor: getColors(labels.length),
+                            data: dataVar,
                         }
                     ]
                 },
@@ -44,22 +35,91 @@
                     title: {
                         display: true,
                         text: '월별 매출 순이익'
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function (tooltipItem, data) {
+                                var label = data.labels[tooltipItem.index];
+                                var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]; //천의자리마다 , 표시
+                                return label + ' : ' + value.toLocaleString() + "원"; // 라벨 (날짜)와 값을 함께 표시합니다.
+                            }
+                        }
                     }
                 }
             });
         }
-            // 날짜를 'YYYY-MM-DD' 형식으로 포맷팅하는 함수
-            function formatDate(date) {
-                var year = date.getFullYear();
-                var month = ('0' + (date.getMonth() + 1)).slice(-2);
-                var day = ('0' + date.getDate()).slice(-2);
-                return year + '-' + month + '-' + day;
+
+        // HSV를 RGB로 변환하는 함수
+        function hsvToRgb(h, s, v) {
+            var r, g, b;
+            var i;
+            var f, p, q, t;
+
+            // 표준값으로 변환
+            h = h / 360;
+            s = s / 100;
+            v = v / 100;
+
+            i = Math.floor(h * 6);
+            f = h * 6 - i;
+            p = v * (1 - s);
+            q = v * (1 - f * s);
+            t = v * (1 - (1 - f) * s);
+
+            switch (i % 6) {
+                case 0:
+                    r = v, g = t, b = p;
+                    break;
+                case 1:
+                    r = q, g = v, b = p;
+                    break;
+                case 2:
+                    r = p, g = v, b = t;
+                    break;
+                case 3:
+                    r = p, g = q, b = v;
+                    break;
+                case 4:
+                    r = t, g = p, b = v;
+                    break;
+                case 5:
+                    r = v, g = p, b = q;
+                    break;
             }
+
+            // RGB로 변환
+            return '#' + toHex(r * 255) + toHex(g * 255) + toHex(b * 255);
+        }
+
+        // 16진수로 변환하는 함수
+        function toHex(value) {
+            var hex = Math.round(value).toString(16);
+            return hex.length == 1 ? '0' + hex : hex;
+        }
+
+        //만든 랜덤칼러를 가져오는 함수
+        function getColors(length) {
+            var colors = [];
+            for (var i = 0; i < length; i++) {
+                // 색상을 고르게 분포
+                var hue = Math.floor(360 * i / length);
+                // 색상을 RGB 형식으로 변환
+                colors.push(hsvToRgb(hue, 100, 100));
+            }
+            return colors;
+        }
+
+        // 날짜를 'YYYY-MM-DD' 형식으로 포맷팅하는 함수
+        function formatDate(date) {
+            var year = date.getFullYear();
+            var month = ('0' + (date.getMonth() + 1)).slice(-2);
+            var day = ('0' + date.getDate()).slice(-2);
+            return year + '-' + month + '-' + day;
+        }
             /** OnLoad event */
             $(function () {
                 // 버튼 이벤트 등록
                 fRegisterButtonClickEvent();
-
                 fn_saleMonthList();
                 fn_aa();
 
@@ -75,19 +135,16 @@
                 var btnId = $(this).attr('id');
 
                 switch (btnId) {
-                    case 'btnSearch' :
+                    case 'btnSearch':
+                        var orderDate = $("#order_month").val();
+                        if (orderDate === "") {
+                            // order_month가 입력되지 않았을 때의 처리
+                            alert("날짜를 선택해주세요.");
+                            return;
+                        }
+
                         fn_saleMonthList();
-                        break;
-                    case 'btnSave' :
-                        fn_save();
-                        break;
-                    case 'btnDelete' :
-                        $("#action").val("D");
-                        fn_save();
-                        break;
-                    case 'btnClose' :
-                    case 'btnCloseDtlCod' :
-                        gfCloseModal();
+                        fn_chart();
                         break;
                 }
             });
@@ -97,19 +154,16 @@
             pagenum = pagenum || 1;
 
             var param = {
-                // proName: $("#proName").val()
-                // , splrName: $("#splrName").val()
-                // , searchKey: $("#searchKey").val()
-                // , pname: $("#pname").val()
-                // , pageSize: pageSize
-                // , pageBlockSize: pageBlockSize
-                // , pagenum: pagenum
+                order_month: $("#order_month").val()
+                , pageSize: pageSize
+                , pageBlockSize: pageBlockSize
+                , pagenum: pagenum
             };
 
             var listCallBack = function (returnValue) {
                 console.log(returnValue);
 
-                $("#listProduct").empty().append(returnValue);
+                $("#listSaleMonth").empty().append(returnValue);
 
                 var totalCnt = $("#totalCnt").val();
 
@@ -118,56 +172,43 @@
                 var paginationHtml = getPaginationHtml(pagenum, totalCnt, pageSize, pageBlockSize, 'fn_productList');
                 console.log("paginationHtml: " + paginationHtml);
 
-                $("#productPagination").empty().append(paginationHtml);
+                $("#saleMonthPagination").empty().append(paginationHtml);
 
                 $("#pageno").val(pagenum);
             };
 
             callAjax("/selSaM/saleMonthList.do", "post", "text", false, param, listCallBack);
         }
+        function fn_chart() {
+            // 그래프 초기화
+            $("#bar-chart-horizontal").remove();
 
+            // 그래프 데이터 가져오기
+            var param = {
+                order_month: $("#order_month").val()
+            };
 
-        function fn_openPopUp() {
+            var listCallBack = function (returnValue) {
+                var labels = [];
+                var dataVar = [];
 
-            popUpInit();
+                if (returnValue.length == 0) { // 매출 데이터가 없을 때
+                    alert("해당 날짜에는 매출이 없습니다.");
+                    return;
+                }
+                for (var i = 0; i < returnValue.length; i++) {
+                    console.log(returnValue[i].order_month);
+                    labels.push(returnValue[i].order_month);
+                    dataVar.push(returnValue[i].net_profit);
+                }
+                console.log("labels" + labels);
+                console.log("dataVar" + dataVar);
+                fn_aa(labels, dataVar);
+                fn_saleMonthList();
+            };
 
-            // 모달 팝업
-            gfModalPop("#layer1");
-
-
+            callAjax("/selSaD/selectedDayChart.do", "post", "json", false, param, listCallBack);
         }
-
-        function popUpInit(object) {
-
-            if (object == "" || object == null || object == undefined) {
-                $("#product_no").val("");
-                $("#product_name").val("");
-                $("#pro_name").val("");
-                $("#splr_name").val("");
-                $("#product_serial").val("");
-                $("#product_unit_price").val("");
-                $("#product_price").val("");
-
-
-                $("#btnDelete").hide();
-// object 가 없는 상태로 팝업 뜰 땐, action 을 “I” 로 설정하여  INSERT
-                $("#action").val("I");
-            } else {
-                $("#product_no").val(object.product_no);
-                $("#product_name").val(object.product_name);
-                $("#pro_name").val(object.pro_name);
-                $("#splr_name").val(object.splr_name);
-                $("#product_serial").val(object.product_serial);
-                $("#product_unit_price").val(object.product_unit_price);
-                $("#product_price").val(object.product_price);
-
-
-                $("#btnDelete").show();
-
-                $("#action").val("U");
-            }
-        }
-
 
     </script>
 
@@ -175,7 +216,7 @@
 <body>
 <form id="myForm" action="" method="">
     <input type="hidden" id="action" name="action"/>
-    <input type="hidden" id="product_no" name="product_no"/>
+    <input type="hidden" id="order_no" name="order_no"/>
     <input type="hidden" id="pageno" name="pageno"/>
 
     <!-- 모달 배경 -->
@@ -212,23 +253,10 @@
                         </p>
 
                         <!-- 검색창 영역 시작 -->
-
-                        <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:10px 10px; margin-bottom: 8px;">
-                            <label for="start" style="font-size: 15px; margin-right:5px; ">기간 조회 : </label>
-                            <input type="date" id="start" name="start" min="2023-01-01"
-                                   style="height: 25px; width: 120px;">
-                            <label for="clicombo" style="margin-left: 15px; font-size: 15px;">거래처명 : </label>
-                            <select id="clicombo" name="clicombo" style="height: 25px; width: 120px;">
-                            </select>
-
-                            <label for="acccombo" style="margin-left: 15px; font-size: 15px;">계정 대분류 : </label>
-                            <select id="acccombo" name="acccombo" style="height: 25px; width: 100px;">
-                                <option value="">전체</option>
-                            </select>
-
-                            </select>
-                            <input type="text" style="width: 200px; height: 25px; margin-right:5px; " id="pname"
-                                   name="pname">
+                        <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:10px 10px;">
+                            <label for="order_month" style="font-size:15px; font-weight:bold; margin-right:10px; margin-top:6px; ">날짜 조회 : </label>
+                            <input type="month" id="order_month" name="order_month" min="2023-01-01"
+                                   style="height: 25px; width: 150px; margin-right: 15px;">
                             <a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
                             </p>
                         </div>
@@ -267,7 +295,7 @@
                             </table>
 
 
-                        <div class="paging_area" id="productPagination"></div>
+                        <div class="paging_area" id="saleMonthPagination"></div>
 
 
                     </div> <!--// content -->
@@ -278,81 +306,7 @@
             </ul>
         </div>
     </div>
-
-    <!-- 모달팝업 -->
-    <div id="layer1" class="layerPop layerType2" style="width: 650px;">
-        <dl>
-            <dt>
-                <strong>제품 등록</strong>
-            </dt>
-            <dd class="content">
-                <!-- s : 여기에 내용입력 -->
-                <table class="row">
-                    <caption>caption</caption>
-                    <colgroup>
-                        <col width="25%">
-                        <col width="25%">
-                        <col width="25%">
-                        <col width="25%">
-                    </colgroup>
-
-                    <tbody>
-                    <tr>
-                        <th scope="row">제품종류 <span class="font_red">*</span></th>
-                        <td>
-                            <select id="ltypecombo" name="ltypecombo">
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">제조사 <span class="font_red">*</span></th>
-                        <td>
-                            <select id="mtypecombo" name="mtypecombo">
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">품명 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="product_name" id="product_name"/></td>
-                        <th scope="row">모델명 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="product_serial"
-                                   id="product_serial"/></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">납품단가 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="product_unit_price" id="product_unit_price"/>
-                        </td>
-                        <th scope="row">판매가 <span class="font_red">*</span></th>
-                        <td><input type="text" class="inputTxt p100" name="product_price" id="product_price"/></td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <!-- e : 여기에 내용입력 -->
-
-                <div class="btn_areaC mt30">
-                    <a href="" class="btnType blue" id="btnSave" name="btn"><span>저장</span></a>
-                    <a href="" class="btnType blue" id="btnDelete" name="btn"><span>삭제</span></a>
-                    <a href="" class="btnType gray" id="btnClose" name="btn"><span>취소</span></a>
-                </div>
-            </dd>
-        </dl>
-        <a href="" class="closePop"><span class="hidden">닫기</span></a>
-    </div>
-
-    <div id="layer2" class="layerPop layerType2" style="width: 600px;">
-        <dl>
-            <dt>
-                <strong>상세코드 관리</strong>
-            </dt>
-            <dd class="content">
-
-
-            </dd>
-        </dl>
-        <a href="" class="closePop"><span class="hidden">닫기</span></a>
-    </div>
-    <!--// 모달팝업 -->
+    
 </form>
 </body>
 </html>

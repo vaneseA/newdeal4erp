@@ -89,7 +89,6 @@ public class SelSaDController {
 
         // Controller -> Service -> Dao -> SQL
         List<SelcectedDayModel> selectedDaySearchList = selSaDService.selectedDayList(paramMap);
-        System.out.println(selectedDaySearchList);
         model.addAttribute("selectedDaySearchList",selectedDaySearchList);
 
         logger.info("+ End " + className + ".selectedDayList");

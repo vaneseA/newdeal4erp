@@ -5,24 +5,19 @@
 
 							<c:if test="${totalcnt eq 0 }">
 								<tr>
-									<td colspan="5">데이터가 존재하지 않습니다.</td>
+									<td colspan="6">데이터가 존재하지 않습니다.</td>
 								</tr>
 							</c:if>
 							
 							<c:if test="${totalcnt > 0 }">
 								<c:forEach items="${saleMonthSearchList}" var="list">
 									<tr>
-										<td>${list.order_date}</td>
-										<td>${list.order_no}</td>
-										<td>${list.clnt_name}</td>
-										<td>${list.splr_name}</td>
+										<td>${list.order_month}</td>
+										<td>${list.total_order_dt_amt}</td>
+										<td>${list.total_order_tot_price}</td>
+										<td>${list.total_product_unit_price}</td>
 										<td>${list.product_name}</td>
-										<td>${list.pro_name}</td>
-										<td>${list.product_serial}</td>
-										<td>${list.product_price}</td>
-										<td>${list.product_unit_price}</td>
-										<td>${list.order_dt_amt}</td>
-										<td>${list.order_tot_price}</td>
+										<td>${list.net_profit}</td>
 									</tr>
 								</c:forEach>
 							</c:if>
