@@ -6,48 +6,17 @@
     <!--  목록 조회 -->
     <select id="saleMonthList" resultType="kr.happyjob.study.selSaM.model.SelSaMModel">
         SELECT
-        od.order_date,
-        od.order_no,
-        cl.clnt_name,
-        pc.pro_name,
-        sl.splr_name,
-        pd.product_name,
-        pd.product_serial,
-        pd.product_price,
-        pd.product_unit_price,
-        odt.order_dt_amt,
-        od.order_tot_price
-        FROM
-        tb_order od
-        INNER JOIN tb_clnt cl ON od.clnt_no = cl.clnt_no
+        DATE_FORMAT(od.order_date, '%Y-%m') as order_month,
+        SUM(od.order_tot_price) as total_order_tot_price,
+        SUM(pd.product_unit_price * odt.order_dt_amt) as total_product_unit_price,
+        (SUM(od.order_tot_price) - SUM(pd.product_unit_price * odt.order_dt_amt)) as net_profit
+        FROM tb_order od
         INNER JOIN tb_order_dt odt ON od.order_no = odt.order_no
         INNER JOIN tb_product pd ON odt.product_no = pd.product_no
-        INNER JOIN tb_pro pc ON pd.pro_cd = pc.pro_cd
-        INNER JOIN tb_splr sl ON pd.splr_no = sl.splr_no
-
-        <where>
-            <if test="(proName != null) and (!proName.equals(''))">
-                and pc.pro_name = #{proName}
-            </if>
-            <if test="(splrName != null) and (!splrName.equals(''))">
-                and sl.splr_name = #{splrName}
-            </if>
-            <if test="(pname != null) and (!pname.equals(''))">
-                <choose>
-                    <when
-                            test="searchKey eq 'product_name'.toString()">
-                        and pd.product_name Like CONCAT('%', #{pname}, '%')
-                    </when>
-                    <otherwise>
-                        and (   pd.product_name Like CONCAT('%', #{pname}, '%')
-                        )
-                    </otherwise>
-                </choose>
-            </if>
-        </where>
-        ORDER BY od.order_date
-        LIMIT #{pageindex}, #{pageSize}
-
+        <if test="(order_date != null) and (!order_date.equals(''))">
+            WHERE od.order_date >= DATE_FORMAT(STR_TO_DATE(#{order_date}, '%Y-%m'), '%Y-%m-01')
+            AND od.order_date = LAST_DAY(STR_TO_DATE(#{order_date}, '%Y-%m'))
+        </if>
     </select>
 
 </mapper>

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/selSaM/")
@@ -51,7 +52,7 @@ public class SelSaMController {
     * 목록 조회
     */
    @RequestMapping("saleMonthList.do")
-   public String productList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+   public String saleMonthList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                              HttpServletResponse response, HttpSession session) throws Exception {
 
       logger.info("+ Start " + className + ".saleMonthList");
@@ -68,15 +69,29 @@ public class SelSaMController {
       List<SelSaMModel> saleMonthSearchList = selSaMService.saleMonthList(paramMap);
       int totalcnt = selSaMService.countSaleMonthList(paramMap);
 
-      model.addAttribute("productSearchList", saleMonthSearchList);
+      model.addAttribute("saleMonthSearchList", saleMonthSearchList);
       model.addAttribute("totalcnt", totalcnt);
 
-      logger.info("+ End " + className + ".productList");
+      logger.info("+ End " + className + ".saleMonthList");
 
       return "selSaM/saleMonthListGrd";
    }
 
+   @RequestMapping("saleMonthChart.do")
+   @ResponseBody
+   public List<SelSaMModel> saleMonthChart(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+                                                   HttpServletResponse response, HttpSession session) throws Exception {
+      logger.info("+ Start " + className + ".saleMonthChart");
+      logger.info("   - paramMap : " + paramMap);
 
+      // Controller -> Service -> Dao -> SQL
+      List<SelSaMModel> saleMonthChart = selSaMService.saleMonthList(paramMap);
+
+
+      logger.info("+ End " + className + ".selectedDayChart");
+
+      return saleMonthChart;
+   }
 
 
 

@@ -22,8 +22,6 @@
 
 
             new Chart(document.getElementById("doughnut-chart"), {
-
-
                 type: 'doughnut',
                 data: {
                     labels: labels,
@@ -296,7 +294,7 @@
 
                         <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:10px 10px;">
                             <label for="order_date" style="font-size:15px; font-weight:bold; margin-right:10px; margin-top:6px; ">날짜 조회 : </label>
-                            <input type="date" id="order_date" name="order_date" min="2023-01-01"
+                            <input type="date" id="order_date" name="order_dat회e" min="2023-01-01"
                                    style="height: 25px; width: 150px; margin-right: 15px;">
                             <a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
                             </p>

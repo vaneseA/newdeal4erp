@@ -164,22 +164,10 @@
 
                         <!-- 검색창 영역 시작 -->
 
-                        <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:10px 10px; margin-bottom: 8px;">
-                            <label for="start" style="font-size: 15px; margin-right:5px; ">기간 조회 : </label>
-                            <input type="date" id="start" name="start" min="2023-01-01"
-                                   style="height: 25px; width: 120px;">
-                            <label for="clicombo" style="margin-left: 15px; font-size: 15px;">거래처명 : </label>
-                            <select id="clicombo" name="clicombo" style="height: 25px; width: 120px;">
-                            </select>
-
-                            <label for="acccombo" style="margin-left: 15px; font-size: 15px;">계정 대분류 : </label>
-                            <select id="acccombo" name="acccombo" style="height: 25px; width: 100px;">
-                                <option value="">전체</option>
-                            </select>
-
-                            </select>
-                            <input type="text" style="width: 200px; height: 25px; margin-right:5px; " id="pname"
-                                   name="pname">
+                        <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:10px 10px; margin-bottom: 8px;">  <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:10px 10px;">
+                            <label for="order_year" style="font-size:15px; font-weight:bold; margin-right:10px; margin-top:6px; ">날짜 조회 : </label>
+                            <input type="year" id="order_year" name="order_year" min="2023-01-01"
+                                   style="height: 25px; width: 150px; margin-right: 15px;">
                             <a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
                             </p>
                         </div>
