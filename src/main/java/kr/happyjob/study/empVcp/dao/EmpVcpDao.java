@@ -3,11 +3,11 @@ package kr.happyjob.study.empVcp.dao;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+
 
 import kr.happyjob.study.empVcp.model.VacaPersonalModel;
 import kr.happyjob.study.empVcp.model.VacaPersonalRemainModel;
-import kr.happyjob.study.empVcs.model.VacaSearchModel;
+
 
 
 public interface EmpVcpDao {

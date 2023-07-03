@@ -10,6 +10,10 @@
 height:10px;
 }
 
+.emptySpace1{
+display:inline-block;
+width:100px;
+}
 
 
 .emptySpace2{
@@ -22,6 +26,10 @@ display:inline-block;
 width:10px;
 }
 
+.emptySpace5{
+
+height:10px;
+}
 
 
 
@@ -41,6 +49,52 @@ width:10px;
 
 #expen_date{
 	font-size:small;
+}
+
+.label-font{
+	font-size: 15px;
+	font-weight: bold;
+
+}
+
+.border-line{
+	display:flex;
+	align-items: center;
+	justify-content:center;
+	padding-top:20px;
+	position:relative;
+
+	
+}
+
+.inputSpace{
+
+position:absolute;
+margin-left: 10px;
+
+}
+
+.search-btn{
+font-weight: bold;
+font-size: 16px;
+color:black;
+
+}
+
+.btnTypegray{
+	background-color: #c0c0c0;
+	border-radius: 2px;
+	width: 120px;
+	height: 22px;
+	position:relative;
+ 	left: 485px;
+ 	bottom: 27px;
+ 	display:flex;
+ 	align-items: center;
+ 	justify-content:center;
+ 	padding-top: 5px;
+ 	
+
 }
 
 
@@ -464,30 +518,33 @@ width:10px;
 							<span>지출결의서 조회 및 승인</span> <span class="fr">
 						</p>
 						
-							<span></span>신청일자: &nbsp; </span><input type = "date" id = "from" name="from" style = "width: 100px; height:27px">
-							<label for= "to">  -  </label>
-							<input type = "date"  id = "to"  name = "to" style = "width: 100px;height:27px">
+							<div style ="border:solid 3px #c0c0c0; height: 120px; border-radius: 10px;" class="border-line">
+								<div>
+									<span class="label-font">신청일자: &nbsp; </span><input type = "date" id = "from" name="from" style = "width: 120px; height:25px; font-size:15px">
+									<label for= "to">  -  </label>
+									<input type = "date"  id = "to"  name = "to" style = "width: 120px;height:25px; font-size:15px">
 							
-							<span>&nbsp;&nbsp;&nbsp;&nbsp;결재: &nbsp;</span>
-							<select id="search_appro_yn" name="search_appro_yn" style="width: 70px; height:27px">
-							        <option value="" >전체</option>
-									<option value="Y" >결재</option>
-									<option value="N" >반려</option>
-							</select>
+									<span class="label-font">&nbsp;&nbsp;&nbsp;&nbsp;결재: &nbsp;</span>
+									<select id="search_appro_yn" name="search_appro_yn" style="width: 120px; height:27px;  font-size: 15px" ">
+									        <option value="" >전체</option>
+											<option value="Y" >결재</option>
+											<option value="N" >반려</option>
+									</select>
+									
+									<span class="label-font">&nbsp;&nbsp;&nbsp;&nbsp;계정 대분류: &nbsp;</span>
+									 <select id="search_acnt_sbject_cd" name="search_acnt_sbject_cd" style="width: 120px; height:27px;  font-size: 15px" " >
+									   
+									</select> <div class="emptySpace5"></div> 
+									
+									<span class="emptySpace1"></span><span class="label-font">&nbsp;&nbsp;&nbsp;&nbsp;계정 상세: &nbsp;</span>
+									 <select id="search_acnt_dt_sbject_cd" name="search_acnt_dt_sbject_cd" style="width: 120px; height:27px;  font-size: 15px" " >
+									</select> 
 							
-							<span>&nbsp;&nbsp;&nbsp;&nbsp;계정 대분류: &nbsp;</span>
-							 <select id="search_acnt_sbject_cd" name="search_acnt_sbject_cd" style="width: 70px; height:27px" >
-							   
-							</select> 
-							
-							<span>&nbsp;&nbsp;&nbsp;&nbsp;계정 상세: &nbsp;</span>
-							 <select id="search_acnt_dt_sbject_cd" name="search_acnt_dt_sbject_cd" style="width: 100px; height:27px" >
-							</select> 
-							
-							<span class="emptySpace2">&nbsp;</span>
-							<input type="text" style="width: 130px; height: 25px;" id="sname" name="sname"><span class="emptySpace3"></span>
-							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
-							</span><div class="empty"></div>
+									<input type="text" style="width: 150px; height: 25px;font-size: 15px" id="sname" name="sname" class="inputSpace">
+									<div class="btnTypegray"><a href="" id="btnSearch" name="btn"><span class="search-btn">검  색</span></a></div>
+									
+								</div>
+							</div><div class="empty"></div>
 							
 						
 						<div class="noticeList">
@@ -515,7 +572,7 @@ width:10px;
 										<th scope="col">사원명</th>
 										<th scope="col">계정대분류</th>
 										<th scope="col">상세분류</th>
-										<th scope="col">거래처명</th>
+										<th scope="col">지출내용</th>
 										<th scope="col">신청일자</th>
 										<th scope="col">사용일자</th>
 										<th scope="col">지출금액</th>

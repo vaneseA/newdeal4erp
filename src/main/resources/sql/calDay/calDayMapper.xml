@@ -25,14 +25,24 @@
 
 <!-- 부서명 신청일 직원명 승인여부 -->
 	<select id="dateCheckDList" resultType="kr.happyjob.study.calDay.model.CalDayModel">
-		SELECT dc.detail_name AS dept_name
-			, ui.name AS name
-			,vr.appro_yn
-		FROM tb_vaca_req vr
-		        LEFT JOIN tb_userinfo ui ON ui.loginID = vr.loginID
-		        LEFT JOIN tb_detail_code dc ON dc.detail_code = ui.dept_cd
-		WHERE vr.vaca_req_date = STR_TO_DATE(#{vacaDate}, '%Y-%m-%d')
+		SELECT ll.dept_name
+		      ,dc.detail_name AS level_name
+		      ,ll.name
+		      ,ll.appro_yn
+		FROM
+		    (SELECT
+		          ui.name AS name
+		          ,ui.level_cd as level_cd
+		          ,ui.dept_cd as dept_cd
+		          ,vr.appro_yn as appro_yn
+		          ,dc.detail_name AS dept_name
+		          ,vr.vaca_req_date
+		        FROM   tb_vaca_req vr
+		        inner JOIN tb_userinfo ui ON ui.loginID = vr.loginID
+		        inner JOIN tb_detail_code dc ON dc.detail_code = ui.dept_cd)ll
+		        inner join tb_detail_code dc on dc.detail_code = ll.level_cd
+		WHERE ll.vaca_req_date = STR_TO_DATE(#{vacaDate}, '%Y-%m-%d')
 		<!-- AND vr.appro_yn = #{appro_yn} -->
-		ORDER BY vr.appro_yn DESC
+		ORDER BY ll.appro_yn DESC;
 	</select>
 </mapper>

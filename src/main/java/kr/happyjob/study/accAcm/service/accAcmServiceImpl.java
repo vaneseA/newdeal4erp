@@ -76,4 +76,20 @@ public class accAcmServiceImpl implements accAcmService {
 		return AccAcmDao.smallInsert(paramMap);
 	}
 	
+	@Override
+	public int LCdDupChked(Map<String, Object> paramMap) {
+		return AccAcmDao.LCdDupChked(paramMap);
+	}
+	
+	@Override
+	public int LNmDupChked(Map<String, Object> paramMap) {
+		return AccAcmDao.LNmDupChked(paramMap);
+	}
+	
+	@Override
+	public int SCdDupChk(Map<String, Object> paramMap) {
+		return AccAcmDao.SCdDupChk(paramMap);
+	}
+
+	
 }	

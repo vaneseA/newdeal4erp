@@ -147,7 +147,7 @@
 
 						<p class="Location">
 							<a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
-								class="btn_nav bold">인사</span> <span class="btn_nav bold">휴가 조회</a>
+								class="btn_nav bold">인사</span> <span class="btn_nav bold">휴가신청내역</a>
 						</p>
 						
 						<div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">

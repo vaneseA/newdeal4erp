@@ -47,7 +47,14 @@
 		// combo box 종류  cli : 거래처    조회 대상 테이블  tb_clnt   
 		selectComCombo("cli","clicombo","all","","");  // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , "", "" 
 		
+		// 제품 중분류
+		$('#ltypecombo').change(function() {
+			productCombo("m","mtypecombo","all",$("#ltypecombo").val(),"","","");   // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , 선택된 상위 계정코드, "" 
+			$("#ptypecombo option").remove();
+		});
 		
+		//제품중분류 별도
+		productCombo("m","emtypecombo","all","","","","");
 		
 		// 버튼 이벤트 등록
 		fRegisterButtonClickEvent();
@@ -148,13 +155,7 @@
 		
 		
 		if(object == "" || object == null || object == undefined) {
-// 			$("#bno").val("");		
-// 			$("#notice_cont").val("");
-// 			$("#notice_no").val("");
-			
-// 			$("#btnDelete").hide();
-			
-// 			$("#action").val("I");	
+
 		} else {
 			$("#bno").val(object.budget_no);		
 			$("#person").val(object.name);
@@ -214,14 +215,12 @@
 			$("#TE").val(outamt);
 			$("#TR").val(outamt).toLocaleString();
 			}
-// 			$("#btnDelete").show();
 			
 		}
 	}
 	
 	function fn_selectone(no) {
 		
-		//alert(no);
 		
 		var param = {
 				budget_no : no
@@ -294,44 +293,49 @@
 							<span>회계전표</span> <span class="fr"> 
 						</p>
 						
-						
-							<label for="start" style="font-size: 15px;">기간 조회 : </label>
-							<input type="date" id="start" name="start" min="2023-01-01" style="height: 25px; width: 100px;">
-							<span> ~ </span>
-							<input type="date" id="end" name="end" min="2023-01-01" style="height: 25px; width: 100px;">
+						<div style="border : solid 3px #c0c0c0; height: 150px; border-radius: 10px;">
+							<div style="margin-top: 18px; text-align: center;">
+								<label for="start" style="font-size: 15px; font-weight: bold">기간 조회 : </label>
+								<input type="date" id="start" name="start" min="2023-01-01" style="height: 25px; width: 150px;">
+								<span style="font-weight: bold; font-size: 15px; margin-left: 10px; margin-right: 10px;">~</span>
+								<input type="date" id="end" name="end" min="2023-01-01" style="height: 25px; width: 150px;">
+								
+								
+							</div> 
 							
-							<label for="clicombo" style="margin-left: 15px; font-size: 15px;">거래처명 : </label>
-							<select id="clicombo" name="clicombo" style="height: 25px; width: 120px;" >
-							</select> 
+							<div style="margin-top: 15px; margin-bottom : 15px; text-align: center; ">
+								<label for="acccombo" style="margin-left: 15px; font-size: 15px; font-weight: bold">계정 대분류 : </label>
+								<select id="acccombo" name="acccombo" style="height: 25px; width: 100px;">
+								        <option value="" >전체</option>
+								</select> 
+								
+								<label for="accdcombo" style="margin-left: 15px; font-size: 15px; font-weight: bold">계정 상세 : </label>
+								 <select id="accdcombo" name="accdcombo" style="width: 100px; height: 25px;" >
+								</select>
+								<label for="clicombo" style="margin-left: 15px; font-size: 15px; font-weight: bold">거래처명 : </label>
+								<select id="clicombo" name="clicombo" style="height: 25px; width: 120px;" >
+								</select> 
+								
+<!-- 								<label for="emtypecombo" style="margin-left: 15px; font-size: 15px; font-weight: bold">납품처 : </label> -->
+<!-- 								<select id="emtypecombo" name="emtypecombo" style="width: 160px; height: 25px;" > -->
+<!-- 								</select>  -->
+								
+								<div style="margin-top: 15px; margin-bottom : 15px; text-align: center; ">
+									
+									<a href="" class="" id="btnSearch" name="btn">
+									<div style="background: #c0c0c0; border-radius: 3px; width: 120px; height: 20px; margin: 0 auto; padding-top: 10px; padding-bottom: 5px;">
+	<!-- 								<div style="background: #add8e6; border-radius: 3px; width: 120px; height: 20px; margin: 0 auto; padding-top: 10px; padding-bottom: 5px;"> -->
+									<span style="border: none; font-weight: bold; text-align: center; font-size: 16px; margin-top: 20px;" >검&nbsp;&nbsp;&nbsp;색</span>
+									</div>
+									</a>
+								
+								</div>
+							</div>
 							
-							<label for="acccombo" style="margin-left: 15px; font-size: 15px;">계정 대분류 : </label>
-							<select id="acccombo" name="acccombo" style="height: 25px; width: 100px;">
-							        <option value="" >전체</option>
-							</select> 
 							
-							<label for="accdcombo" style="margin-left: 15px; font-size: 15px;">계정 상세 : </label>
-							 <select id="accdcombo" name="accdcombo" style="width: 100px;" >
-<!-- 							        <option value="" >전체</option> -->
-<!-- 									<option value="1000" >상품매출</option> -->
-<!-- 									<option value="2000" >상품매입</option> -->
-<!-- 									<option value="3000" >직원급여</option> -->
-<!-- 									<option value="4000" >퇴직급여</option> -->
-<!-- 									<option value="5000" >보험료</option> -->
-<!-- 									<option value="6000" >소모품비</option> -->
-<!-- 									<option value="7000" >여비교통비</option> -->
-<!-- 									<option value="8000" >법인세</option> -->
-							</select> 
-							
-							
-							<label for="" style="margin-left: 15px; font-size: 15px;">납품처 : </label>
-							<select id="" name="" style="width: 100px;" >
-							</select> 
-							
-							
-							<a href="" class="btnType blue" id="btnSearch" name="btn" style="margin-left: 30px;"><span>검  색</span></a>
+						</div>
 <!-- 							 <a class="btnType blue" href="javascript:fn_openpopup();" name="modal"><span>신규등록</span></a> -->
 <!-- 							 <a class="btnType blue" href="javascript:fn_openpopupfile();" name="modal"><span>신규등록 파일</span></a> -->
-							</span>
 						<p style="margin-bottom: 10px;"></p>
 						
 						<div class="acSearchlist">
@@ -416,34 +420,11 @@
 							<th >지출번호</th>
 							<td ><input type="text" class="inputTxt p100 acv" name="Eno" id="Eno" style="border:none"/></td>
 						</tr>
-<!-- 						<tr> -->
-<!-- 							<th scope="row">전표번호</th> -->
-<!-- 							<td colspan="3"><input type="text" class="inputTxt p100 acv" name="bno" id="bno" style="border:none"/></td> -->
-<!-- 							<th scope="row">구분</th> -->
-<!-- 							<td colspan="3"><input type="text" class="inputTxt p100 acv" name="inoutNm" id="inoutNm" style="border:none"/></td> -->
-<!-- 							<th scope="row">담당자</th> -->
-<!-- 							<td colspan="3"><input type="text" class="inputTxt p100 acv" name="person" id="person" style="border:none"/></td> -->
-<!-- 							<th scope="row">일자</th> -->
-<!-- 							<td colspan="3"><input type="text" class="inputTxt p100 acv" name="date" id="date" style="border:none" /></td> -->
-<!-- 						</tr> -->
-<!-- 						<tr> -->
-<!-- 							<th scope="row">거래처</th> -->
-<!-- 							<td colspan="3"><input type="text" class="inputTxt p100 acv" name="clientNm" id="clientNm" style="border:none"/></td> -->
-<!-- 							<th scope="row">주문번호</th> -->
-<!-- 							<td colspan="3"><input type="text" class="inputTxt p100 acv" name="Ono" id="Ono" style="border:none"/></td> -->
-<!-- 							<th scope="row">발주번호</th> -->
-<!-- 							<td colspan="3"><input type="text" class="inputTxt p100 acv" name="Dno" id="Dno" style="border:none"/></td> -->
-<!-- 							<th scope="row">지출번호</th> -->
-<!-- 							<td colspan="3"><input type="text" class="inputTxt p100 acv" name="Eno" id="Eno" style="border:none"/></td> -->
-<!-- 						</tr> -->
 						
 						<tr>
 							<th scope="row" td colspan="4">계정과목</th>
 							<th scope="row" td colspan="2">차변</th>
 							<th scope="row" td colspan="2">대변</th>
-<!-- 							<th scope="row" colspan="4">계정과목</th> -->
-<!-- 							<th scope="row" colspan="4">차변</th> -->
-<!-- 							<th scope="row" colspan="4">대변</th> -->
 							
 						</tr>
 						<tr>
@@ -474,11 +455,6 @@
 					</tbody>
 				</table>
 
-				<!-- e : 여기에 내용입력 -->
-
-<!-- 				<div class="btn_areaC mt30"> -->
-<!-- 					<a href="" class="btnType blue" id="btnSave" name="btn"><span>저장</span></a>  -->
-<!-- 					<a href="" class="btnType blue" id="btnDelete" name="btn"><span>삭제</span></a>  -->
 					
 					<a href=""	class="btnType gray"  id="btnClose" name="btn" style="margin-left: 45.5%; margin-top: 30px; "><span>닫기</span></a>
 <!-- 				</div> -->

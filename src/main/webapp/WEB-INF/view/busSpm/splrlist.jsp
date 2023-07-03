@@ -10,19 +10,25 @@
 <title>납품기업 관리</title>
 <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
 
+
+<!-- 대광유통 Favicon -->
+<link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
+
 <!-- 우편번호 조회 -->
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" charset="utf-8"
 	src="${CTX_PATH}/js/popFindZipCode.js"></script>
+	
+<!-- 카카오맵 API key -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cddfe15bacfcebf2e218ddc6e15fd2eb&libraries=services"></script>
+
                               
 <script type="text/javascript">
 
 	// 페이징 설정
 	var pageSize = 5;     
 	var pageBlockSize = 5;    
-	
-	
 	
 	/** OnLoad event */ 
 	$(function() {
@@ -57,7 +63,6 @@
 	            fn_save();
 	            break;	
 	        case 'btnClose' :
-	        case 'btnCloseDtlCod' :
 	            gfCloseModal();
 	            break;
 	        }
@@ -127,6 +132,7 @@
 	        $("#splr_memo").val("");
 	        $("#splr_no").val("");
 
+	        $("#map").hide();
 	        $("#btnDelete").hide();
 
 	        // object 가 없는 상태로 팝업 뜰 땐, action 을 “I” 로 설정하여  INSERT
@@ -147,6 +153,7 @@
 	        $("#splr_memo").val(object.splr_memo);
 	        $("#splr_no").val(object.splr_no);
 
+	        $("#map").show();
 	        $("#btnDelete").show();
 
 	        // object 가 있는 상태로 팝업 뜰 땐, action 을 “U” 로 설정하여  UPDATE
@@ -162,13 +169,40 @@
 	    }
 
 	    var selectoncallback = function(returndata) {			
-	        
 	        console.log( JSON.stringify(returndata) );
-
 	        popupinit(returndata.splrsearch);
 
 	        // 모달 팝업
 	        gfModalPop("#layer1");
+	        
+	        
+	        /****  카카오맵  JS코드 시작     ****/
+	        var mapContainer = document.getElementById('map'), // 지도 표시할 div 
+		        mapOption = {
+		            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		            level: 3 // 지도의 확대 레벨
+		        };  
+		    // 지도 생성
+		    var map = new kakao.maps.Map(mapContainer, mapOption); 
+		    // 주소-좌표 변환 객체 생성
+		    var geocoder = new kakao.maps.services.Geocoder();
+		    // 주소로 좌표 검색
+		    geocoder.addressSearch($("#splr_add").val(), function(result, status) {
+	
+		        // 정상적으로 검색이 완료됐으면 
+		         if (status === kakao.maps.services.Status.OK) {
+		            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+		            // 결과값으로 받은 위치를 마커로 표시
+		            var marker = new kakao.maps.Marker({
+		                map: map,
+		                position: coords
+		            });
+		            // 지도의 중심을 결과값으로 받은 위치로 이동
+		            map.setCenter(coords);
+		        } 
+		    });
+		    /****  카카오맵  JS코드 끝     ****/
+	        
 
 	    }
 
@@ -184,31 +218,11 @@
 	        return;
 	    }
 
-		// serialize() 사용으로, var param 선언부 주석처리
-		/*
-	    var param = {
-	        action : $("#action").val(),
-	        splr_no : $("#splr_no").val(),
-	        splr_name : $("#splr_name").val(),
-	        splr_tel : $("#splr_tel").val(),
-	        splr_mng : $("#splr_mng").val(),
-	        splr_hp : $("#splr_hp").val(),
-	        splr_zip : $("#splr_zip").val(),
-	        splr_add : $("#splr_add").val(),
-	        splr_add_dt : $("#splr_add_dt").val(),
-	        splr_email : $("#splr_email").val(),
-	        splr_indst : $("#splr_indst").val(),
-	        splr_indst_no : $("#splr_indst_no").val(),
-	        splr_acc : $("#splr_acc").val(),
-	        splr_memo : $("#splr_memo").val()
-	    }
-		*/
-
 	    var savecallback = function(reval) {
 	        console.log( JSON.stringify(reval) );
 
 	        if(reval.returncval > 0) {
-	            alert("저장 되었습니다.");
+	            alert("반영 되었습니다.");
 	            gfCloseModal();
 
 	            if($("#action").val() == "U") {
@@ -232,15 +246,15 @@
 						[ "splr_name", "기업명을 입력해 주세요." ]
 					,	[ "splr_tel", "회사 전화를 입력해 주세요." ]
 					,	[ "splr_mng", "담당자를 입력해 주세요." ]
-					,	[ "splr_hp", "담당자 전화를 입력해 주세요." ]
+					,	[ "splr_hp", "담당자 연락처를 입력해 주세요." ]
 					,	[ "splr_zip", "우편번호를 입력해 주세요." ]
-					,	[ "bk_cd", "은행이름을 선택해 주세요." ]
-					,	[ "splr_acc", "계좌번호를 입력해 주세요." ]
 					,	[ "splr_add", "주소를 입력해 주세요." ]
 					,	[ "splr_add_dt", "상세주소를 입력해 주세요." ]
+					,	[ "splr_email", "이메일을 입력해 주세요." ]
 					,	[ "splr_indst", "업종을 입력해 주세요." ]
 					,	[ "splr_indst_no", "사업자등록번호를 입력해 주세요." ]
-					,	[ "splr_email", "이메일을 입력해 주세요." ]
+					,	[ "bk_cd", "은행이름을 선택해 주세요." ]
+					,	[ "splr_acc", "계좌번호를 입력해 주세요." ]
 				]
 		);
 		if (!chk) {
@@ -336,7 +350,7 @@
 						</p>
 						
 						<!-- 검색창 영역 시작 -->
-						<div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">
+						<div style="display:flex; justify-content:center; align-content:center; border:solid 3px #c0c0c0; border-radius: 10px; padding:40px 40px; margin:20px auto;">
 							<select id="searchKey" name="searchKey" style="width:150px; margin-right:5px;" >
 						        <option value="" >검색조건</option>
 								<option value="sp_name" >기업명</option>
@@ -461,6 +475,7 @@
 							</td>
 						</tr>
 					</tbody>
+					<div id="map" style="margin-bottom:5px; width:100%; height:200px;"></div>
 				</table>
 
 				<!-- e : 여기에 내용입력 -->
@@ -475,65 +490,6 @@
 		<a href="" class="closePop"><span class="hidden">닫기</span></a>
 	</div>
 
-	<div id="layer2" class="layerPop layerType2" style="width: 600px;">
-		<dl>
-			<dt>
-				<strong>상세코드 관리</strong>
-			</dt>
-			<dd class="content">
-
-				<!-- s : 여기에 내용입력 -->
-
-				<table class="row">
-					<caption>caption</caption>
-					<colgroup>
-						<col width="120px">
-						<col width="*">
-						<col width="120px">
-						<col width="*">
-					</colgroup>
-
-					<tbody>
-						<tr>
-							<th scope="row">그룹 코드 ID <span class="font_red">*</span></th>
-							<td><input type="text" class="inputTxt p100" id="dtl_grp_cod" name="dtl_grp_cod" /></td>
-							<th scope="row">그룹 코드 명 <span class="font_red">*</span></th>
-							<td><input type="text" class="inputTxt p100" id="dtl_grp_cod_nm" name="dtl_grp_cod_nm" /></td>
-						</tr>
-						<tr>
-							<th scope="row">상세 코드 ID <span class="font_red">*</span></th>
-							<td><input type="text" class="inputTxt p100" id="dtl_cod" name="dtl_cod" /></td>
-							<th scope="row">상세 코드 명 <span class="font_red">*</span></th>
-							<td><input type="text" class="inputTxt p100" id="dtl_cod_nm" name="dtl_cod_nm" /></td>
-						</tr>
-						
-						<tr>
-							<th scope="row">코드 설명</th>
-							<td colspan="3"><input type="text" class="inputTxt p100"
-								id="dtl_cod_eplti" name="dtl_cod_eplti" /></td>
-						</tr>
-					
-						<tr>
-							<th scope="row">사용 유무 <span class="font_red">*</span></th>
-							<td colspan="3"><input type="radio" id="dtl_use_poa_1"
-								name="dtl_use_poa" value="Y" /> <label for="radio1-1">사용</label>
-								&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" id="dtl_use_poa_2"
-								name="dtl_use_poa" value="N" /> <label for="radio1-2">미사용</label></td>
-						</tr>
-					</tbody>
-				</table>
-
-				<!-- e : 여기에 내용입력 -->
-
-				<div class="btn_areaC mt30">
-					<a href="" class="btnType blue" id="btnSaveDtlCod" name="btn"><span>저장</span></a>
-					<a href="" class="btnType blue" id="btnDeleteDtlCod" name="btn"><span>삭제</span></a>  
-					<a href="" class="btnType gray" id="btnCloseDtlCod" name="btn"><span>취소</span></a>
-				</div>
-			</dd>
-		</dl>
-		<a href="" class="closePop"><span class="hidden">닫기</span></a>
-	</div>
 	<!--// 모달팝업 -->
 </form>
 </body>

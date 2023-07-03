@@ -50,7 +50,8 @@
 					fn_openpopup1();
 					break;
 				case 'btnVacaApp' :
-					fn_vacaFormInsert();
+					fn_data_validation();
+					break;
 				case 'btnBack' :
 					gfCloseModal();
 					break;
@@ -106,7 +107,7 @@
 				form_vaca_tel : $("#form_vaca_tel").val(),
 				form_vaca_sdate : $("#form_vaca_sdate").val(),
 				form_vaca_edate : $("#form_vaca_edate").val(),
-				form_vaca_rej : $("#form_vaca_rej").val()
+				form_vaca_reson : $("#form_vaca_reson").val()
 				
 			} 
 			
@@ -117,6 +118,7 @@
 					if(reval.approIn > 0) {
 						if(reval.vacaApproUpdate > 0) {
 							alert("신청되었습니다");
+							gfCloseModal();
 						}else {
 							alert("결재번호등록오류");
 						}
@@ -136,13 +138,44 @@
 		
 		
 	}
+	//data유효성 체크
+	function fn_data_validation() {
+		var check=true;
+		var form_vaca_tel = $("#form_vaca_tel").val();
+		var form_vaca_sdate = $("#form_vaca_sdate").val();
+		var form_vaca_edate = $("#form_vaca_edate").val();
+		var form_vaca_reson = $("#form_vaca_reson").val();
+		var valiList = [form_vaca_tel, form_vaca_sdate, form_vaca_edate, form_vaca_reson];
+		for(var i in valiList) {
+			console.log(valiList[i]);
+			if(valiList[i] == null || valiList[i] == "") {
+				check = false;
+				break;
+			}
+		}
+		console.log(check);
+		if(check == false) {
+			alert("모든 항목을 채워주세요");
+		}else {
+			fn_vacaFormInsert();
+		}
+		
+	}
+	
 	
 	//휴가신청모달창 오픈
 	function fn_openpopup1() {
-		
+		popupinit();
 		// 모달 팝업
 		gfModalPop("#vacaForm");
 			
+	}
+	//모달 초기화
+	function popupinit() {
+		$("#form_vaca_tel").val("");
+		$("#form_vaca_sdate").val("");
+		$("#form_vaca_edate").val("");
+		$("#form_vaca_reson").val("");
 	}
 	
 	//개인연차신청 상세 모달창 오픈
@@ -227,7 +260,7 @@
 
 						<p class="Location">
 							<a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
-								class="btn_nav bold">인사</span> <span class="btn_nav bold">개인휴가내역조회</a>
+								class="btn_nav bold">인사</span> <span class="btn_nav bold">휴가 신청 및 연차 조회</a>
 						</p>
 						
 						<div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">

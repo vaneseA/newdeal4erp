@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>Chain Maker :: Login</title>
+<title>DK Corporation :: Login</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous"></script>
@@ -18,9 +18,11 @@
 
 <link rel="stylesheet" type="text/css"
 	href="${CTX_PATH}/css/admin/login.css" />
+	
+<!-- 대광유통 Favicon -->
+<link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
 
 <!-- 우편번호 조회 -->
-
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" charset="utf-8"

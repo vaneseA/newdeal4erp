@@ -22,7 +22,7 @@
 		      , fi.file_size
 		      , fi.exten
  	from tb_userinfo ui
- 	inner join tb_file fi on fi.file_no = ui.file_no
+ 	left outer join tb_file fi on fi.file_no = ui.file_no
  	
  <where>
  	
@@ -77,8 +77,9 @@
 		      , fi.file_size
 		      , fi.exten
  	from tb_userinfo ui
- 	inner join tb_file fi on fi.file_no = ui.file_no
+ 	left outer join tb_file fi on fi.file_no = ui.file_no
  	where loginID = #{loginID}
+ 	
  	
 	</select>
 	

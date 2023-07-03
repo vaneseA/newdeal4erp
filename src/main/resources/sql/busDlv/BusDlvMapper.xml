@@ -60,7 +60,7 @@
 <!-- 발주신청 -->
 	<!-- 발주번호 얻어오기 -->
 	<select id="dlvApplicationNo" resultType="int">
-		select MAX(dlv_no)+1 from tb_dlv
+		select ifnull(max(dlv_no),0)+1 from tb_dlv
 	</select>
 	
 	<!-- 발주테이블에 insert -->

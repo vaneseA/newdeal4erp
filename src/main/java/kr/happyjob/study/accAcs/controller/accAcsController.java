@@ -82,21 +82,15 @@ public class accAcsController {
        paramMap.put("pageSize", pageSize);
        paramMap.put("pageindex", pageindex);
        
-//       int clicombo = Integer.parseInt((String) paramMap.get("clicombo"));
-//       paramMap.put("clicombo",clicombo);
-//       paramMap.put("clicombo",clicombo);
-//       paramMap.put("clicombo",clicombo);
        
        
        List<accAcsModel> accountSearchList = AccAcsService.accountSearchList(paramMap);
        
        int totalcnt = AccAcsService.countactlist(paramMap);
-       //countnoticelist의 리턴값을 totalcnt에 대입
 
        
        model.addAttribute("accountSearchList", accountSearchList);
        model.addAttribute("totalcnt", totalcnt);
-       //모델에 noticesearchlist, totalcnt을 등록해서 JSP로 넘기기
        
        
        
@@ -105,7 +99,6 @@ public class accAcsController {
        logger.info("+ End " + className + ".accountSearchList");
 
        return "accAcs/accountSearchListGrd";
-       //"mngNot/noticelistgrd" JSP 열기
        
 	   
    }
@@ -122,20 +115,14 @@ public class accAcsController {
       
       // Controller  Service  Dao  SQL
       accAcsModel accountSearchSelectone= AccAcsService.accountSearchSelectone(paramMap);
-      //mngNotService.noticeselectone(paramMap)에서 받아온 값을 모델 객체에 담기
-      //이상태 그대로 그냥 JSP에 던져줘도 되지 않을까.. 왜 맵을 하나 더 키울까..
-      //모델로 던지면 JSON형태로 Ajax 응답 데이터를 못받나?
       
       Map<String, Object> returnmap = new HashMap<String, Object>();
-      //맵을 해시맵 형식으로 returnmap 생성 -> 맵은 인스턴스 생성이 안되기 때문에 해시맵과 같은 형태로 객체화해서 사용해야함
 
       returnmap.put("accountSearchSelectone", accountSearchSelectone);
-      //맵에 noticesearch 키와 그에 따른 값 noticesearch을 넣어줌 
       
       logger.info("+ End " + className + ".accountSearchSelectone");
 
       return returnmap;
-      //맵을 리턴해서 JSP에 맵을 던져줌
    }  
    
 	   
