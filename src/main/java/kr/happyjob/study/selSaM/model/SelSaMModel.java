@@ -9,8 +9,18 @@ public class SelSaMModel {
     private int order_month_tot_product_price;// 달의 총 제품 단위 가격 * 주문량
     private int order_month_tot_product_unit_price;// 달의 총 제품 단위 가격
 
-    // 기존 getter, setter...
-    // ...
+    private int tot_profit; // 새로운 필드
+
+    // 기존 getter와 setter 메서드...
+
+    public int getTot_profit() {
+        return tot_profit;
+    }
+
+    public void setTot_profit(int tot_profit) {
+        this.tot_profit = tot_profit;
+    }
+
 
     public String getOrder_month() {
         return order_month;
@@ -51,6 +61,7 @@ public class SelSaMModel {
     public void setOrder_month_tot_product_unit_price(int order_month_tot_product_unit_price) {
         this.order_month_tot_product_unit_price = order_month_tot_product_unit_price;
     }
+
     private int order_no;//주문번호
     private Date order_date;//주문일자
     private int product_no;//제품번호

@@ -121,7 +121,7 @@
                 // 버튼 이벤트 등록
                 fRegisterButtonClickEvent();
                 fn_saleMonthList();
-                fn_aa();
+
 
             });
 
@@ -144,7 +144,7 @@
                         }
 
                         fn_saleMonthList();
-                        fn_chart();
+
                         break;
                 }
             });
@@ -165,11 +165,11 @@
 
                 $("#listSaleMonth").empty().append(returnValue);
 
-                var totalCnt = $("#totalCnt").val();
+                var totalcnt = $("#totalcnt").val();
 
-                console.log("totalCnt: " + totalCnt);
+                console.log("totalcnt: " + totalcnt);
 
-                var paginationHtml = getPaginationHtml(pagenum, totalCnt, pageSize, pageBlockSize, 'fn_productList');
+                var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_productList');
                 console.log("paginationHtml: " + paginationHtml);
 
                 $("#saleMonthPagination").empty().append(paginationHtml);
@@ -271,12 +271,11 @@
                             <table class="col">
                                 <caption>caption</caption>
                                 <colgroup>
-                                    <col width="10%">
-                                    <col width="10%">
-                                    <col width="10%">
-                                    <col width="10%">
-                                    <col width="10%">
-                                    <col width="10%">
+                                    <col width="20%">
+                                    <col width="20%">
+                                    <col width="20%">
+                                    <col width="20%">
+                                    <col width="20%">
                                 </colgroup>
 
                                 <thead>
@@ -286,7 +285,6 @@
                                     <th scope="col">매출</th>
                                     <th scope="col">매출 원가</th>
                                     <th scope="col">매출 총이익</th>
-                                    <th scope="col">영업이익률</th>
 
 
                                 </tr>
