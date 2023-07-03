@@ -13,10 +13,10 @@
 								<c:forEach items="${saleMonthSearchList}" var="list">
 									<tr>
 										<td>${list.order_month}</td>
-										<td>${list.total_order_dt_amt}</td>
-										<td>${list.total_order_tot_price}</td>
-										<td>${list.total_product_unit_price}</td>
-										<td>${list.product_name}</td>
+										<td>${list.order_month_dt_amt}</td>
+										<td>${list.order_month_tot_price}</td>
+										<td>${list.order_month_tot_product_price}</td>
+										<td>${list.order_month_tot_product_unit_price}</td>
 										<td>${list.net_profit}</td>
 									</tr>
 								</c:forEach>

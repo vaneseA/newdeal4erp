@@ -3,14 +3,14 @@ package kr.happyjob.study.selSaM.model;
 import java.util.Date;
 
 public class SelSaMModel {
-    // 기존 필드들...
+    private String order_month;// 주문 월
+    private int order_month_dt_amt;// 달의 총 주문량
+    private int order_month_tot_price;// 달의 총 주문 가격
+    private int order_month_tot_product_price;// 달의 총 제품 단위 가격 * 주문량
+    private int order_month_tot_product_unit_price;// 달의 총 제품 단위 가격
 
-    private String order_month; // 주문 월
-    private int total_order_tot_price; // 월별 주문 총액
-    private int total_product_unit_price; // 월별 제품 단위 가격의 합계
-    private int net_profit; // 월별 순이익
-
-    // 기존 getter/setter들...
+    // 기존 getter, setter...
+    // ...
 
     public String getOrder_month() {
         return order_month;
@@ -20,28 +20,36 @@ public class SelSaMModel {
         this.order_month = order_month;
     }
 
-    public int getTotal_order_tot_price() {
-        return total_order_tot_price;
+    public int getOrder_month_dt_amt() {
+        return order_month_dt_amt;
     }
 
-    public void setTotal_order_tot_price(int total_order_tot_price) {
-        this.total_order_tot_price = total_order_tot_price;
+    public void setOrder_month_dt_amt(int order_month_dt_amt) {
+        this.order_month_dt_amt = order_month_dt_amt;
     }
 
-    public int getTotal_product_unit_price() {
-        return total_product_unit_price;
+    public int getOrder_month_tot_price() {
+        return order_month_tot_price;
     }
 
-    public void setTotal_product_unit_price(int total_product_unit_price) {
-        this.total_product_unit_price = total_product_unit_price;
+    public void setOrder_month_tot_price(int order_month_tot_price) {
+        this.order_month_tot_price = order_month_tot_price;
     }
 
-    public int getNet_profit() {
-        return net_profit;
+    public int getOrder_month_tot_product_price() {
+        return order_month_tot_product_price;
     }
 
-    public void setNet_profit(int net_profit) {
-        this.net_profit = net_profit;
+    public void setOrder_month_tot_product_price(int order_month_tot_product_price) {
+        this.order_month_tot_product_price = order_month_tot_product_price;
+    }
+
+    public int getOrder_month_tot_product_unit_price() {
+        return order_month_tot_product_unit_price;
+    }
+
+    public void setOrder_month_tot_product_unit_price(int order_month_tot_product_unit_price) {
+        this.order_month_tot_product_unit_price = order_month_tot_product_unit_price;
     }
     private int order_no;//주문번호
     private Date order_date;//주문일자
