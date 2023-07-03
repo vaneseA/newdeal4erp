@@ -171,7 +171,7 @@
 
 
                 console.log(returnValue);
-                if (!returnValue || returnValue.length === 0) {
+                if (returnValue == null || returnValue.length == 0) {
                     alert("해당 날짜에는 데이터가 존재하지 않습니다.");
                     $(".selectedDayList").css("display", "none");
                     return;
@@ -214,6 +214,7 @@
 
 
         function fn_chart() {
+            var check = false;
             // 그래프 초기화
             $("#doughnut-chart").remove();
             $(".doughnut_items").empty().append('<canvas id="doughnut-chart" width="300" height="250"></canvas>');
@@ -224,24 +225,35 @@
             };
 
             var listCallBack = function (returnValue) {
-                var labels = [];
-                var dataVar = [];
-
-                if (returnValue.length == 0) { // 매출 데이터가 없을 때
-                    alert("해당 날짜에는 매출이 없습니다.");
-                    $(".selectedDayList").css("display", "none");
-                    return;
-                }
-                for (var i = 0; i < returnValue.length; i++) {
+                for (var i in returnValue) {
                     console.log(returnValue[i].order_date);
-                    labels.push(returnValue[i].order_date);
-                    dataVar.push(returnValue[i].net_profit);
+                    if(returnValue[i].order_date == $("#order_date").val()) {
+
+                        check = true;
+                        break;
+                    }
                 }
-                console.log("labels" + labels);
-                console.log("dataVar" + dataVar);
-                fn_aa(labels, dataVar);
-                fn_selectedDayList();
-                $(".selectedDayList").css("display", "block");
+                if (check) {
+                    var labels = [];
+                    var dataVar = [];
+
+                    if (returnValue.length == 0) { // 매출 데이터가 없을 때
+                        alert("해당 날짜에는 매출이 없습니다.");
+                        $(".selectedDayList").css("display", "none");
+                        return;
+                    }
+                    for (var i = 0; i < returnValue.length; i++) {
+                        console.log(returnValue[i].order_date);
+                        labels.push(returnValue[i].order_date);
+                        dataVar.push(returnValue[i].net_profit);
+                    }
+                    console.log("labels" + labels);
+                    console.log("dataVar" + dataVar);
+                    fn_aa(labels, dataVar);
+                    fn_selectedDayList();
+                    $(".selectedDayList").css("display", "block");
+                }
+
             };
 
             callAjax("/selSaD/selectedDayChart.do", "post", "json", false, param, listCallBack);
@@ -293,7 +305,9 @@
                         <!-- 검색창 영역 시작 -->
 
                         <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:10px 10px;">
-                            <label for="order_date" style="font-size:15px; font-weight:bold; margin-right:10px; margin-top:6px; ">날짜 조회 : </label>
+                            <label for="order_date"
+                                   style="font-size:15px; font-weight:bold; margin-right:10px; margin-top:6px; ">날짜 조회
+                                : </label>
                             <input type="date" id="order_date" name="order_dat회e" min="2023-01-01"
                                    style="height: 25px; width: 150px; margin-right: 15px;">
                             <a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>

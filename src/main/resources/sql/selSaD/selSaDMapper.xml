@@ -50,7 +50,6 @@
             AND od.order_date >= DATE_SUB(STR_TO_DATE(#{order_date}, '%Y-%m-%d'), INTERVAL 7 DAY)
 
 
-
         </if>
         GROUP BY od.order_date
         <if test="(order_date != null) and (!order_date.equals(''))">
@@ -66,8 +65,9 @@
         FROM tb_order od
         <where>
             <if test="(order_date != null) and (!order_date.equals(''))">
-                and od.order_date >= STR_TO_DATE(#{order_date}, '%Y-%m-%d')
+                and od.order_date = STR_TO_DATE(#{order_date}, '%Y-%m-%d')
             </if>
+
 
         </where>
     </select>
