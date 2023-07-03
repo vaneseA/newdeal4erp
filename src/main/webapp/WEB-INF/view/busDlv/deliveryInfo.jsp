@@ -66,7 +66,8 @@
 					fn_openpopup1();
 					break;	
 				case 'btnDlvInsert' :
-					fn_dlvInsert();
+					fn_data_validation();
+					break;
 				case 'btnBack' :
 					gfCloseModal();
 					break;
@@ -117,12 +118,19 @@
 	
 	//발주신청모달창 오픈
 	function fn_openpopup1() {
-		
+		//모달 초기화
+		popupinit();
 		// 모달 팝업
 		gfModalPop("#dlvForm");
 			
 	}
-	
+	//모달 초기화
+	function popupinit() {
+		$("#ltypecombo").val("");		
+		$("#mtypecombo").val("");
+		$("#ptypecombo").val("");
+		$("#dlv_amt").val("");
+	}
 	//발주신청함수
 	function fn_dlvInsert() {
 		var param = {
@@ -140,6 +148,7 @@
 				if(reval.approIn > 0) {
 					if(reval.dlvApproUpdate> 0) {
 						alert("발주신청완료");
+						gfCloseModal();
 					}else {
 						alert("결재번호업데이트실패");
 					}
@@ -155,7 +164,29 @@
 		callAjax("/busDlv/dlvInsert.do", "post", "json", false, param, dlvInsertCallback) ;
 	}
 	
-	
+	//data유효성 체크
+	function fn_data_validation() {
+		var check=true;
+		var ltypecombo = $("#ltypecombo").val();
+		var mtypecombo = $("#mtypecombo").val();
+		var ptypecombo = $("#ptypecombo").val();
+		var dlv_amt = $("#dlv_amt").val();
+		var valiList = [ltypecombo, mtypecombo, ptypecombo , dlv_amt];
+		for(var i in valiList) {
+			console.log(valiList[i]);
+			if(valiList[i] == null || valiList[i] == "") {
+				check = false;
+				break;
+			}
+		}
+		console.log(check);
+		if(check == false) {
+			alert("모든 항목을 채워주세요");
+		}else {
+			fn_dlvInsert();
+		}
+		
+	}
 	//반려사유조회 모달창 오픈
 	function fn_openpopup2(dlv_no) {
 		

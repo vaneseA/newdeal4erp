@@ -117,6 +117,7 @@
     							
     							ta_detailList += '<tr>';
     							ta_detailList += '<td>'+ detailList[i].dept_name + '</td>';
+    							ta_detailList += '<td>'+ detailList[i].level_name + '</td>';
     							ta_detailList += '<td>'+ detailList[i].name + '</td>';
     							ta_detailList += '<td>'+ detailList[i].appro_yn + '</td>';
     							ta_detailList += '</tr>';
@@ -190,15 +191,18 @@
 				<table class="col">
 					<caption>caption</caption>
 					<colgroup>
-						<col width="30%">
-						<col width="30%">
-						<col width="35%">
+						<col width="25%">
+						<col width="25%">
+						<col width="25%">
+						<col width="25%">
 					</colgroup>
 					<thead>	
 						<tr>
 							<th scope = "col">부서</th>
+							<th scope = "col">직급</th>
 							<th scope = "col">사원명</th>
 							<th scope = "col">승인여부</th>
+							
 							<%-- <th scope = "col">신청구분</th> --%>
 						</tr>
 					</thead>

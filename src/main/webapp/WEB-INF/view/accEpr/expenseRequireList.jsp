@@ -6,28 +6,19 @@
 <html lang="ko">
 <head>
 <style type="text/css">
-.empty{
-height:10px;
-}
 
-
-
-.emptySpace2{
+.emptySpace1{
 display:inline-block;
-width:10px;
+width:110px;
 }
 
 .emptySpace3{
 display:inline-block;
 width:10px;
 }
+.emptySpace5{
 
-
-
-
-.emptySpace6{
-display:inline-block;
-width:10px;
+height:10px;
 }
 
 #appro_req_date{
@@ -36,6 +27,65 @@ width:10px;
 
 #expen_date{
 	font-size:small;
+}
+
+.border-line{
+	display:flex;
+	align-items: center;
+	justify-content:center;
+	padding-top:20px;
+	position:relative;
+	bottom:20px;
+}
+
+.label-font{
+	font-size: 15px;
+	font-weight: bold;
+
+}
+
+.btnTypegray{
+	background-color: #c0c0c0;
+	border-radius: 2px;
+	width: 120px;
+	height: 22px;
+	position:relative;
+ 	left: 485px;
+ 	bottom: 27px;
+ 	display:flex;
+ 	align-items: center;
+ 	justify-content:center;
+ 	padding-top: 5px;
+ 	
+
+}
+
+.gray-btn{
+	background-color: #c0c0c0;
+	border-radius: 2px;
+	width: 140px;
+	height: 22px;
+	position:relative;
+ 	left: 860px;
+ 	bottom: 55px;
+ 	display:flex;
+ 	align-items: center;
+ 	justify-content:center;
+ 	padding-top: 5px;
+}
+
+.inputSpace{
+
+position:absolute;
+margin-left: 10px;
+
+}
+
+.search-btn{
+font-weight: bold;
+font-size: 16px;
+color:black;
+
 }
 
 </style>
@@ -185,6 +235,12 @@ width:10px;
 					   ,[ "dept_cd", "부서를 선택해주세요." ]
 					   ,[ "acnt_sbject_cd", "계정대분류를 선택해주세요." ]
 					   ,[ "acnt_dt_sbject_cd", "계정상세를 선택해주세요" ]
+					   ,[ "expen_shop", "거래처명을 입력해주세요" ]
+					   ,[ "expen_price", "지출금액을 입력해주세요" ]
+					   ,[ "appro_req_date", "신청일자를 선택해주세요" ]
+					   ,[ "expen_date", "지출날짜를 선택해주세요" ]
+					   ,[ "expen_inf", "지출내용을 선택해주세요" ]
+					   
 					   
 				]
 		);
@@ -208,6 +264,7 @@ width:10px;
 	
    function popupinitfile(object) {
 		
+
 		if(object == "" || object == null || object == undefined) {
 			$("#appro_type_cd").val("");		
 			 $("#dept_cd").val("");
@@ -221,13 +278,38 @@ width:10px;
 			 $("#appro_req_date").val("");
 			 $("#expen_report_no").val();
 			 $("#expen_date").val("");
-			 $("#upfile").val("");		
+			 $("#upfile").val("");
+			 $("#appro_yn").val("");
 			
 			$("#previewdiv").empty();
+			$("#appro_type_cd").attr("disabled",false); 
+			$("#dept_cd").attr("disabled",false); 
+			$("#acnt_sbject_cd").attr("disabled",false); 
+			$("#acnt_dt_sbject_cd").attr("disabled",false); 
+			$("#expen_shop").attr("readonly",false); 
+			$("#expen_price").attr("readonly",false); 
+			$("#appro_req_date").attr("readonly",false); 
+			$("#expen_date").attr("readonly",false); 
+			$("#expen_inf").attr("readonly",false); 
+			$("#appro_type_cd").css('color','black');
+			$("#appro_type_cd").css('font-weight','normal');
+			$("#dept_cd").css('color','black');
+			$("#dept_cd").css('font-weight','normal');
+			$("#acnt_sbject_cd").css('color','black');
+			$("#acnt_sbject_cd").css('font-weight','normal');
+			$("#acnt_dt_sbject_cd").css('color','black');
+			$("#acnt_dt_sbject_cd").css('font-weight','normal');
+			 
+			var fontRedSpans = document.querySelectorAll("span.font_red");
 			
+			for(var i = 0; i<fontRedSpans.length; i++){
+				fontRedSpans[i].style.display = "inline";
+			}
 			$("#btnSaveFile").show();
 			$("#btnDeleteFile").hide();
 			
+			 
+			  
 			$("#action").val("I");	
 		} else {
 		
@@ -248,12 +330,37 @@ width:10px;
 			 $("#appro_no").val(object.appro_no);
 			 $("input[name='appro_yn'][value='" + object.appro_yn + "']").prop("checked", true);
 			 
+		
 			if(object.appro_yn === "Y"){
 				$("#btnDeleteFile").hide();
+				$("#appro_type_cd").attr("disabled",true); 
+				$("#appro_type_cd").css('color','black');
+				$("#appro_type_cd").css('font-weight','bolder');
+				$("#dept_cd").attr("disabled",true); 
+				$("#dept_cd").css('color','black');
+				$("#dept_cd").css('font-weight','bolder');
+				$("#acnt_sbject_cd").attr("disabled",true); 
+				$("#acnt_sbject_cd").css('color','black');
+				$("#acnt_sbject_cd").css('font-weight','bolder');
+				$("#acnt_dt_sbject_cd").attr("disabled",true); 
+				$("#acnt_dt_sbject_cd").css('color','black');
+				$("#acnt_dt_sbject_cd").css('font-weight','bolder');
+				$("#expen_shop").attr("readonly",true); 
+				$("#expen_price").attr("readonly",true); 
+				$("#appro_req_date").attr("readonly",true); 
+				$("#expen_date").attr("readonly",true); 
+				$("#expen_inf").attr("readonly",true); 
+				
 			}else{
 				$("#btnDeleteFile").show();
 			}
-			 
+			
+			var fontRedSpans = document.querySelectorAll("span.font_red");
+			
+			for(var i = 0; i<fontRedSpans.length; i++){
+				fontRedSpans[i].style.display = "none";
+			}
+			
 			var inserthtml = "<a href='javascript:fn_filedownload()'>";
 			
 			if(object.file_name == "" || object.file_name == null || object.file_name == undefined) {
@@ -438,35 +545,39 @@ width:10px;
 						</p>
 
 						<p class="conTitle">
-							<span>지출결의서 신청</span> <span class="fr"><a class="btnType blue" href="javascript:fn_openpopupfile();" name="modal"><span>지출결의서 작성</span></a> 
+							<span>지출결의서 신청</span> <span class="fr">
+							<div class="gray-btn">
+								<a href="javascript:fn_openpopupfile();" name="modal"><span class="search-btn">지출결의서 작성</span></a> 
+							</div>
 						</p>
 						
-							<span></span>신청일자: &nbsp; </span><input type = "date" id = "from" name="from" style = "width: 100px; height:27px">
-							<label for= "to">  -  </label>
-							<input type = "date"  id = "to"  name = "to" style = "width: 100px;height:27px">
+							<div style ="border:solid 3px #c0c0c0; height: 120px; border-radius: 10px;" class="border-line">
+								<div>
+									<span class="label-font">&nbsp;&nbsp;&nbsp;&nbsp;신청일자: &nbsp; </span><input type = "date" id = "from" name="from" style = "width: 120px; height:25px; font-size:15px">
+									<label for= "to">  -  </label>
+									<input type = "date"  id = "to"  name = "to" style = "width: 120px;height:25px; font-size:15px">
+										
+									<span class="emptySpace3"></span><span class="label-font">&nbsp;&nbsp;결재: &nbsp;</span>
+									<select id="appro_yn" name="appro_yn" style="width: 120px; height:27px; font-size: 15px" >
+										    <option value="" >전체</option>
+											<option value="Y" >결재</option>
+											<option value="N" >반려</option>
+									</select>
+										
+									<span class="emptySpace3"></span><span class="label-font">&nbsp;&nbsp;계정 대분류: &nbsp;</span>
+									<select id="search_acnt_sbject_cd" name="search_acnt_sbject_cd" style="width: 120px; height:27px; font-size: 15px" >   
+									</select><div class="emptySpace5"></div> 
+										
+									<span class="emptySpace1"></span><span class="label-font">&nbsp;&nbsp;계정 상세: &nbsp;</span>
+									<select id="search_acnt_dt_sbject_cd" name="search_acnt_dt_sbject_cd" style="width: 120px; height:27px;font-size: 15px" >
+									</select> 
+										
+									<input type="text" style="width: 150px; height: 25px;font-size: 15px" id="sname" name="sname" class="inputSpace">
+									<div class="btnTypegray"><a href="" id="btnSearch" name="btn"><span class="search-btn">검  색</span></a></div>
+								</div>
+							</div>
 							
-							<span>&nbsp;&nbsp;&nbsp;&nbsp;결재: &nbsp;</span>
-							<select id="appro_yn" name="appro_yn" style="width: 70px; height:27px">
-							        <option value="" >전체</option>
-									<option value="Y" >결재</option>
-									<option value="N" >반려</option>
-							</select>
 							
-							<span>&nbsp;&nbsp;&nbsp;&nbsp;계정 대분류: &nbsp;</span>
-							 <select id="search_acnt_sbject_cd" name="search_acnt_sbject_cd" style="width: 70px; height:27px" >
-							   
-							</select> 
-							
-							<span>&nbsp;&nbsp;&nbsp;&nbsp;계정 상세: &nbsp;</span>
-							 <select id="search_acnt_dt_sbject_cd" name="search_acnt_dt_sbject_cd" style="width: 100px; height:27px" >
-							</select> 
-							
-							<span class="emptySpace2">&nbsp;</span>
-							<input type="text" style="width: 130px; height: 25px;" id="sname" name="sname"><span class="emptySpace3"></span>
-							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
-							</span><div class="empty"></div>
-							
-						
 						<div class="noticeList">
 							<table class="col">
 								<caption>caption</caption>
@@ -492,7 +603,7 @@ width:10px;
 										<th scope="col">사원명</th>
 										<th scope="col">계정대분류</th>
 										<th scope="col">상세분류</th>
-										<th scope="col">거래처명</th>
+										<th scope="col">지출내용</th>
 										<th scope="col">신청일자</th>
 										<th scope="col">사용일자</th>
 										<th scope="col">지출금액</th>
@@ -538,13 +649,13 @@ width:10px;
 
 					<tbody>
 						<tr>
-							<th scope="row">결재유형 </th>
+							<th scope="row">결재유형<span class="font_red" >*</span> </th>
 							<td>
 								<select id="appro_type_cd" name="appro_type_cd" style="width: 135px; height:30px">
 									<option value="E" >지출결의서</option>
 							</select>
 							</td>
-							<th scope="row">부서코드 </th>
+							<th scope="row">부서코드<span class="font_red" >*</span> </th>
 							<td >
 							<select id="dept_cd" name="dept_cd" style="width: 135px; height:30px">
 									<option value="300" >회계팀</option>
@@ -556,13 +667,13 @@ width:10px;
 							</td>
 						</tr>						
 						<tr>
-							<th scope="row">계정대분류 </th>
+							<th scope="row">계정대분류<span class="font_red">*</span> </th>
 							<td >
 							<select id="acnt_sbject_cd" name="acnt_sbject_cd" style="width: 135px; height:30px">
 							      
 							</select>
 							</td>
-							<th scope="row">계정상세 </th>
+							<th scope="row">계정상세<span class="font_red">*</span> </th>
 							<td >
 								<select id="acnt_dt_sbject_cd" name="acnt_dt_sbject_cd" style="width: 135px; height:30px" >
 							        
@@ -570,16 +681,16 @@ width:10px;
 							</td>
 						</tr>
 						<tr>
-							<th scope="row">거래처명 </th>
-							<td ><input type="text" class="inputTxt p100" name="expen_shop" id="expen_shop" /></td>
-							<th scope="row">지출금액 </th>
-							<td ><input type="text" class="inputTxt p100" name="expen_price" id="expen_price" /></td>
+							<th scope="row">거래처명<span class="font_red">*</span> </th>
+							<td ><input type="text" class="inputTxt p100" name="expen_shop" id="expen_shop"  style="text-indent:5px"/></td>
+							<th scope="row">지출금액 <span class="font_red">*</span></th>
+							<td ><input type="text" class="inputTxt p100" name="expen_price" id="expen_price" style="text-indent:5px"/></td>
 						</tr>
 						<tr>
-							<th scope="row">신청일자 </th>
-							<td ><input type = "date" id = "appro_req_date" name="appro_req_date" style = "width: 130px; height:30px"></td>
-							<th scope="row">지출날짜 </th>
-							<td ><input type = "date" id = "expen_date" name="expen_date" style = "width: 130px; height:30px"></td>
+							<th scope="row">신청일자 <span class="font_red">*</span></th>
+							<td ><input type = "date" id = "appro_req_date" name="appro_req_date" style = "width: 130px; height:30px; text-indent:2px"></td>
+							<th scope="row">지출날짜<span class="font_red">*</span> </th>
+							<td ><input type = "date" id = "expen_date" name="expen_date" style = "width: 130px; height:30px; text-indent:2px"></td>
 						</tr>
 						<tr>
 							<th scope="row">첨부파일 </th>
@@ -590,9 +701,9 @@ width:10px;
 							</td>
 						</tr>
 						<tr>
-							<th scope="row">지출내용</th>
+							<th scope="row">지출내용<span class="font_red" style="display:none">*</span></th>
 							<td colspan="3">
-							    <textarea id="expen_inf" name="expen_inf"> </textarea>
+							    <textarea id="expen_inf" name="expen_inf"style="text-indent:5px"> </textarea>
 							</td>
 						</tr>
 						

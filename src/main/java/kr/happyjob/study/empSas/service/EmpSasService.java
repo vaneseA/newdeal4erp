@@ -1,15 +1,13 @@
 package kr.happyjob.study.empSas.service;
 
-import java.util.List;
+
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+
 
 
 import kr.happyjob.study.empSas.model.SalSerarchModel;
-import kr.happyjob.study.system.model.ComnCodUtilModel;
-import kr.happyjob.study.system.model.ComnDtlCodModel;
-import kr.happyjob.study.system.model.ComnGrpCodModel;
+
 
 public interface EmpSasService {
 

@@ -9,6 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title>주문관리</title>
 <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
+
+<!-- 대광유통 Favicon -->
+<link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
                               
 <script type="text/javascript">
 
@@ -100,9 +103,25 @@
 	
 	
 	function fn_openpopup() {
+		
+		popupinit();
+		
 		// 주문서 신규작성 모달 팝업
 	    gfModalPop("#layer1");				
 	}
+	
+	
+	// 초기화
+	function popupinit() {
+        $("#ltypecombo").val("");
+        $("#mtypecombo").val("");
+        $("#ptypecombo").val("");
+        $("#order_dt_amt").val("");
+        $("#clicombo").val("");
+        $("#order_date").val("");
+        $("#order_req").val("");
+	}
+	
 	
 	//fn_add()에서 활용할 전역변수
 	var totalOrderPrice = 0;
@@ -153,6 +172,11 @@
 	
 	function fn_save() {
 		
+		// 비어있는 값으로 저장되지 않도록 유효성 검사
+	    if ( ! fn_Validate() ) {
+	        return;
+	    }
+		
 		// tb_order(부모테이블) 에 데이터 먼저 넣고,
 		// tb_order_dt(자식테이블) 에 데이터 넣는 순서
 		
@@ -166,11 +190,10 @@
 	        orderItems : orderItems
 	    };
 
-		
 		var savecallback = function(reval) {
 			console.log(JSON.stringify(reval));
 			if(reval.returncval > 0) {
-				alert("저장 되었습니다.");
+				alert("반영 되었습니다.");
 				gfCloseModal();
 				fn_orderlist();
 			} else {
@@ -182,7 +205,29 @@
 	    
 	}
 	
-
+	
+	function fn_Validate() {
+		var chk = checkNotEmpty(
+				[
+						[ "ltypecombo", "제품분류를 선택해 주세요." ]
+					,	[ "mtypecombo", "제조사를 선택해 주세요." ]
+					,	[ "ptypecombo", "제품명을 선택해 주세요." ]
+					,	[ "order_dt_amt", "주문수량을 입력해 주세요." ]
+					,	[ "clicombo", "주문기업명을 선택해 주세요." ]
+					,	[ "order_date", "주문날짜를 입력해 주세요." ]
+				]
+		);
+		if (!chk) {
+			return;
+		}
+		
+		if (orderItems === "") {
+			alert("[추가] 버튼을 클릭하여 주문할 제품 목록을 확정해 주세요.");
+			return;
+		}
+		
+		return true;
+	}
 	
 	
 	function fn_selectone(no) {
@@ -246,7 +291,7 @@
 						</p>
 						
 						<!-- 검색창 영역 시작 -->
-						<div style="display:flex; justify-content:center; align-content:center; line-height:2; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">
+						<div style="display:flex; justify-content:center; align-content:center; line-height:2; border:solid 3px #c0c0c0; border-radius: 10px; padding:40px 40px; margin:20px auto;">
 							<label for="searchKey" style="font-size:15px; font-weight:bold; margin-right:10px;">주문기업명</label>
 							<select id="searchclicombo" name="searchclicombo" style="width:150px; margin-right:50px;"></select>
 							 							

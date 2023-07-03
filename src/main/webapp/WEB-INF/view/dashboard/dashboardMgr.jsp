@@ -24,7 +24,77 @@ click-able rows
 	cursor: default;
 }
 }
+
+
+/*메인베너 영역 시작*/
+.banner {
+    margin-top: 10px;
+    width: 100%; 
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+.slider{
+    width: 630%;
+    height:100%
+    overflow: hidden;
+    position: relative;
+}
+.slider_image {
+    width: 20%;
+    float: left;
+    margin: 0;
+}
+.control {
+	display: inline-block;
+    position: absolute;
+    bottom: 5%;
+    left: 45%;
+    height: 20px;
+    overflow: hidden;
+}
+.control_button {
+    position: relative;
+    font-size: 1.5em;
+    margin: 0 10px;
+    cursor: pointer;
+    color: #777;
+    float: left;
+}
+.control_button:hover {
+    color: #000;
+}
+.control_button.active {
+    color: #000;
+}
+/* 좌우방향키 */
+.left_right_control {
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    top: 250px;
+    
+}
+.left_control {
+    float: left;
+    
+}
+.right_control {
+    float: right;
+    
+    
+    
+}
+/*메인베너 영역 종료*/
+
+
+
 </style>
+
+
+
+
+
 <script type="text/javascript">
         var pageSizeinf  = 3;
         var pageBlockSizeinquiry  = 10;
@@ -42,6 +112,60 @@ click-able rows
         var watchExampleVM;
         var divComGrpCodList;
         var divComGrpCoddetail;
+        
+      //슬라이드
+        $(function () {
+            //banner slide start
+            $('.slider').append($('.slider_image').first().clone());
+            $('.slider').prepend($('.slider_image').eq(-2).clone());
+            let index=1;
+            let auto;
+            moveSlider(index);
+            autoSlider();
+            $('.control_button').click(function (){
+                index=$(this).index();
+                moveSlider(index+1);
+            });
+            $('.left_control').click(function () {
+                if(index > 1 ) {
+                    index--;
+                    moveSlider(index);
+                }else {
+                    $('.slider').css('left',-5200);
+                    index=3;
+                    moveSlider(index);
+                }
+            });
+            $('.right_control').click(function () {
+                if(index < 3 ) {
+                    index++;
+                    moveSlider(index);
+                }else {
+                    $('.slider').css('left',0);
+                    index=1;
+                    moveSlider(index);
+                }
+            });
+            $('.banner').hover(function () {
+                clearInterval(auto);
+            },function () {
+                autoSlider();
+            });
+            function moveSlider(index) {
+                $('.slider').animate({
+                    left:-(index*1300)
+                },'slow');
+                $('.control_button').removeClass('active');
+                $('.control_button').eq(index-1).addClass('active');
+            }
+            //자동슬라이드
+            function autoSlider () {
+                auto=setInterval(function () {
+                    $('.right_control').trigger('click'); 
+                },3000);
+            }
+            //banner slide finish
+        });
         
 		/* onload 이벤트  */
 		$(document).ready(function() {
@@ -613,6 +737,12 @@ click-able rows
 </script>
 
 </head>
+
+
+
+
+
+
 <body>
 <form id="myForm" action=""  method="">
 
@@ -643,889 +773,37 @@ click-able rows
 						</p>
                          <div >
 						        <p class="conTitle" style="margin-bottom: 1%;">
-									<span>대광유통</span> 
-									<span class="fr"> 
-										 DeaKwang corporation 
-									</span>
-								</p>	
-								<div>
-                                    <table>
-                                      <!-- 메인화면 이미지 -->
-                                     <img src="${CTX_PATH}/images/admin/login/dk_main_img_7.jpg"  width="900px" height="220px">
-								</div>  
-										    <tbody>
-										    		 
-										          <tr>
-										               <td><b><h6>시작</h6></b></td>
-										               <td>
-										                       &nbsp&nbsp&nbsp&nbsp&nbsp<a  href="https://brunch.co.kr/@clay1987/138" target="_blank">OverView</a>
-										               </td>
-										          <tr>
-										          <tr>
-										               <td><b><h6>VueJS 설치</h6></b></td>
-										               <td>
-										                       &nbsp&nbsp&nbsp&nbsp&nbsp<a  href="https://code-daniel.tistory.com/80" target="_blank">CDN&NPM</a>
-										               </td>
-										          <tr>		
-										          <tr>
-										               <td>VueJS Life Cycle</td>
-										               <td>
-										                       &nbsp&nbsp&nbsp&nbsp&nbsp<a  href="https://wormwlrm.github.io/2018/12/29/Understanding-Vue-Lifecycle-hooks.html" target="_blank">Life Cycle</a>
-										                       &nbsp&nbsp&nbsp&nbsp&nbsp<a  href="https://velog.io/@onehousesilver/Vue3-life-cycle-hook" target="_blank">Vue3 Life Cycle</a>
-										                       
-										               </td>
-										          <tr>		
-										          <tr>
-										               <td>공식 사이트</td>
-										               <td>
-										                       &nbsp&nbsp&nbsp&nbsp&nbsp<a  href="https://kr.vuejs.org/" target="_blank">공식 한국 VusJS</a>
-										                       &nbsp&nbsp&nbsp&nbsp&nbsp<a  href="https://vuejsexamples.com/" target="_blank">VusJS Example</a>
-										                       &nbsp&nbsp&nbsp&nbsp&nbsp<a  href="https://cli.vuejs.org/" target="_blank">VusJS 개발도구 VueCli</a> 
-										               </td>
-										          <tr>
-										          <tr>
-										               <td>Vue School </td>
-										               <td>
-										                       &nbsp&nbsp&nbsp&nbsp&nbsp<a  href="https://v3.ko.vuejs.org/api/instance-properties.html#el" target="_blank"> 인스턴스</a>
-										               </td>
-										          <tr>
-										          <tr>
-										               <td>VueJS 개인 불로그</td>
-										               <td>
-										                       &nbsp&nbsp&nbsp&nbsp&nbsp<a  href="https://codelabs-vue.web.app/" target="_blank">개인 불로그</a>
-										               </td>
-										          <tr>		
-										          <tr>
-										               <td>자바스크립트</td>
-										               <td>
-										                       &nbsp&nbsp&nbsp&nbsp&nbsp<a  href="https://joshua1988.github.io/web-development/translation/essential-es6-features-for-vuejs/" target="_blank">ES6</a>
-										               </td>
-										          <tr>	
-										          <tr>
-										               <td>테스트 사이트</td>
-										               <td>
-										                       &nbsp&nbsp&nbsp&nbsp&nbsp<a  href="https://jsfiddle.net/boilerplate/vue" target="_blank">jsfiddle</a>
-										               </td>
-										          <tr>		
-										          <tr>
-										               <td colspan=2>
-										                      <b>** VueJS Life Cycle 종류 별로 스크립트의 option으로 사용 가능(beforeCreate, Created 등) 	</b>
-										               </td>
-										          <tr>				    
-										    </tbody>
-										 
-										 
-										 </table>
-								
-								
-								</div>
-						</div>  						
-						<br>
-						
-                        <div id="vuevar">
-						        <p class="conTitle" style="margin-bottom: 1%;">
-									<span>1. v-model(VueJS 내부 변수)</span> 
-									<span class="fr"> 
-										 입력 문자 숫자, Vue 변수 양방향: v-model
-									</span>
-								</p>
-								<div class="fixed-table-body">		
-										<table width="100%" class="col" border=0>
-		                                    <colgroup>
-											    <col width="40%">
-												<col width="40%">
-												<col width="20%">
-											</colgroup>
-											<tbody>
-											     <tr>
-											         <td colspan=3 style="text-align:left" >
-											                  1. el 등 기본 문법 설명 <br>
-											                  2. data 변수와 v-model로 연결 설정<br>
-											                  3. 가상 DOM과 VueJS 구동 원리 ( 랜더링 개념 )<br>
-											                  4. 일반 Javascript Function 에서 Vue Data 변수 접근 방법   listvue.item<br>
-											                  5. methods 와 일반 Javascript Function 차이<br>
-											                  6. 키보드 입력은 v-on:keyup.13와 같이 키보드 입력을 사용
-											         </td>
-											     </tr>
-											     <tr> 
-											         <td>
-												         문자 : <input type="text" class="inputTxt p100"	name="inputtext" id="inputtext" v-model="inputtext"  @input="inputkey($event)" />
-												     </td>                                                                                                                                    
-												     <td>
-												          {{ inputtext }}
-												     </td>
-												     <td>
-												         <a class="btnType blue" href="javascript:fn_valuedis('inputtext');" name="modal"><span>Javascript 값 확인</span></a>
-												     </td>
-											     <tr>
-											     <tr> 
-											         <td>
-												         숫자 : <input type="text" class="inputTxt p100"	name="inputnum" id="inputnum" v-model="inputnum"  @input="inputkey($event)" />
-											        </td>
-											        <td>
-												          {{ inputnum }}												          
-												     </td>
-												     <td>
-												         <a class="btnType blue" href="javascript:fn_valuedis('inputnum');" name="modal"><span>Javascript 값 확인</span></a>
-												     </td>
-											     <tr>		
-										     </tbody>						
-										</table>
-										
-										
-										<div v-if="disflag" id="truediv">
-										       disflag true
-										</div>
-										<div v-else id="falsediv">
-										       disflag false
-										</div>
-										
-										<div id="showdiv" v-show="disflag">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-										       v-show disflag true
-										</div>										
-										
-										<div v-html="vhtmlvar"> </div>
-										
-										<input type="button" value="disflag change" @click="disflagchane" />
-								</div>		
-							</div> 
-							<br>
-                            <div id="vuebind">
-						        <p class="conTitle" style="margin-bottom: 1%;">
-									<span>2. v-bind,v-on(img src)  </span> 
-									<span class="fr"> 
-										 JavaScript 함수 와 Method 구분   :id/:name   
-									</span>
-								</p>	
-								<div>
-                                     <table width="100%" class="col" border=0>
-		                                    <colgroup>
-											    <col width="100%">
-											</colgroup>
-											<tbody>
-											     <tr>
-											         <td style="text-align:left" >
-											                  1. Tag Attribe 와 VueJS 변수 연결(Tag별 속성 종류)<br>
-											                  2. Tag Event(v-on)  & @대체  <br>
-											         </td>
-											     </tr>								
-								           </tbody>
-								     </table>   
-								   
-									<input type="file"  id="filesel" name="filesel"  @change="selimg" />									
-									<div>
-									     <img v-bind:src="imgpath">
-									</div>										 
-								</div>
-							</div>  
-							<div id="vuecheck">
-							        <p class="conTitle" style="margin-bottom: 1%;">
-										<span>3. Checkbox  </span> 
-										<span class="fr"> 
-											 체크박스 Binding   
-										</span>
-									</p>	
-									<div>
-	                                     <table width="100%" class="col" border=0>
-			                                    <colgroup>
-												    <col width="100%">
-												</colgroup>
-												<tbody>
-												     <tr>
-												         <td style="text-align:left" >
-												                  1. VueJS 배열 변수 연결<br>
-												                  2. Tag Attribe 변수 처리  <br>
-												                  3. v-for 배열 변수 처리   <br>
-												                  4. v-bind 축약  :
-												         </td>
-												     </tr>								
-									           </tbody>
-									     </table> 				
-										  <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
-										  <label for="jack">Jack</label>
-										  <input type="checkbox" id="john" value="John" v-model="checkedNames">
-										  <label for="john">John</label>
-										  <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
-										  <label for="mike">Mike</label>
-										  <br>
-										  <span>체크한 이름: {{ checkedNames }}</span>
-									</div>
-									<br>
-									<div v-for="(item,index) in checklistitem" v-if="checklistitem.length">
-										  {{ item.vuename }} <input type="checkbox" :id="item.vueid" :name="item.vueid" :value="item.vuename" v-model="checkedNames">                                                     
-									</div>
+									<span>대광물산</span>
+																	<!--메인베너영역시작-->
+						      	<div class="banner">
+						        	<div class="slider">
+						              <img class="slider_image" src="/images/admin/login/2.png" alt="sale" >
+						              <img class="slider_image" src="/images/admin/login/3.png" alt="banner" >
+						              <img class="slider_image" src="/images/admin/login/1.png" alt="banner" >
+						        	</div>
+						        	<!--컨트롤 버튼 영역-->
+						        	<div class="control">
+						            	<div class="control_button">●</div>
+						            	<div class="control_button">●</div>
+						            	<div class="control_button">●</div>
+						         	</div>
+						          <!--좌우 컨트롤 버튼 패널-->
+						          	<div class="left_right_control">
+						            	<img class="left_control" src="/images/admin/login/8.png" alt="leftControl">
+						            	<img class="right_control" src="/images/admin/login/7.png" alt="rightControl">
+						          	</div>
+						      	</div>
+						      	<!--메인베너영역종료--> 
 
-									<div>
-									      <br>
-										  <span>체크한 이름: {{ checkedNames }}</span>
-									</div>
-							</div>  
-							<br>
-                            <div id="vueradio">
-							        <p class="conTitle" style="margin-bottom: 1%;">
-										<span>4. Radio  </span> 
-										<span class="fr"> 
-											 Radio Binding   
-										</span>
-									</p>
-                                     <table width="100%" class="col" border=0>
-		                                    <colgroup>
-											    <col width="100%">
-											</colgroup>
-											<tbody>
-											     <tr>
-											         <td style="text-align:left" >
-											                  1. VueJS 변수 연결<br>
-											                  2. Tag Attribe 변수 처리  <br>
-											                  3. v-if, v-else 문법&nbsp&nbsp&nbsp&nbsp&nbsp<a  href="https://beomy.tistory.com/51" target="_blank">v-if, v-else, v-else-if</a>     &nbsp&nbsp&nbsp&nbsp&nbsp<a  href="https://kamang-it.tistory.com/entry/Vue-05%EC%A1%B0%EA%B1%B4%EB%AC%B8" target="_blank">v-if, v-else, v-else-if</a>&nbsp&nbsp&nbsp&nbsp&nbsp<a  href="https://www.python2.net/questions-812626.htm" target="_blank">다중 조건</a> <br>  
-											                  4. === 의미&nbsp&nbsp&nbsp&nbsp&nbsp<a  href="https://zinee-world.tistory.com/112" target="_blank">비교연산자</a>           
-											         </td>
-											     </tr>								
-								           </tbody>
-								     </table> 	
-									<div v-for="(item,index) in radiolistitem" v-if="radiolistitem.length">
-										  {{ item.vuename }} <input type="radio" :id="item.vueid" :name="item.vueid" :value="item.vuename" v-model="radioName">
-									</div>
-									<div>
-									      <br>
-										  <span>선택한 이름: {{ radioName }}</span>
-									</div>
-							</div>  							
-							<br>
-                            <div id="vueprop1">
-							        <p class="conTitle" style="margin-bottom: 1%;">
-										<span>5. Prop  </span> 
-										<span class="fr"> 
-											 동적출력    
-										</span>
-									</p>
-                                    <table width="100%" class="col" border=0>
-		                                    <colgroup>
-											    <col width="100%">
-											</colgroup>
-											<tbody>
-											     <tr>
-											         <td style="text-align:left" >
-											                  1. Component 개념 : 사용자 정의 태그 사용(my-component)<br>
-											                  2. 사용자 정의  Component <br>
-											                  3. Prop의특징 및 활용  <br>
-											                  4. 컴포넌트 사이트의 컴포넌트 종류&nbsp&nbsp&nbsp&nbsp&nbsp<a  href="https://vuejsexamples.com/" target="_blank">VusJS Example</a>
-											         </td>
-											     </tr>								
-								           </tbody>
-								     </table> 										
-                                      <my-component></my-component>
-							</div>  							
-					        <div id = "vueprop2">
-					            <my-component-child msg = "파라미터 전송"></my-component-child>
-					        </div>
-					        <br>
-							<div id="vueprop">
-							        <p class="conTitle" style="margin-bottom: 1%;">
-										<span>6. Computed  </span> 
-										<span class="fr"> 
-											 실시간 계산    
-										</span>
-									</p>
-                                    <table width="100%" class="col" border=0>
-		                                    <colgroup>
-											    <col width="100%">
-											</colgroup>
-											<tbody>
-											     <tr>
-											         <td style="text-align:left" >
-											                  1. Computed 사용법<br>
-											                  2. vuecompute.aPlus  :  get 함수 호출   vuecompute.aPlus = 3 : set 함수 호출  <br>
-											                  3. VueJS 변수의 Life Cycle<br>
-											                  4. Compute 참조&nbsp&nbsp&nbsp&nbsp&nbsp<a  href="https://kr.vuejs.org/v2/guide/computed.html"  target="_blank">공식 한국 VusJS</a> 
-											         </td>
-											     </tr>								
-								           </tbody>
-								     </table> 										
-                                      <my-component></my-component>
-							</div>  	
-							<div>
-							       <a class="btnType blue" href="javascript:fn_compute1()" name="modal"><span>vuecompute.aPlus  결과 : 2 =  1 + 1</span></a>
-                                   <a class="btnType blue" href="javascript:fn_compute2()" name="modal"><span>vuecompute.aPlus = 3   결과 :  a=2</span></a>
-                                   <a class="btnType blue" href="javascript:fn_compute3()" name="modal"><span>vuecompute.a</span></a>
-                                   <a class="btnType blue" href="javascript:fn_compute4()" name="modal"><span>vuecompute.aDouble  결과 :  4 = 2 * 2</span></a>
-							
-							</div>
-							<br>
-							<div id="watch-example">
-							        <p class="conTitle" style="margin-bottom: 1%;">
-										<span>7. watch  </span> 
-										<span class="fr"> 
-											 VueJS 변수 감시  
-										</span>
-									</p>
-                                    <table width="100%" class="col" border=0>
-		                                    <colgroup>
-											    <col width="100%">
-											</colgroup>
-											<tbody>
-											     <tr>
-											         <td style="text-align:left" >
-											                  1. Watch 사용 문법 확인<br>
-											                  2. 변수 변경 이벤트 발생 후 처리 
-											         </td>
-											     </tr>								
-								           </tbody>
-								     </table> 	
-									  <p>
-									    yes/no 질문을 물어보세요:
-									    <input v-model="question">
-									  </p>
-									  <p>{{ answer }}</p>
-							</div>	
-							<br>					
-							<div id="vueoption">
-							        <p class="conTitle" style="margin-bottom: 1%;">
-										<span>8. v-for, templete  </span> 
-										<span class="fr"> 
-											 반복 SelectBox   
-										</span>
-									</p>
-                                    <table width="100%" class="col" border=0>
-		                                    <colgroup>
-											    <col width="100%">
-											</colgroup>
-											<tbody>
-											     <tr>
-											         <td style="text-align:left" >
-											                  1. DB Select Jso 결과값을 활용 한 Select 박스 구성 가능<br>
-											                  2. templete 범위 안에 templete 사용 불가능
-											         </td>
-											     </tr>								
-								           </tbody>
-								     </table> 										
-                                    <template v-for="key in selectList">
-								    {{key.value}}
-								    <select v-model="key.value" >
-								        <option value="1">one</option>
-								        <option value="2">two</option>
-								        <option value="3">three</option>
-								    </select>
-								  </template>
-								  <br>
-								  Option Loop
-								  <select>								   
-								      <template v-for="key in options">
-								          <option value="key.value">{{ key.text }}</option>
-								      </template>
-								  </select>
-								  <a class="btnType blue" href="javascript:fn_changesel()" name="modal"><span>변경</span></a>
-								  
-							</div> 
-							<br>
-							<p class="conTitle" style="margin-bottom: 1%;">
-								<span>9. 공지 사항(v-for,v-if)    </span> 
-								<span class="fr"> 
-									<a  href="https://vuejsexamples.net/vue-table/" target="_blank">변경된 bootstrap-table</a>
-								</span>
-							</p>
-		                    <table width="100%" class="col" border=0>
-                                    <colgroup>
-									    <col width="100%">
-									</colgroup>
-									<tbody>
-									     <tr>
-									         <td style="text-align:left" >
-									                  1. 테이블 컴포넌트 사용 예<br>
-									                  2. v-for,v-if 설명 &nbsp&nbsp&nbsp&nbsp&nbsp<a  href="https://vuejsexamples.com/" target="_blank">VusJS Example</a> &nbsp&nbsp&nbsp&nbsp&nbsp<a  href="https://vuejsexamples.com/" target="_blank">VusJS Example</a> <br>
-									                  3. Controller 와 연동 설명
-									         </td>
-									     </tr>								
-						           </tbody>
-						     </table> 				
 
-					        	<br>
-					        	<div id="divComGrpCodList">
-									<table class="col">
-										<caption>caption</caption>
-										<colgroup>
-											<col width="17%">
-											<col width="20%">
-											<col width="20%">
-											<col width="10%">
-											<col width="15%">
-											<col width="10%">
-										</colgroup>
-			
-										<thead>
-											<tr>
-												<th scope="col">그룹코드</th>
-												<th scope="col">그룹코드명</th>
-												<th scope="col">그룹코드 설명</th>
-												<th scope="col">사용여부</th>
-												<th scope="col">등록일</th>
-												<th scope="col">비고</th>
-											</tr>
-										</thead>
-										<tbody v-for=" (item,index) in grouplist" v-if="grouplist.length">
-										      <tr v-on:click="grpdetail(item.grp_cod)">
-										        <td> {{ item.grp_cod }} </td>
-										        <td> {{ item.grp_cod_nm }} </td>
-										        <td> {{ item.grp_cod_eplti }} </td>
-										        <td> {{ item.use_poa }} </td>			
-										        <td> {{ item.reg_date }} </td>
-										        <td>  </td>
-										       </tr>							        
-										</tbody>
-									</table>
-									<br>
-									<div class="paging_area"  id="comnGrpCodPagination" v-html="pagenavi"> </div>
-								</div>
-	
-						        
-					        							     
-						     	
-					        <div id="divNoticeList">
-								<div class="bootstrap-table">
-									<div class="fixed-table-toolbar">
-										<div class="bs-bars pull-left"></div>
-										<div class="columns columns-right btn-group pull-right">	</div>
-									</div>
-									<div class="fixed-table-container" style="padding-bottom: 0px;">
-										<div class="fixed-table-body">		
-												<table class="col">
-													<caption>caption</caption>
-													<colgroup>
-													   <col width="5%">
-														<col width="70%">
-														<col width="10%">
-														<col width="5%">
-													</colgroup>
-								
-													<thead>
-														<tr>
-														    <th scope="col">번호</th>
-															<th scope="col">제목</th>
-															<th scope="col">작성일</th>
-															<th scope="col">작성자</th>
-														</tr>
-													</thead>
-													<tbody id="listInf" v-for="(item,index) in listitem" v-if="listitem.length">
-													      <tr @click="detailview(item.noticeNo)">
-														    <td>{{ item.noticeNo }}</td>
-															<td>{{ item.noticeTitle }}</td>
-															<td>{{ item.noticeRegdate }}</td>
-															<td>{{ item.loginId }}</td>									
-													      </tr>
-													</tbody>
-												</table>
-										</div>
-	                                    <div>
-												<div>
-													<div class="clearfix" />
-												</div>
-										</div>
-									 </div>		
-								   </div>
-								</div>			   
-
-					        	<div class="paging_area"  id="listInfPagination"> </div>
-					        	
-					        	
-					        	
-                                <br>					
-                                <p class="conTitle" style="margin-bottom: 1%;">
-									<span>10. NPM Vuejs 개요     </span> 
-							
-									<span class="fr"> 
-										  NPM
-									</span>
-							    </p>
-			                    <table width="100%" class="col" border=0>
-	                                    <colgroup>
-										    <col width="100%">
-										</colgroup>
-										<tbody>
-										     <tr>
-										         <td style="text-align:left" >
-										                  1. NodeJS와 연관성<br>
-										                  2.ReactJS 와 관련성 <br>
-										                  3. 사전 설정<br>
-										                      D:\egov\jdk1.8.0_181 폴더를 D:\로 복사<br>
-										                      D:\egov\apache-tomcat-8.0.53 폴더를 D:\로 <br>
-										                      JAVA_HOME 설정
-										         </td>
-										     </tr>								
-							           </tbody>
-							     </table> 	
-							     <br>
-                                <p class="conTitle" style="margin-bottom: 1%;">
-									<span>11. nodeJs  설치     </span> 
-									<span class="fr"> 
-										  NodeJS
-									</span>
-							    </p>
-			                    <table width="100%" class="col" border=0>
-	                                    <colgroup>
-										    <col width="100%">
-										</colgroup>
-										<tbody>
-										     <tr>
-										         <td style="text-align:left" >
-										                  <a  href="https://ojava.tistory.com/185" target="_blank">참조</a> <br>
-										                   node-v14.16.0-x64.exe   실행
-										         </td>
-										     </tr>								
-							           </tbody>
-							     </table> 		
-							     <br>
-                                 <p class="conTitle" style="margin-bottom: 1%;">
-									<span>12. nodeJs  설치  (Command)   </span> 
-									<span class="fr"> 
-										  NodeJS
-									</span>
-							    </p>
-			                    <table width="100%" class="col" border=0>
-	                                    <colgroup>
-										    <col width="100%">
-										</colgroup>
-										<tbody>
-										     <tr>
-										         <td style="text-align:left" >
-										                  CMD 창에서  C:\nodejs>npm install   실행
-										         </td>
-										     </tr>								
-							           </tbody>
-							     </table> 	
-							     <br>
-                                 <p class="conTitle" style="margin-bottom: 1%;">
-									<span>13. vue 설치  (Command)   </span> 
-									<span class="fr"> 
-										  VueJS
-									</span>
-							    </p>
-			                    <table width="100%" class="col" border=0>
-	                                    <colgroup>
-										    <col width="100%">
-										</colgroup>
-										<tbody>
-										     <tr>
-										         <td style="text-align:left" >
-										                  CMD 창에서  npm install vue   실행<br>
-										              설치 확인 : vue -v
-										         </td>
-										     </tr>								
-							           </tbody>
-							     </table> 		
-							     <br>
-                                 <p class="conTitle" style="margin-bottom: 1%;">
-									<span>14. Vuejs Cli 설치  (Command)   </span> 
-									<span class="fr"> 
-										  VueJS
-									</span>
-							    </p>
-			                    <table width="100%" class="col" border=0>
-	                                    <colgroup>
-										    <col width="100%">
-										</colgroup>
-										<tbody>
-										     <tr>
-										         <td style="text-align:left" >
-										                  vue/cli 역활<br>
-										                  CMD 창에서  npm install -g @vue/cli   실행
-										         </td>
-										     </tr>								
-							           </tbody>
-							     </table> 		
-							     <br>
-                                 <p class="conTitle" style="margin-bottom: 1%;">
-									<span>14. 프로젝트 생성  (Command)   </span>
-									<span class="fr"> 
-									<a  href="https://blog.metafor.kr/201"  target="_blank">2.x 외 3.x의 차이점</a>
-								    </span> 
-							    </p>
-			                    <table width="100%" class="col" border=0>
-	                                    <colgroup>
-										    <col width="100%">
-										</colgroup>
-										<tbody>
-										     <tr>
-										         <td style="text-align:left" >
-										                  14.1 workspace 폴더 생성<br>
-                                                                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp14.2 worksapce 폴더 cmd 에서 프로젝트 생성 (5.2.2 실행)<br>
-                                                                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp14.2.1 vue init webpack (프로젝트 이름) <br>       
-                                                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp예) vue init webpack my-app<br>
-                                                                  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp14.2.2 vue create (프로젝트 이름)  <br>
-                                                                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvue create helloworld 
-										         </td>
-										     </tr>								
-							           </tbody>
-							     </table> 		
-							     <br>
-							      <p class="conTitle" style="margin-bottom: 1%;">
-									<span>15. Server Run  (Command)   </span>
-									<span class="fr"> 
-									Server 실행
-								    </span> 
-							    </p>
-			                    <table width="100%" class="col" border=0>
-	                                    <colgroup>
-										    <col width="100%">
-										</colgroup>
-										<tbody>
-										     <tr>
-										         <td style="text-align:left" >
-										                 생성 프로젝트 폴더로 이동 후 실행  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp npm run serve<br>
-                                                              <a  href="http://localhost:8080/"  target="_blank">확인</a>
-										         </td>
-										     </tr>								
-							           </tbody>
-							     </table> 	
-							     <br>
-							      <p class="conTitle" style="margin-bottom: 1%;">
-									<span>19. Vuejs 관리자  (Command)   </span>
-									<span class="fr"> 
-									관리자 화면
-								    </span> 
-							    </p>
-			                    <table width="100%" class="col" border=0>
-	                                    <colgroup>
-										    <col width="100%">
-										</colgroup>
-										<tbody>
-										     <tr>
-										         <td style="text-align:left" >
-										                 vue ui
-										         </td>
-										     </tr>								
-							           </tbody>
-							     </table> 
-							     <br>
-							      <p class="conTitle" style="margin-bottom: 1%;">
-									<span>20. Vsc   설치</span>
-									<span class="fr"> 
-									Visual Studio Code
-								    </span> 
-							    </p>
-			                    <table width="100%" class="col" border=0>
-	                                    <colgroup>
-										    <col width="100%">
-										</colgroup>
-										<tbody>
-										     <tr>
-										         <td style="text-align:left" >
-										                 VSCodeUserSetup-x64-1.61.0.exe 실행
-										         </td>
-										     </tr>								
-							           </tbody>
-							     </table> 
-							      <br>
-							      <p class="conTitle" style="margin-bottom: 1%;">
-									<span>21. vsc 환경 설정</span>
-									<span class="fr"> 
-									Visual Studio Code
-								    </span> 
-							    </p>
-			                    <table width="100%" class="col" border=0>
-	                                    <colgroup>
-										    <col width="100%">
-										</colgroup>
-										<tbody>
-										     <tr>
-										         <td style="text-align:left" >
-                                                              <a  href="https://ddolcat.tistory.com/1565"  target="_blank">참조1</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-										                      <a  href="https://ojava.tistory.com/185"  target="_blank">참조2</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-										                      <a  href="https://linked2ev.github.io/devsub/2020/08/31/Visual-Studio-Code-vue.js-%EA%B0%9C%EB%B0%9C%EC%8B%9C-%EC%B6%94%EC%B2%9C-plugin-%EC%A0%95%EB%A6%AC/"  target="_blank">참조3</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-										                      <a  href="https://dev-onestep.tistory.com/25"  target="_blank">참조4</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<br>
-										                      첨부 이미지 참조
-										         </td>
-										     </tr>								
-							           </tbody>
-							     </table> 
-							     <br>
-							      <p class="conTitle" style="margin-bottom: 1%;">
-									<span>22. 프로젝트 열기</span>
-									<span class="fr"> 
-									Visual Studio Code
-								    </span> 
-							    </p>
-			                    <table width="100%" class="col" border=0>
-	                                    <colgroup>
-										    <col width="100%">
-										</colgroup>
-										<tbody>
-										     <tr>
-										         <td style="text-align:left" >
-                                                     VSC 메뉴 : 파일-폴더열기   선택후     해당 프로젝트 폴더 열기
-										         </td>
-										     </tr>								
-							           </tbody>
-							     </table> 
-							     <br>
-							      <p class="conTitle" style="margin-bottom: 1%;">
-									<span>23. 추가 설치</span>
-									<span class="fr"> 
-									Axios, 모달창
-								    </span> 
-							    </p>
-			                    <table width="100%" class="col" border=0>
-	                                    <colgroup>
-										    <col width="100%">
-										</colgroup>
-										<tbody>
-										     <tr>
-										         <td style="text-align:left" >
-                                                     Axios 설치 : npm install --save axios <br>
-                                                     <a href="https://jess2.xyz/vue/vue-tip/" >Axios 정리</a> <br>
-                                                     모달창 : npm i jenesius-vue-modal<br>
-                                                     
-                                                     * 참조<br>
-                                                       <a href="https://johnpapa.net/vue2-to-vue3/" > Vue 2.X 에 3.x로 변경</a><br>
-                                                        - 1. vue add vue-next<br>
-                                                        - 2. vue add typescript<br>
-                                                        - 3. vue add router<br>
-                                                        - 4. vue add vuex<br>
-                                                      * 세션 설치<br>  
-                                                        - npm install --save vue-session <br>
-                                                        - <a href="https://archijude.tistory.com/419" >node_modules/vue-session/index.js 수정</a>
-										         </td>
-										     </tr>								
-							           </tbody>
-							     </table> 							     
-							     
-							     
-							     
-							     <br>
-							      <p class="conTitle" style="margin-bottom: 1%;">
-									<span>23. 샘플소스 만들기</span>
-									<span class="fr"> 
-									Visual Studio Code
-								    </span> 
-							    </p>
-			                    <table width="100%" class="col" border=0>
-	                                    <colgroup>
-										    <col width="100%">
-										</colgroup>
-										<tbody>
-										     <tr>
-										         <td style="text-align:left" >
-                                                     샘플소스 만들기
-										         </td>
-										     </tr>								
-							           </tbody>
-							     </table> 
-							     
-							     
-				        </div>  
-					</li>
+      
+						</div>
+					</div> 
+				</li>
 			</ul>
 		</div>
-		
-		
-		
-		
-		
-	</div>
-					
-
-				
-				
-		
-	<!-- 모달팝업 -->
-	<div id="notice" class="layerPop layerType2" style="width: 600px;">
-		<input type="hidden" id="noticeNo" name="noticeNo" value="${noticeNo}"> <!-- 수정시 필요한 num 값을 넘김  -->
-		
-		<dl>
-			<dt>
-				<strong>공지사항</strong>
-			</dt>
-			<dd class="content">
-				<!-- s : 여기에 내용입력 -->
-				<table class="row">
-					<caption>caption</caption>
-
-					<tbody>
-						<tr>
-							<th scope="row">작성자 <span class="font_red">*</span></th>
-							<td><input type="text" class="inputTxt p100" name="loginId" id="loginId" v-model="loginId" v-bind:readonly="loginIdread" /></td>
-							<!-- <th scope="row">작성일<span class="font_red">*</span></th>
-							<td><input type="text" class="inputTxt p100" name="write_date" id="write_date" /></td> -->
-						</tr>
-						<tr>
-							<th scope="row">제목 <span class="font_red">*</span></th>
-							<td colspan="3">
-							        <input type="text" class="inputTxt p100"	name="noticeTitle" id="noticeTitle" v-model="noticeTitle" v-bind:readonly="noticeTitleread" />
-							 </td>
-						</tr>
-						<tr>
-							<th scope="row">내용</th>
-							<td colspan="3">
-								<textarea class="inputTxt p100" name="noticeContent" id="noticeContent" v-model="noticeContent" v-bind:readonly="noticeContentread">
-								</textarea>
-							</td>
-						</tr>
-						
-					</tbody>
-				</table>
-
-				<!-- e : 여기에 내용입력 -->
-
-				<div class="btn_areaC mt30">
-					<a href=""	class="btnType gray"  id="btnClose" name="btn"><span>닫기</span></a>
-				</div>
-			</dd>
-
-		</dl>
-	</div>
-
-
-	<div id="layer2" class="layerPop layerType2" style="width: 600px;">
-	    <input type="hidden" id="action" name="action" value="U"> 
-		<dl>
-			<dt>
-				<strong>그룹코드 관리</strong>
-			</dt>
-			<dd class="content">
-				<!-- s : 여기에 내용입력 -->
-				<table class="row">
-					<caption>caption</caption>
-					<colgroup>
-						<col width="120px">
-						<col width="*">
-						<col width="120px">
-						<col width="*">
-					</colgroup>
-
-					<tbody>
-						<tr>
-							<th scope="row">그룹 코드 <span class="font_red">*</span></th>
-							<td><input type="text" class="inputTxt p100" name="grp_cod" id="grp_cod"  v-model="grp_cod" /></td>
-							<th scope="row">그룹 코드 명 <span class="font_red">*</span></th>
-							<td><input type="text" class="inputTxt p100" name="grp_cod_nm" id="grp_cod_nm" v-model="grp_cod_nm" /></td>
-						</tr>
-						<tr>
-							<th scope="row">코드 설명 <span class="font_red">*</span></th>
-							<td colspan="3"><input type="text" class="inputTxt p100"
-								name="grp_cod_eplti" id="grp_cod_eplti" v-model="grp_cod_eplti"  /></td>
-						</tr>
-				
-						<tr>
-							<th scope="row">사용 유무 <span class="font_red">*</span></th>
-							<td colspan="3"><input type="radio" id="radio1-1"
-								name="grp_use_poa" id="grp_use_poa_1" value='Y'  v-model="use_poa" /> <label for="radio1-1">사용</label>
-								&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" id="radio1-2"
-								name="grp_use_poa" id="grp_use_poa_2" value="N" v-model="use_poa" /> <label for="radio1-2">미사용</label></td>
-						</tr>
-					</tbody>
-				</table>
-
-				<!-- e : 여기에 내용입력 -->
-
-				<div class="btn_areaC mt30">
-					<a href="" class="btnType blue" id="btnSaveGrpCod" name="btn"><span>저장</span></a> 
-					<a href="" class="btnType blue" id="btnDeleteGrpCod" name="btn" v-show="delshow" ><span>삭제</span></a> 
-					<a href=""	class="btnType gray"  id="btnCloseGrpCod" name="btn"><span>취소</span></a>
-				</div>
-			</dd>
-		</dl>
-		<a href="" class="closePop"><span class="hidden">닫기</span></a>
 	</div>  
-      
 </form>
+
 </body>
 </html>

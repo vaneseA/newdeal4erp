@@ -172,7 +172,7 @@ width:10px;
 			$("#btnDeleteFile").hide();
 			
 		} else {
-			 
+			
 			 $("#loginID").val(object.loginID);
 			 $("#name").val(object.name);		
 			 $("#password").val(object.password);
@@ -182,6 +182,11 @@ width:10px;
 			 $("#emp_addr").val(object.emp_addr);
 			 $("#emp_dt_addr").val(object.emp_dt_addr);
 			  
+			 
+			 $("#loginID").attr("readonly",true); 
+			 $("#name").attr("readonly",true); 
+			 
+			 
 			 var inserthtml = "";
 				
 				if(object.file_name == "" || object.file_name == null || object.file_name == undefined) {
@@ -206,32 +211,7 @@ width:10px;
 				$("#action").val("U");	
 		}
 	}
-   function preview(event) {
-		var image = event.target;
-		  
-		//alert(image.files[0].file_name + " : " + image.files[0].file_nm + " : " + image.files[0].name);
-		
-		 if(image.files[0]){
-			  //alert(window.URL.createObjectURL(image.files[0]));
-			 
-			  var selfile = image.files[0].name;
-		      var selfilearr = selfile.split(".");
-		      var inserthtml = "";
-		      var lastindex = selfilearr.length - 1;
-		      
-		      
-		      if(selfilearr[lastindex].toLowerCase() == "jpg" || selfilearr[lastindex].toLowerCase() == "gif" || selfilearr[lastindex].toLowerCase() == "jpge" || selfilearr[lastindex].toLowerCase() == "png") {
-		    	  inserthtml = "<img src='" + window.URL.createObjectURL(image.files[0]) + "' style='width:100px; height:120px' />";
-		      } else {
-		    	  inserthtml = selfile;
-		      }
-			  
-			  
-			  $("#previewdiv").empty().append(inserthtml);
-		}
-		
-   }
-    
+   
 	function fn_savefile() {
 		
 		 var param = {
@@ -366,7 +346,7 @@ width:10px;
 	<!-- 모달팝업 -->
 	
 	
-	<div id="layer1" class="layerPop layerType2" style="width: 600px;">
+	<div id="layer1" class="layerPop layerType2" style="width: 550px;">
 		<dl>
 			<dt>
 				<strong>마이페이지</strong>

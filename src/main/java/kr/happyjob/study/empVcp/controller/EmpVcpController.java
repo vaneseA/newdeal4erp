@@ -1,22 +1,19 @@
 package kr.happyjob.study.empVcp.controller;
 
-import java.io.File;
-import java.net.URLEncoder;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-import javax.mail.Session;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.poi.util.SystemOutLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,13 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-import kr.happyjob.study.common.comnUtils.ComnCodUtil;
-import kr.happyjob.study.empSam.model.SalManagementModel;
 import kr.happyjob.study.empVcp.model.VacaPersonalModel;
 import kr.happyjob.study.empVcp.model.VacaPersonalRemainModel;
 import kr.happyjob.study.empVcp.service.EmpVcpService;
-import kr.happyjob.study.empVcs.model.VacaSearchModel;
-import kr.happyjob.study.empVcs.service.EmpVcsService;
+
 
 @Controller
 @RequestMapping("/empVcp/")

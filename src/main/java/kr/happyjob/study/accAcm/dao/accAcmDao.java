@@ -22,11 +22,12 @@ public interface accAcmDao {
 	int countSList(Map<String, Object> paramMap);
 
 	int smallInsert(Map<String, Object> paramMap);
-	
-	
-	
 
-	
+	int LCdDupChked(Map<String, Object> paramMap);
+
+	int LNmDupChked(Map<String, Object> paramMap);
+
+	int SCdDupChk(Map<String, Object> paramMap);
 
 
 	

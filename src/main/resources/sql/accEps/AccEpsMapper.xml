@@ -170,7 +170,31 @@
 	     
 	  
 	</update>
+	<insert id="listUpdateFileBudEps">
 	
+	<selectKey resultType="int" keyProperty="no" order="BEFORE">
+            select ifnull(max(budget_no),0) + 1 from tb_budget
+        </selectKey>
+	      
+	     insert into tb_budget
+						(
+						  budget_no
+						  , acnt_sbject_cd
+						  , acnt_dt_sbject_cd
+						  , expen_report_no
+						  
+						)
+						values
+						(
+						  #{no},
+						  #{acnt_sbject_cd},
+						  #{acnt_dt_sbject_cd},
+						  #{expen_report_no}
+						  
+						)   
+	     
+	  
+	</insert>
 	
 	
 	

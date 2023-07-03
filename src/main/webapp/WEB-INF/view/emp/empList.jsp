@@ -24,6 +24,9 @@
       fRegisterButtonClickEvent();
 
       fn_emplist();
+      
+      comcombo("dep_cd","depcombo","all","");
+      comcombo("level_cd","levcombo","all","");
 
 
     });
@@ -109,9 +112,13 @@
 
       if(object == "" || object == null || object == undefined) {
 
+        $("#loginID").val("");
+        $("#loginID").attr("readonly",true);
         $("#emp_birth").val("");
+        $("#user_type").val("");
+        
         $("#name").val("");
-        $("#emp_sex").val("");
+        $("#emp_gen").val("");
         $("#emp_edu").val("");
         $("#emp_email").val("");
         $("#emp_hp").val("");
@@ -123,19 +130,55 @@
         $("#dept_cd").val("");
         $("#level_cd").val("");
         $("#emp_yr_sal").val("");
+        $("#emp_yr_sal").attr("readonly",true);
         $("#emp_sdate").val("");
+        $("#emp_sdate").attr("readonly",true);
         $("#emp_edate").val("");
+        $("#emp_edate").attr("readonly",true);
         $("#retire_reason").val("");
 
-
         $("#btnDelete").hide();
+        $("#upfile").val("");
 
         $("#action").val("I");
       } else {
-
+       
+        $("#loginID").val(object.loginId);
+        $("#loginID").attr("readonly",true);
         $("#emp_birth").val(object.emp_birth);
+        $("#user_type").val(object.user_type);
+        
+        var user_type = object.user_type;
+        if(user_type == "A"){
+       	 $("#type_A").prop("checked", true);
+       	 
+        } else if(user_type == "B"){
+       	 
+       	 $("#type_B").prop("checked", true);
+        }else if(user_type == "C"){
+          	 
+          	 $("#type_C").prop("checked", true);
+        }else if(user_type == "D"){
+        	$("#type_D").prop("checked", true);
+        		
+        	}else {
+        	$("#type_E").prop("checked", true);
+        	}
+        
+        
+        $("#password").val(object.password);
         $("#name").val(object.name);
-        $("#emp_sex").val(object.emp_sex);
+        $("#emp_gen").val(object.emp_gen);
+           
+         var emp_gen = object.emp_gen;
+         if(emp_gen == 1){
+        	 $("#sex_M").prop("checked", true);
+        	 
+         } else {
+        	 
+        	 $("#sex_W").prop("checked", true);
+         }
+        
         $("#emp_edu").val(object.emp_edu);
         $("#emp_email").val(object.emp_email);
         $("#emp_hp").val(object.emp_hp);
@@ -147,10 +190,14 @@
         $("#dept_cd").val(object.dept_cd);
         $("#level_cd").val(object.level_cd);
         $("#emp_yr_sal").val(object.emp_yr_sal);
+        $("#emp_yr_sal").attr("readonly",true);
         $("#emp_sdate").val(object.emp_sdate);
+        $("#emp_sdate").attr("readonly",true);
         $("#emp_edate").val(object.emp_edate);
+        $("#emp_edate").attr("readonly",true);
         $("#retire_reason").val(object.retire_reason);
 
+        $("#upfile").val("");
 
 
         $("#btnDelete").show();
@@ -164,7 +211,7 @@
       //alert(no);
 
       var param = {
-        loginId : login
+        loginID : login
       }
 
       var selectoncallback = function(returndata) {
@@ -186,73 +233,61 @@
       if ( ! fn_Validate() ) {
         return;
       }
-
-      /*
-      var param = {
-        action : $("#id").val(),
-        loginId : $("#loginId").val(""),
-        emp_birth : $("#emp_birth").val(""),
-        name : $("#name").val(""),
-        emp_sex : $("#emp_sex").val(""),
-        emp_edu : $("#emp_edu").val(""),
-        emp_email : $("#emp_email").val(""),
-        emp_hp : $("#emp_hp").val(""),
-        emp_zip : $("#emp_zip").val(""),
-        emp_dt_addr : $("#emp_dt_addr").val(""),
-        bk_cd : $("#bk_cd").val(""),
-        emp_account : $("#emp_account").val(""),
-        dept_cd : $("#dept_cd").val(""),
-        level_cd : $("#level_cd").val(""),
-        emp_yr_sal : $("#emp_yr_sal").val(""),
-        emp_sdate : $("#emp_sdate").val(""),
-        emp_edate : $("#emp_edate").val(""),
-        sal_date : $("#sal_date").val(""),
-        retire_reason : $("#retire_reason").val(""),
-        emp_addr : $("#emp_addr").val(""),
-        emp_work_yn : $("#emp_work_yn").val(""),
-        sal_san : $("#sal_san").val(""),
-        retire_reason : $("#retire_reason").val(""),
-        sal_ko : $("#sal_ko").val(""),
-        sal_kun : $("#sal_kun").val(""),
-        sal_kuk : $("#sal_kuk").val(""),
-        sal_pre : $("#sal_pre").val(""),
-        sal_after : $("#sal_after").val("")
-
-
-      }
-      */
-
-
-      var savecollback = function(reval) {
-        console.log( JSON.stringify(reval) );
-
-        if(reval.returncval > 0) {
-          alert("저장 되었습니다.");
-          gfCloseModal();
-
-          if($("#action").val() == "U") {
-            fn_emplist($("#pageno").val());
-          } else {
-            fn_emplist();
-          }
-        }  else {
-          alert("오류가 발생 되었습니다.");
-        }
-      }
-
-
-      callAjax("/empEpm/empSave.do", "post", "json", false, $("#myForm").serialize() , savecollback) ;
-
+      
+//       var fileCheck = document.getElementById("upfile").value;
+//       if(!fileCheck){
+//     	  swal("파일을 첨부해 주세요");
+//           return false;
+//       }
+      
+      var emp_gen = $('input[name=sex]:checked').val();
+      $("#emp_gen").val(emp_gen);
+      
+      var user_type = $('input[name=type]:checked').val();
+      $("#user_type").val(user_type);
+      
+		var frm = document.getElementById("myForm");
+		frm.enctype = 'multipart/form-data';
+		var fileData = new FormData(frm);
+		
+		var filesavecallback = function(returnval) {
+			console.log( JSON.stringify(returnval) );
+			
+			if(returnval.returncval > 0) {
+				alert("저장 되었습니다.");
+				gfCloseModal();
+				
+				if($("#action").val() == "U") {
+					fn_emplist($("#pageno").val());
+				} else {
+					fn_emplist();
+				}
+			}  else {
+				alert("오류가 발생 되었습니다.");				
+			}
+		}
+      
+		callAjaxFileUploadSetFormData("/empEpm/empSave.do", "post", "json", true, fileData, filesavecallback);
     }
+    
+    
     function fn_Validate() {
       var chk = checkNotEmpty(
               [
-                [ "emp_birth", "생일을 입력해 주세요." ]
+                [ "emp_birth", "생년월일을 입력해 주세요." ]
                 ,	[ "name", "이름을 입력해 주세요." ]
-                ,	[ "emp_sex", "성별을 입력해 주세요." ]
+                ,	[ "emp_gen", "성별을 입력해 주세요." ]
                 ,	[ "emp_edu", "학력을 입력해 주세요." ]
                 ,	[ "emp_email", "이메일을 입력해 주세요." ]
                 ,	[ "emp_hp", "전화번호를 선택해 주세요." ]
+                ,	[ "user_type", "권한을 선택해 주세요." ]
+                ,	[ "emp_zip", "우편번호를 선택해 주세요." ]
+                ,	[ "emp_addr", "주소를 선택해 주세요." ]
+                ,	[ "emp_dt_addr", "상세주소를 선택해 주세요." ]
+                ,	[ "bk_cd", "은행을 선택해 주세요." ]
+                ,	[ "emp_account", "계좌번호를 선택해 주세요." ]
+                ,	[ "dept_cd", "부서를 선택해 주세요." ]
+                ,	[ "level_cd", "직급을 선택해 주세요." ]
 
               ]
       );
@@ -264,20 +299,6 @@
 
 
 
-    //////////////////////////   위는 파일 업이 처리
-    /////////////////////////    file upload
-
-
-
-
-
-
-
-
-
-
-
-
 
   </script>
 
@@ -285,7 +306,6 @@
 <body>
 <form id="myForm" action=""  method="">
   <input type="hidden" id="action"  name="action"  />
-  <input type="hidden" id="loginId"  name="loginId"  />
   <input type="hidden" id="pageno"  name="pageno"  />
 
   <!-- 모달 배경 -->
@@ -313,11 +333,11 @@
                     class="btn_nav bold">운영</span> <span class="btn_nav bold">공지사항
 								관리</span> <a href="../system/comnCodMgr.do" class="btn_set refresh">새로고침</a>
             </p>
-
             <p class="conTitle">
               <span>인사관리</span> <span class="fr">
+			<div style="border : solid 3px #c0c0c0; height: 50px; border-radius: 10px; text-align: center; padding-top: 20px; margin-bottom: 10px;">
 							<select id="deptcd" name="deptcd" style="width: 150px;">
-							        <option value="" >전체</option>
+							        <option value="" >부서</option>
 									<option value="100" >관리자</option>
 									<option value="200" >임원직</option>
                                     <option value="300" >회계팀</option>
@@ -326,7 +346,7 @@
 							</select>
 
                             <select id="lvcd" name="lvcd" style="width: 150px;">
-							        <option value="" >전체</option>
+							        <option value="" >직급</option>
 									<option value="10" >사원</option>
 									<option value="20" >주임</option>
                                     <option value="30" >대리</option>
@@ -338,7 +358,7 @@
                                     <option value="90" >대표</option>
 							</select>
 							 <select id="searchKey" name="searchKey" style="width: 150px;" >
-							        <option value="" >전체</option>
+							        <option value="" >사번/사번명</option>
 									<option value="loginId" >사번</option>
 									<option value="name" >사원명</option>
 							</select>
@@ -348,6 +368,7 @@
 
 							</span>
             </p>
+            </div>
 
             <div class="empList">
               <table class="col">
@@ -359,8 +380,8 @@
                   <col width="10%">
                   <col width="15%">
                   <col width="10%">
-                  <col width="10%">
-                  <col width="5%">
+                  <col width="15%">
+                  
                 </colgroup>
 
                 <thead>
@@ -372,7 +393,7 @@
                   <th scope="col">직급</th>
                   <th scope="col">입사일자</th>
                   <th scope="col">재직구분</th>
-                  <th scope="col">상세</th>
+                  
                 </tr>
                 </thead>
                 <tbody id="listemp"></tbody>
@@ -410,67 +431,120 @@
 
           <tbody>
           <tr>
-
-            <th scope="row">생년월일 <span class="font_red">*</span></th>
-            <td><input type="text" class="inputTxt p100" name="emp_birth" id="emp_birth" /></td>
+            <th scope="row">사번 </th>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="loginID" id="loginID" placeholder="인사 등록 후 확인 가능합니다." style="text-align: center;"/></td>
+          </tr>
+          <tr>
+          
+          <th scope="row">생년월일 <span class="font_red">*</span></th>
+            <td><input type="text" class="inputTxt p100" name="emp_birth" id="emp_birth" placeholder="0000-00-00"  style="text-align: center;"/></td>
+            <th scope="row">권한 <span class="font_red">*</span></th>
+            <td colspan="3">
+            <input type="radio" name="user_type" id="type_A" value="A"/>A
+            <input type="radio" name="user_type" id="type_B" value="B"/>B
+            <input type="radio" name="user_type" id="type_C" value="C"/>C
+            <input type="radio" name="user_type" id="type_D" value="D"/>D   
+            <input type="radio" name="user_type" id="type_E" value="E"/>E   
+            </td>                     
           </tr>
           <tr>
             <th scope="row">이름 <span class="font_red">*</span></th>
-            <td><input type="text" class="inputTxt p100" name="name" id="name" /></td>
+            <td><input type="text" class="inputTxt p100" name="name" id="name" style="text-align: center;"/></td>          
             <th scope="row">성별 <span class="font_red">*</span></th>
-            <td><input type="text" class="inputTxt p100" name="emp_sex" id="emp_sex" /></td>
+            <td colspan="3">
+            
+            &nbsp&nbsp&nbsp<input type="radio" name="emp_gen" id="sex_M" value="1"/>&nbsp&nbsp남자 
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <input type="radio" name="emp_gen" id="sex_W" value="2"/>&nbsp&nbsp여자 
+            </td>            
           </tr>
           <tr>
+            <th scope="row">비밀번호 </th>
+            <td><input type="text" class="inputTxt p100" name="password" id="password" placeholder="자동등록(0000)."style="text-align: center;"/></td>          
             <th scope="row">학력 <span class="font_red">*</span></th>
-            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_edu" id="emp_edu" /></td>
+            <td><input type="text" class="inputTxt p100" name="emp_edu" id="emp_edu"  style="text-align: center;"/></td>
           </tr>
           <tr>
             <th scope="row">이메일 <span class="font_red">*</span></th>
-            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_email" id="emp_email" /></td>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_email" id="emp_email" placeholder="______@______.___"/ style="text-align: center;"></td>
           </tr>
           <tr>
             <th scope="row">전화번호 <span class="font_red">*</span></th>
-            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_hp" id="emp_hp" /></td>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_hp" id="emp_hp" placeholder="000-0000-0000"/ style="text-align: center;"></td>
           </tr>
           <tr>
             <th scope="row">우편번호 <span class="font_red">*</span></th>
-            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_zip" id="emp_zip" /></td>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_zip" id="emp_zip" placeholder="00000" / style="text-align: center;"></td>
           </tr>
           <tr>
             <th scope="row">주소 <span class="font_red">*</span></th>
-            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_addr" id="emp_addr" /></td>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_addr" id="emp_addr" / style="text-align: center;"></td>
           </tr>
           <tr>
             <th scope="row">상세주소 <span class="font_red">*</span></th>
-            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_dt_addr" id="emp_dt_addr" /></td>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_dt_addr" id="emp_dt_addr" / style="text-align: center;"></td>
           </tr>
           <tr>
             <th scope="row">은행 <span class="font_red">*</span></th>
-            <td colspan="3"><input type="text" class="inputTxt p100" name="bk_cd" id="bk_cd" /></td>
+            <td colspan="3">
+<!--             <input type="text" class="inputTxt p100" name="bk_cd" id="bk_cd" /> -->
+                        <select id="bk_cd" name="bk_cd" style="margin-right:5px; width: 430px; text-align: center;">
+							        <option value="" >전체</option>
+									<option value="1" >우리</option>
+									<option value="2" >하나</option>
+                                    <option value="3" >신한</option>
+                                    <option value="4" >국민</option>
+                                    <option value="5" >기업</option>
+                                    <option value="6" >농협</option>
+            </select>
+            </td>
           </tr>
           <tr>
             <th scope="row">계좌번호 <span class="font_red">*</span></th>
-            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_account" id="emp_account" /></td>
-          </tr>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_account" id="emp_account" style="text-align: center;"/></td>
+          </tr>          
           <tr>
             <th scope="row">부서 <span class="font_red">*</span></th>
-            <td colspan="3"><input type="text" class="inputTxt p100" name="dept_cd" id="dept_cd" /></td>
+            <td colspan="3">
+            <select id="dept_cd" name="dept_cd" style="margin-right:5px; width: 430px; text-align: center;">
+							        <option value="" >전체</option>
+									<option value="100" >관리자</option>
+									<option value="200" >임원직</option>
+                                    <option value="300" >회계팀</option>
+                                    <option value="400" >영업팀</option>
+                                    <option value="500" >인사팀</option>
+            </select>
+            </td>
           </tr>
           <tr>
             <th scope="row">직급 <span class="font_red">*</span></th>
-            <td colspan="3"><input type="text" class="inputTxt p100" name="level_cd" id="level_cd" /></td>
+            <td colspan="3">
+            <select id="level_cd" name="level_cd" style="margin-right:5px; width: 430px; text-align: center;">
+            <option value="" >전체</option>
+									<option value="10" >사원</option>
+									<option value="20" >주임</option>
+                                    <option value="30" >대리</option>
+                                    <option value="40" >과장</option>
+                                    <option value="50" >부장</option>
+                                    <option value="60" >상무</option>
+                                    <option value="70" >전무</option>
+                                    <option value="80" >이사</option>
+                                    <option value="90" >대표</option>
+							
+            </select>
+            </td>
           </tr>
           <tr>
-            <th scope="row">연봉 <span class="font_red">*</span></th>
-            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_yr_sal" id="emp_yr_sal" /></td>
+            <th scope="row">연봉 </th>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_yr_sal" id="emp_yr_sal" placeholder="작성 불필요" style="text-align: center;"/></td>
           </tr>
           <tr>
-            <th scope="row">입사일 <span class="font_red">*</span></th>
-            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_sdate" id="emp_sdate" /></td>
+            <th scope="row">입사일</th>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_sdate" id="emp_sdate" placeholder="작성 불필요" style="text-align: center;"/></td>
           </tr>
           <tr>
-            <th scope="row">퇴사일 <span class="font_red">*</span></th>
-            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_edate" id="emp_edate" /></td>
+            <th scope="row">퇴사일 </th>
+            <td colspan="3"><input type="text" class="inputTxt p100" name="emp_edate" id="emp_edate" placeholder="작성 불필요" style="text-align: center;"/></td>
           </tr>
           <tr>
             <th scope="row">퇴사내용 </th>
@@ -478,10 +552,17 @@
               <textarea id="retire_reason" name="retire_reason"> </textarea>
             </td>
           </tr>
+          <tr>
+            <th scope="row">신규사원 증명사진 </th>
+            <td colspan="3">
+<!--                <input type="file" id="upfile"  name="upfile"  onchange="javascript:preview(event)" /> -->
+               <input type="file" id="upfile"  name="upfile"  />
+            </td>
+          </tr>
           </tbody>
         </table>
 
-        <!-- e : 여기에 내용입력 -->
+        <!-- e  여기에 내용입력 -->
 
         <div class="btn_areaC mt30">
           <a href="" class="btnType blue" id="btnSave" name="btn"><span>저장</span></a>

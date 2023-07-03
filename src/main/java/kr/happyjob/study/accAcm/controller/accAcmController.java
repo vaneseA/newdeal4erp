@@ -56,6 +56,9 @@ public class accAcmController {
       
       logger.info("+ End " + className + ".accAcm");
 
+      
+      
+      
       return "accAcm/accAcmList";
    }
 
@@ -200,6 +203,60 @@ public class accAcmController {
 	      return returnmap;
 	   } 
 	
+	   
+	   //계정 대분류 코드 중복 확인
+	   @RequestMapping("LCdDupChk.do")
+	   @ResponseBody
+	   public int LCdDupChk(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+	         HttpServletResponse response, HttpSession session) throws Exception {
+		   
+		   
+		   int result = AccAcmService.LCdDupChked(paramMap);
+
+		   logger.info("+ paramMap값 체크 " + paramMap);
+		   logger.info("+ result값 체크 " + result);
+		   
+		   
+		   return result;
+		   
+	   }
+	   //계정 대분류 이름 중복 확인
+	   @RequestMapping("LNmDupChk.do")
+	   @ResponseBody
+	   public int LNmDupChk(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+			   HttpServletResponse response, HttpSession session) throws Exception {
+		   
+		   
+		   int result = AccAcmService.LNmDupChked(paramMap);
+		   
+		   logger.info("+ paramMap값 체크NM " + paramMap);
+		   logger.info("+ result값 체크NM " + result);
+		   
+		   
+		   return result;
+		   
+	   }
+	   
+	   //계정 대분류 코드 중복 확인
+	   @RequestMapping("SCdDupChk.do")
+	   @ResponseBody
+	   public int SCdDupChk(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+			   HttpServletResponse response, HttpSession session) throws Exception {
+		   
+		   
+		   int result = AccAcmService.SCdDupChk(paramMap);
+		   
+		   logger.info("+ paramMapSD값 체크 " + paramMap);
+		   logger.info("+ result값SD 체크 " + result);
+		   
+		   return result;
+		   
+	   }
+	   
+	   
+	   
+	   
+	   
 	   
       
 }
