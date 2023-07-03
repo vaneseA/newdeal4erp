@@ -146,7 +146,6 @@
                         }
 
                         fn_saleDayList();
-                        fn_chart();
 
                         break;
                 }
@@ -171,16 +170,18 @@
 
 
                 console.log(returnValue);
-                if (returnValue == null || returnValue.length == 0) {
+
+
+                $("#listSaleDay").empty().append(returnValue);
+
+
+                var totalcnt = $("#totalcnt").val();
+
+                if (totalcnt == 0) {
                     alert("해당 날짜에는 데이터가 존재하지 않습니다.");
                     $(".selectedDayList").css("display", "none");
                     return;
                 }
-
-                $("#listSaleDay").empty().append(returnValue);
-
-                var totalcnt = $("#totalcnt").val();
-
                 console.log("totalcnt: " + totalcnt);
 
                 var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_saleDayList');
@@ -189,6 +190,7 @@
                 $("#saleDayPagination").empty().append(paginationHtml);
 
                 $("#pageno").val(pagenum);
+                fn_chart();
             };
 
             callAjax("/selSaD/saleDayList.do", "post", "text", false, param, listCallBack);
@@ -196,8 +198,6 @@
 
         function fn_selectedDayList() {
 
-            // selectedDayList 초기화
-            selectedDayList = [];
 
             var param = {
                 order_date: $("#order_date").val()
@@ -227,7 +227,7 @@
             var listCallBack = function (returnValue) {
                 for (var i in returnValue) {
                     console.log(returnValue[i].order_date);
-                    if(returnValue[i].order_date == $("#order_date").val()) {
+                    if (returnValue[i].order_date == $("#order_date").val()) {
 
                         check = true;
                         break;
