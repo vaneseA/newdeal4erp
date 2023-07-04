@@ -77,20 +77,20 @@ public class SelSaMController {
       return "selSaM/saleMonthListGrd";
    }
 
-   @RequestMapping("saleMonthChart.do")
+   @RequestMapping("selectedMonthChart.do")
    @ResponseBody
-   public List<SelSaMModel> saleMonthChart(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
-                                                   HttpServletResponse response, HttpSession session) throws Exception {
-      logger.info("+ Start " + className + ".saleMonthChart");
+   public List<SelSaMModel> selectedMonthChart(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+                                               HttpServletResponse response, HttpSession session) throws Exception {
+      logger.info("+ Start " + className + ".selectedMonthChart");
       logger.info("   - paramMap : " + paramMap);
 
       // Controller -> Service -> Dao -> SQL
-      List<SelSaMModel> saleMonthChart = selSaMService.saleMonthList(paramMap);
+      List<SelSaMModel> selectedMonthChart = selSaMService.saleMonthList(paramMap);
 
 
       logger.info("+ End " + className + ".selectedDayChart");
 
-      return saleMonthChart;
+      return selectedMonthChart;
    }
 
 
