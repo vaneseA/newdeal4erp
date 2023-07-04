@@ -121,8 +121,8 @@
 
                 switch (btnId) {
                     case 'btnSearch':
-                        var orderDate = $("#order_month").val();
-                        if (orderDate === "") {
+                        var orderMonth = $("#order_month").val();
+                        if (orderMonth === "") {
                             alert("날짜를 선택해주세요.");
                             return;
                         }
@@ -135,9 +135,11 @@
         }
 
         function fn_saleMonthList(pagenum) {
+
             pagenum = pagenum || 1;
 
             var param = {
+
                 order_month: $("#order_month").val(),
                 pageSize: pageSize,
                 pageBlockSize: pageBlockSize,
@@ -153,7 +155,7 @@
 
                 console.log("totalcnt: " + totalcnt);
 
-                var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_productList');
+                var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_saleMonthList');
                 console.log("paginationHtml: " + paginationHtml);
 
                 $("#saleMonthPagination").empty().append(paginationHtml);
@@ -165,32 +167,48 @@
         }
 
         function fn_chart() {
+            var check = false;
+            // 그래프 초기화
             $("#bar-chart-horizontal").remove();
+            $(".bar_items").empty().append('<canvas id="bar-chart-horizontal" width="300" height="250"></canvas>');
 
             var param = {
                 order_month: $("#order_month").val()
             };
 
             var listCallBack = function (returnValue) {
-                var labels = [];
-                var dataVar = [];
-
-                if (returnValue.length == 0) {
-                    alert("해당 날짜에는 매출이 없습니다.");
-                    return;
-                }
-                for (var i = 0; i < returnValue.length; i++) {
+                for (var i in returnValue) {
                     console.log(returnValue[i].order_month);
-                    labels.push(returnValue[i].order_month);
-                    dataVar.push(returnValue[i].net_profit);
+                    if (returnValue[i].order_month == $("#order_month").val()) {
+
+                        check = true;
+                        break;
+                    }
                 }
-                console.log("labels" + labels);
-                console.log("dataVar" + dataVar);
-                fn_aa(labels, dataVar);
-                fn_saleMonthList();
+
+                if (check) {
+                    var labels = [];
+                    var dataVar = [];
+
+                    if (returnValue.length == 0) { // 매출 데이터가 없을 때
+                        alert("해당 날짜에는 매출이 없습니다.");
+                        $(".selectedDayList").css("display", "none");
+                        return;
+                    }
+                    for (var i = 0; i < returnValue.length; i++) {
+                        console.log(returnValue[i].order_month);
+                        labels.push(returnValue[i].order_month);
+                        dataVar.push(returnValue[i].net_profit);
+                    }
+                    console.log("labels" + labels);
+                    console.log("dataVar" + dataVar);
+                    fn_aa(labels, dataVar);
+                    fn_saleMonthList();
+                    $(".fn_saleMonthList").css("display", "block");
+                }
             };
 
-            callAjax("/selSaD/selectedDayChart.do", "post", "json", false, param, listCallBack);
+            callAjax("/selSaM/selectedMonthChart.do", "post", "json", false, param, listCallBack);
         }
 
     </script>
@@ -233,7 +251,9 @@
                         </p>
 
                         <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:10px 10px;">
-                            <label for="order_month" style="font-size:15px; font-weight:bold; margin-right:10px; margin-top:6px; ">월 조회 : </label>
+                            <label for="order_month"
+                                   style="font-size:15px; font-weight:bold; margin-right:10px; margin-top:6px; ">월 조회
+                                : </label>
                             <input type="month" id="order_month" name="order_month" min="2023-01-01"
                                    style="height: 25px; width: 120px; margin-right: 15px;">
                             <a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
@@ -241,7 +261,9 @@
 
                         <div class="saleMonthList">
                             <div style="display:flex; flex-grow: 1; justify-content: space-evenly;">
-                                <div class="items" style="width: 50%"><canvas id="bar-chart-horizontal" width="300" height="250"></canvas></div>
+                                <div class="bar_items" style="width: 100%">
+                                    <canvas id="bar-chart-horizontal" width="300" height="250"></canvas>
+                                </div>
                             </div>
                         </div>
 
