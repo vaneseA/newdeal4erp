@@ -26,7 +26,7 @@
     <select id="countSaleMonthList" resultType="int">
          select sum(ll.cnt) 
           from ( 
-			        SELECT COUNT(* ) cnt
+			        SELECT COUNT(*) cnt
 			          FROM tb_order od
 			                   INNER JOIN tb_order_dt odt ON od.order_no = odt.order_no
 			                   INNER JOIN tb_product pd ON odt.product_no = pd.product_no
