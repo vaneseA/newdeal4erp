@@ -38,9 +38,8 @@
                     tooltips: {
                         callbacks: {
                             label: function (tooltipItem, data) {
-                                var label = data.labels[tooltipItem.index];
                                 var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                                return label + ' : ' + value.toLocaleString() + "원";
+                                return value.toLocaleString() + "원";
                             }
                         }
                     }
@@ -100,7 +99,6 @@
             }
             return colors;
         }
-
         function formatDate(date) {
             var year = date.getFullYear();
             var month = ('0' + (date.getMonth() + 1)).slice(-2);
@@ -112,13 +110,10 @@
             fRegisterButtonClickEvent();
             fn_saleMonthList();
         });
-
         function fRegisterButtonClickEvent() {
             $('a[name=btn]').click(function (e) {
                 e.preventDefault();
-
                 var btnId = $(this).attr('id');
-
                 switch (btnId) {
                     case 'btnSearch':
                         var orderMonth = $("#order_month").val();
@@ -126,9 +121,7 @@
                             alert("날짜를 선택해주세요.");
                             return;
                         }
-
                         fn_saleMonthList();
-
                         break;
                 }
             });
@@ -139,7 +132,6 @@
             pagenum = pagenum || 1;
 
             var param = {
-
                 order_month: $("#order_month").val(),
                 pageSize: pageSize,
                 pageBlockSize: pageBlockSize,
@@ -148,7 +140,6 @@
 
             var listCallBack = function (returnValue) {
                 console.log(returnValue);
-
                 $("#listSaleMonth").empty().append(returnValue);
 
                 var totalcnt = $("#totalcnt").val();
@@ -161,6 +152,7 @@
                 $("#saleMonthPagination").empty().append(paginationHtml);
 
                 $("#pageno").val(pagenum);
+                fn_chart();
             };
 
             callAjax("/selSaM/saleMonthList.do", "post", "text", false, param, listCallBack);
@@ -171,62 +163,51 @@
             // 그래프 초기화
             $("#bar-chart-horizontal").remove();
             $(".bar_items").empty().append('<canvas id="bar-chart-horizontal" width="300" height="250"></canvas>');
-
             var param = {
                 order_month: $("#order_month").val()
             };
-
             var listCallBack = function (returnValue) {
                 for (var i in returnValue) {
                     console.log(returnValue[i].order_month);
                     if (returnValue[i].order_month == $("#order_month").val()) {
-
                         check = true;
                         break;
                     }
                 }
-
                 if (check) {
                     var labels = [];
                     var dataVar = [];
 
                     if (returnValue.length == 0) { // 매출 데이터가 없을 때
-                        alert("해당 날짜에는 매출이 없습니다.");
-                        $(".selectedDayList").css("display", "none");
+                        alert("해당 월에는 매출이 없습니다.");
+                        $(".bar_items").css("display", "none");
                         return;
                     }
                     for (var i = 0; i < returnValue.length; i++) {
                         console.log(returnValue[i].order_month);
                         labels.push(returnValue[i].order_month);
-                        dataVar.push(returnValue[i].net_profit);
+                        dataVar.push(returnValue[i].tot_profit);
                     }
                     console.log("labels" + labels);
                     console.log("dataVar" + dataVar);
                     fn_aa(labels, dataVar);
-                    fn_saleMonthList();
-                    $(".fn_saleMonthList").css("display", "block");
+
+                    $(".bar_items").css("display", "block");
                 }
             };
-
             callAjax("/selSaM/selectedMonthChart.do", "post", "json", false, param, listCallBack);
         }
-
     </script>
-
 </head>
 <body>
 <form id="myForm" action="" method="">
     <input type="hidden" id="action" name="action"/>
     <input type="hidden" id="order_no" name="order_no"/>
     <input type="hidden" id="pageno" name="pageno"/>
-
     <div id="mask"></div>
-
     <div id="wrap_area">
-
         <h2 class="hidden">header 영역</h2>
         <jsp:include page="/WEB-INF/view/common/header.jsp"></jsp:include>
-
         <h2 class="hidden">컨텐츠 영역</h2>
         <div id="container">
             <ul>
@@ -236,20 +217,16 @@
                 <li class="contents">
                     <h3 class="hidden">contents 영역</h3>
                     <div class="content">
-
                         <p class="Location">
                             <a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a>
                             <span class="btn_nav bold">매출</span>
                             <span class="btn_nav bold">월별 매출 현황</span>
-                            <a href="../busPd/productInfo.do" class="btn_set refresh">새로고침</a>
+                            <a href="../selSaM/saleMonthList.do" class="btn_set refresh">새로고침</a>
                         </p>
-
-
                         <p class="conTitle">
                             <span>월별 매출 현황</span>
                             <span class="fr"></span>
                         </p>
-
                         <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:10px 10px;">
                             <label for="order_month"
                                    style="font-size:15px; font-weight:bold; margin-right:10px; margin-top:6px; ">월 조회
@@ -259,14 +236,13 @@
                             <a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
                         </div>
 
+                        <div class="bar_items" style="width: 60%; display: none; margin-left: auto; margin-right: auto;">
+                            <canvas id="bar-chart-horizontal" width="300" height="250"></canvas>
+                        </div>
                         <div class="saleMonthList">
                             <div style="display:flex; flex-grow: 1; justify-content: space-evenly;">
-                                <div class="bar_items" style="width: 100%">
-                                    <canvas id="bar-chart-horizontal" width="300" height="250"></canvas>
-                                </div>
                             </div>
                         </div>
-
                         <table class="col">
                             <caption>caption</caption>
                             <colgroup>
@@ -288,11 +264,8 @@
                             </thead>
                             <tbody id="listSaleMonth"></tbody>
                         </table>
-
                         <div class="paging_area" id="saleMonthPagination"></div>
-
                     </div>
-
                     <h3 class="hidden">풋터 영역</h3>
                     <jsp:include page="/WEB-INF/view/common/footer.jsp"></jsp:include>
                 </li>
