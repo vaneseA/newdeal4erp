@@ -5,7 +5,7 @@
 
 							<c:if test="${totalcnt eq 0 }">
 								<tr>
-									<td colspan="10">데이터가 존재하지 않습니다.</td>
+									<td colspan="11">데이터가 존재하지 않습니다.</td>
 								</tr>
 							</c:if>
 							
@@ -31,7 +31,7 @@
 										<td>-</td>
 									</c:if>
 									<c:if test="${list.dlv_rej ne null}">
-										<td><a href="javascript:fn_openpopup2(${list.dlv_no})"class="btnType2 color2" id="btnVacaRej" name="btn" >상세</a></td>
+										<td><a href="javascript:fn_openpopup2(${list.dlv_no})"class="btnType3 color1" id="btnVacaRej" name="btn" >상세</a></td>
 									</c:if>
 									
 										

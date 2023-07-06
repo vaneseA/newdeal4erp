@@ -116,6 +116,7 @@
     						for(var i = 0; i < detailList.length; i++){    
     							
     							ta_detailList += '<tr>';
+    							ta_detailList += '<td>'+ detailList[i].appro_type_cd + '</td>';
     							ta_detailList += '<td>'+ detailList[i].dept_name + '</td>';
     							ta_detailList += '<td>'+ detailList[i].level_name + '</td>';
     							ta_detailList += '<td>'+ detailList[i].name + '</td>';
@@ -170,7 +171,7 @@
 					<p class="conTitle">
 						<span>월별결재내역</span> 
 					</p>
-					
+					<br>
 					<div id='calendar'></div>
 					</div> <!--// content -->
 				<h3 class="hidden">풋터 영역</h3>
@@ -191,13 +192,15 @@
 				<table class="col">
 					<caption>caption</caption>
 					<colgroup>
-						<col width="25%">
-						<col width="25%">
-						<col width="25%">
-						<col width="25%">
+						<col width="20%">					
+						<col width="20%">
+						<col width="20%">
+						<col width="20%">
+						<col width="20%">
 					</colgroup>
 					<thead>	
 						<tr>
+							<th scope = "col">결재유형</th>
 							<th scope = "col">부서</th>
 							<th scope = "col">직급</th>
 							<th scope = "col">사원명</th>

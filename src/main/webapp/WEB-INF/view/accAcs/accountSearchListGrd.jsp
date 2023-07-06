@@ -10,7 +10,7 @@
 							</c:if>
 							
 							<c:if test="${totalcnt > 0 }">
-								<c:forEach items="${accountSearchList}" var="list">
+								<c:forEach items="${accountSearchList}" var="list" >
 									<tr>
 										<td><a href="javascript:fn_selectone('${list.budget_no}')">${list.budget_no}</a></td>
 										<td><a href="javascript:fn_selectone('${list.budget_no}')">${list.pdate}</a></td>

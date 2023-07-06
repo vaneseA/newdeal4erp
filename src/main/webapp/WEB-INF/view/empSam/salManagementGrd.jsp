@@ -25,12 +25,18 @@
 										<td>${list.sal_kuk}</td>
 										<td>${list.sal_after}</td>
 										<td>${list.emp_final_money}</td>
+									<c:if test="${list.emp_meno eq null}">
+										<td>-</td>
+									</c:if>
+									<c:if test="${list.emp_meno ne null}">
 										<td>${list.emp_meno}</td>
+									</c:if>
+										
 									<c:if test="${list.sal_pay_yn eq 'N'}">
-										<td><a class="btnType2 color2" href="javascript:fn_openpopup(${list.loginID}, ${list.sal_date.substring(0,4).concat(list.sal_date.substring(5))});" id="btnChoice" name="modal"  >미지급</a></td>
+										<td><a class="btnType3 color2" href="javascript:fn_openpopup(${list.loginID}, ${list.sal_date.substring(0,4).concat(list.sal_date.substring(5))});" id="btnChoice" name="modal"  >미지급</a></td>
 									</c:if>
 									<c:if test="${list.sal_pay_yn eq 'Y'}">
-										<td><a class="btnType2 color2" id="btnChoice" name="modal" >지급</a></td>
+										<td><a class="btnType3 color1" id="btnChoice" name="modal" >지급</a></td>
 									</c:if>
 										
 									</tr>

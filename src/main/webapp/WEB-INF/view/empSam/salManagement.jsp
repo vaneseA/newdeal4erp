@@ -5,8 +5,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
 <title>급여지급 리스트 조회</title>
 
 <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
@@ -276,13 +278,20 @@
 						<p class="Location">
 							<a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
 								class="btn_nav bold">인사</span> <span class="btn_nav bold">급여관리</span> 
-							<a href="../system/comnCodMgr.do" class="btn_set refresh">새로고침</a>
+							<a href="../empSam/salManagement.do" class="btn_set refresh">새로고침</a>
 						</p>
-						
-						<div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">
-							<p class="conTitle">
-							<span>급여지급 리스트 조회</span> 
+						<p class="conTitle">
+							<span>급여관리</span> 
 							<span class="fr"> 
+								<!-- 이번달 급여계산 버튼 -->
+								<span id="calSalSpan" style="color:red;"></span>
+								<input type="month" id="calDate" name="calDate" style="padding:6px"/>
+								<a href="#" class="btnType3 color1" id="calSal" name="btn" >이번달 급여계산</a>
+								
+							</span>
+						</p>
+						<div style="display:flex; justify-content:center; align-content:center; line-height:2; border:solid 3px #c0c0c0; border-radius: 10px; padding:40px 40px; margin:20px auto;">
+							
 								<select id="dept_cd" name="dept_cd" style="width: 130px; margin-right:5px;">
 								        <option value="" >부서</option>
 										<option value="300" >회계팀</option>
@@ -314,17 +323,13 @@
 								<input type="text" style="width: 200px; height: 25px; margin-right:5px;" id="sname" name="sname">
 								<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
 								 
-							</span>
-						</p>
+							
 					</div>
 						
 						
 						<!-- 급여 상세 조회 리스트 목록 뿌리기(thead부분 tbody는 salManagementGrd에서 삽입) -->
 						<div class="empSamList">
-							<!-- 이번달 급여계산 버튼 -->
-							<a href="#" class="btnType3 color1" id="calSal" name="btn" >이번달 급여계산</a>
-							<input type="month" id="calDate" name="calDate" style="padding:6px"/>
-							<span id="calSalSpan" style="color:red;"></span>
+							
 							<table class="col" style="margin:10px 0;">
 							<caption>caption</caption>
 							<colgroup>
@@ -342,7 +347,7 @@
 								<col width="6%">
 								<col width="6%">
 								<col width="3%">
-								<col width="2%">
+								<col width="5%">
 							</colgroup>
 	
 							<thead>

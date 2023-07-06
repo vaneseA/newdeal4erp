@@ -159,7 +159,7 @@
                 $("#saleYearPagination").empty().append(paginationHtml);
 
                 $("#pageno").val(pagenum);
-                // fn_chart();
+                fn_chart();
             };
 
             callAjax("/selSaY/saleYearList.do", "post", "text", false, param, listCallBack);
@@ -186,7 +186,7 @@
                     var dataVar = [];
 
                     if (returnValue.length == 0) { // 매출 데이터가 없을 때
-                        alert("해당 월에는 매출이 없습니다.");
+                        alert("해당 연도에는 매출이 없습니다.");
                         $(".bar_items").css("display", "none");
                         return;
                     }
@@ -285,8 +285,7 @@
                                     <th scope="col">총 매출</th>
                                     <th scope="col">총 지출</th>
                                     <th scope="col">총 순이익</th>
-                                    <th scope="col">전년대비 매출 성장률</th>
-                                    <th scope="col">전년대비 순이익 성장률</th>
+                                    <th scope="col">전년대비 성장률</th>
                                 </tr>
                                 </thead>
                                 <tbody id="listSaleYear"></tbody>

@@ -9,10 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title>공지사항</title>
 <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
+<link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
 
 <script type="text/javascript">
 
-	// 페이징 설정
+	//// 페이징 설정
 	var pageSize = 5;     
 	var pageBlockSize = 5;    
 	
@@ -318,6 +319,9 @@
 	
 	
 	function fn_accAcmSListSearch(currentPage, LL_acnt_sbject_cd, LL_acnt_sbject_name) {
+		
+		
+		console.log("dddddddddddddddddddddddd" + $("#LL_acnt_sbject_cd").val());
 		
 		$("#tmpAcnt_sbject_cd").val(LL_acnt_sbject_cd);
 		$("#tmpAcnt_sbject_name").val(LL_acnt_sbject_name);
@@ -659,8 +663,8 @@
 
 						<p class="Location">
 							<a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
-								class="btn_nav bold">운영</span> <span class="btn_nav bold">공지사항
-								관리</span> <a href="../system/comnCodMgr.do" class="btn_set refresh">새로고침</a>
+								class="btn_nav bold">회계</span> <span class="btn_nav bold">계정과목 관리
+								</span> <a href="../accAcm/accManagement.do" class="btn_set refresh">새로고침</a>
 						</p>
                         
                         
@@ -668,34 +672,33 @@
                         
 						<p class="conTitle">
 							<span>계정과목 관리</span> <span class="fr"> 
+							<a href="javascript:fn_openpopup();" name="modal"><span style=" color: black; display: inline-block; border: 3px solid #c0c0c0; padding: 7px 30px 7px 30px; font-weight: bold; font-size: 15px; background: #c0c0c0; border-radius: 2px;">신규등록</span></a>
+							</span>
+						</p>
+						
+						
+<!-- 						<div style="height: 50px;  float: right; margin-right: 25px;"> -->
+<!-- 							<label for="acnt_sbjct_inout" style=" font-size: 15px; font-weight: bold; margin-right: 10px;">구분</label> -->
+<!-- 							<select id="acnt_sbjct_inout" name="acnt_sbjct_inout" style="width: 150px; margin-right: 30px;"> -->
+<!-- 							        <option value="" >전체</option> -->
+<!-- 									<option value="1" >수입</option> -->
+<!-- 									<option value="2" >비용</option> -->
+<!-- 							</select>  -->
+							
+<!-- 							<div style="display: inline-block; border: 3px solid #c0c0c0; padding: 5px 40px 5px 40px; font-weight: bold; font-size: 15px; background: #c0c0c0; border-radius: 2px;"><a href="" id="btnSearch" name="btn"><span style=" color: black;">검&nbsp;색</span></a></div> -->
+<!-- 						</div>	 -->
+
+						<div style="height: 30px;  text-align: center; border: 3px solid #c0c0c0;  border-radius: 10px; padding-top: 13px; padding-bottom: 13px; margin-bottom: 20px; margin-top: 20px;">
 							<label for="acnt_sbjct_inout" style=" font-size: 15px; font-weight: bold; margin-right: 10px;">구분</label>
-							<select id="acnt_sbjct_inout" name="acnt_sbjct_inout" style="width: 150px;">
+							<select id="acnt_sbjct_inout" name="acnt_sbjct_inout" style="width: 150px; margin-right: 30px;">
 							        <option value="" >전체</option>
 									<option value="1" >수입</option>
 									<option value="2" >비용</option>
 							</select> 
-<!-- 							<label for="acccombo">계정대분류 : </label> -->
-<!-- 							<select id="acccombo" name="acccombo" style="width: 150px;"> -->
-<!-- 							</select>  -->
 							
+							<div style="display: inline-block; border: 3px solid #c0c0c0; padding: 5px 40px 5px 40px; font-weight: bold; font-size: 15px; background: #c0c0c0; border-radius: 2px;"><a href="" id="btnSearch" name="btn"><span style=" color: black;">검&nbsp;색</span></a></div>
+						</div>	
 							
-<!-- 							<label for="accdcombo">계정상세 : </label> -->
-<!-- 							 <select id="accdcombo" name="accdcombo" style="width: 150px;" > -->
-<!-- 							</select>  -->
-							
-							
-<!-- 							<label for="typecombo">구분 : </label> -->
-<!-- 							<select id="typecombo" name="typecombo" style="width: 150px;"> -->
-<!-- 							        <option value="" >전체</option> -->
-<!-- 									<option value="1" >수입</option> -->
-<!-- 									<option value="2" >비용</option> -->
-<!-- 							</select> -->
-							
-							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
-							 <a class="btnType blue" href="javascript:fn_openpopup();" name="modal"><span>등록</span></a>
-							</span>
-						</p>
-						
 						<div class="noticeList">
 							<table class="col">
 								<caption>caption</caption>
@@ -720,7 +723,9 @@
 						
 						<p class="conTitle mt50">
 							<span>계정 상세 코드</span> <span class="fr"> 
-							<a class="btnType blue"  href="javascript:fn_accDtlPop();" name="modal"><span>신규등록</span></a>
+							<a class=""  href="javascript:fn_accDtlPop();" name="modal">
+							<span style=" color: black; display: inline-block; border: 3px solid #c0c0c0; padding: 7px 30px 7px 30px; font-weight: bold; font-size: 15px; background: #c0c0c0; border-radius: 2px;">신규등록</span>
+							</a>
 							</span>
 						</p>
 	
@@ -760,8 +765,8 @@
 						<jsp:include page="/WEB-INF/view/common/footer.jsp"></jsp:include>
 				</li>
 			</ul>
-		</div>
-	</div>
+		</div><!-- containeron -->
+	</div> <!-- wrap_area -->
 
 	<!-- 모달팝업 -->
 	<div id="layer1" class="layerPop layerType2" style="width: 600px;">

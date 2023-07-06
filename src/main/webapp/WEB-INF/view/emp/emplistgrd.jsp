@@ -13,8 +13,8 @@
   <c:forEach items="${empSearchList}" var="list">
     <tr>
       <td>${list.loginId}</td>
-      <td><a href="javascript:fn_empSelectOne('${list.loginId}')">${list.name}</a></td>
-      <td>${list.dept_cd}</td>
+      <td><a href="javascript:fn_empSelectOne('${list.loginId}')" >${list.name}</a></td>
+<%--       <td>${list.dept_cd}</td> --%>
       <td>
       		<c:choose>
       		<c:when test="${list.dept_cd eq '100'}">관리자</c:when>
@@ -40,6 +40,7 @@
           
       </td>
       <td>${list.emp_sdate}</td>
+      
       <td>${list.emp_work_yn}</td>
     </tr>
   </c:forEach>

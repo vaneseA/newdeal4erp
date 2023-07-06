@@ -9,6 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>인사관리</title>
   <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
+<link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
 
   <script type="text/javascript">
 
@@ -16,7 +17,7 @@
     var pageSize = 10;
     var pageBlockSize = 5;
 
-
+//
 
     /** OnLoad event */
     $(function() {
@@ -118,7 +119,7 @@
         $("#user_type").val("");
         
         $("#name").val("");
-        $("#emp_gen").val("");
+        $("#emp_sex").val("");
         $("#emp_edu").val("");
         $("#emp_email").val("");
         $("#emp_hp").val("");
@@ -168,10 +169,10 @@
         
         $("#password").val(object.password);
         $("#name").val(object.name);
-        $("#emp_gen").val(object.emp_gen);
+        $("#emp_sex").val(object.emp_sex);
            
-         var emp_gen = object.emp_gen;
-         if(emp_gen == 1){
+         var emp_sex = object.emp_sex;
+         if(emp_sex == 1){
         	 $("#sex_M").prop("checked", true);
         	 
          } else {
@@ -240,8 +241,8 @@
 //           return false;
 //       }
       
-      var emp_gen = $('input[name=sex]:checked').val();
-      $("#emp_gen").val(emp_gen);
+      var emp_sex = $('input[name=sex]:checked').val();
+      $("#emp_sex").val(emp_sex);
       
       var user_type = $('input[name=type]:checked').val();
       $("#user_type").val(user_type);
@@ -276,7 +277,7 @@
               [
                 [ "emp_birth", "생년월일을 입력해 주세요." ]
                 ,	[ "name", "이름을 입력해 주세요." ]
-                ,	[ "emp_gen", "성별을 입력해 주세요." ]
+                ,	[ "emp_sex", "성별을 입력해 주세요." ]
                 ,	[ "emp_edu", "학력을 입력해 주세요." ]
                 ,	[ "emp_email", "이메일을 입력해 주세요." ]
                 ,	[ "emp_hp", "전화번호를 선택해 주세요." ]
@@ -304,7 +305,7 @@
 
 </head>
 <body>
-<form id="myForm" action=""  method="">
+<form id="myForm" action=""  method="" >
   <input type="hidden" id="action"  name="action"  />
   <input type="hidden" id="pageno"  name="pageno"  />
 
@@ -329,14 +330,18 @@
           <div class="content">
 
             <p class="Location">
-              <a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
-                    class="btn_nav bold">운영</span> <span class="btn_nav bold">공지사항
-								관리</span> <a href="../system/comnCodMgr.do" class="btn_set refresh">새로고침</a>
+              <a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> 
+              <span class="btn_nav bold">인사</span>
+              <span class="btn_nav bold">인사관리</span> 
+			 <a href="../empEpm/empmanagement.do" class="btn_set refresh">새로고침</a>
             </p>
             <p class="conTitle">
               <span>인사관리</span> <span class="fr">
-			<div style="border : solid 3px #c0c0c0; height: 50px; border-radius: 10px; text-align: center; padding-top: 20px; margin-bottom: 10px;">
-							<select id="deptcd" name="deptcd" style="width: 150px;">
+							 <a class="" href="javascript:fn_openpopup();" name="modal">
+							 	<span style=" color: black; display: inline-block; border: 3px solid #c0c0c0; padding: 7px 30px 7px 30px; font-weight: bold; font-size: 15px; background: #c0c0c0; border-radius: 2px;">신규등록</span>
+							 </a>
+			<div style="border : solid 3px #c0c0c0; height: 40px; border-radius: 10px; text-align: center; padding-top: 14px; padding-bottom: 10px; margin-bottom: 20px; margin-top: 20px;"">
+							<select id="deptcd" name="deptcd" style="width: 100px; margin-right: 10px;">
 							        <option value="" >부서</option>
 									<option value="100" >관리자</option>
 									<option value="200" >임원직</option>
@@ -345,7 +350,7 @@
                                     <option value="500" >인사팀</option>
 							</select>
 
-                            <select id="lvcd" name="lvcd" style="width: 150px;">
+                            <select id="lvcd" name="lvcd" style="width: 100px; margin-right: 10px;">
 							        <option value="" >직급</option>
 									<option value="10" >사원</option>
 									<option value="20" >주임</option>
@@ -357,29 +362,30 @@
                                     <option value="80" >이사</option>
                                     <option value="90" >대표</option>
 							</select>
-							 <select id="searchKey" name="searchKey" style="width: 150px;" >
-							        <option value="" >사번/사번명</option>
+							 <select id="searchKey" name="searchKey" style="width: 100px; margin-right: 10px;" >
+							        <option value="" >사번/사원명</option>
 									<option value="loginId" >사번</option>
 									<option value="name" >사원명</option>
 							</select>
-							<input type="text" style="width: 300px; height: 25px;" id="ename" name="ename">
-							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
-							 <a class="btnType blue" href="javascript:fn_openpopup();" name="modal"><span>신규등록</span></a>
+							<input type="text" style="width: 200px; height: 25px; margin-right: 20px;" id="ename" name="ename">
+							<div style="display: inline-block; border: 3px solid #c0c0c0; padding: 5px 40px 5px 40px; font-weight: bold; font-size: 15px; background: #c0c0c0; border-radius: 2px;">
+								<a href="" id="btnSearch" name="btn"><span style=" color: black;">검  색</span></a>
+							</div>
 
-							</span>
-            </p>
             </div>
+			</span>
+            </p>
 
             <div class="empList">
               <table class="col">
                 <caption>caption</caption>
                 <colgroup>
-                  <col width="10%">
-                  <col width="30%">
-                  <col width="10%">
-                  <col width="10%">
                   <col width="15%">
-                  <col width="10%">
+                  <col width="25%">
+<%--                   <col width="10%"> --%>
+                  <col width="15%">
+                  <col width="15%">
+                  <col width="15%">
                   <col width="15%">
                   
                 </colgroup>
@@ -388,7 +394,7 @@
                 <tr>
                   <th scope="col">사번</th>
                   <th scope="col">이름</th>
-                  <th scope="col">부서코드</th>
+<!--                   <th scope="col">부서코드</th> -->
                   <th scope="col">부서명</th>
                   <th scope="col">직급</th>
                   <th scope="col">입사일자</th>
@@ -416,7 +422,7 @@
   <div id="layer1" class="layerPop layerType2" style="width: 600px;">
     <dl>
       <dt>
-        <strong>그룹코드 관리</strong>
+        <strong>인사관리</strong>
       </dt>
       <dd class="content">
         <!-- s : 여기에 내용입력 -->
@@ -440,11 +446,11 @@
             <td><input type="text" class="inputTxt p100" name="emp_birth" id="emp_birth" placeholder="0000-00-00"  style="text-align: center;"/></td>
             <th scope="row">권한 <span class="font_red">*</span></th>
             <td colspan="3">
-            <input type="radio" name="user_type" id="type_A" value="A"/>A
-            <input type="radio" name="user_type" id="type_B" value="B"/>B
-            <input type="radio" name="user_type" id="type_C" value="C"/>C
-            <input type="radio" name="user_type" id="type_D" value="D"/>D   
-            <input type="radio" name="user_type" id="type_E" value="E"/>E   
+            <input type="radio" name="user_type" id="type_A" value="A" style="margin-right: 2px;"/>&nbsp;A
+            <input type="radio" name="user_type" id="type_B" value="B" style="margin-right: 2px;"/>&nbsp;B
+            <input type="radio" name="user_type" id="type_C" value="C" style="margin-right: 2px;"/>&nbsp;C
+            <input type="radio" name="user_type" id="type_D" value="D" style="margin-right: 2px;"/>&nbsp;D   
+            <input type="radio" name="user_type" id="type_E" value="E"/>&nbsp;E   
             </td>                     
           </tr>
           <tr>
@@ -453,14 +459,14 @@
             <th scope="row">성별 <span class="font_red">*</span></th>
             <td colspan="3">
             
-            &nbsp&nbsp&nbsp<input type="radio" name="emp_gen" id="sex_M" value="1"/>&nbsp&nbsp남자 
+            &nbsp&nbsp&nbsp<input type="radio" name="emp_sex" id="sex_M" value="1"/>&nbsp&nbsp남자 
             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-            <input type="radio" name="emp_gen" id="sex_W" value="2"/>&nbsp&nbsp여자 
+            <input type="radio" name="emp_sex" id="sex_W" value="2"/>&nbsp&nbsp여자 
             </td>            
           </tr>
           <tr>
             <th scope="row">비밀번호 </th>
-            <td><input type="text" class="inputTxt p100" name="password" id="password" placeholder="자동등록(0000)."style="text-align: center;"/></td>          
+            <td><input type="text" class="inputTxt p100" name="password" id="password" placeholder="자동등록(0000)"style="text-align: center;"/></td>          
             <th scope="row">학력 <span class="font_red">*</span></th>
             <td><input type="text" class="inputTxt p100" name="emp_edu" id="emp_edu"  style="text-align: center;"/></td>
           </tr>

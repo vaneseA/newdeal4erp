@@ -5,8 +5,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
 <title>휴가신청 및 조회</title>
 
 <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
@@ -261,17 +263,18 @@
 						<p class="Location">
 							<a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
 								class="btn_nav bold">인사</span> <span class="btn_nav bold">휴가 신청 및 연차 조회</a>
+								<a href="../empVcp/vacaPersonal.do" class="btn_set refresh">새로고침</a>
+						</p>
+						<p class="conTitle">
+								<span>휴가 신청 및 연차 조회</span><span class="fr">
+								<a href="" class="btnType3 color1" id="btnVacaForm" name="btn" >휴가 신청</a>
+								</span>
 						</p>
 						
-						<div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">
-							<p class="conTitle">
-								<span>개인휴가내역조회</span>
-							</p>
-						</div>
 							
 						<!-- 휴가 신청 조회 리스트 -->
 						<div class="empVcpList">
-							<a href="" class="btnType3 color1" id="btnVacaForm" name="btn" >휴가 신청</a>
+							
 							<!-- 개인잔여연차 -->
 							<div id="empVcpRemain" style="width:300px; text-align:center; margin:10px 0;">
 								<table class="row">

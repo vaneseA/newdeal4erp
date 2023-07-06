@@ -7,10 +7,10 @@
 <head>
 <style type="text/css">
 
-.emptySpace1{
+ .emptySpace2{
 display:inline-block;
-width:110px;
-}
+width:120px;
+} 
 
 .emptySpace3{
 display:inline-block;
@@ -31,11 +31,10 @@ height:10px;
 
 .border-line{
 	display:flex;
-	align-items: center;
 	justify-content:center;
-	padding-top:20px;
+	align-items: center;
 	position:relative;
-	bottom:20px;
+	bottom:23px;
 }
 
 .label-font{
@@ -47,15 +46,13 @@ height:10px;
 .btnTypegray{
 	background-color: #c0c0c0;
 	border-radius: 2px;
-	width: 120px;
+	width: 100px;
 	height: 22px;
-	position:relative;
- 	left: 485px;
- 	bottom: 27px;
  	display:flex;
  	align-items: center;
  	justify-content:center;
- 	padding-top: 5px;
+ 	padding: 7px; 
+ 	margin: 0 auto;
  	
 
 }
@@ -63,15 +60,15 @@ height:10px;
 .gray-btn{
 	background-color: #c0c0c0;
 	border-radius: 2px;
-	width: 140px;
+	width: 120px;
 	height: 22px;
 	position:relative;
  	left: 860px;
- 	bottom: 55px;
+ 	bottom: 60px;
  	display:flex;
  	align-items: center;
  	justify-content:center;
- 	padding-top: 5px;
+ 	padding: 7px; 
 }
 
 .inputSpace{
@@ -87,6 +84,10 @@ font-size: 16px;
 color:black;
 
 }
+.center{
+width: 650px;
+}
+
 
 </style>
 <meta charset="UTF-8">
@@ -98,7 +99,7 @@ color:black;
  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
 <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
-
+<link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
 <script type="text/javascript">
 
 	// 페이징 설정
@@ -551,29 +552,29 @@ color:black;
 							</div>
 						</p>
 						
-							<div style ="border:solid 3px #c0c0c0; height: 120px; border-radius: 10px;" class="border-line">
-								<div>
-									<span class="label-font">&nbsp;&nbsp;&nbsp;&nbsp;신청일자: &nbsp; </span><input type = "date" id = "from" name="from" style = "width: 120px; height:25px; font-size:15px">
+							<div style ="border:solid 3px #c0c0c0; height: 160px; border-radius: 10px;" class="border-line">
+								<div class="center">
+									<span class="emptySpace2"></span><span class="label-font">신청일자 &nbsp; </span><input type = "date" id = "from" name="from" style = "width: 140px; height:25px">
 									<label for= "to">  -  </label>
-									<input type = "date"  id = "to"  name = "to" style = "width: 120px;height:25px; font-size:15px">
+									<input type = "date"  id = "to"  name = "to" style = "width: 140px;height:25px"><div class="emptySpace5"></div> 
 										
-									<span class="emptySpace3"></span><span class="label-font">&nbsp;&nbsp;결재: &nbsp;</span>
-									<select id="appro_yn" name="appro_yn" style="width: 120px; height:27px; font-size: 15px" >
+									<span class="label-font">결재 &nbsp;</span>
+									<select id="appro_yn" name="appro_yn" style="width: 100px; height:27px" >
 										    <option value="" >전체</option>
 											<option value="Y" >결재</option>
 											<option value="N" >반려</option>
 									</select>
 										
-									<span class="emptySpace3"></span><span class="label-font">&nbsp;&nbsp;계정 대분류: &nbsp;</span>
-									<select id="search_acnt_sbject_cd" name="search_acnt_sbject_cd" style="width: 120px; height:27px; font-size: 15px" >   
-									</select><div class="emptySpace5"></div> 
+									<span class="emptySpace3"></span><span class="label-font">&nbsp;&nbsp;계정 대분류 &nbsp;</span>
+									<select id="search_acnt_sbject_cd" name="search_acnt_sbject_cd" style="width: 100px; height:27px" >   
+									</select>
 										
-									<span class="emptySpace1"></span><span class="label-font">&nbsp;&nbsp;계정 상세: &nbsp;</span>
-									<select id="search_acnt_dt_sbject_cd" name="search_acnt_dt_sbject_cd" style="width: 120px; height:27px;font-size: 15px" >
+									<span class="emptySpace3"></span><span class="label-font">&nbsp;&nbsp;계정 상세 &nbsp;</span>
+									<select id="search_acnt_dt_sbject_cd" name="search_acnt_dt_sbject_cd" style="width: 100px; height:27px" >
 									</select> 
 										
-									<input type="text" style="width: 150px; height: 25px;font-size: 15px" id="sname" name="sname" class="inputSpace">
-									<div class="btnTypegray"><a href="" id="btnSearch" name="btn"><span class="search-btn">검  색</span></a></div>
+									<input type="text" style="width: 120px; height: 25px" id="sname" name="sname" class="inputSpace">
+									<div class="emptySpace5"></div><div class="btnTypegray"><a href="" id="btnSearch" name="btn"><span class="search-btn">검  색</span></a></div>
 								</div>
 							</div>
 							

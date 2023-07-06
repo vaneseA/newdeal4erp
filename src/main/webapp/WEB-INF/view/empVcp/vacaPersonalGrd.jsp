@@ -30,7 +30,7 @@
 										<td>-</td>
 									</c:if>
 									<c:if test="${list.vaca_rej ne null}">
-										<td><a href="javascript:fn_openpopup2(${list.vaca_no})"class="btnType2 color2" id="btnVacaRej" name="btn" >상세</a></td>
+										<td><a href="javascript:fn_openpopup2(${list.vaca_no})"class="btnType3 color1" id="btnVacaRej" name="btn" >상세</a></td>
 									</c:if>
 									
 										

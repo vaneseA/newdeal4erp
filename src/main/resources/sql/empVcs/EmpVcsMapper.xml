@@ -28,7 +28,7 @@
 			</if>
 			
 			<if test="(loginID != null) and (!loginID.equals(''))">
-				and vaca.loginID Like CONCAT('%',relace(#{loginID},' ','') , '%')
+				and vaca.loginID Like CONCAT('%',replace(#{loginID},' ','') , '%')
 			</if>
 			</where>
 			order by vaca.vaca_no desc
@@ -50,7 +50,7 @@
 			</if>
 			
 			<if test="(loginID != null) and (!loginID.equals(''))">
-				and vaca.loginID Like CONCAT('%',relace(#{loginID},' ',''), '%')
+				and vaca.loginID Like CONCAT('%',replace(#{loginID},' ',''), '%')
 			</if>
 			</where>
 	</select>

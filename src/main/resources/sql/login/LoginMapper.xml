@@ -13,7 +13,7 @@
      </select>
      
    
-   <!-- 사용자 로그인 -->
+  <!--  사용자 로그인 
    <select id="selectLogin" resultType="kr.happyjob.study.login.model.LgnInfoModel">
       /*kr.happy.study.login.dao.LoginDao.selectLogin*/
       SELECT  loginID as lgn_id
@@ -23,7 +23,25 @@
      WHERE loginID = #{lgn_Id}
         AND password = #{pwd}
      </select>
+      -->
      
+      <!-- 사용자 로그인 -->
+   <select id="selectLogin" resultType="kr.happyjob.study.login.model.LgnInfoModel">
+      /*kr.happy.study.login.dao.LoginDao.selectLogin*/
+      SELECT  ui.loginID as lgn_id
+               , ui.name as usr_nm
+               , ui.user_Type as mem_author
+               ,ui.file_no
+               ,fi.file_name
+               ,fi.logic_path
+               ,fi.physic_path
+               ,fi.file_size
+               ,fi.exten
+      FROM tb_userinfo ui
+      left outer join tb_file fi on ui.file_no = fi.file_no
+     WHERE ui.loginID = #{lgn_Id}
+        AND ui.password = #{pwd}
+     </select>
      
 <!-- 사용자 메뉴 권한 -->
    <select id="listUsrMnuAtrt" resultType="kr.happyjob.study.login.model.UsrMnuAtrtModel">
