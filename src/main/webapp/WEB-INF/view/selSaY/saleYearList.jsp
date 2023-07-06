@@ -74,11 +74,14 @@
         function fRegisterButtonClickEvent() {
             $('a[name=btn]').click(function (e) {
                 e.preventDefault();
-
                 var btnId = $(this).attr('id');
-
                 switch (btnId) {
-                    case 'btnSearch' :
+                    case 'btnSearch':
+                        var orderYear = $("#order_Year").val();
+                        if (orderYear === "") {
+                            alert("날짜를 선택해주세요.");
+                            return;
+                        }
                         fn_saleYearList();
                         break;
                 }
@@ -89,10 +92,7 @@
             pagenum = pagenum || 1;
 
             var param = {
-                selectedValue: $("#proName").val(),
-                selectedValue: $("#splrName").val(),
-                searchKey: $("#searchKey").val(),
-                selectedValue: $("#pname").val(),
+                order_year: $("#order_year").val(),
                 pageSize: pageSize,
                 pageBlockSize: pageBlockSize,
                 pagenum: pagenum
@@ -101,19 +101,19 @@
 
             var listCallBack = function (returnValue) {
                 console.log(returnValue);
-
                 $("#listSaleYear").empty().append(returnValue);
 
-                var totalCnt = $("#totalCnt").val();
+                var totalcnt = $("#totalcnt").val();
 
-                console.log("totalCnt: " + totalCnt);
+                console.log("totalcnt: " + totalcnt);
 
-                var paginationHtml = getPaginationHtml(pagenum, totalCnt, pageSize, pageBlockSize, 'fn_saleYearList');
+                var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_saleYearList');
                 console.log("paginationHtml: " + paginationHtml);
 
                 $("#saleYearPagination").empty().append(paginationHtml);
 
                 $("#pageno").val(pagenum);
+                // fn_chart();
             };
 
             callAjax("/selSaY/saleYearList.do", "post", "text", false, param, listCallBack);
@@ -149,16 +149,15 @@
                     <!-- contents -->
                     <h3 class="hidden">contents 영역</h3> <!-- content -->
                     <div class="content">
-
                         <p class="Location">
                             <a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
                                 class="btn_nav bold">매출</span> <span class="btn_nav bold">연별 매출 현황
-								</span> <a href="../selSaY/saleYear.do" class="btn_set refresh">새로고침</a>
+								</span> <a href="../selSaY/saleYearList.do" class="btn_set refresh">새로고침</a>
                         </p>
 
 
                         <p class="conTitle">
-                            <span>연별 매출 현황</span> <span class="fr">별
+                            <span>연별 매출 현황</span> <span class="fr">
 					</span>
                         </p>
 
@@ -196,9 +195,10 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">연도</th>
-                                    <th scope="col">영업이익</th>
-                                    <th scope="col">매출</th>
-                                    <th scope="col">인건비</th>
+                                    <th scope="col">총 판매량</th>
+                                    <th scope="col">총 매출</th>
+                                    <th scope="col">총 지출</th>
+                                    <th scope="col">총 순이익</th>
                                     <th scope="col">전년대비 매출 성장률</th>
                                     <th scope="col">전년대비 순이익 성장률</th>
 
