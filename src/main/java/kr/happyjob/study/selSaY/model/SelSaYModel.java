@@ -4,24 +4,24 @@ import java.util.Date;
 
 public class SelSaYModel {
 
-    private int order_no;//주문번호
-    private Date order_date;//주문일자
-    private int product_no;//제품번호
-    private int splr_no;//납품기업번호
-    private String splr_name;//납품기업명
-    private String product_name;//품명
+    private int order_no; // 주문번호
+    private Date order_date; // 주문일자
+    private int product_no; // 제품번호
+    private int splr_no; // 납품기업번호
+    private String splr_name; // 납품기업명
+    private String product_name; // 품명
 
-    private String pro_cd;//제품 분류코드
+    private String pro_cd; // 제품 분류코드
 
-    private String pro_name;//제품 분류
+    private String pro_name; // 제품 분류
 
-    private String product_serial;//모델명
-    private int product_unit_price;//납품단가
-    private int product_price;//판매가
+    private String product_serial; // 모델명
+    private int product_unit_price; // 납품단가
+    private int product_price; // 판매가
 
-    private int oder_dt_amt;//수량
+    private int order_dt_amt; // 수량
 
-    private int oder_tot_price;//총액
+    private int order_tot_price; // 총액
 
     public int getOrder_no() {
         return order_no;
@@ -111,19 +111,19 @@ public class SelSaYModel {
         this.product_price = product_price;
     }
 
-    public int getOder_dt_amt() {
-        return oder_dt_amt;
+    public int getOrder_dt_amt() {
+        return order_dt_amt;
     }
 
-    public void setOder_dt_amt(int oder_dt_amt) {
-        this.oder_dt_amt = oder_dt_amt;
+    public void setOrder_dt_amt(int order_dt_amt) {
+        this.order_dt_amt = order_dt_amt;
     }
 
-    public int getOder_tot_price() {
-        return oder_tot_price;
+    public int getOrder_tot_price() {
+        return order_tot_price;
     }
 
-    public void setOder_tot_price(int oder_tot_price) {
-        this.oder_tot_price = oder_tot_price;
+    public void setOrder_tot_price(int order_tot_price) {
+        this.order_tot_price = order_tot_price;
     }
 }

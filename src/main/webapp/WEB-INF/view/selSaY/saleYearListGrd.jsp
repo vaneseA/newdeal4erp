@@ -10,26 +10,20 @@
 </c:if>
 
 <c:if test="${totalcnt > 0 }">
-    <c:forEach items="${saleDaySearchList}" var="list">
+    <c:forEach items="${saleYearSearchList}" var="list">
         <tr>
-            <td>${list.order_date_str}</td>
-            <td>${list.order_no}</td>
-            <td>${list.clnt_name}</td>
-            <td>${list.pro_name}</td>
-            <td>${list.splr_name}</td>
-            <td>${list.product_name}</td>
-            <td>${list.product_serial}</td>
+            <td>${list.order_year}</td>
             <td>
-                <fmt:formatNumber value="${list.product_unit_price}" type="number" pattern="#,###" />
+                <fmt:formatNumber value="${list.order_year_dt_amt}" type="number" pattern="#,###" />
             </td>
             <td>
-                <fmt:formatNumber value="${list.product_price}" type="number" pattern="#,###" />
+                <fmt:formatNumber value="${list.order_year_tot_product_price}" type="number" pattern="#,###" />
             </td>
             <td>
-                <fmt:formatNumber value="${list.order_dt_amt}" type="number" pattern="#,###" />
+                <fmt:formatNumber value="${list.tot_profit}" type="number" pattern="#,###" />
             </td>
             <td>
-                <fmt:formatNumber value="${list.order_tot_price}" type="number" pattern="#,###" />
+                <fmt:formatNumber value="${list.sal_after_total}" type="number" pattern="#,###" />
             </td>
         </tr>
     </c:forEach>

@@ -110,6 +110,7 @@
             fRegisterButtonClickEvent();
             fn_saleMonthList();
         });
+        /** 버튼 이벤트 등록 */
         function fRegisterButtonClickEvent() {
             $('a[name=btn]').click(function (e) {
                 e.preventDefault();

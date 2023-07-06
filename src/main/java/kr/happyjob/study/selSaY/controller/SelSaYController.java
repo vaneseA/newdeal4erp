@@ -1,6 +1,7 @@
 package kr.happyjob.study.selSaY.controller;
 
 import kr.happyjob.study.selSaY.model.SelSaYModel;
+import kr.happyjob.study.selSaY.model.SelSaYModel;
 import kr.happyjob.study.selSaY.service.SelSaYService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -73,6 +75,22 @@ public class SelSaYController {
       logger.info("+ End " + className + ".productList");
 
       return "selSaY/saleYearListGrd";
+   }
+
+   @RequestMapping("selectedYearChart.do")
+   @ResponseBody
+   public List<SelSaYModel> selectedYearChart(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+                                               HttpServletResponse response, HttpSession session) throws Exception {
+      logger.info("+ Start " + className + ".selectedYearChart");
+      logger.info("   - paramMap : " + paramMap);
+
+      // Controller -> Service -> Dao -> SQL
+      List<SelSaYModel> selectedYearChart = selSaYService.saleYearList(paramMap);
+
+
+      logger.info("+ End " + className + ".selectedDayChart");
+
+      return selectedYearChart;
    }
 
 
