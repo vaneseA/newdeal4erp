@@ -52,7 +52,7 @@ public class SelSaYController {
     * 목록 조회
     */
    @RequestMapping("saleYearList.do")
-   public String productList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
+   public String saleYearList(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
                              HttpServletResponse response, HttpSession session) throws Exception {
 
       logger.info("+ Start " + className + ".saleYearList");
@@ -69,10 +69,10 @@ public class SelSaYController {
       List<SelSaYModel> saleYearSearchList = selSaYService.saleYearList(paramMap);
       int totalcnt = selSaYService.countSaleYearList(paramMap);
 
-      model.addAttribute("productSearchList", saleYearSearchList);
+      model.addAttribute("saleYearSearchList", saleYearSearchList);
       model.addAttribute("totalcnt", totalcnt);
 
-      logger.info("+ End " + className + ".productList");
+      logger.info("+ End " + className + ".saleYearList");
 
       return "selSaY/saleYearListGrd";
    }
@@ -88,7 +88,7 @@ public class SelSaYController {
       List<SelSaYModel> selectedYearChart = selSaYService.saleYearList(paramMap);
 
 
-      logger.info("+ End " + className + ".selectedDayChart");
+      logger.info("+ End " + className + ".selectedYearChart");
 
       return selectedYearChart;
    }

@@ -88,7 +88,7 @@ public class SelSaMController {
       List<SelSaMModel> selectedMonthChart = selSaMService.saleMonthList(paramMap);
 
 
-      logger.info("+ End " + className + ".selectedDayChart");
+      logger.info("+ End " + className + ".selectedMonthChart");
 
       return selectedMonthChart;
    }

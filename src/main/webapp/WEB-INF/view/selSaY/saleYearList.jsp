@@ -17,39 +17,87 @@
         var pageBlockSize = 5;
 
         function fn_aa() {
-
-            // 오늘 날짜 가져오기
-            var currentDate = new Date();
-
-            // Date 객체의 날짜를 7일씩 증가시키면서 label 생성
-            var labels = [];
-            for (var i = 0; i < 7; i++) {
-                var date = new Date(currentDate);
-                date.setDate(date.getDate() + i);
-                var formattedDate = formatDate(date); // 날짜를 원하는 형식으로 포맷팅
-                labels.push(formattedDate);
-            }
-
             new Chart(document.getElementById("bar-chart"), {
                 type: 'bar',
                 data: {
                     labels: labels,
                     datasets: [
                         {
-                            label: "Population (millions)",
-                            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-                            data: [2478,5267,734,784,433]
+                            label: "매출",
+                            backgroundColor: getColors(labels.length),
+                            data: dataVar,
                         }
                     ]
                 },
                 options: {
-                    legend: { display: false },
+                    legend: {display: false},
                     title: {
                         display: true,
                         text: '연별 매출 순이익'
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function (tooltipItem, data) {
+                                var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                                return value.toLocaleString() + "원";
+                            }
+                        }
                     }
                 }
             });
+        }
+
+        function hsvToRgb(h, s, v) {
+            var r, g, b;
+            var i;
+            var f, p, q, t;
+
+            h = h / 360;
+            s = s / 100;
+            v = v / 100;
+
+            i = Math.floor(h * 6);
+            f = h * 6 - i;
+            p = v * (1 - s);
+            q = v * (1 - f * s);
+            t = v * (1 - (1 - f) * s);
+
+            switch (i % 6) {
+                case 0:
+                    r = v, g = t, b = p;
+                    break;
+                case 1:
+                    r = q, g = v, b = p;
+                    break;
+                case 2:
+                    r = p, g = v, b = t;
+                    break;
+                case 3:
+                    r = p, g = q, b = v;
+                    break;
+                case 4:
+                    r = t, g = p, b = v;
+                    break;
+                case 5:
+                    r = v, g = p, b = q;
+                    break;
+            }
+
+            return '#' + toHex(r * 255) + toHex(g * 255) + toHex(b * 255);
+        }
+
+        function toHex(value) {
+            var hex = Math.round(value).toString(16);
+            return hex.length == 1 ? '0' + hex : hex;
+        }
+
+        function getColors(length) {
+            var colors = [];
+            for (var i = 0; i < length; i++) {
+                var hue = Math.floor(360 * i / length);
+                colors.push(hsvToRgb(hue, 100, 100));
+            }
+            return colors;
         }
 
         // 날짜를 'YYYY-MM-DD' 형식으로 포맷팅하는 함수
@@ -64,9 +112,7 @@
         $(function () {
             // 버튼 이벤트 등록
             fRegisterButtonClickEvent();
-
             fn_saleYearList();
-            fn_aa();
         });
 
 
@@ -119,6 +165,45 @@
             callAjax("/selSaY/saleYearList.do", "post", "text", false, param, listCallBack);
         }
 
+        function fn_chart() {
+            var check = false;
+            // 그래프 초기화
+            $("#bar-chart").remove();
+            $(".bar_items").empty().append('<canvas id="bar-chart" width="300" height="250"></canvas>');
+            var param = {
+                order_year: $("#order_year").val()
+            };
+            var listCallBack = function (returnValue) {
+                for (var i in returnValue) {
+                    console.log(returnValue[i].order_year);
+                    if (returnValue[i].order_year == $("#order_year").val()) {
+                        check = true;
+                        break;
+                    }
+                }
+                if (check) {
+                    var labels = [];
+                    var dataVar = [];
+
+                    if (returnValue.length == 0) { // 매출 데이터가 없을 때
+                        alert("해당 월에는 매출이 없습니다.");
+                        $(".bar_items").css("display", "none");
+                        return;
+                    }
+                    for (var i = 0; i < returnValue.length; i++) {
+                        console.log(returnValue[i].order_year);
+                        labels.push(returnValue[i].order_year);
+                        dataVar.push(returnValue[i].tot_profit);
+                    }
+                    console.log("labels" + labels);
+                    console.log("dataVar" + dataVar);
+                    fn_aa(labels, dataVar);
+
+                    $(".bar_items").css("display", "block");
+                }
+            };
+            callAjax("/selSaY/selectedYearChart.do", "post", "json", false, param, listCallBack);
+        }
 
     </script>
 
@@ -157,8 +242,7 @@
 
 
                         <p class="conTitle">
-                            <span>연별 매출 현황</span> <span class="fr">
-					</span>
+                            <span>연별 매출 현황</span> <span class="fr"></span>
                         </p>
 
                         <!-- 검색창 영역 시작 -->
@@ -174,11 +258,13 @@
 
                         <!-- 검색창 영역 끝 -->
 
-
+                        <div class="bar_items"
+                             style="width: 60%; display: none; margin-left: auto; margin-right: auto;">
+                            <canvas id="bar-chart" width="300" height="250"></canvas>
+                        </div>
                         <div class="saleYearList">
                             <div style="display:flex; flex-grow: 1; justify-content: space-evenly;">
-                                <div class="items" style="width: 50%">
-                                    <canvas id="bar-chart" width="300" height="250"></canvas>
+                                <div style="display:flex; flex-grow: 1; justify-content: space-evenly;">
                                 </div>
                             </div>
                             <table class="col">
@@ -201,18 +287,12 @@
                                     <th scope="col">총 순이익</th>
                                     <th scope="col">전년대비 매출 성장률</th>
                                     <th scope="col">전년대비 순이익 성장률</th>
-
-
                                 </tr>
                                 </thead>
                                 <tbody id="listSaleYear"></tbody>
                             </table>
-
                             <div class="paging_area" id="saleYearPagination"></div>
-
-
                         </div> <!--// content -->
-
                         <h3 class="hidden">풋터 영역</h3>
                         <jsp:include page="/WEB-INF/view/common/footer.jsp"></jsp:include>
                 </li>

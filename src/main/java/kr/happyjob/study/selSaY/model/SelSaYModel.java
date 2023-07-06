@@ -23,6 +23,63 @@ public class SelSaYModel {
 
     private int order_tot_price; // 총액
 
+    private int order_year; // 주문년도
+
+    private long order_year_dt_amt; // 주문년도별 총 주문량
+    private long order_year_tot_price; // 주문년도별 총 가격
+    private long order_year_tot_product_price; // 주문년도별 제품 총 가격
+    private long order_year_tot_product_unit_price; // 주문년도별 단위 제품 총 가격
+    private long tot_profit; // 총 이익
+    private long sal_after_total; // 총 지급액
+
+    public long getOrder_year_dt_amt() {
+        return this.order_year_dt_amt;
+    }
+
+    public void setOrder_year_dt_amt(final long order_year_dt_amt) {
+        this.order_year_dt_amt = order_year_dt_amt;
+    }
+
+    public long getOrder_year_tot_price() {
+        return this.order_year_tot_price;
+    }
+
+    public void setOrder_year_tot_price(final long order_year_tot_price) {
+        this.order_year_tot_price = order_year_tot_price;
+    }
+
+    public long getOrder_year_tot_product_price() {
+        return this.order_year_tot_product_price;
+    }
+
+    public void setOrder_year_tot_product_price(final long order_year_tot_product_price) {
+        this.order_year_tot_product_price = order_year_tot_product_price;
+    }
+
+    public long getOrder_year_tot_product_unit_price() {
+        return this.order_year_tot_product_unit_price;
+    }
+
+    public void setOrder_year_tot_product_unit_price(final long order_year_tot_product_unit_price) {
+        this.order_year_tot_product_unit_price = order_year_tot_product_unit_price;
+    }
+
+    public long getTot_profit() {
+        return this.tot_profit;
+    }
+
+    public void setTot_profit(final long tot_profit) {
+        this.tot_profit = tot_profit;
+    }
+
+    public long getSal_after_total() {
+        return this.sal_after_total;
+    }
+
+    public void setSal_after_total(final long sal_after_total) {
+        this.sal_after_total = sal_after_total;
+    }
+
     public int getOrder_no() {
         return order_no;
     }
@@ -125,5 +182,13 @@ public class SelSaYModel {
 
     public void setOrder_tot_price(int order_tot_price) {
         this.order_tot_price = order_tot_price;
+    }
+
+    public int getOrder_year() {
+        return order_year;
+    }
+
+    public void setOrder_year(int order_year) {
+        this.order_year = order_year;
     }
 }
