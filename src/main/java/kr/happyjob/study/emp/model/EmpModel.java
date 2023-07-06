@@ -1,12 +1,12 @@
 package kr.happyjob.study.emp.model;
-// www
+////
 public class EmpModel {
 
 	private String loginId;
 	private String name;
 	private String level_cd;
 	private String dept_cd;
-	private String emp_gen;
+	private String emp_sex;
 	private String emp_hp;
 	private String emp_email;
 	private String emp_birth;
@@ -64,11 +64,11 @@ public class EmpModel {
 	public void setDept_cd(String dept_cd) {
 		this.dept_cd = dept_cd;
 	}
-	public String getEmp_gen() {
-		return emp_gen;
+	public String getEmp_sex() {
+		return emp_sex;
 	}
-	public void setEmp_gen(String emp_gen) {
-		this.emp_gen = emp_gen;
+	public void setEmp_sex(String emp_sex) {
+		this.emp_sex = emp_sex;
 	}
 	public String getEmp_hp() {
 		return emp_hp;

@@ -189,4 +189,13 @@ public class CalDayModel {
 	}
 
 	private String level_name;
+	public String getAppro_type_cd() {
+		return appro_type_cd;
+	}
+
+	public void setAppro_type_cd(String appro_type_cd) {
+		this.appro_type_cd = appro_type_cd;
+	}
+
+	private String appro_type_cd;
 }

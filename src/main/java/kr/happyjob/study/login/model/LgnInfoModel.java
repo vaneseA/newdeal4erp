@@ -137,7 +137,61 @@ public class LgnInfoModel {
 		this.mem_author = mem_author;
 	}
 
-	
+//	파일 불러오기
+	private int file_no;
+    public int getFile_no() {
+		return file_no;
+	}
+
+	public void setFile_no(int file_no) {
+		this.file_no = file_no;
+	}
+
+	public String getFile_name() {
+		return file_name;
+	}
+
+	public void setFile_name(String file_name) {
+		this.file_name = file_name;
+	}
+
+	public String getLogic_path() {
+		return logic_path;
+	}
+
+	public void setLogic_path(String logic_path) {
+		this.logic_path = logic_path;
+	}
+
+	public String getPhysic_path() {
+		return physic_path;
+	}
+
+	public void setPhysic_path(String physic_path) {
+		this.physic_path = physic_path;
+	}
+
+	public int getFile_size() {
+		return file_size;
+	}
+
+	public void setFile_size(int file_size) {
+		this.file_size = file_size;
+	}
+
+	public String getExten() {
+		return exten;
+	}
+
+	public void setExten(String exten) {
+		this.exten = exten;
+	}
+
+	private String file_name;
+    private String logic_path;
+    private String physic_path;
+    private int file_size;
+    private String exten;
 	
 
 }

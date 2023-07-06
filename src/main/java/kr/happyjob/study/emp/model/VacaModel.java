@@ -1,5 +1,5 @@
 package kr.happyjob.study.emp.model;
-//www
+////
 public class VacaModel {
     private int dt_vaca_no;
     private int dt_va_tot;
