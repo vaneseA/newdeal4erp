@@ -17,9 +17,11 @@ public interface EmpApmDao {
 	/** 한건 조회 */
 	public EmpApmModel listSelectOneApm(Map<String, Object> paramMap) throws Exception;
 	
-	/** 수정 */
-	public int listUpdateApm(Map<String, Object> paramMap) throws Exception;
-	public int listUpdateApproApm(Map<String, Object> paramMap) throws Exception;
+	/** 휴가 상태 조회 **/
+	public EmpApmModel getVacationStatus(Map<String, Object> paramMap) throws Exception;
+	
+	/** 결재 상태 수정 */
+	public int updateApmStatus(Map<String, Object> paramMap) throws Exception;
 	
 	/** 수정 파일 */
 	public int listUpdateFileApm(Map<String, Object> paramMap) throws Exception;
@@ -29,6 +31,8 @@ public interface EmpApmDao {
 	
 	/** 파일 등록 */
 	public int fileinsertApm(Map<String, Object> paramMap) throws Exception;
+	
+
 	
 	
 }

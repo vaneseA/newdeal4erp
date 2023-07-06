@@ -20,7 +20,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/empEpm/")
 public class empController {
-
+////
      @Autowired
      EmpService empService;
 
@@ -110,7 +110,7 @@ public class empController {
       
         } else if("U".equals(action)) {
             logger.info("   - update : " + paramMap);
-            logger.info("   - updateemp_genemp_gen : " + paramMap.get("emp_gen"));
+            logger.info("   - updateemp_sexemp_sex : " + paramMap.get("emp_sex"));
             
             logger.info("   - vaceUpdate안녕 : " + paramMap);
             returncval = empService.empUpdate(paramMap,request);

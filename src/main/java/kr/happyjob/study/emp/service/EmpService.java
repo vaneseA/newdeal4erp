@@ -1,5 +1,5 @@
 package kr.happyjob.study.emp.service;
-//www
+////
 import kr.happyjob.study.emp.model.EmpModel;
 import kr.happyjob.study.mngNot.model.NoticeModel;
 
@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-
+//
 public interface EmpService {
     String maxMethod3(Map<String, Object> paramMap) throws Exception;
 

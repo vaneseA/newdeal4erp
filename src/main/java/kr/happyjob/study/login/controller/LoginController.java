@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.happyjob.study.common.comnUtils.ComnCodUtil;
+import kr.happyjob.study.empMpg.model.EmpMpgModel;
 import kr.happyjob.study.login.model.LgnInfoModel;
 import kr.happyjob.study.login.model.UsrMnuAtrtModel;
 import kr.happyjob.study.login.service.LoginService;
@@ -130,17 +131,24 @@ public class LoginController {
 	        list.setNodeList(loginService.listUsrChildMnuAtrt(resultMapSub));
 	     }
 	     
+	   
+	     
 	     session.setAttribute("loginId",lgnInfoModel.getLgn_id());                     //   로그인 ID
 	     session.setAttribute("userNm",lgnInfoModel.getUsr_nm());                  // 사용자 성명
 	     session.setAttribute("usrMnuAtrt", listUsrMnuAtrtModel);
 	     session.setAttribute("userType", lgnInfoModel.getMem_author());            // 로그린 사용자 권란       A: 관리자       B: 기업회원    C:일반회원
 	     session.setAttribute("serverName", request.getServerName());
-	
+	     session.setAttribute("logic_path", lgnInfoModel.getLogic_path());
+	     
+	     
+	     
 	     resultMap.put("loginId",lgnInfoModel.getLgn_id()); 
 	     resultMap.put("userNm",lgnInfoModel.getUsr_nm()); 
 	     resultMap.put("usrMnuAtrt", listUsrMnuAtrtModel);
 	     resultMap.put("userType", lgnInfoModel.getMem_author());
 	     resultMap.put("serverName", request.getServerName());
+	 
+	     logger.info("   - resultMap : " + resultMap);
 	     
 	} else {
 
