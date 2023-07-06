@@ -99,6 +99,7 @@
             }
             return colors;
         }
+
         function formatDate(date) {
             var year = date.getFullYear();
             var month = ('0' + (date.getMonth() + 1)).slice(-2);
@@ -110,6 +111,7 @@
             fRegisterButtonClickEvent();
             fn_saleMonthList();
         });
+
         /** 버튼 이벤트 등록 */
         function fRegisterButtonClickEvent() {
             $('a[name=btn]').click(function (e) {
@@ -224,10 +226,14 @@
                             <span class="btn_nav bold">월별 매출 현황</span>
                             <a href="../selSaM/saleMonthList.do" class="btn_set refresh">새로고침</a>
                         </p>
+
+
                         <p class="conTitle">
-                            <span>월별 매출 현황</span>
-                            <span class="fr"></span>
+                            <span>월별 매출 현황</span><span class="fr"></span>
                         </p>
+
+                        <!-- 검색창 영역 시작 -->
+
                         <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:10px 10px;">
                             <label for="order_month"
                                    style="font-size:15px; font-weight:bold; margin-right:10px; margin-top:6px; ">월 조회
@@ -237,7 +243,10 @@
                             <a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
                         </div>
 
-                        <div class="bar_items" style="width: 60%; display: none; margin-left: auto; margin-right: auto;">
+                        <!-- 검색창 영역 끝 -->
+
+                        <div class="bar_items"
+                             style="width: 60%; display: none; margin-left: auto; margin-right: auto;">
                             <canvas id="bar-chart-horizontal" width="300" height="250"></canvas>
                         </div>
                         <div class="saleMonthList">

@@ -20,11 +20,12 @@
                 <fmt:formatNumber value="${list.order_year_tot_product_price}" type="number" pattern="#,###" />
             </td>
             <td>
-                <fmt:formatNumber value="${list.tot_profit}" type="number" pattern="#,###" />
-            </td>
-            <td>
                 <fmt:formatNumber value="${list.sal_after_total}" type="number" pattern="#,###" />
             </td>
+            <td>
+                <fmt:formatNumber value="${list.tot_profit}" type="number" pattern="#,###" />
+            </td>
+
         </tr>
     </c:forEach>
 </c:if>
