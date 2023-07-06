@@ -11,10 +11,6 @@
 height:10px;
 }
 
-.emptySpace{
-display:inline-block;
-width: 720px;
-}
 
 .emptySpace2{
 display:inline-block;
@@ -24,6 +20,44 @@ width:10px;
 .inputTxt p1001{
  width:100px;
 
+}
+
+.border-line{
+	display:flex;
+	align-items: center;
+	justify-content:center;
+	position:relative;
+	
+}
+
+.btnTypegray{
+	background-color: #c0c0c0;
+	border-radius: 2px;
+	width: 100px;
+	height: 22px;
+ 	display:flex;
+ 	align-items: center;
+ 	justify-content:center;
+ 	padding: 7px;
+ 	float:left;
+ 	/* position:relative;
+ 	bottom:50px;
+ 	left: 100px; */
+ 	
+
+}
+
+.search-btn{
+font-weight: bold;
+font-size: 16px;
+color:black;
+
+}
+
+.center{
+
+display:flex;
+align-items:center;
 }
 
 
@@ -37,7 +71,7 @@ width:10px;
  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
 <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
-
+<link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
 <script type="text/javascript">
 
 	// 페이징 설정
@@ -133,6 +167,7 @@ width:10px;
 			console.log( JSON.stringify(returndata) );
 								
 			popupinitfile(returndata.listSearch);
+			imgFile(returndata.listSearch);
 			
 			// 모달 팝업
 			gfModalPop("#layer1");
@@ -186,9 +221,10 @@ width:10px;
 			 $("#loginID").attr("readonly",true); 
 			 $("#name").attr("readonly",true); 
 			 
-			 
+			
 			 var inserthtml = "";
-				
+			 
+			
 				if(object.file_name == "" || object.file_name == null || object.file_name == undefined) {
 					inserthtml += "";
 				} else {
@@ -201,9 +237,9 @@ width:10px;
 				    	  inserthtml += object.file_name;
 				    }				
 				} 
-			 
 				
 				$("#previewdiv").empty().append(inserthtml);
+				$("#LoginImg").empty().append(inserthtml);
 				
 				$("#btnSaveFile").show();
 				$("#btnDeleteFile").hide();
@@ -211,6 +247,7 @@ width:10px;
 				$("#action").val("U");	
 		}
 	}
+   
    
 	function fn_savefile() {
 		
@@ -296,12 +333,15 @@ width:10px;
 							<span>마이페이지</span> <span class="fr">
 						</p>
 						
-							
-							<span class="emptySpace"></span><span>&nbsp;&nbsp;&nbsp;&nbsp;사번: &nbsp;</span>
-							<input type="text" style="width: 130px; height: 25px;" id="sname" name="sname"><span class="emptySpace2"></span>
-							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
-							</span><div class="empty"></div>
-							
+							<div style ="border:solid 3px #c0c0c0; height: 100px; border-radius: 10px;" class="border-line">
+								<div class="center">
+									</span><span style="font-weight:bold; font-size: 15px; float:left">사번 &nbsp;</span>
+									<input type="text" style="width: 130px; height: 25px; float:left; margin-right: 10px" id="sname" name="sname">
+									<div class="btnTypegray"><a href="" id="btnSearch" name="btn"><span class="search-btn">검  색</span></a></div>
+									</span>
+								</div>
+								
+							</div><div class="empty"></div>
 						
 						<div class="mypageList">
 							<table class="col">

@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
 <title>휴가신청 및 조회</title>
 
 <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
@@ -148,26 +149,27 @@
 						<p class="Location">
 							<a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
 								class="btn_nav bold">인사</span> <span class="btn_nav bold">휴가신청내역</a>
+								<a href="../empVcs/vacaSearch.do" class="btn_set refresh">새로고침</a>
 						</p>
-						
-						<div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">
-							<p class="conTitle">
-								<span>휴가신청 리스트</span> 
-								<span class="fr"> 
+						<p class="conTitle">
+								<span>휴가신청 내역</span> 
+								
+						</p>
+						<div style="display:flex; justify-content:center; align-content:center; line-height:2; border:solid 3px #c0c0c0; border-radius: 10px; padding:40px 40px; margin:20px auto;">
+							
 								
 									<!-- 휴가신청 범위 시작 -->
-									<span style="margin:0 10px;">신청일</span> 
-									<input type="date" style="width: 150px; height: 25px; margin-right:5px;" id="vaca_req_sdate" name="vaca_req_sdate">
+									<span style="font-size:15px; font-weight:bold; margin-right:10px;">신청일</span> 
+									<input type="date" style="height:30px; width:100px; margin-right:5px;" id="vaca_req_sdate" name="vaca_req_sdate">
 									<!-- 휴가신청 범위 끝 -->
-									<span>-</span>
-									<input type="date" style="width: 150px; height: 25px; margin-right:5px;" id="vaca_req_edate" name="vaca_req_edate">
+									<span style="margin-right:5px; line-height:3;">-</span>
+									<input type="date" style="height:30px; width:100px; margin-right:5px;" id="vaca_req_edate" name="vaca_req_edate">
 									<!-- 사번 -->
-									<span style="margin:0 10px;">사번</span> 
+									<span style="font-size:15px; font-weight:bold; margin-right:10px;">사번</span> 
 									<input type="text" style="width: 150px; height: 25px; margin-right:5px;" id="loginID" name="loginID">
 									<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
 								 
-								</span>
-							</p>
+								
 						</div>
 						
 						

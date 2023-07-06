@@ -26,7 +26,7 @@
                         and em.loginId Like CONCAT('%', #{ename}, '%')
                     </when>
                     <when
-                            test="searchKey eq 'name'.toString()">
+                            test="searchKey eq 'name'.toString()" >
                         and em.name LIKE CONCAT('%', #{ename}, '%')
                     </when>
                     <otherwise>
@@ -37,7 +37,7 @@
                 </choose>
             </if>
         </where>
-    ORDER BY em.dept_cd
+    ORDER BY CAST(em.loginID AS UNSIGNED) desc
     LIMIT #{pageindex}, #{pageSize}
     
     </select>
@@ -82,7 +82,7 @@
         em.password,
         em.emp_birth,
         em.name,
-        em.emp_gen,
+        em.emp_sex,
         em.emp_edu,
         em.emp_email,
         em.emp_hp,
@@ -156,7 +156,7 @@
         user_type,
         emp_birth,
         name,
-        emp_gen,
+        emp_sex,
         emp_edu,
         emp_email,
         emp_hp,
@@ -192,7 +192,7 @@
 
             ,#{name}
 
-            ,#{emp_gen}
+            ,#{emp_sex}
 
             ,#{emp_edu}
 
@@ -241,7 +241,7 @@
         update tb_userinfo
         set user_type =  #{user_type}
           , emp_edu =  #{emp_edu}
-          , emp_gen =  #{emp_gen}
+          , emp_sex =  #{emp_sex}
           , emp_email =  #{emp_email}
           , emp_hp =  #{emp_hp}
           , emp_zip =  #{emp_zip}
@@ -280,7 +280,7 @@
     <update id="empDelete">
         update tb_userinfo
         set emp_work_yn =  'N'
-        , emp_edate = now()
+        , emp_edate = date_format(now(),'%Y-%m-%d')
         , emp_final_money= #{emp_final_money}
         , emp_final_money= #{emp_final_money}
         where  loginID =  #{loginID}

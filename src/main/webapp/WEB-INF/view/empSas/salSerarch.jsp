@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
 <title>개인 급여 내역서</title>
 
 <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
@@ -163,19 +164,19 @@
 							<a href="../system/comnCodMgr.do" class="btn_set refresh">새로고침</a>
 						</p>
 						<p class="conTitle">
-							<span>급여내역서</span> 
+							<span>급여조회</span> 
 							<span class="fr"> 
-								<div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">									
-									<!-- 사번, 년월 검색 -->
-									<span style="font-weight:bolder; margin-right:5px; padding: 4px 0px;">사  번</span>
-									<input type="text" style="width: 150px; height: 25px; margin-right:10px" id="searchLoginID" name="searchLoginID" >
-									<input type="month" style="width: 150px; height: 25px; margin-right:10px"" id="searchDate" name="searchDate" >
-									<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
-								</div>
+								
 							</span>
 									
 						</p>
-							
+						<div style="display:flex; justify-content:center; align-content:center; line-height:2; border:solid 3px #c0c0c0; border-radius: 10px; padding:40px 40px; margin:20px auto;">									
+							<!-- 사번, 년월 검색 -->
+							<span style="font-size:15px; font-weight:bold; margin-right:10px;">사  번</span>
+							<input type="text" style="height:30px; width:100px; margin-right:5px;" id="searchLoginID" name="searchLoginID" >
+							<input type="month" style="height:30px; width:100px; margin-right:5px;" id="searchDate" name="searchDate" >
+							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
+						</div>
 						
 						
 						<!-- 개인급여내역서 조회 리스트 뿌리기 -->

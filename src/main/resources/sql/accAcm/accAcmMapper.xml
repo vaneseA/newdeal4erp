@@ -40,7 +40,7 @@
 		    inner join tb_dt_sbject ads on ab.acnt_sbject_cd = ads.acnt_sbject_cd
 			
        		   <where>
-					<if test="(acnt_sbject_cd != null) and (!acnt_sbject_cd.equals(''))">
+					<if test="(acnt_sbject_cd != null) and (!acnt_sbject_cd.equals(''))" >
 				        	and ads.acnt_sbject_cd = #{acnt_sbject_cd}
 				    </if>
 			    </where>

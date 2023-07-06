@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
 <title>휴가신청 및 조회</title>
 
 <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
@@ -149,6 +150,7 @@
 					if(reval.dlvApproUpdate> 0) {
 						alert("발주신청완료");
 						gfCloseModal();
+						fn_busDlvList();
 					}else {
 						alert("결재번호업데이트실패");
 					}
@@ -234,28 +236,32 @@
 						<p class="Location">
 							<a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
 								class="btn_nav bold">영업</span> <span class="btn_nav bold">발주내역조회</a>
+								<a href="../busDlv/deliveryInfo.do" class="btn_set refresh">새로고침</a>
 						</p>
-						
-						<div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">
-							<p class="conTitle">
-								<span>발주내역조회</span>
-								<span class="fr"> 
-									<span style="margin:0 10px;">주문자 사번</span>
+						<p class="conTitle">
+							<span>발주내역조회</span> <span class="fr">
+							 <a class="btnType3 color1" id="btnDlvForm" name="btn" >발주신청</a>
+							</span>
+						</p>
+						<div style="display:flex; justify-content:center; align-content:center; line-height:2; border:solid 3px #c0c0c0; border-radius: 10px; padding:40px 40px; margin:20px auto;">
+
+								 
+									<span style="font-size:15px; font-weight:bold; margin-right:10px;">주문자 사번</span>
 									<input type="text" id="loginID" name="loginID" style="width: 150px; height: 25px; margin-right:5px;"/>
-									<span style="margin:0 10px;">발주일</span>
-									<input type="date" id="dlv_sdate" name="dlv_sdate" />
-									<span>-</span>
-									<input type="date" id="dlv_edate" name="dlv_edate" style="margin-right:10px;"/>
+									<span style="font-size:15px; font-weight:bold; margin-right:10px;">발주일</span>
+									<input type="date" id="dlv_sdate" name="dlv_sdate" style="height:30px; width:100px; margin-right:5px;"/>
+									<span style="margin-right:5px; line-height:3;">-</span>
+									<input type="date" id="dlv_edate" name="dlv_edate" style="height:30px; width:100px; margin-right:5px;"/>
 									<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
 									 
-								</span>
+								
 							</p>
 							
 						</div>
 							
 						<!-- 휴가 신청 조회 리스트 -->
 						<div class="busDlvList">
-							<a class="btnType3 color1" id="btnDlvForm" name="btn" >발주신청</a>
+							
 							<table class="col" style=" margin:10px 0;">
 							<caption>caption</caption>
 							<colgroup>

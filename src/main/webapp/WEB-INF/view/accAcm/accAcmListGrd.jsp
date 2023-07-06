@@ -17,10 +17,16 @@
 											<c:if test="${list.acnt_sbjct_inout == 2 }">비용</c:if>
 										<td>${list.acnt_sbject_cd}</td>
 										<td><a href="javascript:fn_accAcmSListSearch(1, '${list.acnt_sbject_cd}', '${list.acnt_sbject_name}')">${list.acnt_sbject_name}</a></td>
+<%-- 										<td>${acnt_sbject_cd}</td>  --%>
+<%-- 										<td><input id="FF_acnt_sbject_cd" name="FF_acnt_sbject_cd" value ="${list.acnt_sbject_cd}"/></td> --%>
+<%-- 										<td><input id="LL_acnt_sbject_cd" name="LL_acnt_sbject_cd" value ="${list.acnt_sbject_cd}"/></td> --%>
+<!-- 										<td><input id="FF_acnt_sbject_cd" name="FF_acnt_sbject_cd" value ="ddd"/></td> -->
 									</tr>
 								</c:forEach>
 							</c:if>
 							
 							<input type="hidden" id="totalcnt" name="totalcnt" value ="${totalcnt}"/>
 							<input type="hidden" id="LL_acnt_sbject_cd" name="LL_acnt_sbject_cd" value ="${acnt_sbject_cd}"/>
+<%-- 							<input id="LL_acnt_sbject_cd" name="LL_acnt_sbject_cd" value ="${acnt_sbject_cd}"/> --%>
 							<input type="hidden" id="LL_acnt_sbject_name" name="LL_acnt_sbject_name" value ="${acnt_sbject_name}"/>
+							

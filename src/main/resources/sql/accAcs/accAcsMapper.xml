@@ -85,14 +85,15 @@
        				   and ll.pdate <![CDATA[>=]]> STR_TO_DATE(#{start}, '%Y-%m-%d')    
 			        </if>
 			        <if test ="(end != null) and (!end.equals(''))" >
-       				   and ll.pdate <![CDATA[<=]]> DATE_ADD(STR_TO_DATE(#{end} , '%Y-%m-%d'), INTERVAL 1 DAY)
+       				   and ll.pdate <![CDATA[<=]]> STR_TO_DATE(#{end}, '%Y-%m-%d')
 			        </if>
+<!-- 					<if test ="(start != null) and (!start.equals(''))" > -->
+<!--        				   and ll.pdate <![CDATA[>=]]> STR_TO_DATE(#{start}, '%Y-%m-%d')     -->
+<!-- 			        </if> -->
+<!-- 			        <if test ="(end != null) and (!end.equals(''))" > -->
+<!--        				   and ll.pdate <![CDATA[<=]]> DATE_ADD(STR_TO_DATE(#{end} , '%Y-%m-%d'), INTERVAL 1 DAY) -->
+<!-- 			        </if> -->
 		        	<if test="(clicombo != null) and (!clicombo.equals(''))">
-<!-- 			        	<choose>  -->
-<!-- 			        		<when test="clicombo eq 1"> -->
-<!-- 			        			and ll.client = '태평물산' -->
-<!-- 			        		</when> -->
-<!-- 			        	</choose> -->
 			        	and ll.client = (select clnt_name from tb_clnt where clnt_no = #{clicombo})
 			        </if>
 			        
@@ -109,7 +110,7 @@
 		        LIMIT #{pageindex}, #{pageSize}
 	</select>
 	
-	<select id="countactlist" resultType="int">
+	<select id="countactlist" resultType="int" >
 			select count(*)
 		      from (
 		                     select bd.budget_no
@@ -163,11 +164,17 @@
 		        inner join tb_userinfo ui on ui.loginID = ll.loginID
             	inner join tb_acnt_sbject asb on asb.acnt_sbject_cd = ll.acnt_sbject_cd
 		        <where>
+<!-- 					<if test ="(start != null) and (!start.equals(''))" > -->
+<!--        				   and ll.pdate <![CDATA[>=]]> STR_TO_DATE(#{start}, '%Y-%m-%d')     -->
+<!-- 			        </if> -->
+<!-- 			        <if test ="(end != null) and (!end.equals(''))" > -->
+<!--        				   and ll.pdate <![CDATA[<=]]> DATE_ADD(STR_TO_DATE(#{end} , '%Y-%m-%d'), INTERVAL 1 DAY) -->
+<!-- 			        </if> -->
 					<if test ="(start != null) and (!start.equals(''))" >
        				   and ll.pdate <![CDATA[>=]]> STR_TO_DATE(#{start}, '%Y-%m-%d')    
 			        </if>
 			        <if test ="(end != null) and (!end.equals(''))" >
-       				   and ll.pdate <![CDATA[<=]]> DATE_ADD(STR_TO_DATE(#{end} , '%Y-%m-%d'), INTERVAL 1 DAY)
+       				   and ll.pdate <![CDATA[<=]]> STR_TO_DATE(#{end}, '%Y-%m-%d')
 			        </if>
 		        	<if test="(clicombo != null) and (!clicombo.equals(''))">
 <!-- 			        	<choose>  -->

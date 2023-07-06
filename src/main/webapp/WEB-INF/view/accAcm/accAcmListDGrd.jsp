@@ -9,7 +9,7 @@
 								</tr>
 							</c:if>
 							
-							<c:if test="${totalCount > 0 }">
+							<c:if test="${totalCount > 0 }" >
 								<c:forEach items="${accAcmDtModel}" var="list">
 									<tr>
 										<td>

@@ -7,8 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>공지사항</title>
+<title>회계전표</title>
 <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
+<link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
 
 <style type="text/css">
 
@@ -16,7 +17,7 @@
 			text-align: center;
 			border: 0 solid black;
 			
-			}
+			 }
 
 
 
@@ -282,8 +283,7 @@
 
 						<p class="Location">
 							<a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
-								class="btn_nav bold">운영</span> <span class="btn_nav bold">공지사항
-								관리</span> <a href="../system/comnCodMgr.do" class="btn_set refresh">새로고침</a>
+								class="btn_nav bold">회계</span> <span class="btn_nav bold">회계전표</span> <a href="../accAcs/accountSearch.do" class="btn_set refresh">새로고침</a>
 						</p>
                         
                         
@@ -295,24 +295,24 @@
 						
 						<div style="border : solid 3px #c0c0c0; height: 150px; border-radius: 10px;">
 							<div style="margin-top: 18px; text-align: center;">
-								<label for="start" style="font-size: 15px; font-weight: bold">기간 조회 : </label>
-								<input type="date" id="start" name="start" min="2023-01-01" style="height: 25px; width: 150px;">
+								<label for="start" style="font-size: 15px; font-weight: bold">기간 조회&nbsp;&nbsp; </label>
+								<input type="date" id="start" name="start" min="2020-01-01" style="height: 25px; width: 150px;">
 								<span style="font-weight: bold; font-size: 15px; margin-left: 10px; margin-right: 10px;">~</span>
-								<input type="date" id="end" name="end" min="2023-01-01" style="height: 25px; width: 150px;">
+								<input type="date" id="end" name="end" min="2020-01-01" style="height: 25px; width: 150px;">
 								
 								
 							</div> 
 							
 							<div style="margin-top: 15px; margin-bottom : 15px; text-align: center; ">
-								<label for="acccombo" style="margin-left: 15px; font-size: 15px; font-weight: bold">계정 대분류 : </label>
+								<label for="acccombo" style="margin-left: 15px; font-size: 15px; font-weight: bold">계정 대분류&nbsp;&nbsp;</label>
 								<select id="acccombo" name="acccombo" style="height: 25px; width: 100px;">
 								        <option value="" >전체</option>
 								</select> 
 								
-								<label for="accdcombo" style="margin-left: 15px; font-size: 15px; font-weight: bold">계정 상세 : </label>
+								<label for="accdcombo" style="margin-left: 15px; font-size: 15px; font-weight: bold">계정 상세&nbsp;&nbsp;</label>
 								 <select id="accdcombo" name="accdcombo" style="width: 100px; height: 25px;" >
 								</select>
-								<label for="clicombo" style="margin-left: 15px; font-size: 15px; font-weight: bold">거래처명 : </label>
+								<label for="clicombo" style="margin-left: 15px; font-size: 15px; font-weight: bold">거래처명&nbsp;&nbsp;</label>
 								<select id="clicombo" name="clicombo" style="height: 25px; width: 120px;" >
 								</select> 
 								
@@ -325,7 +325,7 @@
 									<a href="" class="" id="btnSearch" name="btn">
 									<div style="background: #c0c0c0; border-radius: 3px; width: 120px; height: 20px; margin: 0 auto; padding-top: 10px; padding-bottom: 5px;">
 	<!-- 								<div style="background: #add8e6; border-radius: 3px; width: 120px; height: 20px; margin: 0 auto; padding-top: 10px; padding-bottom: 5px;"> -->
-									<span style="border: none; font-weight: bold; text-align: center; font-size: 16px; margin-top: 20px;" >검&nbsp;&nbsp;&nbsp;색</span>
+									<span style="border: none; font-weight: bold; text-align: center; font-size: 16px; margin-top: 20px; color: black;" >검&nbsp;&nbsp;&nbsp;색</span>
 									</div>
 									</a>
 								

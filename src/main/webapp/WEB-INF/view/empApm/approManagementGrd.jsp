@@ -11,17 +11,18 @@
 							
 							<c:if test="${totalcnt > 0 }">
 								<c:forEach items="${listSearch}" var="list">
-								<!--  onclick="javascript:fn_selectone('${list.approno}')" -->
+								
 									<tr >
 										<td>${list.appro_no}</td>
 										<td>${list.appro_type_cd}</td>
 										<td>${list.dept_name}</td>	
-										<td>${list.loginid}</td>			
+										<td>${list.loginID}</td>
 										<td>${list.name}</td>
 										<td>${list.req_date}</td>
 										<td>${list.appro_yn}</td>
 										<td>${list.appro_date}</td>
-										<td>${list.approbos}</td>
+										<td>${list.appro_bos}</td>
+										<td><a class="btnType3 color1" href="javascript:fn_selectone('${list.appro_no}', '${list.appro_type_cd}')">결재</a></td>
 									</tr>
 								</c:forEach>
 							</c:if>
