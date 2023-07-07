@@ -176,17 +176,15 @@
                     if (returnValue[i].order_month == $("#order_month").val()) {
                         check = true;
                         break;
+                    }else {
+
                     }
                 }
                 if (check) {
                     var labels = [];
                     var dataVar = [];
 
-                    if (returnValue.length == 0) { // 매출 데이터가 없을 때
-                        alert("해당 월에는 매출이 없습니다.");
-                        $(".bar_items").css("display", "none");
-                        return;
-                    }
+
                     for (var i = 0; i < returnValue.length; i++) {
                         console.log(returnValue[i].order_month);
                         labels.push(returnValue[i].order_month);
