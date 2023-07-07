@@ -286,7 +286,54 @@
 			 <!-- jsp발주번호 파람값으로넘기기 -->
 		 ) 
 	</insert>
-	
+	<select id = "dveSelecte" resultType="string">
+		
+	            select appro_type_cd from tb_appro where appro_no = ${appro_no}
+	  
+	</select>
+	<!-- 발주, 휴가 업데이트 -->
+<update id="DVEupdate">
 
+   <if test='appro_type_cd == "D"'>
+	   	<if test='appro_yn == "Y"'>
+	        update tb_dlv set appro_yn = 'Y'  where appro_no = #{appro_no}
+	      </if>
+	      <if test='appro_yn == "N"'>
+	        update tb_dlv set dlv_rej = #{appro_rej_reason} where appro_no = #{appro_no}
+	      </if>
+    </if>
+    <if test='appro_type_cd == "V"'>
+    	<if test='appro_yn == "Y"'>
+	        update tb_vaca_req set appro_yn = 'Y' where appro_no = #{appro_no}
+	      </if>
+	      <if test='appro_yn == "N"'>
+	        update tb_vaca_req set vaca_rej = #{appro_rej_reason} where appro_no = #{appro_no}
+	      </if>
+        
+    </if>
+</update>
+
+<!-- 휴가잔여 계산 -->
+<!-- 결재한 휴가일수계산 -->
+<select id="vacaDays" resultType = "int">
+	select  DATEDIFF(STR_TO_DATE(vaca_edate, '%Y-%m-%d'),STR_TO_DATE(vaca_sdate, '%Y-%m-%d')) 
+	from tb_vaca_req where appro_no = #{appro_no}
+</select>
+
+<!-- 휴가잔여테이블에 휴가일수 빼기 -->
+<update id="vacaUpdate">
+
+   update tb_dt_vacation set
+	dt_vaca_rest = dt_vaca_rest-#{days}+1
+    where loginID = #{loginID}
+    
+   <!--이코드는 걍 오류남 근데 받는게 어프로노 아님?
+	select  
+	dv.dt_vaca_rest-#{days} as days
+	from tb_dt_vacation dv
+	inner join tb_userinfo ui ON ui.loginID = dv.loginID
+	where dv.loginID = #{loginID} 
+	-->
+</update>
 
 </mapper>

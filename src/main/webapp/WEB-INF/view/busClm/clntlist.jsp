@@ -217,7 +217,23 @@
 	        return;
 	    }
 
-		// serialize() 사용으로, var param 선언X
+	    var param = {
+	        action : $("#action").val(),
+	        clnt_no : $("#clnt_no").val(),
+	        clnt_name : $("#clnt_name").val(),
+	        clnt_tel : $("#clnt_tel").val(),
+	        clnt_mng : $("#clnt_mng").val(),
+	        clnt_hp : $("#clnt_hp").val(),
+	        clnt_zip : $("#clnt_zip").val(),
+	        clnt_add : $("#clnt_add").val(),
+	        clnt_add_dt : $("#clnt_add_dt").val(),
+	        clnt_email : $("#clnt_email").val(),
+	        clnt_indst : $("#clnt_indst").val(),
+	        clnt_indst_no : $("#clnt_indst_no").val(),
+	        bkcombo : $("#bkcombo").val(),
+	        clnt_acc : $("#clnt_acc").val(),
+	        clnt_memo : $("#clnt_memo").val()
+	    };
 
 	    var savecallback = function(reval) {
 	        console.log( JSON.stringify(reval) );
@@ -236,7 +252,7 @@
 	        }
 	    }
 
-	    callAjax("/busClm/clntsave.do", "post", "json", false, $("#myForm").serialize(), savecallback) ;
+	    callAjax("/busClm/clntsave.do", "post", "json", false, param, savecallback) ;
 
 	}
 	

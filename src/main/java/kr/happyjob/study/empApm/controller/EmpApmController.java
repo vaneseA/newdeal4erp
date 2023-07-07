@@ -118,7 +118,7 @@ public class EmpApmController {
 		paramMap.put("loginID", (String) session.getAttribute("loginId"));
 
 
-		int returncval = 0;
+		Map<String, Object> returncval =  new HashMap<>()	;
 
 		if ("U".equals(action)) {
 			returncval = empApmService.updateApmStatus(paramMap);
@@ -129,11 +129,9 @@ public class EmpApmController {
 		
 		empApmService.listUpdateFileBudApm(paramMap);
 		
-		Map<String, Object> result = new HashMap<String, Object>();
-
-		result.put("returncval", returncval);
+		
 		logger.info("+ End " + className + ".updateApmStatus");
-		return result;
+		return returncval;
 	}
 
 //	@RequestMapping("listSaveApm.do")

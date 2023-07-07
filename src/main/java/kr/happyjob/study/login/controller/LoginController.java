@@ -105,12 +105,16 @@ public class LoginController {
 	    
 	      // 사용자 로그인
 	  LgnInfoModel lgnInfoModel = loginService.loginProc(paramMap);
-	  
+      
+	  //재직 여부 확인
+      String workYN = lgnInfoModel.getEmp_work_yn();
+      System.out.println("라라라라" + workYN);
+      
 	  String result;
 	  String resultMsg;
 	  Map<String, Object> resultMap = new HashMap<String, Object>();
 	  
-	  if (lgnInfoModel != null) {
+	  if (lgnInfoModel != null &&  workYN.equals("Y") ) {
 	     result = "SUCCESS";
 	     resultMsg = "사용자 로그인 정보가 일치 합니다.";
 	     System.out.println("asdf" + lgnInfoModel.getApproval_cd());

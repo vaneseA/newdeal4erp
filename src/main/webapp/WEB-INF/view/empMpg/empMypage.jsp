@@ -167,7 +167,7 @@ align-items:center;
 			console.log( JSON.stringify(returndata) );
 								
 			popupinitfile(returndata.listSearch);
-			imgFile(returndata.listSearch);
+		
 			
 			// 모달 팝업
 			gfModalPop("#layer1");

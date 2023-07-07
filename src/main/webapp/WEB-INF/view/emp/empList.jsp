@@ -247,7 +247,7 @@
       var user_type = $('input[name=type]:checked').val();
       $("#user_type").val(user_type);
       
-		var frm = document.getElementById("myForm");
+		var frm = document.getElementById("myForm2");
 		frm.enctype = 'multipart/form-data';
 		var fileData = new FormData(frm);
 		
@@ -305,8 +305,7 @@
 
 </head>
 <body>
-<form id="myForm" action=""  method="" >
-  <input type="hidden" id="action"  name="action"  />
+<form id="myForm" >
   <input type="hidden" id="pageno"  name="pageno"  />
 
   <!-- 모달 배경 -->
@@ -419,6 +418,8 @@
   </div>
 
   <!-- 모달팝업 -->
+  <form id="myForm2" >
+    <input type="hidden" id="action"  name="action"  />
   <div id="layer1" class="layerPop layerType2" style="width: 600px;">
     <dl>
       <dt>
@@ -602,6 +603,7 @@
     </dl>
     <a href="" class="closePop"><span class="hidden">닫기</span></a>
   </div>
+  </form>
   <!--// 모달팝업 -->
 </form>
 </body>

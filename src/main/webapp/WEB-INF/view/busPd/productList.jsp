@@ -13,7 +13,7 @@
     <script type="text/javascript">
 
         // 페이징 설정
-        var pageSize = 10;
+        var pageSize = 5;
         var pageBlockSize = 5;
 
 
@@ -24,25 +24,13 @@
 
             fn_productList();
 
+            // 제품 대분류
+            productCombo("l", "ltypecombo", "all", "", "", "", "");  // combo type( l : 대분류   m : 중분류   s : 소분류) combo_name, type(기본값  all : 전체   sel : 선택) ,  대분류 코드, 중분류코드, 소분류 코드, ""
 
-            // 제품분류
-            productCombo("l", "lTypeCombo", "all", "", "", "", "");  // combo type( l : 대분류   m : 중분류   s : 소분류) combo_name, type(기본값  all : 전체   sel : 선택) ,  대분류 코드, 중분류코드, 소분류 코드, ""
-
-
-            // 제품분류 제품등록용
-            productCombo("l", "lTypeComboForCreate", "all", "", "", "", "");  // combo type( l : 대분류   m : 중분류   s : 소분류) combo_name, type(기본값  all : 전체   sel : 선택) ,  대분류 코드, 중분류코드, 소분류 코드, ""
-
-
-            // 제조사
-            $('#lTypeCombo').change(function () {
-                productCombo("m", "mTypeCombo", "all", $("#lTypeCombo").val(), "", "", "");   // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , 선택된 상위 계정코드, ""
-                $("#splrName").val($(this).val());
-            });
-
-            // 제조사 제품등록용
-            $('#lTypeComboForCreate').change(function () {
-                productCombo("m", "mTypeComboForCreate", "all", $("#lTypeComboForCreate").val(), "", "", "");   // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , 선택된 상위 계정코드, ""
-                $("#splrName").val($(this).val());
+            // 제품 중분류
+            $('#ltypecombo').change(function () {
+                productCombo("m", "mtypecombo", "all", $("#ltypecombo").val(), "", "", "");   // combo type(combo box 종류),  combo_name, type(기본값  all : 전체   sel : 선택) , 선택된 상위 계정코드, ""
+                $("#ptypecombo option").remove();
             });
 
         });
@@ -78,8 +66,8 @@
             pagenum = pagenum || 1;
 
             var param = {
-                lTypeCombo: $("#lTypeCombo").val()
-                , mTypeCombo: $("#mTypeCombo").val()
+                proName: $("#proName").val()
+                , splrName: $("#splrName").val()
                 , searchKey: $("#searchKey").val()
                 , pname: $("#pname").val()
                 , pageSize: pageSize
@@ -92,11 +80,11 @@
 
                 $("#listProduct").empty().append(returnValue);
 
-                var totalcnt = $("#totalcnt").val();
+                var totalCnt = $("#totalCnt").val();
 
-                console.log("totalcnt: " + totalcnt);
+                console.log("totalCnt: " + totalCnt);
 
-                var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_productList');
+                var paginationHtml = getPaginationHtml(pagenum, totalCnt, pageSize, pageBlockSize, 'fn_productList');
                 console.log("paginationHtml: " + paginationHtml);
 
                 $("#productPagination").empty().append(paginationHtml);
@@ -160,7 +148,7 @@
 
                 popUpInit(returndata.productSearch);
 
-                // 모달 팝업델
+                // 모달 팝업
                 gfModalPop("#layer1");
 
             }
@@ -215,8 +203,8 @@
                     ["pro_name", "제품분류를 선택해 주세요."]
                     , ["splr_name", "납품회사명을 선택해 주세요"]
                     , ["product_name", "품명 입력해 주세요"]
-                    , ["product_serial", "시리얼넘버를 입력해 주세요"]
-                    , ["product_unit_price", "납품가를 입력해 주세요"]
+                    , ["product_serial", "모델명을 입력해 주세요"]
+                    , ["product_unit_price", "납품을 입력해 주세요"]
                     , ["product_price", "판매가을 입력해 주세요"],
 
                 ]
@@ -275,27 +263,25 @@
                         </p>
 
                         <!-- 검색창 영역 시작 -->
-                        <div style="display:flex; justify-content:center; align-content:center; line-height:2; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">
-                            <label for="lTypeCombo" style="font-size:15px; font-weight:bold; margin-right:10px;">제품
-                                분류</label>
-                            <select id="lTypeCombo" name="lTypeCombo" style="width: 150px; margin-right:5px;">
-
+                        <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:40px 40px; margin-bottom: 8px;">
+                            <select id="proName" name="proName" style="width: 170px; margin-right:5px;">
+                                <option value="">(제품종류) 전체</option>
+                                <option value="저장장치">저장장치</option>
+                                <option value="CPU">CPU</option>
+                                <option value="메모리">메모리</option>
+                                <option value="그래픽카드">그래픽카드</option>
+                                <option value="메인보드">메인보드</option>
                             </select>
-
-
-                            <label for="mTypeCombo" style="font-size:15px; font-weight:bold; margin-left:10px; margin-right:10px;">제조사</label>
-                            <select id="mTypeCombo" name="mTypeCombo" style="width: 170px; margin-right:5px;">
-
+                            <select id="splrName" name="splrName" style="width: 170px; margin-right:5px;">
+                                <option value="">(제조사) 전체</option>
+                                <option value="삼성">삼성</option>
+                                <option value="intel">intel</option>
                             </select>
-
-                            <label for="searchKey" style="font-size:15px; font-weight:bold; margin-right:10px;">검색 조건</label>
                             <select id="searchKey" name="searchKey" style="width: 120px; margin-right:5px;">
-
-                                <option value="">전체</option>
+                                <option value="">검색조건</option>
                                 <option value="product_name">제품 이름</option>
-                                <option value="product_serial">시리얼넘버</option>
                             </select>
-                            <input type="text" style="width: 160px; height: 25px; margin-right:5px; " id="pname"
+                            <input type="text" style="width: 200px; height: 25px; margin-right:5px; " id="pname"
                                    name="pname">
                             <a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
                             </p>
@@ -307,13 +293,13 @@
                             <table class="col">
                                 <caption>caption</caption>
                                 <colgroup>
-                                    <col width="8%">
                                     <col width="10%">
                                     <col width="10%">
-                                    <col width="28%">
-                                    <col width="20%">
-                                    <col width="11%">
-                                    <col width="12%">
+                                    <col width="10%">
+                                    <col width="10%">
+                                    <col width="10%">
+                                    <col width="10%">
+                                    <col width="10%">
                                 </colgroup>
 
                                 <thead>
@@ -322,7 +308,7 @@
                                     <th scope="col">제폼 종류</th>
                                     <th scope="col">제조사</th>
                                     <th scope="col">제품 이름</th>
-                                    <th scope="col">시리얼넘버</th>
+                                    <th scope="col">모델명</th>
                                     <th scope="col">납품단가</th>
                                     <th scope="col">판매가</th>
 
@@ -363,23 +349,23 @@
 
                     <tbody>
                     <tr>
-                        <th scope="row">제품 분류 <span class="font_red">*</span></th>
+                        <th scope="row">제품종류 <span class="font_red">*</span></th>
                         <td>
-                            <select id="lTypeComboForCreate" name="lTypeComboForCreate">
+                            <select id="ltypecombo" name="ltypecombo">
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">제조사 <span class="font_red">*</span></th>
                         <td>
-                            <select id="mTypeComboForCreate" name="mTypeComboForCreate">
+                            <select id="mtypecombo" name="mtypecombo">
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">품명 <span class="font_red">*</span></th>
                         <td><input type="text" class="inputTxt p100" name="product_name" id="product_name"/></td>
-                        <th scope="row">시리얼넘버 <span class="font_red">*</span></th>
+                        <th scope="row">모델명 <span class="font_red">*</span></th>
                         <td><input type="text" class="inputTxt p100" name="product_serial"
                                    id="product_serial"/></td>
                     </tr>

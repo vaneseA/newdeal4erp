@@ -176,7 +176,7 @@
 
         /* 모달파트 */
 
-        function fn_selectone(no, type) {
+        function fn_selectone(no, type,loginId) {
 
             var param = {
                 appro_no: no,
@@ -184,22 +184,25 @@
             }
 
             var selectoncallback;
+            selectonecallback = function (returndata) {
+            	$("#modalLoginID").val(loginId);
+            	 // 결재 타입이 휴가/발주 구분
+                if (type == '휴가') {
+                    
+                        console.log(JSON.stringify(returndata));
+                        popupinitfile(returndata.listSearch);
+                        gfModalPop("#layer2_va");
+                    
+                } else {
+                   
+                        console.log(JSON.stringify(returndata));
+                        popupinitfile(returndata.listSearch);
+                        gfModalPop("#layer2");
+                    
 
-            // 결재 타입이 휴가/발주 구분
-            if (type == '휴가') {
-                selectonecallback = function (returndata) {
-                    console.log(JSON.stringify(returndata));
-                    popupinitfile(returndata.listSearch);
-                    gfModalPop("#layer2_va");
                 }
-            } else {
-                selectonecallback = function (returndata) {
-                    console.log(JSON.stringify(returndata));
-                    popupinitfile(returndata.listSearch);
-                    gfModalPop("#layer2");
-                }
-
             }
+           
 
             callAjax("/empApm/listSelectOneApm.do", "post", "json", false, param,
                 selectonecallback);
@@ -348,6 +351,9 @@
             /* if ( ! fn_Validate() ) {
                 return;
             }  */
+            if($("input[name='appro_yn']:checked").val() == 'N') {
+            	alert()
+            }
             var param = {
                 // 결재/반려 여부
                 appro_yn: $("input[name='appro_yn']:checked").val(),
@@ -357,16 +363,27 @@
                 appro_bos: $("#appro_bos").val(),
                 // 반려 사유
                 dlv_no: $("#dlv_no_modal").val(),
-                appro_rej_reason: $("#appro_rej_reason").val(),
-                action: $("#action").val()
+                appro_rej_reason: $("#appro_rej_reason_modal").val(),
+                action: $("#action").val(),
+                loginID : $("#modalLoginID").val()
 
             }
-            console.log($("#dlv_no").val());
+            console.log($("#appro_rej_reason_modal").val());
             var savecallback = function (reval) {
                 console.log(JSON.stringify(reval));
 
-                if (reval.returncval > 0) {
-                    alert("저장 되었습니다.");
+                if (reval.approStatus > 0) {
+                	if(reval.dv >0 ) {
+                		if(reval.vu) {
+                			alert("결재 되었습니다.");
+                		}else {
+                			alert("반려되었습니다");
+                		}
+                		
+                	}else {
+                		
+                	}
+                    
                     gfCloseModal();
 
                     if ($("#action").val() == "U") {
@@ -457,7 +474,7 @@
                                 <option value="Y ">결재</option>
                                 <option value="N ">반려</option>
                                 </select> <span class="label-font ">&nbsp;&nbsp;&nbsp;&nbsp;결재유형:&nbsp;</span>
-                                <select id="appro_type_cd_ask " name="appro_type_cd_ask"
+                                <select id="appro_type_cd_ask" name="appro_type_cd_ask"
                                         style="width: 120px; height: 27px; font-size: 15px"">
                                 <option value="">전체</option>
                                 <option value="발주">발주</option>
@@ -534,6 +551,7 @@
     <!-- 모달팝업 -->
 
     <div id="layer2" class="layerPop layerType2" style="width: 600px;">
+    <input type="hidden" id="modalLoginID"/>
         <dl>
             <dt>
                 <strong>결재</strong>
@@ -656,8 +674,8 @@
                         <th scope="row">신청일자</th>
                         <td><input type="text" id="vaca_req_date_modal" name="vaca_req_date_modal"
                                    style="width: 130px; height:30px"></td>
-                        <th scope="row">지출날짜</th>
-                        <td><input type="text" id="vaca_edate_modal" name="vaca_edate_modal"
+                        <th scope="row">이름</th>
+                        <td><input type="text" id="" name="vaca_edate_modal"
                                    style="width: 130px; height:30px"></td>
                     </tr>
 
@@ -675,8 +693,8 @@
 
                     <tr>
                         <th scope="row">반려사유</th>
-                        <td colspan="3"><textarea id="appro_rej_reason"
-                                                  name="appro_rej_reason"> </textarea></td>
+                        <td colspan="3"><textarea id="appro_rej_reason_modal"
+                                                  name="appro_rej_reason_modal"> </textarea></td>
                     </tr>
 
                     </tbody>

@@ -27,12 +27,15 @@ public interface EmpApmDao {
 	public int listUpdateFileApm(Map<String, Object> paramMap) throws Exception;
 	public int listUpdateFileApproApm(Map<String, Object> paramMap) throws Exception;
 	public int listUpdateFileBudApm(Map<String, Object> paramMap) throws Exception;
-	
+	public int DVEupdate(Map<String, Object> paramMap) throws Exception;
+	public String dveSelecte(Map<String, Object> paramMap) throws Exception;
+	public int vacaDays(Map<String, Object> paramMap) throws Exception;
+	public int vacaUpdate(Map<String, Object> paramMap) throws Exception;
 	
 	/** 파일 등록 */
 	public int fileinsertApm(Map<String, Object> paramMap) throws Exception;
 	
-
+	
 	
 	
 }

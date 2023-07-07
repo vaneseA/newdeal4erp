@@ -217,6 +217,24 @@
 	    if ( ! fn_Validate() ) {
 	        return;
 	    }
+		
+	    var param = {
+	        action : $("#action").val(),
+	        splr_no : $("#splr_no").val(),
+	        splr_name : $("#splr_name").val(),
+	        splr_tel : $("#splr_tel").val(),
+	        splr_mng : $("#splr_mng").val(),
+	        splr_hp : $("#splr_hp").val(),
+	        splr_zip : $("#splr_zip").val(),
+	        splr_add : $("#splr_add").val(),
+	        splr_add_dt : $("#splr_add_dt").val(),
+	        splr_email : $("#splr_email").val(),
+	        splr_indst : $("#splr_indst").val(),
+	        splr_indst_no : $("#splr_indst_no").val(),
+	        bkcombo : $("#bkcombo").val(),
+	        splr_acc : $("#splr_acc").val(),
+	        splr_memo : $("#splr_memo").val()
+	    };
 
 	    var savecallback = function(reval) {
 	        console.log( JSON.stringify(reval) );
@@ -235,7 +253,7 @@
 	        }
 	    }
 
-	    callAjax("/busSpm/splrsave.do", "post", "json", false, $("#myForm").serialize(), savecallback) ;
+	    callAjax("/busSpm/splrsave.do", "post", "json", false, param, savecallback);
 
 	}
 	
