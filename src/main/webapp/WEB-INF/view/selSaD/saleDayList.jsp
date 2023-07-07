@@ -165,28 +165,18 @@
 
 
             var listCallBack = function (returnValue) {
-
-
                 console.log(returnValue);
-
-
                 $("#listSaleDay").empty().append(returnValue);
-
-
                 var totalcnt = $("#totalcnt").val();
-
                 if (totalcnt == 0) {
                     alert("해당 날짜에는 데이터가 존재하지 않습니다.");
                     $(".selectedDayList").css("display", "none");
                     return;
                 }
                 console.log("totalcnt: " + totalcnt);
-
                 var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_saleDayList');
                 console.log("paginationHtml: " + paginationHtml);
-
                 $("#saleDayPagination").empty().append(paginationHtml);
-
                 $("#pageno").val(pagenum);
                 fn_chart();
             };
@@ -194,39 +184,19 @@
             callAjax("/selSaD/saleDayList.do", "post", "text", false, param, listCallBack);
         }
 
-        function fn_selectedDayList() {
-
-
-            var param = {
-                order_date: $("#order_date").val()
-            };
-
-            var listCallBack = function (returnValue) {
-
-                // 데이터 추가
-                $("#selectedDayList").empty().append(returnValue);
-            };
-
-            callAjax("/selSaD/selectedDayList.do", "post", "text", false, param, listCallBack);
-        }
-
-
         function fn_chart() {
             var check = false;
             // 그래프 초기화
             $("#doughnut-chart").remove();
             $(".doughnut_items").empty().append('<canvas id="doughnut-chart" width="300" height="250"></canvas>');
-
             // 그래프 데이터 가져오기
             var param = {
                 order_date: $("#order_date").val()
             };
-
             var listCallBack = function (returnValue) {
                 for (var i in returnValue) {
                     console.log(returnValue[i].order_date);
                     if (returnValue[i].order_date == $("#order_date").val()) {
-
                         check = true;
                         break;
                     }
@@ -253,8 +223,23 @@
                 }
 
             };
-
             callAjax("/selSaD/selectedDayChart.do", "post", "json", false, param, listCallBack);
+        }
+
+        function fn_selectedDayList() {
+
+
+            var param = {
+                order_date: $("#order_date").val()
+            };
+
+            var listCallBack = function (returnValue) {
+
+                // 데이터 추가
+                $("#selectedDayList").empty().append(returnValue);
+            };
+
+            callAjax("/selSaD/selectedDayList.do", "post", "text", false, param, listCallBack);
         }
 
 
@@ -267,14 +252,9 @@
     <input type="hidden" id="order_no" name="order_no"/>
     <input type="hidden" id="pageno" name="pageno"/>
 
-    <!-- 모달 배경 -->
-    <div id="mask"></div>
-
     <div id="wrap_area">
-
         <h2 class="hidden">header 영역</h2>
         <jsp:include page="/WEB-INF/view/common/header.jsp"></jsp:include>
-
         <h2 class="hidden">컨텐츠 영역</h2>
         <div id="container">
             <ul>
@@ -287,17 +267,14 @@
                     <!-- contents -->
                     <h3 class="hidden">contents 영역</h3> <!-- content -->
                     <div class="content">
-
                         <p class="Location">
                             <a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
                                 class="btn_nav bold">매출</span> <span class="btn_nav bold">일별 매출 현황
 								</span> <a href="../selSaD/saleDay.do" class="btn_set refresh">새로고침</a>
                         </p>
 
-
                         <p class="conTitle">
-                            <span>일별 매출 현황</span> <span class="fr">
-					</span>
+                            <span>일별 매출 현황</span> <span class="fr"></span>
                         </p>
 
                         <!-- 검색창 영역 시작 -->
@@ -305,14 +282,14 @@
                         <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:10px 10px;">
                             <label for="order_date"
                                    style="font-size:15px; font-weight:bold; margin-right:10px; margin-top:6px; ">날짜 조회
-                                : </label>
+                                 </label>
                             <input type="date" id="order_date" name="order_date" min="2023-01-01"
                                    style="height: 25px; width: 150px; margin-right: 15px;">
                             <a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
-                            </p>
+
                         </div>
                         <!-- 검색창 영역 끝 -->
-                        <div class="selectedDayList" style="display: none;"> <!-- Here -->
+                        <div class="selectedDayList" style="display: none;">
                             <div style="display:flex; flex-grow: 1; justify-content: space-evenly;">
                                 <div class="doughnut_items" style="width: 100%">
                                     <canvas id="doughnut-chart" width="300" height="250"></canvas>

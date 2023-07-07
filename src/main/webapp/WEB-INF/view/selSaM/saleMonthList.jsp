@@ -144,16 +144,16 @@
             var listCallBack = function (returnValue) {
                 console.log(returnValue);
                 $("#listSaleMonth").empty().append(returnValue);
-
                 var totalcnt = $("#totalcnt").val();
-
                 console.log("totalcnt: " + totalcnt);
-
+                if (totalcnt == 0) {
+                    alert("해당 월에는 데이터가 존재하지 않습니다.");
+                    $(".bar_items").css("display", "none");
+                    return;
+                }
                 var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_saleMonthList');
                 console.log("paginationHtml: " + paginationHtml);
-
                 $("#saleMonthPagination").empty().append(paginationHtml);
-
                 $("#pageno").val(pagenum);
                 fn_chart();
             };
@@ -166,6 +166,7 @@
             // 그래프 초기화
             $("#bar-chart-horizontal").remove();
             $(".bar_items").empty().append('<canvas id="bar-chart-horizontal" width="300" height="250"></canvas>');
+            // 그래프 데이터 가져오기
             var param = {
                 order_month: $("#order_month").val()
             };
@@ -194,7 +195,6 @@
                     console.log("labels" + labels);
                     console.log("dataVar" + dataVar);
                     fn_aa(labels, dataVar);
-
                     $(".bar_items").css("display", "block");
                 }
             };
@@ -207,7 +207,7 @@
     <input type="hidden" id="action" name="action"/>
     <input type="hidden" id="order_no" name="order_no"/>
     <input type="hidden" id="pageno" name="pageno"/>
-    <div id="mask"></div>
+
     <div id="wrap_area">
         <h2 class="hidden">header 영역</h2>
         <jsp:include page="/WEB-INF/view/common/header.jsp"></jsp:include>
@@ -227,7 +227,6 @@
                             <a href="../selSaM/saleMonthList.do" class="btn_set refresh">새로고침</a>
                         </p>
 
-
                         <p class="conTitle">
                             <span>월별 매출 현황</span><span class="fr"></span>
                         </p>
@@ -237,14 +236,12 @@
                         <div style="display:flex; justify-content:center; align-content:center; border:1px solid DeepSkyBlue; padding:10px 10px;">
                             <label for="order_month"
                                    style="font-size:15px; font-weight:bold; margin-right:10px; margin-top:6px; ">월 조회
-                                : </label>
+                                 </label>
                             <input type="month" id="order_month" name="order_month" min="2023-01-01"
                                    style="height: 25px; width: 120px; margin-right: 15px;">
                             <a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
                         </div>
-
                         <!-- 검색창 영역 끝 -->
-
                         <div class="bar_items"
                              style="width: 60%; display: none; margin-left: auto; margin-right: auto;">
                             <canvas id="bar-chart-horizontal" width="300" height="250"></canvas>
