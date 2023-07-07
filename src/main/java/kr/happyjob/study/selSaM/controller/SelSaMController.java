@@ -67,7 +67,19 @@ public class SelSaMController {
 
       // Controller -> Service -> Dao -> SQL
       List<SelSaMModel> saleMonthSearchList = selSaMService.saleMonthList(paramMap);
+
       int totalcnt = selSaMService.countSaleMonthList(paramMap);
+      String orderMonth = (String)paramMap.get("order_month");
+      System.out.println("orderMonth" + orderMonth );
+      for(int i=0; i<saleMonthSearchList.size(); i++) {
+         if (saleMonthSearchList.get(i).getOrder_month().equals(orderMonth)) {
+            break;
+         }else {
+            totalcnt = 0;
+         }
+         System.out.println("orderMonth" + saleMonthSearchList.get(i).getOrder_month() );
+      }
+
 
       model.addAttribute("saleMonthSearchList", saleMonthSearchList);
       model.addAttribute("totalcnt", totalcnt);

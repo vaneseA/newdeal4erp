@@ -21,7 +21,7 @@
         </if>
         GROUP BY DATE_FORMAT(od.order_date,'%Y-%m')
         ORDER BY od.order_date DESC
-        LIMIT #{pageIndex}, #{pageSize}
+
     </select>
 
     <!-- 목록 개수 조회 -->
