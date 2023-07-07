@@ -70,15 +70,20 @@ public class SelSaMController {
 
       int totalcnt = selSaMService.countSaleMonthList(paramMap);
       String orderMonth = (String)paramMap.get("order_month");
-      System.out.println("orderMonth" + orderMonth );
-      for(int i=0; i<saleMonthSearchList.size(); i++) {
-         if (saleMonthSearchList.get(i).getOrder_month().equals(orderMonth)) {
-            break;
-         }else {
-            totalcnt = 0;
+      System.out.println("orderMonth" + orderMonth + "d");
+      if(orderMonth == null || orderMonth.equals("")) {
+
+      }else {
+         for(int i=0; i<saleMonthSearchList.size(); i++) {
+            if (saleMonthSearchList.get(i).getOrder_month().equals(orderMonth)) {
+               break;
+            }else {
+               totalcnt = 0;
+            }
+            System.out.println("orderMonth" + saleMonthSearchList.get(i).getOrder_month() );
          }
-         System.out.println("orderMonth" + saleMonthSearchList.get(i).getOrder_month() );
       }
+
 
 
       model.addAttribute("saleMonthSearchList", saleMonthSearchList);
