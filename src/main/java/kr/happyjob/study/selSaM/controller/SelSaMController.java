@@ -63,7 +63,7 @@ public class SelSaMController {
       int pageindex = (pagenum - 1) * pageSize;
 
       paramMap.put("pageSize", pageSize);
-      paramMap.put("pageindex", pageindex);
+      paramMap.put("pageIndex", pageindex);
 
       // Controller -> Service -> Dao -> SQL
       List<SelSaMModel> saleMonthSearchList = selSaMService.saleMonthList(paramMap);
