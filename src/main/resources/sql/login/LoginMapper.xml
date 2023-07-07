@@ -31,6 +31,7 @@
       SELECT  ui.loginID as lgn_id
                , ui.name as usr_nm
                , ui.user_Type as mem_author
+               , ui.emp_work_yn
                ,ui.file_no
                ,fi.file_name
                ,fi.logic_path

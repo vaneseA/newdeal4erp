@@ -240,6 +240,7 @@
     <update id="empUpdate">
         update tb_userinfo
         set user_type =  #{user_type}
+       	  , name = #{name}
           , emp_edu =  #{emp_edu}
           , emp_sex =  #{emp_sex}
           , emp_email =  #{emp_email}
@@ -252,6 +253,7 @@
           , level_cd =  #{level_cd}
           , emp_yr_sal =  #{emp_yr_sal}
           , retire_reason =  #{retire_reason}
+          , emp_birth = #{emp_birth}
 
           , sal_san = #{sal_san}
 

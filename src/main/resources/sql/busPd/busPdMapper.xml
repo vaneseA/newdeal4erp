@@ -17,11 +17,11 @@
         INNER JOIN tb_pro pc ON pd.pro_cd = pc.pro_cd
         INNER JOIN tb_splr sl ON pd.splr_no = sl.splr_no
         <where>
-            <if test="(lTypeCombo != null) and (!lTypeCombo.equals(''))">
-                and pd.pro_cd = #{lTypeCombo}
+            <if test="(proName != null) and (!proName.equals(''))">
+                and pc.pro_name = #{proName}
             </if>
-            <if test="(mTypeCombo != null) and (!mTypeCombo.equals(''))">
-                and pd.splr_no = #{mTypeCombo}
+            <if test="(splrName != null) and (!splrName.equals(''))">
+                and sl.splr_name = #{splrName}
             </if>
             <if test="(pname != null) and (!pname.equals(''))">
                 <choose>
@@ -48,11 +48,11 @@
         INNER JOIN tb_splr sl ON pd.splr_no = sl.splr_no
 
         <where>
-            <if test="(lTypeCombo != null) and (!lTypeCombo.equals(''))">
-                and pd.pro_cd = #{lTypeCombo}
+            <if test="(proName != null) and (!proName.equals(''))">
+                and pc.pro_name = #{proName}
             </if>
-            <if test="(mTypeCombo != null) and (!mTypeCombo.equals(''))">
-                and pd.splr_no = #{mTypeCombo}
+            <if test="(splrName != null) and (!splrName.equals(''))">
+                and sl.splr_name = #{splrName}
             </if>
             <if test="(pname != null) and (!pname.equals(''))">
                 <choose>
@@ -81,17 +81,19 @@
         pro_cd,
         splr_no,
         product_name,
-
+        product_dt,
+        file_no,
         product_serial,
         product_unit_price,
         product_price
         )
         VALUES (
         #{no},
-        #{lTypeComboForCreate},
-        #{mTypeComboForCreate},
+        #{ltypecombo},
+        #{mtypecombo},
         #{product_name},
-
+        1,
+        1,
         #{product_serial},
         #{product_unit_price},
         #{product_price}

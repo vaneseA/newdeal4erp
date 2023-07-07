@@ -488,7 +488,7 @@
 				}
 			}
 			
-			callAjax("/accAcm/bigInsert.do", "post", "json", true, $("#myForm").serialize() , savecollback) ;
+			callAjax("/accAcm/bigInsert.do", "post", "json", true, $("#myForm2").serialize() , savecollback) ;
 			
 			
 		}
@@ -537,7 +537,7 @@
 		}
 		
 
-		callAjax("/accAcm/smallInsert.do", "post", "json", false, $("#myForm").serialize() , savecollback) ;
+		callAjax("/accAcm/smallInsert.do", "post", "json", false, $("#myForm2").serialize() , savecollback) ;
 		
 	}
 	}
@@ -629,17 +629,7 @@
 </head>
 <body>
 <form id="myForm" action=""  method="">
-	<input type="hidden" id="action"  name="action"  value=""/>
-	<input type="hidden" id="pageno"  name="pageno"  />
-	
-	<input type="hidden" id="currentPageComnGrpCod" value="1" />
-	<input type="hidden" id="currentPageComnDtlCod"  value="1"  />
-	
-	<input type="hidden" id="tmpAcnt_sbject_cd" value="">
-	<input type="hidden" id="tmpAcnt_sbject_name" value="">
-	
-	 <input type="hidden" name="chkLCd" id="chkLCd" value="2"/>
-	 <input type="hidden" name="chkLNm" id="chkLNm" value="2"/>
+
 	
 	<!-- 모달 배경 -->
 	<div id="mask"></div>
@@ -769,6 +759,18 @@
 	</div> <!-- wrap_area -->
 
 	<!-- 모달팝업 -->
+	  <form id="myForm2" >
+	  	<input type="hidden" id="action"  name="action"  value=""/>
+	<input type="hidden" id="pageno"  name="pageno"  />
+	
+	<input type="hidden" id="currentPageComnGrpCod" value="1" />
+	<input type="hidden" id="currentPageComnDtlCod"  value="1"  />
+	
+	<input type="hidden" id="tmpAcnt_sbject_cd" value="">
+	<input type="hidden" id="tmpAcnt_sbject_name" value="">
+	
+	 <input type="hidden" name="chkLCd" id="chkLCd" value="2"/>
+	 <input type="hidden" name="chkLNm" id="chkLNm" value="2"/>
 	<div id="layer1" class="layerPop layerType2" style="width: 600px;">
 		<dl>
 			<dt>
@@ -883,6 +885,7 @@
 		</dl>
 		<a href="" class="closePop"><span class="hidden">닫기</span></a>
 	</div>
+	  </form>
 	<!--// 모달팝업 -->
 </form>
 </body>

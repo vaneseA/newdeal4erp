@@ -22,7 +22,7 @@ public interface EmpApmService {
 	public EmpApmModel getVacationStatus(Map<String, Object> paramMap) throws Exception;
 	
 	/* 결재 사항 수정 */
-	public int updateApmStatus(Map<String, Object> paramMap) throws Exception;
+	public Map<String, Object> updateApmStatus(Map<String, Object> paramMap) throws Exception;
 	
 //	/** 수정 */
 //	public int listUpdateApm(Map<String, Object> paramMap) throws Exception;

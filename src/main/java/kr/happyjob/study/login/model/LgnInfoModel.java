@@ -20,6 +20,11 @@ public class LgnInfoModel {
 	//승인 코드
 	private String approval_cd;
 	
+	//재직 여부
+	private String emp_work_yn;
+	
+	
+	
 	
 	/*// 게시판 글 번호
 	private int row_num;
@@ -34,6 +39,14 @@ public class LgnInfoModel {
 	private String ofc_dvs_cod;
 	*/
 	
+	public String getEmp_work_yn() {
+		return emp_work_yn;
+	}
+
+	public void setEmp_work_yn(String emp_work_yn) {
+		this.emp_work_yn = emp_work_yn;
+	}
+
 	// 사용자 로그인 ID
 	private String lgn_id;
 	

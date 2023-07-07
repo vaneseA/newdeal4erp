@@ -190,8 +190,8 @@
 	    if ( ! fn_Validate() ) {
 	        return;
 	    }
-
-		// serialize() 사용으로, var param 선언X
+		
+	 	// serialize() 사용으로, var param 선언X
 
 	    var savecallback = function(reval) {
 	        console.log( JSON.stringify(reval) );
@@ -210,7 +210,7 @@
 	        }
 	    }
 
-	    callAjax("/busSap/plansave.do", "post", "json", false, $("#myForm").serialize(), savecallback) ;
+	    callAjax("/busSap/plansave.do", "post", "json", false, $("#myForm2").serialize(), savecallback);
 
 	}
 	
@@ -238,8 +238,6 @@
 </head>
 <body>
 <form id="myForm" action=""  method="">
-	<input type="hidden" id="action"  name="action"  />
-	<input type="hidden" id="pln_no"  name="pln_no"  />
 	<input type="hidden" id="pageno"  name="pageno"  />
 
 	<!-- 모달 배경 -->
@@ -343,60 +341,65 @@
 	</div>
 
 	<!-- 모달팝업 -->
-	<div id="layer1" class="layerPop layerType2" style="width: 800px;">
-		<dl>
-			<dt>
-				<strong>영업계획 관리</strong>
-			</dt>
-			<dd class="content">
-				<!-- s : 여기에 내용입력 -->
-				<table class="row">
-					<caption>caption</caption>
-					<colgroup>
-						<col width="25%">
-						<col width="25%">
-						<col width="25%">
-						<col width="25%">
-					</colgroup>
-
-					<tbody>
-						<tr>
-							<th scope="row">고객기업명 <span class="font_red">*</span></th>
-							<td><select id="clicombo" name="clicombo"></select></td>
-							<th scope="row">제품분류 <span class="font_red">*</span></th>
-							<td><select id="ltypecombo" name="ltypecombo"></select></td>
-						</tr>
-						<tr>
-							<th scope="row">제조사 <span class="font_red">*</span></th>
-							<td><select id="mtypecombo" name="mtypecombo"></select></td>
-							<th scope="row">제품명 <span class="font_red">*</span></th>
-							<td><select id="ptypecombo" name="ptypecombo"></select></td>
-						</tr>
-						<tr>
-							<th scope="row">목표수량 <span class="font_red">*</span></th>
-							<td><input type="text" class="inputTxt p100" name="pln_amt" id="pln_amt" /></td>
-							<th scope="row">실적수량 <span class="font_red">*</span></th>
-							<td><input type="text" class="inputTxt p100" name="per_amt" id="per_amt" /></td>
-						</tr>
-						<tr>
-							<th scope="row">메모</th>
-							<td colspan="3"><input type="text" class="inputTxt p100" name="pln_memo" id="pln_memo" /></td>
-						</tr>
-					</tbody>
-				</table>
-
-				<!-- e : 여기에 내용입력 -->
-
-				<div class="btn_areaC mt30">
-					<a href="" class="btnType blue" id="btnSave" name="btn"><span>저장</span></a> 
-					<a href="" class="btnType blue" id="btnDelete" name="btn"><span>삭제</span></a> 
-					<a href=""	class="btnType gray"  id="btnClose" name="btn"><span>취소</span></a>
-				</div>
-			</dd>
-		</dl>
-		<a href="" class="closePop"><span class="hidden">닫기</span></a>
-	</div>
-
+	<form id="myForm2" action=""  method="">
+		<input type="hidden" id="action"  name="action"  />
+		<input type="hidden" id="pln_no"  name="pln_no"  />
+	
+		<div id="layer1" class="layerPop layerType2" style="width: 800px;">
+			<dl>
+				<dt>
+					<strong>영업계획 관리</strong>
+				</dt>
+				<dd class="content">
+					<!-- s : 여기에 내용입력 -->
+					<table class="row">
+						<caption>caption</caption>
+						<colgroup>
+							<col width="25%">
+							<col width="25%">
+							<col width="25%">
+							<col width="25%">
+						</colgroup>
+	
+						<tbody>
+							<tr>
+								<th scope="row">고객기업명 <span class="font_red">*</span></th>
+								<td><select id="clicombo" name="clicombo"></select></td>
+								<th scope="row">제품분류 <span class="font_red">*</span></th>
+								<td><select id="ltypecombo" name="ltypecombo"></select></td>
+							</tr>
+							<tr>
+								<th scope="row">제조사 <span class="font_red">*</span></th>
+								<td><select id="mtypecombo" name="mtypecombo"></select></td>
+								<th scope="row">제품명 <span class="font_red">*</span></th>
+								<td><select id="ptypecombo" name="ptypecombo"></select></td>
+							</tr>
+							<tr>
+								<th scope="row">목표수량 <span class="font_red">*</span></th>
+								<td><input type="text" class="inputTxt p100" name="pln_amt" id="pln_amt" /></td>
+								<th scope="row">실적수량 <span class="font_red">*</span></th>
+								<td><input type="text" class="inputTxt p100" name="per_amt" id="per_amt" /></td>
+							</tr>
+							<tr>
+								<th scope="row">메모</th>
+								<td colspan="3"><input type="text" class="inputTxt p100" name="pln_memo" id="pln_memo" /></td>
+							</tr>
+						</tbody>
+					</table>
+	
+					<!-- e : 여기에 내용입력 -->
+	
+					<div class="btn_areaC mt30">
+						<a href="" class="btnType blue" id="btnSave" name="btn"><span>저장</span></a> 
+						<a href="" class="btnType blue" id="btnDelete" name="btn"><span>삭제</span></a> 
+						<a href=""	class="btnType gray"  id="btnClose" name="btn"><span>취소</span></a>
+					</div>
+				</dd>
+			</dl>
+			<a href="" class="closePop"><span class="hidden">닫기</span></a>
+		</div>
+	
+	</form>
 	<!--// 모달팝업 -->
 </form>
 </body>

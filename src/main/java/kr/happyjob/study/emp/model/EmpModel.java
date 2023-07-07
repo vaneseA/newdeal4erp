@@ -40,6 +40,11 @@ public class EmpModel {
 	private String physic_path;
 	private int file_size;
 	private String exten;
+
+	
+	
+	
+	
 	public String getLoginId() {
 		return loginId;
 	}
