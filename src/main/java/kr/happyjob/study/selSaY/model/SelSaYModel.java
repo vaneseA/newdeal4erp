@@ -60,9 +60,6 @@ public class SelSaYModel {
         return this.order_year_tot_product_unit_price;
     }
 
-    public void setOrder_year_tot_product_unit_price(final long order_year_tot_product_unit_price) {
-        this.order_year_tot_product_unit_price = order_year_tot_product_unit_price;
-    }
 
     public long getTot_profit() {
         return this.tot_profit;
@@ -190,5 +187,56 @@ public class SelSaYModel {
 
     public void setOrder_year(int order_year) {
         this.order_year = order_year;
+    }
+
+    private int sale_year;
+    private long total_sales_volume;
+    private long expense_total;
+    private long year_total_profit;
+    private double percent_year;
+
+    public int getSale_year() {
+        return sale_year;
+    }
+
+    public void setSale_year(int sale_year) {
+        this.sale_year = sale_year;
+    }
+
+    public long getTotal_sales_volume() {
+        return total_sales_volume;
+    }
+
+    public void setTotal_sales_volume(long total_sales_volume) {
+        this.total_sales_volume = total_sales_volume;
+    }
+
+
+    public void setOrder_year_tot_product_unit_price(long order_year_tot_product_unit_price) {
+        this.order_year_tot_product_unit_price = order_year_tot_product_unit_price;
+    }
+
+    public long getExpense_total() {
+        return expense_total;
+    }
+
+    public void setExpense_total(long expense_total) {
+        this.expense_total = expense_total;
+    }
+
+    public long getYear_total_profit() {
+        return year_total_profit;
+    }
+
+    public void setYear_total_profit(long year_total_profit) {
+        this.year_total_profit = year_total_profit;
+    }
+
+    public double getPercent_year() {
+        return percent_year;
+    }
+
+    public void setPercent_year(double percent_year) {
+        this.percent_year = percent_year;
     }
 }

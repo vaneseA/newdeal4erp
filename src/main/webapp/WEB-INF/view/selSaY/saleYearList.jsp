@@ -16,7 +16,7 @@
         var pageSize = 5;
         var pageBlockSize = 5;
 
-        function fn_aa() {
+        function fn_aa(labels, dataVar) {
             new Chart(document.getElementById("bar-chart"), {
                 type: 'bar',
                 data: {
@@ -135,6 +135,7 @@
         }
 
         function fn_saleYearList(pagenum) {
+
             pagenum = pagenum || 1;
 
             var param = {
@@ -144,21 +145,27 @@
                 pagenum: pagenum
             };
 
-
             var listCallBack = function (returnValue) {
                 console.log(returnValue);
                 $("#listSaleYear").empty().append(returnValue);
-
                 var totalcnt = $("#totalcnt").val();
-
                 console.log("totalcnt: " + totalcnt);
-
+                if (totalcnt == 0) {
+                    alert("해당 연도에는 데이터가 존재하지 않습니다.");
+                    $(".bar_items").css("display", "none");
+                    console.log("pagenum:" + pagenum);
+                    var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_saleYearList');
+                    console.log("paginationHtml: " + paginationHtml);
+                    $("#saleYearPagination").empty().append(paginationHtml);
+                    $("#pageno").val(pagenum);
+                    return;
+                }
+                console.log("pagenum:" + pagenum);
                 var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_saleYearList');
                 console.log("paginationHtml: " + paginationHtml);
-
                 $("#saleYearPagination").empty().append(paginationHtml);
-
                 $("#pageno").val(pagenum);
+
                 fn_chart();
             };
 
@@ -179,26 +186,23 @@
                     if (returnValue[i].order_year == $("#order_year").val()) {
                         check = true;
                         break;
+                    }else {
+
                     }
                 }
                 if (check) {
                     var labels = [];
                     var dataVar = [];
 
-                    if (returnValue.length == 0) { // 매출 데이터가 없을 때
-                        alert("해당 연도에는 매출이 없습니다.");
-                        $(".bar_items").css("display", "none");
-                        return;
-                    }
+
                     for (var i = 0; i < returnValue.length; i++) {
                         console.log(returnValue[i].order_year);
                         labels.push(returnValue[i].order_year);
-                        dataVar.push(returnValue[i].tot_profit);
+                        dataVar.push(returnValue[i].year_total_profit);
                     }
                     console.log("labels" + labels);
                     console.log("dataVar" + dataVar);
                     fn_aa(labels, dataVar);
-
                     $(".bar_items").css("display", "block");
                 }
             };
@@ -214,14 +218,9 @@
     <input type="hidden" id="order_no" name="order_no"/>
     <input type="hidden" id="pageno" name="pageno"/>
 
-    <!-- 모달 배경 -->
-    <div id="mask"></div>
-
     <div id="wrap_area">
-
         <h2 class="hidden">header 영역</h2>
         <jsp:include page="/WEB-INF/view/common/header.jsp"></jsp:include>
-
         <h2 class="hidden">컨텐츠 영역</h2>
         <div id="container">
             <ul>

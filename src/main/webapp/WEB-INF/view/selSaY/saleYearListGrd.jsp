@@ -12,20 +12,20 @@
 <c:if test="${totalcnt > 0 }">
     <c:forEach items="${saleYearSearchList}" var="list">
         <tr>
-            <td>${list.order_year}</td>
+            <td>${list.sale_year}</td>
             <td>
-                <fmt:formatNumber value="${list.order_year_dt_amt}" type="number" pattern="#,###" />
+                <fmt:formatNumber value="${list.total_sales_volume}" type="number" pattern="#,###" />
             </td>
             <td>
                 <fmt:formatNumber value="${list.order_year_tot_product_price}" type="number" pattern="#,###" />
             </td>
             <td>
-                <fmt:formatNumber value="${list.sal_after_total}" type="number" pattern="#,###" />
+                <fmt:formatNumber value="${list.expense_total}" type="number" pattern="#,###" />
             </td>
             <td>
-                <fmt:formatNumber value="${list.tot_profit}" type="number" pattern="#,###" />
+                <fmt:formatNumber value="${list.year_total_profit}" type="number" pattern="#,###" />
             </td>
-
+            <td>${list.percent_year}</td>
         </tr>
     </c:forEach>
 </c:if>
