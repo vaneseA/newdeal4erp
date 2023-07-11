@@ -52,16 +52,7 @@ public class EmpVcpController {
       logger.info("+ Start " + className + ".vacaPersonal");
       logger.info("   - paramMap : " + paramMap); //println으로 값이 들어왔는지 확인하는거ㄴ
       
-      String loginID = null;
-      Cookie[] cookies = request.getCookies(); 
-      if(cookies != null) {
-		    for(Cookie index : cookies) {
-		        String cookieName = index.getName();
-		        if(cookieName.equals("EMP_ID")) {
-		        	loginID = index.getValue();
-		        }
-		    }
-      }
+      String loginID = (String)session.getAttribute("loginId");
       model.addAttribute("loginID",loginID);
       
       System.out.println("loginID"+loginID);

@@ -50,16 +50,7 @@ public class BusDlvController {
       logger.info("+ Start " + className + ".deliveryInfo");
       logger.info("   - paramMap : " + paramMap);
       
-      String loginID = null;
-      Cookie[] cookies = request.getCookies(); 
-      if(cookies != null) {
-		    for(Cookie index : cookies) {
-		        String cookieName = index.getName();
-		        if(cookieName.equals("EMP_ID")) {
-		        	loginID = index.getValue();
-		        }
-		    }
-      }
+      String loginID = (String)session.getAttribute("loginId");
       model.addAttribute("loginID",loginID);
       
 

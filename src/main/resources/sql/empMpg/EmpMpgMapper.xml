@@ -90,10 +90,8 @@
 	              , emp_email = #{emp_email}
 	              , emp_zip = #{emp_zip}
 	              , emp_addr = #{emp_addr}
-	              , emp_dt_addr = #{emp_dt_addr} 
-	              
-	 where loginID = #{loginID}
-	  
+	              , emp_dt_addr = #{emp_dt_addr} 	  
+ 	   where  loginID = #{loginID}
 	</update>
 	
 </mapper>

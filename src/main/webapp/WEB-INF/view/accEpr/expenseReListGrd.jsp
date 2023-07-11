@@ -20,7 +20,7 @@
 										<td>${list.expen_inf}</td>
 										<td>${list.appro_req_date}</td>
 										<td>${list.expen_date}</td>
-										<td>${list.expen_price}</td>
+										<td><fmt:formatNumber value="${list.expen_price}" pattern="#,##0" /></td>
 										<td>${list.appro_yn}</td>
 										<td>${list.appro_date}</td>
 										<td>${list.appro_bos}</td>

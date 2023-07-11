@@ -57,6 +57,7 @@
             break;
           case 'btnClose' :
           case 'btnCloseFile' :
+        	  
             gfCloseModal();
             break;
         }
@@ -120,6 +121,8 @@
         
         $("#name").val("");
         $("#emp_sex").val("");
+        $("input:radio[name='user_type']").removeAttr("checked");
+        $("input:radio[name='emp_sex']").removeAttr("checked");
         $("#emp_edu").val("");
         $("#emp_email").val("");
         $("#emp_hp").val("");
@@ -447,7 +450,7 @@
             <td><input type="text" class="inputTxt p100" name="emp_birth" id="emp_birth" placeholder="0000-00-00"  style="text-align: center;"/></td>
             <th scope="row">권한 <span class="font_red">*</span></th>
             <td colspan="3">
-            <input type="radio" name="user_type" id="type_A" value="A" style="margin-right: 2px;"/>&nbsp;A
+            <input type="radio" name="user_type" id="type_A" value="A" style="margin-right: 2px;" />&nbsp;A
             <input type="radio" name="user_type" id="type_B" value="B" style="margin-right: 2px;"/>&nbsp;B
             <input type="radio" name="user_type" id="type_C" value="C" style="margin-right: 2px;"/>&nbsp;C
             <input type="radio" name="user_type" id="type_D" value="D" style="margin-right: 2px;"/>&nbsp;D   

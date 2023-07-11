@@ -17,14 +17,14 @@
 										<td>${list.name}</td>
 										<td>${list.dept_name}</td>
 										<td>${list.level_name}</td>
-										<td>${list.emp_yr_sal}</td>
-										<td>${list.sal_pre}</td>
-										<td>${list.sal_san}</td>
-										<td>${list.sal_ko}</td>
-										<td>${list.sal_kun}</td>
-										<td>${list.sal_kuk}</td>
-										<td>${list.sal_after}</td>
-										<td>${list.emp_final_money}</td>
+										<td><fmt:formatNumber value="${list.emp_yr_sal}" type="number" pattern="#,###" /></td>
+										<td><fmt:formatNumber value="${list.sal_pre}" type="number" pattern="#,###" /></td>
+										<td><fmt:formatNumber value="${list.sal_san}" type="number" pattern="#,###" /></td>
+										<td><fmt:formatNumber value="${list.sal_ko}" type="number" pattern="#,###" /></td>
+										<td><fmt:formatNumber value="${list.sal_kun}" type="number" pattern="#,###" /></td>
+										<td><fmt:formatNumber value="${list.sal_kuk}" type="number" pattern="#,###" /></td>
+										<td><fmt:formatNumber value="${list.sal_after}" type="number" pattern="#,###" /></td>
+										<td><fmt:formatNumber value="${list.emp_final_money}" type="number" pattern="#,###" /></td>
 									<c:if test="${list.emp_meno eq null}">
 										<td>-</td>
 									</c:if>

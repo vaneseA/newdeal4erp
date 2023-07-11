@@ -2,6 +2,7 @@ package kr.happyjob.study.accEpr.controller;
 
 import java.io.File;
 import java.net.URLEncoder;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,18 +62,24 @@ public class AccEprController {
       logger.info("+ Start " + className + ".expenseRequireList");
       logger.info("   - paramMap : " + paramMap);
       
+     
+      
       int pagenum = Integer.parseInt((String) paramMap.get("pagenum"));
       int pageSize = Integer.parseInt((String) paramMap.get("pageSize"));
       int pageIndex = (pagenum - 1) * pageSize;
+     
+      
       
       paramMap.put("pageSize", pageSize);
       paramMap.put("pageIndex", pageIndex);
+
       
       String currentLoginID = (String) session.getAttribute("loginId");
       String currentuserType = (String) session.getAttribute("userType");
       
       paramMap.put("currentLoginID", currentLoginID);
       paramMap.put("currentuserType", currentuserType);
+      
       
       List<AccEprModel> listSearch = accEprService.expenseRequireList(paramMap);
       int totalcnt = accEprService.countList(paramMap);
@@ -108,38 +115,7 @@ public class AccEprController {
       return returnmap;
    }  
    
-   @RequestMapping("listSave.do")
-   @ResponseBody
-   public Map<String, Object> listSave(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,
-         HttpServletResponse response, HttpSession session) throws Exception {
-      
-      logger.info("+ Start " + className + ".listSave");
-      logger.info("   - paramMap : " + paramMap);
-      
-      String action = (String) paramMap.get("action");
-      paramMap.put("loginID", (String) session.getAttribute("loginID"));
-      
-      
-      int returncval = 0;
-      
-      if("I".equals(action)) {
-    	  returncval = accEprService.listInsert(paramMap);
-      } else if("U".equals(action)) {
-    	  returncval = accEprService.listUpdate(paramMap);
-      } else if("D".equals(action)) {
-    	  returncval = accEprService.listDelete(paramMap);
-      }      
-      
-      Map<String, Object> returnmap = new HashMap<String, Object>();
-      
-      returnmap.put("returncval", returncval);
-      
-      logger.info("+ End " + className + ".listSave");
-
-      return returnmap;
-   }    
-   
-   
+ 
    @RequestMapping("listSaveFile.do")
    @ResponseBody
    public Map<String, Object> listSaveFile(Model model, @RequestParam Map<String, Object> paramMap, HttpServletRequest request,

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>월별결재내역</title>
+<title>월별결재관리</title>
 
 <!-- sweet alert import -->
 <script src='${CTX_PATH}/js/sweetalert/sweetalert.min.js'></script>
@@ -14,6 +14,8 @@
 <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
 <!-- fullCalendar css import -->
 <link rel="stylesheet" type="text/css" href="${CTX_PATH}/css/fullcalendar/main.css" />
+<!-- 대광유통 Favicon -->
+<link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
 <!-- fullCalendar js import -->
 <script src='${CTX_PATH}/js/fullcalendar/main.js'></script>
 <script src='${CTX_PATH}/js/fullcalendar/ko.js'></script>

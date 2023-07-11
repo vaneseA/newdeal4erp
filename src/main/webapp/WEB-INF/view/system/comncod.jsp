@@ -9,8 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>Job Korea :: 공통 코드 관리</title>
+<title>공통코드관리</title>
+<!-- 대광유통 Favicon -->
+<link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
 <!-- sweet alert import -->
+
 <script src='${CTX_PATH}/js/sweetalert/sweetalert.min.js'></script>
 <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
 <!-- sweet swal import -->
@@ -674,7 +677,7 @@
 
 						<p class="Location">
 							<a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
-								class="btn_nav bold">기준정보</span> <span class="btn_nav bold">공통코드
+								class="btn_nav bold">운영</span> <span class="btn_nav bold">공통코드
 								관리</span> <a href="../system/comnCodMgr.do" class="btn_set refresh">새로고침</a>
 						</p>
 

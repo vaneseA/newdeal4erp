@@ -379,7 +379,7 @@
 	</div>
 
 	<!-- 모달팝업 -->
-	<div id="layer1" class="layerPop layerType2" style="width: 900px; height: 500px;">
+	<div id="layer1" class="layerPop layerType2" style="width: 1000px; height: 500px;">
 		<dl>
 			<dt>
 				<strong>회계전표 상세</strong>

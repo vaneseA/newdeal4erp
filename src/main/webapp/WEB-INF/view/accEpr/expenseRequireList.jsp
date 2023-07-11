@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
@@ -92,9 +93,9 @@ width: 650px;
 </style>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>지출결의서</title>
+<title>지출결의서 신청</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
- <link rel="stylesheet" href="/resources/demos/style.css">
+<!--  <link rel="stylesheet" href="/resources/demos/style.css"> -->
  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
@@ -153,7 +154,7 @@ width: 650px;
 					break;
 				case 'btnDeleteFile' :
 					$("#action").val("D");	
-					fn_save();
+					fn_savefile();
 					break;	
 				case 'btnSaveFile' :
 					fn_savefile();
@@ -313,7 +314,7 @@ width: 650px;
 			  
 			$("#action").val("I");	
 		} else {
-		
+			console.log(object.expen_price);
 			
 			 $("#appro_type_cd").val(object.appro_type_cd);		
 			 $("#dept_cd").val(object.dept_cd);
@@ -323,7 +324,7 @@ width: 650px;
 			 selectComCombo("accd","acnt_dt_sbject_cd","all",object.acnt_sbject_cd,object.acnt_dt_sbject_cd);  
 			 $("#expen_inf").val(object.expen_inf);	
 			 $("#expen_shop").val(object.expen_shop);	
-			 $("#expen_price").val(object.expen_price);
+			 $("#expen_price").val(object.expen_price.toLocaleString());
 			 $("#appro_req_date").val(object.appro_req_date);
 			 $("#expen_report_no").val(object.expen_report_no);
 			 $("#expen_date").val(object.expen_date);
@@ -331,27 +332,27 @@ width: 650px;
 			 $("#appro_no").val(object.appro_no);
 			 $("input[name='appro_yn'][value='" + object.appro_yn + "']").prop("checked", true);
 			 
+			 
+			 $("#appro_type_cd").attr("disabled",true); 
+			 $("#appro_type_cd").css('color','black');
+			 $("#appro_type_cd").css('font-weight','bolder');
+			 $("#dept_cd").attr("disabled",true); 
+			 $("#dept_cd").css('color','black');
+			 $("#dept_cd").css('font-weight','bolder');
+			 $("#acnt_sbject_cd").attr("disabled",true); 
+			 $("#acnt_sbject_cd").css('color','black');
+			 $("#acnt_sbject_cd").css('font-weight','bolder');
+			 $("#acnt_dt_sbject_cd").attr("disabled",true); 
+			 $("#acnt_dt_sbject_cd").css('color','black');
+			 $("#acnt_dt_sbject_cd").css('font-weight','bolder');
+			 $("#expen_shop").attr("readonly",true); 
+			 $("#expen_price").attr("readonly",true); 
+			 $("#appro_req_date").attr("readonly",true); 
+			 $("#expen_date").attr("readonly",true); 
+			 $("#expen_inf").attr("readonly",true); 
 		
 			if(object.appro_yn === "Y"){
 				$("#btnDeleteFile").hide();
-				$("#appro_type_cd").attr("disabled",true); 
-				$("#appro_type_cd").css('color','black');
-				$("#appro_type_cd").css('font-weight','bolder');
-				$("#dept_cd").attr("disabled",true); 
-				$("#dept_cd").css('color','black');
-				$("#dept_cd").css('font-weight','bolder');
-				$("#acnt_sbject_cd").attr("disabled",true); 
-				$("#acnt_sbject_cd").css('color','black');
-				$("#acnt_sbject_cd").css('font-weight','bolder');
-				$("#acnt_dt_sbject_cd").attr("disabled",true); 
-				$("#acnt_dt_sbject_cd").css('color','black');
-				$("#acnt_dt_sbject_cd").css('font-weight','bolder');
-				$("#expen_shop").attr("readonly",true); 
-				$("#expen_price").attr("readonly",true); 
-				$("#appro_req_date").attr("readonly",true); 
-				$("#expen_date").attr("readonly",true); 
-				$("#expen_inf").attr("readonly",true); 
-				
 			}else{
 				$("#btnDeleteFile").show();
 			}
@@ -414,57 +415,14 @@ width: 650px;
 		
 		
 	}
-    function fn_save() {
+  
+	function fn_savefile() {
 		
 		if ( ! fn_Validate() ) {
 			return;
 		}
 		
-		var param = {
-				
-			
-				action : $("#action").val(),
-				appro_type_cd : $("#appro_type_cd").val(),
-				dept_cd : $("#dept_cd").val(),
-				loginID : $("#loginID").val(),
-				name : $("#name").val(),
-				acnt_sbject_cd :$("#acnt_sbject_cd").val(),
-				acnt_dt_sbject_cd : $("#acnt_dt_sbject_cd").val(),
-				expen_inf : $("#expen_inf").val(),
-				expen_shop : $("#expen_shop").val(),
-				expen_price : $("#expen_price").val(),
-				appro_req_date : $("#appro_req_date").val(),
-				expen_date : $("#expen_date").val()
-		}
-		
-		var savecallback = function(reval) {
-			console.log( JSON.stringify(reval) );
-			
-			if(reval.returncval > 0) {
-				alert("저장 되었습니다.");
-				gfCloseModal();
-				
-				if($("#action").val() == "U") {
-					fn_expenseRequireList($("#pageno").val());
-				} else {
-					fn_expenseRequireList();
-				}
-			}  else {
-				alert("오류가 발생 되었습니다.");				
-			}
-		}
-		
-		//callAjax("/mngNot/noticesave.do", "post", "json", false, param, savecollback) ;
-		callAjax("/accEpr/listSave.do", "post", "json", false, $("#myForm").serialize() , savecallback) ;
-		
-	}
- 
-	function fn_savefile() {
-		
-
-		
-		
-		var frm = document.getElementById("myForm");
+		var frm = document.getElementById("myForm2");
 		frm.enctype = 'multipart/form-data';
 		var fileData = new FormData(frm);
 		
@@ -514,10 +472,9 @@ width: 650px;
 </head>
 <body>
 <form id="myForm" action=""  method="">
-	<input type="hidden" id="action"  name="action"  />
-	<input type="hidden" id="appro_no"  name="appro_no"  />
 	<input type="hidden" id="pageno"  name="pageno"  />
-	<input type="hidden" id="expen_report_no"  name="expen_report_no"  />
+	
+	
 	
 	<!-- 모달 배경 -->
 	<div id="mask"></div>
@@ -631,7 +588,11 @@ width: 650px;
 
 	<!-- 모달팝업 -->
 	
-	
+	 <form id="myForm2" action=""  method=""> 
+	<input type="hidden" id="action"  name="action"  />
+	<input type="hidden" id="appro_no"  name="appro_no"  />
+	<input type="hidden" id="expen_report_no"  name="expen_report_no"  />
+		
 	<div id="layer2" class="layerPop layerType2" style="width: 600px;">
 		<dl>
 			<dt>
@@ -725,7 +686,7 @@ width: 650px;
 		<a href="" class="closePop"><span class="hidden">닫기</span></a>
 	</div>
 	
-	
+	 </form> 
 	<!--// 모달팝업 -->
 </form>
 </body>

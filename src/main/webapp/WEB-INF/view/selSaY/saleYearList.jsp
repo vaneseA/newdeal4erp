@@ -15,12 +15,12 @@
         // 페이징 설정
         var pageSize = 5;
         var pageBlockSize = 5;
-
         function fn_aa(labels, dataVar) {
+
             new Chart(document.getElementById("bar-chart"), {
                 type: 'bar',
                 data: {
-                    labels: labels,
+                    labels: ["2023", "2022", "2021", "2020"],
                     datasets: [
                         {
                             label: "매출",
@@ -39,7 +39,7 @@
                         callbacks: {
                             label: function (tooltipItem, data) {
                                 var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                                return value.toLocaleString() + "원";
+                                return value.toLocaleString() + "원"; // 라벨 (날짜)와 값을 함께 표시합니다.
                             }
                         }
                     }

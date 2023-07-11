@@ -10,7 +10,7 @@ public class AccEprModel {
 	private String file_no;
 	private String expen_shop;
 	private int expen_report_no;
-	private String expen_price;
+	private int expen_price;
 	private String expen_inf;
 	private String expen_date;
 	private String appro_req_date;
@@ -37,7 +37,7 @@ public class AccEprModel {
 	}
 
 
-	public AccEprModel(String loginID, String file_no, String expen_shop, int expen_report_no, String expen_price,
+	public AccEprModel(String loginID, String file_no, String expen_shop, int expen_report_no, int expen_price,
 			String expen_inf, String expen_date, String appro_req_date, String appro_date, String appro_type_cd,
 			String dept_cd, String appro_yn, int appro_no, String appro_bos, String acnt_sbject_cd, String acnt_dt_sbject_cd,
 			String file_name, String logic_path, String physic_path, int file_size, String exten, String name,
@@ -110,12 +110,12 @@ public class AccEprModel {
 	}
 
 
-	public String getExpen_price() {
+	public int getExpen_price() {
 		return expen_price;
 	}
 
 
-	public void setExpen_price(String expen_price) {
+	public void setExpen_price(int expen_price) {
 		this.expen_price = expen_price;
 	}
 

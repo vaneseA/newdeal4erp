@@ -206,7 +206,7 @@
 		,pd.product_name
 
 		,dlv.product_no
-
+		,dlv.dlv_rej
 		,dlv.splr_no
 
 		,dlv.dlv_amt
@@ -214,7 +214,7 @@
 		,dlv.dlv_date
 		,ap.appro_no
 		,ap.appro_bos
-
+		,ap.appro_rej_reason
 		,pd.product_unit_price
 
 		,sb.acnt_sbject_name
@@ -255,17 +255,28 @@
 
 
 <select resultType="kr.happyjob.study.empApm.model.EmpApmModel" id="getVacationStatus">
-    SELECT vaca.vaca_no,
-           vaca.loginID,
-           ui.name,
-           ui.dept_cd, -- 부서코드 추가
-           vaca.vaca_req_date,
-           ap.appro_no,
-           ap.appro_bos
-    FROM tb_vaca_req vaca
-             INNER JOIN tb_appro ap ON ap.appro_no = vaca.appro_no
-             INNER JOIN tb_userinfo ui ON ui.loginID = vaca.loginID
-             INNER JOIN tb_userinfo ui_dept ON ui_dept.loginID = vaca.loginID -- 부서명을 가져오기 위한 조인
+    SELECT 
+    vaca.vaca_no,
+    vaca.loginID,
+    ui.name,
+    ui.dept_cd, -- 부서코드 추가
+    vaca.vaca_req_date,
+    ap.appro_no,
+    ap.appro_bos,
+    CONCAT(
+        DATE_FORMAT(vaca.vaca_edate, '%Y년 %m월 %d일')
+    ) AS vaca_edate,
+    CONCAT(
+        DATE_FORMAT(vaca.vaca_sdate, '%Y년 %m월 %d일')
+    ) AS vaca_sdate
+FROM
+    tb_vaca_req vaca
+        INNER JOIN
+    tb_appro ap ON ap.appro_no = vaca.appro_no
+        INNER JOIN
+    tb_userinfo ui ON ui.loginID = vaca.loginID
+        INNER JOIN
+    tb_userinfo ui_dept ON ui_dept.loginID = vaca.loginID -- 부서명을 가져오기 위한 조인
     WHERE vaca.appro_no = #{appro_no}
 </select>
 		
