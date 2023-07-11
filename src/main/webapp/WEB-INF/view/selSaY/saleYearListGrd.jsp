@@ -25,7 +25,7 @@
             <td>
                 <fmt:formatNumber value="${list.year_total_profit}" type="number" pattern="#,###" />
             </td>
-            <td>${list.percent_year}</td>
+            <td>${list.percent_year}%</td>
         </tr>
     </c:forEach>
 </c:if>

@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
-<title>휴가신청 및 조회</title>
+<title>발주내역조회</title>
 
 <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
 
@@ -134,6 +134,13 @@
 	}
 	//발주신청함수
 	function fn_dlvInsert() {
+		//발주수량제한
+		var maxNum = 3;
+		if($("#dlv_amt").val().length > maxNum) {
+			alert("발주수량초과.3자리로 입력해주세요");
+			return;
+		}
+		
 		var param = {
 				ltypecombo : $("#ltypecombo").val()
 				,mtypecombo : $("#mtypecombo").val()

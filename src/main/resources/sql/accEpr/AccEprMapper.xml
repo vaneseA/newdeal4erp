@@ -10,7 +10,7 @@
        er.loginID
       ,ui.name 
       ,er.expen_report_no
-      ,format(cast(er.expen_price as decimal),0)as expen_price
+      ,er.expen_price
       ,er.expen_inf
       ,DATE_FORMAT(er.expen_date,'%Y-%m-%d') as expen_date
       ,CONCAT(
@@ -135,7 +135,7 @@
 	<select id="listSelectOne" resultType="kr.happyjob.study.accEpr.model.AccEprModel">
 	 select er.loginID
 		      ,ui.name 
-		      ,format(cast(er.expen_price as decimal),0)as expen_price
+		      ,er.expen_price
 		      ,er.expen_inf
 		      ,er.expen_date
 		      ,er.expen_shop
@@ -206,13 +206,14 @@
 	    <selectKey resultType="int" keyProperty="no" order="BEFORE">
             select ifnull(max(appro_no),0) + 1 from tb_appro
         </selectKey>  
-      
+    
         INSERT INTO tb_appro
           (
           	loginID,
              file_no,
              appro_no,
              appro_type_cd,
+             expen_report_no,
              appro_req_date,
              dept_cd,
              appro_price,
@@ -227,7 +228,8 @@
                   ELSE NULL
              END,
             #{no},
-            #{appro_type_cd}, 
+            #{appro_type_cd},
+            (select ifnull(max(expen_report_no),0) + 1 from tb_expen_report), 
             #{appro_req_date},
             #{dept_cd},
             #{expen_price},

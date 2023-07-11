@@ -48,6 +48,9 @@ public class EmpMpgController {
       logger.info("+ Start " + className + ".empMypage");
       logger.info("   - paramMap : " + paramMap);
       
+      model.addAttribute("usertype",  (String) session.getAttribute("userType"));
+      model.addAttribute("cloginId",  (String) session.getAttribute("loginId"));
+      
       logger.info("+ End " + className + ".empMypage");
 
       return "empMpg/empMypage";
@@ -117,8 +120,12 @@ public class EmpMpgController {
       logger.info("   - paramMap : " + paramMap);
       
       String action = (String) paramMap.get("action");
+      String currentLoginID = (String) session.getAttribute("loginId");
+      String currentuserType = (String) session.getAttribute("userType");
       
-     paramMap.put("loginID", (String) session.getAttribute("loginId"));
+      paramMap.put("currentLoginID", currentLoginID);
+      paramMap.put("currentuserType", currentuserType);
+     /* paramMap.put("loginID", (String) session.getAttribute("loginId"));*/
       
       int returncval = 0;
       
@@ -135,7 +142,8 @@ public class EmpMpgController {
       return returnmap;
    }  
    
-	
+  
+   
 	   
       
 }

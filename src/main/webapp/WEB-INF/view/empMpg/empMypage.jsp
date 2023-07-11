@@ -64,7 +64,7 @@ align-items:center;
 </style>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>지출결의서</title>
+<title>마이페이지</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
  <link rel="stylesheet" href="/resources/demos/style.css">
  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -153,14 +153,17 @@ align-items:center;
  
 	
 	function fn_selectone(loginID) {
+			
+		var hutype = $("#usertype").val();
+		var hloginId = $("#cloginId").val();
 		
+		if(hutype != "A"  && hloginId != loginID  ) {
+			alert("수정 권한이 없습니다.");
+			return;
+		}
 		
-		var param = {
-				
+		var param = {				
 				loginID : loginID
-				
-				
-				
 		}
 		
 		var selectonecallback = function(returndata) {			
@@ -183,6 +186,9 @@ align-items:center;
 	
 	
 	function fn_openpopupfile() {
+		
+		
+		
         popupinitfile();
 		
 		// 모달 팝업
@@ -301,7 +307,8 @@ align-items:center;
 <form id="myForm" action=""  method="">
 	<input type="hidden" id="action"  name="action"  />
 	<input type="hidden" id="pageno"  name="pageno"  />
-	
+	<input type="hidden" id="usertype"  name="usertype"  value="${usertype}"  />
+	<input type="hidden" id="cloginId"  name="cloginId"  value="${cloginId}"  />
 	
 	<!-- 모달 배경 -->
 	<div id="mask"></div>

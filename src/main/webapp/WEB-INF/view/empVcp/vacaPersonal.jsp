@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
-<title>휴가신청 및 조회</title>
+<title>휴가 신청 및 연차 조회</title>
 
 <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
 
@@ -140,6 +140,7 @@
 		
 		
 	}
+	
 	//data유효성 체크
 	function fn_data_validation() {
 		var check=true;
@@ -156,20 +157,59 @@
 			}
 		}
 		console.log(check);
+		
+		//빈항목체크
 		if(check == false) {
 			alert("모든 항목을 채워주세요");
-		}else {
-			fn_vacaFormInsert();
+			return;
 		}
+		
+		//휴가사유 글자제한
+		if(form_vaca_reson.length > 200) {
+			alert("휴가사유를 200자 이내로 적어주세요");
+			return;
+		}
+		
+		//날짜 체크
+		form_vaca_sdate = parseInt(form_vaca_sdate.replace(/-/g,""));
+		form_vaca_edate = parseInt(form_vaca_edate.replace(/-/g,""));
+		console.log(form_vaca_sdate);
+		
+		if(form_vaca_sdate > form_vaca_edate){
+			alert("휴가 시작 날짜와 종료 날짜를 정확히 입력해주세요");
+			return;
+		}
+		
+		fn_vacaFormInsert();
+		
 		
 	}
 	
+	//textarea 글자수 표기
+	function fn_textArea() {
+		var totText = 200;
+		//남은 글자 수
+		var remainText;
+		//현재 작성한 글자 수
+		var vacaResonLength = $("#form_vaca_reson").val().length;
+		//현재 남은 글자 수
+		remainText = totText - vacaResonLength;
+		
+		if(remainText < 0 ) {
+			$("#textAreaRemain").html("글자 수 초과").css("color","red");
+			return;
+		}
+		
+		$("#textAreaRemain").html(remainText + "/" + totText).css("color","black");
+		
+	}
 	
 	//휴가신청모달창 오픈
 	function fn_openpopup1() {
 		popupinit();
 		// 모달 팝업
 		gfModalPop("#vacaForm");
+		fn_textArea();
 			
 	}
 	//모달 초기화
@@ -365,7 +405,7 @@
 							<th scope="row">사번 </th>
 							<td><input type="text" class="inputTxt p100" name="form_loginID" id="form_loginID" value="${loginID}" readonly/></td>
 							<th scope="row">비상연락처 </th>
-							<td><input type="text" class="inputTxt p100" name="form_vaca_tel" id="form_vaca_tel" /></td>
+							<td><input type="text" class="inputTxt p100" name="form_vaca_tel" id="form_vaca_tel" placeholder="ex) 010-0000-0000"/></td>
 							
 						</tr>
 						<tr>
@@ -377,7 +417,7 @@
 						</tr>
 						<tr>
 							<th scope="row">휴가사유 </th>
-							<td colspan="3" rowspan="3"><textarea id="form_vaca_reson" name="form_vaca_reson"> </textarea></td>
+							<td colspan="3" rowspan="3"><textarea id="form_vaca_reson" name="form_vaca_reson" placeholder="200자 이내로 작성가능" onkeyup="fn_textArea()"></textarea><div id="textAreaRemain" ></div></td>
 							
 						</tr>
 				

@@ -91,6 +91,8 @@
     <title>결재 관리</title>
     <link rel="stylesheet"
           href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<!-- 대광유통 Favicon -->
+	<link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
@@ -265,16 +267,17 @@
 
                 $("#appro_yn").val("");
                 $("#budget_no").val("");
-
+                $("#appro_rej_reason_dlv").val("");
                 /* 휴가 */
                 $("#appro_no_modal2").val("");
                 $("#login_id_modal").val("");
                 $("#vaca_no_modal").val("");
                 $("#detail_name_modal").val("");
-                $("#vaca_req_date_modal").val("");
+                $("#vaca_sdate_modal").val("");
                 $("#vaca_edate_modal").val("");
                 $("#appro_yn_modal").val("");
-
+                $("#appro_rej_reason_vaca").val("");
+                
 
                 $("#btnSaveFile").show();
                 $("#btnDeleteFile").hide();
@@ -290,18 +293,19 @@
                 $("#product_unit_price").val(object.product_unit_price);
                 $("#dlv_amt").val(object.dlv_amt);
                 $("#expen_price").val(object.expen_price);
-
+                $("#appro_rej_reason_dlv").val(object.appro_rej_reason);
+                
                 /* 휴가 */
                 $("#appro_no_modal2").val(object.appro_no);
                 $("#login_id_modal").val(object.loginID);
                 $("#vaca_no_modal").val(object.vaca_no);
                 var deptName = convertDeptCodeToName(object.dept_cd);
                 $("#detail_name_modal").val(deptName);
-                $("#vaca_req_date_modal").val(object.vaca_req_date);
+                $("#vaca_sdate_modal").val(object.vaca_sdate);
 
                 $("#vaca_edate_modal").val(object.vaca_edate);
                 $("#appro_yn_modal").val(object.appro_yn);
-
+                $("#appro_rej_reason_vaca").val(object.appro_rej_reason);
 
                 $("input[name='appro_yn'][value='" + object.appro_yn + "']").prop(
                     "checked", true);
@@ -362,8 +366,9 @@
                 // 결재자
                 appro_bos: $("#appro_bos").val(),
                 // 반려 사유
-                dlv_no: $("#dlv_no_modal").val(),
-                appro_rej_reason: $("#appro_rej_reason_modal").val(),
+                /* dlv_no: $("#dlv_no_modal").val(), */
+                appro_rej_reason: $("#appro_rej_reason_dlv").val(),
+                appro_rej_reason: $("#appro_rej_reason_vaca").val(),
                 action: $("#action").val(),
                 loginID : $("#modalLoginID").val()
 
@@ -374,6 +379,8 @@
 
                 if (reval.approStatus > 0) {
                 	if(reval.dv >0 ) {
+                		alert("결재 되었습니다.");
+                		
                 		if(reval.vu) {
                 			alert("결재 되었습니다.");
                 		}else {
@@ -614,8 +621,8 @@
 
                     <tr>
                         <th scope="row">반려사유</th>
-                        <td colspan="3"><textarea id="appro_rej_reason"
-                                                  name="appro_rej_reason"> </textarea></td>
+                        <td colspan="3"><textarea id="appro_rej_reason_dlv"
+                                                  name="appro_rej_reason_dlv"> </textarea></td>
                     </tr>
 
                     </tbody>
@@ -671,11 +678,11 @@
                     </tr>
 
                     <tr>
-                        <th scope="row">신청일자</th>
-                        <td><input type="text" id="vaca_req_date_modal" name="vaca_req_date_modal"
+                        <th scope="row">휴가시작일</th>
+                        <td><input type="text" id="vaca_sdate_modal" name="vaca_sdate_modal"
                                    style="width: 130px; height:30px"></td>
-                        <th scope="row">이름</th>
-                        <td><input type="text" id="" name="vaca_edate_modal"
+                        <th scope="row">휴가종료일</th>
+                        <td><input type="text" id="vaca_edate_modal" name="vaca_edate_modal"
                                    style="width: 130px; height:30px"></td>
                     </tr>
 
@@ -693,8 +700,8 @@
 
                     <tr>
                         <th scope="row">반려사유</th>
-                        <td colspan="3"><textarea id="appro_rej_reason_modal"
-                                                  name="appro_rej_reason_modal"> </textarea></td>
+                        <td colspan="3"><textarea id="appro_rej_reason_vaca"
+                                                  name="appro_rej_reason_vaca"> </textarea></td>
                     </tr>
 
                     </tbody>

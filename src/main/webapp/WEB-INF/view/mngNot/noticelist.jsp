@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title>공지사항</title>
+<!-- 대광유통 Favicon -->
+<link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
 <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
 
 <script type="text/javascript">
@@ -75,29 +77,11 @@
 		
 		
 	});
+	
 
-	function checkAdminPermission() {
-		var loginId = $("#tb_notice").find("tr").filter(function() {
-			return $(this).find("td").filter(function() {
-				return $(this).text().trim() === 'loginID';
-			}).length > 0;
-		}).find("td").eq(1).text();
-
-		if(loginId !== 'admin'){
-			$('a[name=modal]').click(function(e) {
-				e.preventDefault();
-				alert("권한이 없습니다");
-				console.log("Login ID1: " + loginId);
-			});
-		}else{
-			$('a[name=modal]').off('click');
-			console.log("Login ID2: " + loginId);
-		}
-	}
+	/** 버튼 이벤트 등록 */
 
 	function fRegisterButtonClickEvent() {
-		checkAdminPermission(); // 권한 확인
-
 		$('a[name=btn]').click(function(e) {
 			e.preventDefault();
 
@@ -109,18 +93,18 @@
 					break;
 				case 'btnSave' :
 					fn_save();
-					break;
+					break;	
 				case 'btnDelete' :
-					$("#action").val("D");
+					$("#action").val("D");	
 					fn_save();
-					break;
+					break;	
 				case 'btnDeleteFile' :
-					$("#action").val("D");
+					$("#action").val("D");	
 					fn_savefile();
-					break;
+					break;		
 				case 'btnSaveFile' :
 					fn_savefile();
-					break;
+					break;	
 				case 'btnClose' :
 				case 'btnCloseFile' :
 					gfCloseModal();
@@ -128,7 +112,6 @@
 			}
 		});
 	}
-
 	
 	
 	function fn_noticelist(pagenum) {
@@ -463,28 +446,53 @@
 						<p class="Location">
 							<a href="../dashboard/dashboard.do" class="btn_set home">메인으로</a> <span
 								class="btn_nav bold">운영</span> <span class="btn_nav bold">공지사항
-								관리</span> <a href="../system/comnCodMgr.do" class="btn_set refresh">새로고침</a>
+								</span> <a href="../system/comnCodMgr.do" class="btn_set refresh">새로고침</a>
 						</p>
                         
-                        
+                
                         
                         
 						<p class="conTitle">
-							<span>공지사항</span> <span class="fr"> 
-							<select id="delyn" name="delyn" style="width: 150px;">
+							<span>공지사항 
+							</span> <span class="fr"> 
+							<a class="btnType blue" href="javascript:fn_openpopup();" name="modal"><span>신규등록</span></a>
+							 <a class="btnType blue" href="javascript:fn_openpopupfile();" name="modal"><span>신규등록 파일</span></a>
+							
+						 
+
+					
+						
+						<!-- 검색창 영역 시작 -->
+						<div style="display:flex; justify-content:center; align-content:center; border:solid 3px #c0c0c0; border-radius: 10px; padding:40px 40px; margin:20px auto;">
+							<div style="display:flex; flex-direction:column; line-height:2; padding-right:50px;">
+								<div style="display:flex; justify-content:center; align-content:center;">
+									
+								<!-- <select id="delyn" name="delyn" style="width: 150px;">
 							        <option value="" >전체</option>
 									<option value="Y" >삭제</option>
 									<option value="N" >미삭제</option>
-							</select> 
+							</select>  -->
 							 <select id="searchKey" name="searchKey" style="width: 150px;" >
 							        <option value="" >전체</option>
 									<option value="writer" >작성자</option>
 									<option value="title" >제목</option>
 							</select> 
 							<input type="text" style="width: 300px; height: 25px;" id="sname" name="sname">
-							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
-							 <a class="btnType blue" href="javascript:fn_openpopup();" name="modal"><span>신규등록</span></a>
-							 <a class="btnType blue" href="javascript:fn_openpopupfile();" name="modal"><span>신규등록 파일</span></a>
+							<!-- <a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a> -->
+									
+								</div>
+	
+						
+							</div>
+
+							<div style="display:flex; align-content: center;align-items: center;">
+								<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
+							</div>
+
+						</div>
+							
+
+							 
 							</span>
 						</p>
 						
@@ -514,7 +522,7 @@
 	
 						<div class="paging_area"  id="noticePagination"> </div>
 						
-                        <div class="comcombo">
+                        <%-- <div class="comcombo">
 							<table class="col">
 								<caption>caption</caption>
 								<colgroup>
@@ -592,7 +600,7 @@
                                    </tr>   
 								</tbody>
 							</table>
-						</div>
+						</div> --%>
 					</div> <!--// content -->
 
 					<h3 class="hidden">풋터 영역</h3>

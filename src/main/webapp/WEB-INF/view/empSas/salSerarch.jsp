@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
-<title>개인 급여 내역서</title>
+<title>급여조회</title>
 
 <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
 
@@ -173,7 +173,7 @@
 						<div style="display:flex; justify-content:center; align-content:center; line-height:2; border:solid 3px #c0c0c0; border-radius: 10px; padding:40px 40px; margin:20px auto;">									
 							<!-- 사번, 년월 검색 -->
 							<span style="font-size:15px; font-weight:bold; margin-right:10px;">사  번</span>
-							<input type="text" style="height:30px; width:100px; margin-right:5px;" id="searchLoginID" name="searchLoginID" >
+							<input type="text" style="height:30px; width:100px; margin-right:5px;" id="searchLoginID" name="searchLoginID" value="${loginID}" readonly>
 							<input type="month" style="height:30px; width:100px; margin-right:5px;" id="searchDate" name="searchDate" >
 							<a href="" class="btnType blue" id="btnSearch" name="btn"><span>검  색</span></a>
 						</div>

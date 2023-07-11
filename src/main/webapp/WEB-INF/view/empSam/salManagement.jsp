@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <link rel="icon" type="image/png" sizes="16x16" href="${CTX_PATH}/images/admin/comm/favicon-16x16.png">
-<title>급여지급 리스트 조회</title>
+<title>급여관리</title>
 
 <jsp:include page="/WEB-INF/view/common/common_include.jsp"></jsp:include>
 
@@ -169,11 +169,11 @@
 			
 			if(reval.salPaysf > 0) {
 				alert("일괄 지급되었습니다.");
-				gfCloseModal();
 				fn_empSamList(currentPage);
 
 			}  else {
-				alert("이미 모두 지급되었습니다.");				
+				alert("이미 모두 지급되었습니다.");	
+				gfCloseModal();
 			}
 		}
 		

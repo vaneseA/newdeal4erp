@@ -3,7 +3,7 @@ package kr.happyjob.study.empSas.controller;
 
 import java.util.Map;
 
-
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -47,6 +47,9 @@ public class EmpSasController {
       
       logger.info("+ Start " + className + ".salSearch");
       logger.info("   - paramMap : " + paramMap); //println으로 값이 들어왔는지 확인하는거ㄴ
+      
+      String loginID = (String)session.getAttribute("loginId");
+      model.addAttribute("loginID",loginID);
       
       logger.info("+ End " + className + ".salSearch");
 
