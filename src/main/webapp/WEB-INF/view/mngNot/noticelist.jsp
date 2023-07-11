@@ -75,11 +75,29 @@
 		
 		
 	});
-	
 
-	/** 버튼 이벤트 등록 */
+	function checkAdminPermission() {
+		var loginId = $("#tb_notice").find("tr").filter(function() {
+			return $(this).find("td").filter(function() {
+				return $(this).text().trim() === 'loginID';
+			}).length > 0;
+		}).find("td").eq(1).text();
+
+		if(loginId !== 'admin'){
+			$('a[name=modal]').click(function(e) {
+				e.preventDefault();
+				alert("권한이 없습니다");
+				console.log("Login ID1: " + loginId);
+			});
+		}else{
+			$('a[name=modal]').off('click');
+			console.log("Login ID2: " + loginId);
+		}
+	}
 
 	function fRegisterButtonClickEvent() {
+		checkAdminPermission(); // 권한 확인
+
 		$('a[name=btn]').click(function(e) {
 			e.preventDefault();
 
@@ -91,18 +109,18 @@
 					break;
 				case 'btnSave' :
 					fn_save();
-					break;	
+					break;
 				case 'btnDelete' :
-					$("#action").val("D");	
+					$("#action").val("D");
 					fn_save();
-					break;	
+					break;
 				case 'btnDeleteFile' :
-					$("#action").val("D");	
+					$("#action").val("D");
 					fn_savefile();
-					break;		
+					break;
 				case 'btnSaveFile' :
 					fn_savefile();
-					break;	
+					break;
 				case 'btnClose' :
 				case 'btnCloseFile' :
 					gfCloseModal();
@@ -110,6 +128,7 @@
 			}
 		});
 	}
+
 	
 	
 	function fn_noticelist(pagenum) {

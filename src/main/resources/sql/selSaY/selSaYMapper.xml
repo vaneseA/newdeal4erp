@@ -39,7 +39,7 @@
             ) AS t1
                 LEFT OUTER JOIN
             (SELECT
-                 YEAR(er.expen_date) AS expen_year,
+                 YEAR(er.expxen_date) AS expen_year,
                  SUM(er.expen_price) AS total_expen_price
              FROM tb_expen_report er
              GROUP BY expen_year
