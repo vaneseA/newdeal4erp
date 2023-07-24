@@ -150,14 +150,14 @@
                     alert("해당 월에는 데이터가 존재하지 않습니다.");
                     $(".bar_items").css("display", "none");
                     console.log("pagenum:" + pagenum);
-                    var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_saleMonthList');
+                    var paginationHtml = getPaginationHtml(pagenum, totalcnt,'fn_saleMonthList');
                     console.log("paginationHtml: " + paginationHtml);
                     $("#saleMonthPagination").empty().append(paginationHtml);
                     $("#pageno").val(pagenum);
                     return;
                 }
                 console.log("pagenum:" + pagenum);
-                var paginationHtml = getPaginationHtml(pagenum, totalcnt, pageSize, pageBlockSize, 'fn_saleMonthList');
+                var paginationHtml = getPaginationHtml(pagenum, totalcnt, 'fn_saleMonthList');
                 console.log("paginationHtml: " + paginationHtml);
                 $("#saleMonthPagination").empty().append(paginationHtml);
                 $("#pageno").val(pagenum);
