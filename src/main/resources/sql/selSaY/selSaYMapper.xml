@@ -6,7 +6,6 @@
     <!--  목록 조회 -->
     <select id="saleYearList" resultType="kr.happyjob.study.selSaY.model.SelSaYModel">
         SELECT
-        SELECT
             t1.order_year AS sale_year,
             t1.order_year_dt_amt AS total_sales_volume,
             t1.order_year_tot_price AS order_year_tot_product_price,
