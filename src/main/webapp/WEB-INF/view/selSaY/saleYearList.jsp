@@ -15,6 +15,7 @@
         // 페이징 설정
         var pageSize = 5;
         var pageBlockSize = 5;
+
         function fn_aa(labels, dataVar) {
 
             new Chart(document.getElementById("bar-chart"), {
