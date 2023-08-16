@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -28,6 +29,12 @@ public class LoginServiceImpl implements LoginService {
 	
 	@Autowired
 	private LoginDao loginDao;
+	
+	@Value("${fileUpload.rootPath}")
+	private String rootPath;    // W:\\FileRepository
+	
+	@Value("${fileUpload.virtualRootPath}")
+	private String virtualrootPath;  // /serverfile
 	
 	/** 사용자 로그인 체크*/
 	public String checkLogin(Map<String, Object> paramMap) throws Exception {
@@ -123,10 +130,10 @@ public class LoginServiceImpl implements LoginService {
 		paramMap.put("dirPath", dirPath);
 		
 		// 파일 저장
-		String itemFilePath = dirPath + File.separator; // 업로드 실제 경로 조립 (무나열생성)
-		FileUtilCho fileUtil = new FileUtilCho(multipartHttpServletRequest, "D:\\FileRepository", "", itemFilePath);
-		Map<String, Object> fileInfo = fileUtil.uploadFiles(); // 실제 업로드 처리
-
+		String itemFilePath = dirPath+ File.separator; // 업로드 실제 경로 조립 (무나열생성)
+		FileUtilCho fileUtil = new FileUtilCho(multipartHttpServletRequest, rootPath, virtualrootPath, itemFilePath);
+		Map<String, Object> fileInfo = fileUtil.uploadFiles(); // 실제 럽로드 처리
+		
 		// 데이터 저장
 		try {
 				
